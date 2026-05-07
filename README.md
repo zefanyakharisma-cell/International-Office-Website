@@ -12,11 +12,14 @@ A single-page application (SPA) for the PCU International Office, showcasing inb
 │   └── styles.css      # Custom styles, animations, and PCU brand variables
 ├── JS/
 │   └── main.js         # Navigation logic, dynamic rendering, and SDK integration
-└── Assets/
-    └── Graphics/
-        ├── logo-UKP.svg
-        └── Petra Graphic Asset/
-            └── *.svg   # Decorative background illustrations
+├── Assets/
+│   └── Graphics/
+│       ├── logo-UKP.svg
+│       └── Petra Graphic Asset/
+│           └── *.svg   # Decorative background illustrations
+├── fix_news.py         # One-time dev utility — see note below (safe to ignore)
+├── .gitignore
+└── README.md
 ```
 
 ---
@@ -56,6 +59,20 @@ Navigation is handled client-side via `navigateTo(pageId)`. The following pages 
 - `outbound-semester-exchange` — Outgoing exchange semester program
 - `joint-double-degree` — Joint/Double Degree program
 - `internship` — Internship opportunities
+
+**Partnership**
+- `international-partnership` — International partner universities
+- `domestic-partnership` — Domestic/national partner institutions
+- `consortium-association` — Consortium and association memberships
+- `partnership-meet-us` — Partnership contact and meeting information
+
+**Life at PCU**
+- `how-to-get` — Directions and transport to PCU
+- `accommodation` — Student housing options *(placeholder — content pending)*
+- `preparation-arrival` — Arrival guide for incoming students *(placeholder — content pending)*
+- `visa-immigration` — Visa and immigration information *(placeholder — content pending)*
+
+> **Note for IT team:** Pages marked as *placeholder* are incomplete and should not be linked from any public-facing navigation until content is finalized.
 
 ---
 
@@ -110,6 +127,38 @@ python -m http.server 8080
 
 ---
 
+## Deployment
+
+This is a fully static site — no server-side processing is required. To deploy:
+
+1. Copy the entire repository folder to your web server's public directory (e.g. `/var/www/html/international-office/`).
+2. Ensure the web server (Apache/Nginx) serves `index.html` as the default document.
+3. No `.htaccess` rewrite rules are needed — all navigation is handled client-side via JavaScript.
+4. Verify that the `Assets/` folder and all subfolders are accessible. The folder `Assets/Graphics/Petra Graphic Asset/` contains spaces in its name — confirm your server handles this correctly, or rename the folder and update the references in `index.html` and `styles.css` if needed.
+
+---
+
+## Known Dependencies & Limitations
+
+**External image URLs (Unsplash)**
+Several news article pages (`page-news-1` through `page-news-6`) load hero images from `https://images.unsplash.com`. These are placeholder images used during development. Before going live, replace them with actual PCU-owned images hosted locally or on a CDN.
+
+**CDN dependencies**
+The site requires an internet connection to load Tailwind CSS, Lucide Icons, and Google Fonts. If the site needs to work in an offline or intranet environment, these assets must be downloaded and self-hosted.
+
+**`.DS_Store` file**
+A `.DS_Store` file (a macOS system file) was committed to the repository. It is harmless and can be safely deleted. To prevent this in the future, ensure `.DS_Store` is listed in `.gitignore`.
+
+---
+
+## About `fix_news.py`
+
+This is a **one-time developer utility** that was used during development to replace a static banner in the News page with a dynamic carousel. It has already been applied — the result is baked into `index.html`.
+
+**The IT team does not need to run this script.** It is kept in the repository for reference only and can be safely ignored or deleted.
+
+---
+
 ## Runtime Configuration (Element SDK)
 
 If `window.elementSdk` is present on the page (e.g. when embedded in a CMS or page builder), the site supports live editing of:
@@ -125,13 +174,13 @@ These are configured via `defaultConfig` at the top of `main.js`.
 
 ## Contact
 
-**PCU Global — Petra Christian University International Office**  
-Jl. Siwalankerto 121-131, Surabaya 60236, Indonesia  
-📧 General: [io@petra.ac.id](mailto:io@petra.ac.id)  
-📧 Director: [io-director@petra.ac.id](mailto:io-director@petra.ac.id)
+**Zefanya Kharisma Nugroho, S.Hub.Int.**
+Surabaya, Indonesia
+📧 Personal: [zefanya.kharisma@gmail.com](mailto:zefanya.kharisma@gmail.com)
+📧 Work: [zefanya.kharisma@petra.ac.id](mailto:zefanya.kharisma@petra.ac.id)
 
-Social media: [Facebook](https://www.facebook.com/PetraChristianUniversity) · [Instagram](https://www.instagram.com/petrachristianuniversity) · [YouTube](https://www.youtube.com/c/PetraChristianUniversity) · [LinkedIn](https://www.linkedin.com/school/petra-christian-university/)
+Social media: [Instagram](https://www.instagram.com/joshuazefanya_) · [LinkedIn](https://www.linkedin.com/in/zefanyakharisma)
 
 ---
 
-© 2025 PCU Global — Petra Christian University. All rights reserved.
+© 2025 Zefanya Kharisma Nugroho — Petra Christian University. All rights reserved.
