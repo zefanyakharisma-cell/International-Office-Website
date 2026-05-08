@@ -49,7 +49,12 @@
       'bg-pcu-blue/30','bg-pcu-sky/30','bg-pcu-yellow/30','bg-pcu-purple/30','bg-pcu-green/30',
       'bg-pcu-yellow/20','bg-pcu-navy/10','bg-pcu-light/40','bg-pcu-light/50','bg-pcu-light/80',
       'hover:bg-pcu-sky','hover:bg-pcu-blue','hover:bg-pcu-light','hover:text-pcu-blue',
-      'hover:bg-pcu-gold','hover:text-pcu-navy'
+      'hover:bg-pcu-gold','hover:text-pcu-navy',
+      'from-pcu-sky','from-pcu-orange','from-pcu-purple','from-pcu-green','from-pcu-navy',
+      'to-pcu-sky','to-pcu-orange','to-pcu-purple','to-pcu-green','to-pcu-navy',
+      'border-pcu-orange','border-pcu-purple/20',
+      'bg-pcu-orange/5','bg-pcu-purple/5','bg-pcu-sky/10','bg-pcu-orange/10','bg-pcu-green/10',
+      'text-pcu-orange','text-pcu-purple','text-pcu-green','text-pcu-navy'
     ]
   }
 </script>
@@ -906,8 +911,12 @@
 </div>
 <div class="page" id="page-how-to-get">
 <div class="min-h-screen bg-white" style="padding-top: 80px;">
-<div class="bg-gradient-to-r from-pcu-blue to-pcu-sky py-20">
-<div class="max-w-7xl mx-auto px-6 lg:px-8">
+<div class="relative overflow-hidden bg-gradient-to-r from-pcu-green to-emerald-500 py-20">
+<div class="absolute inset-0">
+<img alt="Life at PCU" class="w-full h-full object-cover opacity-60" src="Assets/Images/Student%20Exchange/student-exchange-2.JPG" style="object-position: center 50%;"/>
+</div>
+<div class="absolute inset-0 bg-gradient-to-r from-pcu-green/80 to-emerald-500/80"></div>
+<div class="relative max-w-7xl mx-auto px-6 lg:px-8">
 <a class="inline-flex items-center gap-1 text-white/70 text-sm mb-6 hover:text-white transition" href="#" onclick="navigateTo('home');return false"><i class="w-4 h-4" data-lucide="arrow-left"></i> Back to Home</a>
 <h1 class="font-display text-4xl md:text-5xl font-bold text-white mb-4">How to Get to PCU</h1>
 <p class="text-white/75 text-lg max-w-3xl">Find Petra Christian University in Surabaya with a map, transport tips, and nearby city and mall locations.</p>
@@ -920,23 +929,23 @@
 <iframe allowfullscreen="" class="w-full h-96" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=Petra%20Christian%20University%20Surabaya&amp;output=embed"></iframe>
 </div>
 <div class="bg-pcu-light rounded-3xl border border-gray-100 p-8">
-<h2 class="font-semibold text-pcu-blue text-2xl mb-4">Petra Christian University</h2>
+<h2 class="font-semibold text-pcu-green text-2xl mb-4">Petra Christian University</h2>
 <p class="text-gray-600 mb-4">Petra Christian University (PCU) is located at Jl. Siwalankerto 121-131, Surabaya 60236, Indonesia. The campus sits in a central area of western Surabaya with easy access to major roads and local transport.</p>
 <div class="grid gap-4 sm:grid-cols-2">
 <div class="rounded-3xl bg-white p-5 border border-gray-100 shadow-sm">
-<h3 class="font-semibold text-pcu-blue mb-2">City Center</h3>
+<h3 class="font-semibold text-pcu-green mb-2">City Center</h3>
 <p class="text-gray-600">Approximately 20 minutes from Surabaya city center and the business district.</p>
 </div>
 <div class="rounded-3xl bg-white p-5 border border-gray-100 shadow-sm">
-<h3 class="font-semibold text-pcu-blue mb-2">Airport</h3>
+<h3 class="font-semibold text-pcu-green mb-2">Airport</h3>
 <p class="text-gray-600">Around 30 minutes from Juanda International Airport by taxi or ride share.</p>
 </div>
 <div class="rounded-3xl bg-white p-5 border border-gray-100 shadow-sm">
-<h3 class="font-semibold text-pcu-blue mb-2">Shopping &amp; Malls</h3>
+<h3 class="font-semibold text-pcu-green mb-2">Shopping &amp; Malls</h3>
 <p class="text-gray-600">Close to Tunjungan Plaza, Pakuwon Mall, and BG Junction, all within 30-40 minutes.</p>
 </div>
 <div class="rounded-3xl bg-white p-5 border border-gray-100 shadow-sm">
-<h3 class="font-semibold text-pcu-blue mb-2">Transport</h3>
+<h3 class="font-semibold text-pcu-green mb-2">Transport</h3>
 <p class="text-gray-600">Accessible by Grab, Blue Bird taxi, and local bus services across Surabaya.</p>
 </div>
 </div>
@@ -944,16 +953,16 @@
 </div>
 <div class="space-y-6">
 <div class="bg-white rounded-3xl border border-gray-100 p-8 shadow-sm">
-<h2 class="font-semibold text-pcu-blue text-2xl mb-4">Nearby Landmarks</h2>
+<h2 class="font-semibold text-pcu-green text-2xl mb-4">Nearby Landmarks</h2>
 <ul class="space-y-4 text-gray-600">
-<li class="flex gap-3"><i class="w-5 h-5 text-pcu-blue mt-1" data-lucide="map-pin"></i> PCU is within easy reach of Surabaya's Western Corridor.</li>
-<li class="flex gap-3"><i class="w-5 h-5 text-pcu-blue mt-1" data-lucide="shopping-bag"></i> Tunjungan Plaza and Pakuwon Mall are the closest major shopping centers.</li>
-<li class="flex gap-3"><i class="w-5 h-5 text-pcu-blue mt-1" data-lucide="train"></i> Surabaya's major train stations are 20-30 minutes away by car.</li>
-<li class="flex gap-3"><i class="w-5 h-5 text-pcu-blue mt-1" data-lucide="clock"></i> Peak travel time around the campus is typically 25-35 minutes during rush hour.</li>
+<li class="flex gap-3"><i class="w-5 h-5 text-pcu-green mt-1" data-lucide="map-pin"></i> PCU is within easy reach of Surabaya's Western Corridor.</li>
+<li class="flex gap-3"><i class="w-5 h-5 text-pcu-green mt-1" data-lucide="shopping-bag"></i> Tunjungan Plaza and Pakuwon Mall are the closest major shopping centers.</li>
+<li class="flex gap-3"><i class="w-5 h-5 text-pcu-green mt-1" data-lucide="train"></i> Surabaya's major train stations are 20-30 minutes away by car.</li>
+<li class="flex gap-3"><i class="w-5 h-5 text-pcu-green mt-1" data-lucide="clock"></i> Peak travel time around the campus is typically 25-35 minutes during rush hour.</li>
 </ul>
 </div>
 <div class="bg-white rounded-3xl border border-gray-100 p-8 shadow-sm">
-<h2 class="font-semibold text-pcu-blue text-2xl mb-4">Travel Tips</h2>
+<h2 class="font-semibold text-pcu-green text-2xl mb-4">Travel Tips</h2>
 <p class="text-gray-600 mb-4">For first-time visitors, use ride-hailing apps or a trusted taxi from Juanda Airport. Ask your driver to use the campus address and verify with the university's official address.</p>
 <p class="text-gray-600">If you plan to explore the city, Surabaya offers easy access to restaurants, malls, and cultural areas from the area around PCU.</p>
 </div>
@@ -965,21 +974,21 @@
 <div class="page" id="page-accommodation">
 <div class="min-h-screen bg-gradient-to-b from-pcu-light/50 to-white" style="padding-top: 80px;">
 <div class="max-w-7xl mx-auto px-6 lg:px-8 py-16">
-<div class="text-center mb-12 reveal"><span class="inline-block px-4 py-1.5 bg-pcu-blue/10 text-pcu-blue text-xs font-semibold rounded-full mb-4 uppercase tracking-wider">Life at PCU</span>
-<h1 class="font-display text-3xl md:text-5xl font-bold text-pcu-blue mb-4">Accommodation</h1>
+<div class="text-center mb-12 reveal"><span class="inline-block px-4 py-1.5 bg-pcu-green/10 text-pcu-green text-xs font-semibold rounded-full mb-4 uppercase tracking-wider">Life at PCU</span>
+<h1 class="font-display text-3xl md:text-5xl font-bold text-pcu-green mb-4">Accommodation</h1>
 <p class="text-gray-500 text-lg max-w-3xl mx-auto">Information about student accommodation at Petra Christian University will be available soon. For now, this page gives an overview of the types of housing options international students can expect.</p>
 </div>
 <div class="grid lg:grid-cols-3 gap-6">
 <div class="rounded-3xl bg-white border border-gray-100 p-8 shadow-sm">
-<h2 class="font-semibold text-pcu-blue text-xl mb-3">Student Dorms</h2>
+<h2 class="font-semibold text-pcu-green text-xl mb-3">Student Dorms</h2>
 <p class="text-gray-600">On-campus or near-campus dormitories may be available for international students depending on availability.</p>
 </div>
 <div class="rounded-3xl bg-white border border-gray-100 p-8 shadow-sm">
-<h2 class="font-semibold text-pcu-blue text-xl mb-3">Apartments</h2>
+<h2 class="font-semibold text-pcu-green text-xl mb-3">Apartments</h2>
 <p class="text-gray-600">Many students choose shared apartments close to campus and shopping centers for convenience.</p>
 </div>
 <div class="rounded-3xl bg-white border border-gray-100 p-8 shadow-sm">
-<h2 class="font-semibold text-pcu-blue text-xl mb-3">Homestay</h2>
+<h2 class="font-semibold text-pcu-green text-xl mb-3">Homestay</h2>
 <p class="text-gray-600">Homestay options allow students to live with local families and experience Indonesian culture firsthand.</p>
 </div>
 </div>
@@ -988,14 +997,18 @@
 </div>
 <div class="page" id="page-preparation-arrival">
 <div class="min-h-screen bg-white" style="padding-top: 80px;">
-<div class="bg-gradient-to-r from-pcu-blue to-pcu-sky py-20">
-<div class="max-w-7xl mx-auto px-6 lg:px-8">
+<div class="relative overflow-hidden bg-gradient-to-r from-pcu-green to-emerald-500 py-20">
+<div class="absolute inset-0">
+<img alt="Life at PCU" class="w-full h-full object-cover opacity-60" src="Assets/Images/Student%20Exchange/student-exchange-2.JPG" style="object-position: center 50%;"/>
+</div>
+<div class="absolute inset-0 bg-gradient-to-r from-pcu-green/80 to-emerald-500/80"></div>
+<div class="relative max-w-7xl mx-auto px-6 lg:px-8">
 <a class="inline-flex items-center gap-1 text-white/70 text-sm mb-6 hover:text-white transition" href="#" onclick="navigateTo('home');return false"><i class="w-4 h-4" data-lucide="arrow-left"></i> Back to Home</a>
 <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
 <div>
 <h1 class="font-display text-4xl md:text-5xl font-bold text-white mb-4">Preparation &amp; Arrival Guide</h1>
 <p class="text-white/75 text-lg max-w-3xl">Everything you need before departure and during arrival in Surabaya.</p>
-</div><a class="inline-flex items-center gap-2 px-6 py-3.5 bg-white text-pcu-blue font-semibold rounded-full shadow-lg hover:bg-white/90 transition" download="" href="Files/Downloads/International Students Guidebook (1).pdf"> <i class="w-4 h-4" data-lucide="download"></i> Download Guidebook </a>
+</div><a class="inline-flex items-center gap-2 px-6 py-3.5 bg-white text-pcu-green font-semibold rounded-full shadow-lg hover:bg-white/90 transition" download="" href="Files/Downloads/International Students Guidebook (1).pdf"> <i class="w-4 h-4" data-lucide="download"></i> Download Guidebook </a>
 </div>
 </div>
 </div>
@@ -1003,34 +1016,34 @@
 <div class="grid lg:grid-cols-2 gap-10">
 <div class="space-y-8">
 <div class="rounded-3xl border border-gray-100 bg-pcu-light p-8 shadow-sm">
-<h2 class="font-semibold text-pcu-blue text-2xl mb-4">Pre-Departure Checklist</h2>
+<h2 class="font-semibold text-pcu-green text-2xl mb-4">Pre-Departure Checklist</h2>
 <ul class="space-y-4 text-gray-600">
-<li class="flex gap-3"><i class="w-5 h-5 text-pcu-blue mt-1" data-lucide="check-circle"></i> Confirm your student visa and travel documents.</li>
-<li class="flex gap-3"><i class="w-5 h-5 text-pcu-blue mt-1" data-lucide="check-circle"></i> Arrange airport transfer and arrival logistics.</li>
-<li class="flex gap-3"><i class="w-5 h-5 text-pcu-blue mt-1" data-lucide="check-circle"></i> Pack essentials, local SIM card, and currency for initial expenses.</li>
+<li class="flex gap-3"><i class="w-5 h-5 text-pcu-green mt-1" data-lucide="check-circle"></i> Confirm your student visa and travel documents.</li>
+<li class="flex gap-3"><i class="w-5 h-5 text-pcu-green mt-1" data-lucide="check-circle"></i> Arrange airport transfer and arrival logistics.</li>
+<li class="flex gap-3"><i class="w-5 h-5 text-pcu-green mt-1" data-lucide="check-circle"></i> Pack essentials, local SIM card, and currency for initial expenses.</li>
 </ul>
 </div>
 <div class="rounded-3xl border border-gray-100 bg-white p-8 shadow-sm">
-<h2 class="font-semibold text-pcu-blue text-2xl mb-4">Arrival Guide</h2>
+<h2 class="font-semibold text-pcu-green text-2xl mb-4">Arrival Guide</h2>
 <ul class="space-y-4 text-gray-600">
-<li class="flex gap-3"><i class="w-5 h-5 text-pcu-sky mt-1" data-lucide="map-pin"></i> Arrive at Juanda International Airport and use a trusted ride service to PCU.</li>
-<li class="flex gap-3"><i class="w-5 h-5 text-pcu-sky mt-1" data-lucide="users"></i> Check in with the International Office upon arrival for orientation support.</li>
-<li class="flex gap-3"><i class="w-5 h-5 text-pcu-sky mt-1" data-lucide="home"></i> Confirm your accommodation arrangements before leaving the airport.</li>
+<li class="flex gap-3"><i class="w-5 h-5 text-pcu-green mt-1" data-lucide="map-pin"></i> Arrive at Juanda International Airport and use a trusted ride service to PCU.</li>
+<li class="flex gap-3"><i class="w-5 h-5 text-pcu-green mt-1" data-lucide="users"></i> Check in with the International Office upon arrival for orientation support.</li>
+<li class="flex gap-3"><i class="w-5 h-5 text-pcu-green mt-1" data-lucide="home"></i> Confirm your accommodation arrangements before leaving the airport.</li>
 </ul>
 </div>
 </div>
 <div class="space-y-8">
 <div class="rounded-3xl border border-gray-100 bg-white p-8 shadow-sm">
-<h2 class="font-semibold text-pcu-blue text-2xl mb-4">Health Insurance</h2>
+<h2 class="font-semibold text-pcu-green text-2xl mb-4">Health Insurance</h2>
 <p class="text-gray-600 mb-4">We recommend students have either Health &amp; Travel Insurance from their home country before arriving in Indonesia. This is the preferred coverage for international students during the exchange period.</p>
 <p class="text-gray-600">Make sure your plan includes medical evacuation, emergency care, and COVID-19 coverage if available.</p>
 </div>
 <div class="rounded-3xl border border-gray-100 bg-pcu-light p-8 shadow-sm">
-<h2 class="font-semibold text-pcu-blue text-2xl mb-4">First Week Checklist</h2>
+<h2 class="font-semibold text-pcu-green text-2xl mb-4">First Week Checklist</h2>
 <ul class="space-y-4 text-gray-600">
-<li class="flex gap-3"><i class="w-5 h-5 text-pcu-blue mt-1" data-lucide="check-circle"></i> Register at the International Office and attend orientation events.</li>
-<li class="flex gap-3"><i class="w-5 h-5 text-pcu-blue mt-1" data-lucide="file-text"></i> Confirm your class schedule and campus facilities tour.</li>
-<li class="flex gap-3"><i class="w-5 h-5 text-pcu-blue mt-1" data-lucide="credit-card"></i> Open a local bank account if needed and get a local SIM card.</li>
+<li class="flex gap-3"><i class="w-5 h-5 text-pcu-green mt-1" data-lucide="check-circle"></i> Register at the International Office and attend orientation events.</li>
+<li class="flex gap-3"><i class="w-5 h-5 text-pcu-green mt-1" data-lucide="file-text"></i> Confirm your class schedule and campus facilities tour.</li>
+<li class="flex gap-3"><i class="w-5 h-5 text-pcu-green mt-1" data-lucide="credit-card"></i> Open a local bank account if needed and get a local SIM card.</li>
 </ul>
 </div>
 </div>
@@ -1041,27 +1054,27 @@
 <div class="page" id="page-explore">
 <div class="min-h-screen bg-gradient-to-b from-pcu-light/50 to-white" style="padding-top: 80px;">
 <div class="max-w-5xl mx-auto px-6 lg:px-8 py-16 md:py-24">
-<div class="text-center mb-16"><span class="inline-block px-4 py-1.5 bg-pcu-blue/10 text-pcu-blue text-xs font-semibold rounded-full mb-5 uppercase tracking-wider">Choose Your Path</span>
-<h1 class="font-display text-3xl md:text-5xl font-bold text-pcu-blue mb-4">Explore Programs</h1>
+<div class="text-center mb-16"><span class="inline-block px-4 py-1.5 bg-pcu-navy/10 text-pcu-navy text-xs font-semibold rounded-full mb-5 uppercase tracking-wider">Choose Your Path</span>
+<h1 class="font-display text-3xl md:text-5xl font-bold text-pcu-navy mb-4">Explore Programs</h1>
 <p class="text-gray-500 text-lg max-w-xl mx-auto">Select the category that best describes you to discover the right international opportunities.</p>
 </div>
 <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto"><!-- International Students Card -->
 <div class="program-card bg-white rounded-3xl overflow-hidden border border-gray-100 cursor-pointer group" onclick="navigateTo('intl-students')">
-<div class="h-52 bg-gradient-to-br from-pcu-blue via-pcu-sky to-blue-400 flex items-center justify-center relative overflow-hidden">
+<div class="h-52 bg-gradient-to-br from-pcu-sky to-cyan-400 flex items-center justify-center relative overflow-hidden">
 <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(255,255,255,0.1),transparent)]"></div><i class="w-20 h-20 text-white/70 group-hover:scale-110 transition-transform duration-500" data-lucide="plane"></i>
 </div>
 <div class="p-8">
-<h2 class="font-display text-2xl font-bold text-pcu-blue mb-3">International Students</h2>
-<p class="text-gray-500 mb-6 leading-relaxed">Coming to PCU from abroad? Explore exchange programs, degree programs, and cultural immersion opportunities.</p><span class="inline-flex items-center gap-2 px-6 py-3 bg-pcu-blue text-white font-semibold rounded-full group-hover:bg-pcu-sky transition"> View Programs <i class="w-4 h-4" data-lucide="arrow-right"></i> </span>
+<h2 class="font-display text-2xl font-bold text-pcu-sky mb-3">International Students</h2>
+<p class="text-gray-500 mb-6 leading-relaxed">Coming to PCU from abroad? Explore exchange programs, degree programs, and cultural immersion opportunities.</p><span class="inline-flex items-center gap-2 px-6 py-3 bg-pcu-sky text-white font-semibold rounded-full group-hover:bg-cyan-400 transition"> View Programs <i class="w-4 h-4" data-lucide="arrow-right"></i> </span>
 </div>
 </div><!-- PCU Students Card -->
 <div class="program-card bg-white rounded-3xl overflow-hidden border border-gray-100 cursor-pointer group" onclick="navigateTo('pcu-students')">
-<div class="h-52 bg-gradient-to-br from-pcu-gold via-yellow-500 to-orange-400 flex items-center justify-center relative overflow-hidden">
+<div class="h-52 bg-gradient-to-br from-pcu-orange to-amber-400 flex items-center justify-center relative overflow-hidden">
 <div class="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,rgba(255,255,255,0.1),transparent)]"></div><i class="w-20 h-20 text-white/70 group-hover:scale-110 transition-transform duration-500" data-lucide="globe"></i>
 </div>
 <div class="p-8">
-<h2 class="font-display text-2xl font-bold text-pcu-blue mb-3">Local Students</h2>
-<p class="text-gray-500 mb-6 leading-relaxed">PCU student looking to go abroad? Discover outbound exchange, dual degrees, and internship opportunities.</p><span class="inline-flex items-center gap-2 px-6 py-3 bg-pcu-gold text-white font-semibold rounded-full group-hover:bg-yellow-500 transition"> View Programs <i class="w-4 h-4" data-lucide="arrow-right"></i> </span>
+<h2 class="font-display text-2xl font-bold text-pcu-orange mb-3">Local Students</h2>
+<p class="text-gray-500 mb-6 leading-relaxed">PCU student looking to go abroad? Discover outbound exchange, dual degrees, and internship opportunities.</p><span class="inline-flex items-center gap-2 px-6 py-3 bg-pcu-orange text-white font-semibold rounded-full group-hover:bg-amber-500 transition"> View Programs <i class="w-4 h-4" data-lucide="arrow-right"></i> </span>
 </div>
 </div>
 </div>
@@ -1070,11 +1083,11 @@
 </div><!-- ==================== INTERNATIONAL STUDENTS PAGE ==================== -->
 <div class="page" id="page-intl-students">
 <div style="padding-top: 80px;"><!-- Hero banner -->
-<div class="relative overflow-hidden bg-gradient-to-r from-pcu-blue to-pcu-sky py-16 md:py-24">
+<div class="relative overflow-hidden bg-gradient-to-r from-pcu-sky to-cyan-400 py-16 md:py-24">
 <div class="absolute inset-0">
 <img alt="Gedung Petra" class="w-full h-full object-cover opacity-60" src="Assets/Images/Student%20Exchange/student-exchange-8.JPG" style="object-position: center 35%;"/>
 </div>
-<div class="absolute inset-0 bg-gradient-to-r from-pcu-blue/70 to-pcu-sky/70"></div>
+<div class="absolute inset-0 bg-gradient-to-r from-pcu-sky/80 to-cyan-400/80"></div>
 <div class="relative max-w-7xl mx-auto px-6 lg:px-8"><a class="inline-flex items-center gap-1 text-white/60 text-sm mb-6 hover:text-white transition" href="#" onclick="navigateTo('home');return false"><i class="w-4 h-4" data-lucide="arrow-left"></i> Back to Home</a>
 <a class="inline-flex items-center gap-1 text-white/70 text-sm mb-4 hover:text-white transition" href="#" onclick="navigateTo('pcu-students');return false"><i class="w-4 h-4" data-lucide="arrow-left"></i> Back to Local Students</a>
 <h1 class="font-display text-3xl md:text-5xl font-bold text-white mb-3">International Students</h1>
@@ -1084,55 +1097,55 @@
 <div class="max-w-7xl mx-auto px-6 lg:px-8 py-16">
 <div class="grid sm:grid-cols-2 gap-6 mb-16">
 <div class="program-card bg-white rounded-2xl border border-gray-100 overflow-hidden">
-<div class="h-40 bg-gradient-to-br from-pcu-blue to-pcu-sky flex items-center justify-center">
+<div class="h-40 bg-gradient-to-br from-pcu-sky to-cyan-400 flex items-center justify-center">
 <i class="w-14 h-14 text-white/80" data-lucide="repeat"></i>
 </div>
 <div class="p-6">
-<h3 class="font-semibold text-lg text-pcu-blue mb-2">Semester Exchange</h3>
+<h3 class="font-semibold text-lg text-pcu-sky mb-2">Semester Exchange</h3>
 <p class="text-sm text-gray-500 leading-relaxed mb-4">Experience a full semester at PCU with credit transfer to your home university. Choose from a range of courses across 8 faculties.</p>
-<div class="flex flex-wrap gap-2 mb-4"><span class="px-3 py-1 bg-pcu-light text-pcu-blue text-xs rounded-full font-medium">1 Semester</span> <span class="px-3 py-1 bg-pcu-light text-pcu-blue text-xs rounded-full font-medium">Credit Transfer</span>
+<div class="flex flex-wrap gap-2 mb-4"><span class="px-3 py-1 bg-pcu-sky/10 text-pcu-sky text-xs rounded-full font-medium">1 Semester</span> <span class="px-3 py-1 bg-pcu-sky/10 text-pcu-sky text-xs rounded-full font-medium">Credit Transfer</span>
 </div><button class="text-pcu-sky text-sm font-medium flex items-center gap-1 hover:gap-2 transition-all" onclick="navigateTo('semester-exchange')">View Details <i class="w-3.5 h-3.5" data-lucide="arrow-right"></i></button>
 </div>
 </div>
 <div class="program-card bg-white rounded-2xl border border-gray-100 overflow-hidden">
-<div class="h-40 bg-gradient-to-br from-indigo-600 to-pcu-blue flex items-center justify-center">
+<div class="h-40 bg-gradient-to-br from-pcu-sky to-cyan-400 flex items-center justify-center">
 <i class="w-14 h-14 text-white/80" data-lucide="graduation-cap"></i>
 </div>
 <div class="p-6">
-<h3 class="font-semibold text-lg text-pcu-blue mb-2">International Degree Program</h3>
+<h3 class="font-semibold text-lg text-pcu-sky mb-2">International Degree Program</h3>
 <p class="text-sm text-gray-500 leading-relaxed mb-4">Pursue a full undergraduate degree at PCU across 9 departments with internationally-oriented curricula taught in English.</p>
-<div class="flex flex-wrap gap-2 mb-4"><span class="px-3 py-1 bg-pcu-light text-pcu-blue text-xs rounded-full font-medium">Full Degree</span> <span class="px-3 py-1 bg-pcu-light text-pcu-blue text-xs rounded-full font-medium">English</span>
+<div class="flex flex-wrap gap-2 mb-4"><span class="px-3 py-1 bg-pcu-sky/10 text-pcu-sky text-xs rounded-full font-medium">Full Degree</span> <span class="px-3 py-1 bg-pcu-sky/10 text-pcu-sky text-xs rounded-full font-medium">English</span>
 </div><button class="text-pcu-sky text-sm font-medium flex items-center gap-1 hover:gap-2 transition-all" onclick="navigateTo('intl-degree')">View Details <i class="w-3.5 h-3.5" data-lucide="arrow-right"></i></button>
 </div>
 </div>
 <div class="program-card bg-white rounded-2xl border border-gray-100 overflow-hidden">
-<div class="h-40 bg-gradient-to-br from-violet-500 to-purple-700 flex items-center justify-center">
+<div class="h-40 bg-gradient-to-br from-pcu-sky to-cyan-400 flex items-center justify-center">
 <i class="w-14 h-14 text-white/80" data-lucide="sparkles"></i>
 </div>
 <div class="p-6">
-<h3 class="font-semibold text-lg text-pcu-blue mb-2">Indonesian SPECTRUM</h3>
+<h3 class="font-semibold text-lg text-pcu-sky mb-2">Indonesian SPECTRUM</h3>
 <p class="text-sm text-gray-500 leading-relaxed mb-4">A short-term cultural and academic immersion program exploring Indonesia's rich heritage and modern landscape.</p>
-<div class="flex flex-wrap gap-2 mb-4"><span class="px-3 py-1 bg-pcu-light text-pcu-blue text-xs rounded-full font-medium">Short-term</span> <span class="px-3 py-1 bg-pcu-light text-pcu-blue text-xs rounded-full font-medium">Cultural</span>
+<div class="flex flex-wrap gap-2 mb-4"><span class="px-3 py-1 bg-pcu-sky/10 text-pcu-sky text-xs rounded-full font-medium">Short-term</span> <span class="px-3 py-1 bg-pcu-sky/10 text-pcu-sky text-xs rounded-full font-medium">Cultural</span>
 </div><button class="text-pcu-sky text-sm font-medium flex items-center gap-1 hover:gap-2 transition-all" onclick="navigateTo('indonesian-spectrum')">View Details <i class="w-3.5 h-3.5" data-lucide="arrow-right"></i></button>
 </div>
 </div>
 <div class="program-card bg-white rounded-2xl border border-gray-100 overflow-hidden">
-<div class="h-40 bg-gradient-to-br from-pcu-gold to-yellow-500 flex items-center justify-center">
+<div class="h-40 bg-gradient-to-br from-pcu-sky to-cyan-400 flex items-center justify-center">
 <i class="w-14 h-14 text-white/80" data-lucide="heart-handshake"></i>
 </div>
 <div class="p-6">
-<h3 class="font-semibold text-lg text-pcu-blue mb-2">International Community Outreach Program
+<h3 class="font-semibold text-lg text-pcu-sky mb-2">International Community Outreach Program
          </h3>
 <p class="text-sm text-gray-500 leading-relaxed mb-4">Engage in meaningful community service in rural Indonesia while building cross-cultural competence and leadership.</p>
-<div class="flex flex-wrap gap-2 mb-4"><span class="px-3 py-1 bg-pcu-light text-pcu-blue text-xs rounded-full font-medium">Service Learning</span> <span class="px-3 py-1 bg-pcu-light text-pcu-blue text-xs rounded-full font-medium">Cultural</span>
+<div class="flex flex-wrap gap-2 mb-4"><span class="px-3 py-1 bg-pcu-sky/10 text-pcu-sky text-xs rounded-full font-medium">Service Learning</span> <span class="px-3 py-1 bg-pcu-sky/10 text-pcu-sky text-xs rounded-full font-medium">Cultural</span>
 </div><button class="text-pcu-sky text-sm font-medium flex items-center gap-1 hover:gap-2 transition-all" onclick="navigateTo('cop')">View Details <i class="w-3.5 h-3.5" data-lucide="arrow-right"></i></button>
 </div>
 </div>
 </div><!-- News filtered -->
 <div>
 <div class="flex items-end justify-between mb-8">
-<div><span class="inline-block px-3 py-1 bg-blue-100 text-pcu-sky text-xs font-semibold rounded-full mb-3">#inboundstudents</span>
-<h2 class="font-display text-2xl md:text-3xl font-bold text-pcu-blue">Latest for International Students</h2>
+<div><span class="inline-block px-3 py-1 bg-pcu-sky/10 text-pcu-sky text-xs font-semibold rounded-full mb-3">#inboundstudents</span>
+<h2 class="font-display text-2xl md:text-3xl font-bold text-pcu-sky">Latest for International Students</h2>
 </div>
 </div>
 <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6" id="inboundNews"></div>
@@ -1142,11 +1155,11 @@
 </div><!-- ==================== PCU STUDENTS PAGE ==================== -->
 <div class="page" id="page-pcu-students">
 <div style="padding-top: 80px;">
-<div class="relative overflow-hidden bg-gradient-to-r from-pcu-gold to-yellow-500 py-16 md:py-24">
+<div class="relative overflow-hidden bg-gradient-to-r from-pcu-orange to-amber-400 py-16 md:py-24">
 <div class="absolute inset-0">
 <img alt="Gedung Petra" class="w-full h-full object-cover opacity-60" src="Assets/Images/Student%20Exchange/student-exchange-7.JPG" style="object-position: center 50%;"/>
 </div>
-<div class="absolute inset-0 bg-gradient-to-r from-pcu-gold/70 to-yellow-500/70"></div>
+<div class="absolute inset-0 bg-gradient-to-r from-pcu-orange/70 to-amber-400/70"></div>
 <div class="relative max-w-7xl mx-auto px-6 lg:px-8"><a class="inline-flex items-center gap-1 text-white/60 text-sm mb-6 hover:text-white transition" href="#" onclick="navigateTo('home');return false"><i class="w-4 h-4" data-lucide="arrow-left"></i> Back to Home</a>
 <a class="inline-flex items-center gap-1 text-white/70 text-sm mb-4 hover:text-white transition" href="#" onclick="navigateTo('pcu-students');return false"><i class="w-4 h-4" data-lucide="arrow-left"></i> Back to Local Students</a>
 <h1 class="font-display text-3xl md:text-5xl font-bold text-white mb-3">Local Students</h1>
@@ -1156,43 +1169,43 @@
 <div class="max-w-7xl mx-auto px-6 lg:px-8 py-16">
 <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
 <div class="program-card bg-white rounded-2xl border border-gray-100 overflow-hidden cursor-pointer" onclick="navigateTo('outbound-semester-exchange')">
-<div class="h-40 bg-gradient-to-br from-pcu-sky to-blue-400 flex items-center justify-center">
+<div class="h-40 bg-gradient-to-br from-pcu-orange to-amber-400 flex items-center justify-center">
 <i class="w-14 h-14 text-white/80" data-lucide="repeat"></i>
 </div>
 <div class="p-6">
-<h3 class="font-semibold text-lg text-pcu-blue mb-2">Outbound Semester Exchange</h3>
+<h3 class="font-semibold text-lg text-pcu-orange mb-2">Outbound Semester Exchange</h3>
 <p class="text-sm text-gray-500 leading-relaxed mb-4">Study abroad at one of our 80+ partner universities for one semester with full credit transfer.</p>
-<div class="flex flex-wrap gap-2 mb-4"><span class="px-3 py-1 bg-pcu-light text-pcu-blue text-xs rounded-full font-medium">1 Semester</span> <span class="px-3 py-1 bg-pcu-light text-pcu-blue text-xs rounded-full font-medium">80+ Partners</span>
-</div><button class="text-pcu-sky text-sm font-medium flex items-center gap-1 hover:gap-2 transition-all" onclick="navigateTo('outbound-semester-exchange')">View Details <i class="w-3.5 h-3.5" data-lucide="arrow-right"></i></button>
+<div class="flex flex-wrap gap-2 mb-4"><span class="px-3 py-1 bg-pcu-orange/10 text-pcu-orange text-xs rounded-full font-medium">1 Semester</span> <span class="px-3 py-1 bg-pcu-orange/10 text-pcu-orange text-xs rounded-full font-medium">80+ Partners</span>
+</div><button class="text-pcu-orange text-sm font-medium flex items-center gap-1 hover:gap-2 transition-all" onclick="navigateTo('outbound-semester-exchange')">View Details <i class="w-3.5 h-3.5" data-lucide="arrow-right"></i></button>
 </div>
 </div>
 <div class="program-card bg-white rounded-2xl border border-gray-100 overflow-hidden cursor-pointer" onclick="navigateTo('joint-double-degree')">
-<div class="h-40 bg-gradient-to-br from-indigo-600 to-pcu-blue flex items-center justify-center">
+<div class="h-40 bg-gradient-to-br from-pcu-orange to-amber-500 flex items-center justify-center">
 <i class="w-14 h-14 text-white/80" data-lucide="graduation-cap"></i>
 </div>
 <div class="p-6">
-<h3 class="font-semibold text-lg text-pcu-blue mb-2">Joint/Double Degree</h3>
+<h3 class="font-semibold text-lg text-pcu-orange mb-2">Joint/Double Degree</h3>
 <p class="text-sm text-gray-500 leading-relaxed mb-4">Earn degrees from both PCU and an international partner university in a structured dual program.</p>
-<div class="flex flex-wrap gap-2 mb-4"><span class="px-3 py-1 bg-pcu-light text-pcu-blue text-xs rounded-full font-medium">Dual Degree</span> <span class="px-3 py-1 bg-pcu-light text-pcu-blue text-xs rounded-full font-medium">International</span>
-</div><button class="text-pcu-sky text-sm font-medium flex items-center gap-1 hover:gap-2 transition-all">View Details <i class="w-3.5 h-3.5" data-lucide="arrow-right"></i></button>
+<div class="flex flex-wrap gap-2 mb-4"><span class="px-3 py-1 bg-pcu-orange/10 text-pcu-orange text-xs rounded-full font-medium">Dual Degree</span> <span class="px-3 py-1 bg-pcu-orange/10 text-pcu-orange text-xs rounded-full font-medium">International</span>
+</div><button class="text-pcu-orange text-sm font-medium flex items-center gap-1 hover:gap-2 transition-all">View Details <i class="w-3.5 h-3.5" data-lucide="arrow-right"></i></button>
 </div>
 </div>
 <div class="program-card bg-white rounded-2xl border border-gray-100 overflow-hidden cursor-pointer" onclick="navigateTo('internship')">
-<div class="h-40 bg-gradient-to-br from-teal-500 to-emerald-600 flex items-center justify-center">
+<div class="h-40 bg-gradient-to-br from-pcu-orange to-amber-400 flex items-center justify-center">
 <i class="w-14 h-14 text-white/80" data-lucide="briefcase"></i>
 </div>
 <div class="p-6">
-<h3 class="font-semibold text-lg text-pcu-blue mb-2">Internship</h3>
+<h3 class="font-semibold text-lg text-pcu-orange mb-2">Internship</h3>
 <p class="text-sm text-gray-500 leading-relaxed mb-4">Gain professional experience abroad through our international internship placements and industry partners.</p>
-<div class="flex flex-wrap gap-2 mb-4"><span class="px-3 py-1 bg-pcu-light text-pcu-blue text-xs rounded-full font-medium">Professional</span> <span class="px-3 py-1 bg-pcu-light text-pcu-blue text-xs rounded-full font-medium">Global Network</span>
-</div><button class="text-pcu-sky text-sm font-medium flex items-center gap-1 hover:gap-2 transition-all" onclick="navigateTo('internship')">View Details <i class="w-3.5 h-3.5" data-lucide="arrow-right"></i></button>
+<div class="flex flex-wrap gap-2 mb-4"><span class="px-3 py-1 bg-pcu-orange/10 text-pcu-orange text-xs rounded-full font-medium">Professional</span> <span class="px-3 py-1 bg-pcu-orange/10 text-pcu-orange text-xs rounded-full font-medium">Global Network</span>
+</div><button class="text-pcu-orange text-sm font-medium flex items-center gap-1 hover:gap-2 transition-all" onclick="navigateTo('internship')">View Details <i class="w-3.5 h-3.5" data-lucide="arrow-right"></i></button>
 </div>
 </div>
 </div><!-- News filtered -->
 <div>
 <div class="flex items-end justify-between mb-8">
-<div><span class="inline-block px-3 py-1 bg-yellow-100 text-pcu-gold text-xs font-semibold rounded-full mb-3">#outboundstudents</span>
-<h2 class="font-display text-2xl md:text-3xl font-bold text-pcu-blue">Latest for PCU Students</h2>
+<div><span class="inline-block px-3 py-1 bg-pcu-orange/10 text-pcu-orange text-xs font-semibold rounded-full mb-3">#outboundstudents</span>
+<h2 class="font-display text-2xl md:text-3xl font-bold text-pcu-orange">Latest for PCU Students</h2>
 </div>
 </div>
 <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6" id="outboundNews"></div>
@@ -1203,11 +1216,11 @@
 <!-- ==================== OUTBOUND SEMESTER EXCHANGE PAGE ==================== -->
 <div class="page" id="page-outbound-semester-exchange">
 <div style="padding-top: 80px;">
-<div class="relative overflow-hidden bg-gradient-to-r from-pcu-sky to-blue-400 py-16 md:py-24">
+<div class="relative overflow-hidden bg-gradient-to-r from-pcu-orange to-amber-400 py-16 md:py-24">
 <div class="absolute inset-0">
 <img alt="Gedung Petra" class="w-full h-full object-cover opacity-60" src="Assets/Images/Student%20Exchange/student-exchange-6.JPG" style="object-position: center 50%;"/>
 </div>
-<div class="absolute inset-0 bg-gradient-to-r from-pcu-sky/70 to-blue-400/70"></div>
+<div class="absolute inset-0 bg-gradient-to-r from-pcu-orange/70 to-amber-400/70"></div>
 <div class="relative max-w-7xl mx-auto px-6 lg:px-8"><a class="inline-flex items-center gap-1 text-white/60 text-sm mb-6 hover:text-white transition" href="#" onclick="navigateTo('home');return false"><i class="w-4 h-4" data-lucide="arrow-left"></i> Back to Home</a>
 <a class="inline-flex items-center gap-1 text-white/70 text-sm mb-4 hover:text-white transition" href="#" onclick="navigateTo('pcu-students');return false"><i class="w-4 h-4" data-lucide="arrow-left"></i> Back to Local Students</a>
 <span class="inline-block px-4 py-1.5 bg-white/15 backdrop-blur text-white text-xs font-semibold rounded-full mb-4 tracking-wide uppercase">Outbound Programs</span>
@@ -1261,7 +1274,7 @@
 <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5" id="ose-partner-grid"></div>
 </div>
 <!-- How to Apply -->
-<div class="bg-gradient-to-br from-pcu-light/60 to-white rounded-3xl p-10 border border-pcu-blue/10 mb-16">
+<div class="bg-gradient-to-br from-pcu-orange/5 to-white rounded-3xl p-10 border border-pcu-orange/10 mb-16">
 <h2 class="font-display text-2xl font-bold text-pcu-blue mb-8">How to Apply</h2>
 <div class="grid md:grid-cols-4 gap-6">
 <div class="text-center">
@@ -1300,11 +1313,11 @@
 <!-- ==================== INTERNSHIP PAGE ==================== -->
 <div class="page" id="page-internship">
 <div style="padding-top: 80px;">
-<div class="relative overflow-hidden bg-gradient-to-r from-teal-600 to-emerald-500 py-16 md:py-24">
+<div class="relative overflow-hidden bg-gradient-to-r from-pcu-orange to-amber-400 py-16 md:py-24">
 <div class="absolute inset-0">
 <img alt="Gedung Petra" class="w-full h-full object-cover opacity-60" src="Assets/Images/Student%20Exchange/internship-1.JPG" style="object-position: center 50%;"/>
 </div>
-<div class="absolute inset-0 bg-gradient-to-r from-teal-600/70 to-emerald-500/70"></div>
+<div class="absolute inset-0 bg-gradient-to-r from-pcu-orange/70 to-amber-400/70"></div>
 <div class="relative max-w-7xl mx-auto px-6 lg:px-8"><a class="inline-flex items-center gap-1 text-white/60 text-sm mb-6 hover:text-white transition" href="#" onclick="navigateTo('home');return false"><i class="w-4 h-4" data-lucide="arrow-left"></i> Back to Home</a>
 <a class="inline-flex items-center gap-1 text-white/70 text-sm mb-4 hover:text-white transition" href="#" onclick="navigateTo('pcu-students');return false"><i class="w-4 h-4" data-lucide="arrow-left"></i> Back to Local Students</a>
 <span class="inline-block px-4 py-1.5 bg-white/15 backdrop-blur text-white text-xs font-semibold rounded-full mb-4 tracking-wide uppercase">Outbound Programs</span>
@@ -1343,11 +1356,11 @@
 <div class="space-y-5" id="internship-opportunities-list"></div>
 </div>
 <!-- Apply CTA -->
-<div class="bg-gradient-to-br from-teal-600 to-emerald-500 rounded-3xl p-10 text-white text-center">
+<div class="bg-gradient-to-br from-pcu-orange to-amber-400 rounded-3xl p-10 text-white text-center">
 <i class="w-12 h-12 mx-auto mb-4 text-white/80" data-lucide="briefcase"></i>
 <h3 class="font-display text-2xl font-bold mb-3">Don't See a Fit?</h3>
 <p class="text-white/80 mb-6 max-w-xl mx-auto">Reach out to the International Office — we can help connect you with the right opportunity based on your interests and major.</p>
-<a class="inline-flex items-center gap-2 px-8 py-3.5 bg-white text-teal-700 font-semibold rounded-full hover:bg-teal-50 transition shadow-lg" href="mailto:io@petra.ac.id">
+<a class="inline-flex items-center gap-2 px-8 py-3.5 bg-white text-pcu-orange font-semibold rounded-full hover:bg-orange-50 transition shadow-lg" href="mailto:io@petra.ac.id">
 <i class="w-4 h-4" data-lucide="mail"></i> Contact International Office
        </a>
 </div>
@@ -1357,11 +1370,11 @@
 <!-- ==================== SEMESTER EXCHANGE PAGE ==================== -->
 <div class="page" id="page-semester-exchange">
 <div style="padding-top: 80px;"><!-- Hero Section -->
-<div class="relative overflow-hidden bg-gradient-to-r from-pcu-blue to-pcu-sky py-16 md:py-24">
+<div class="relative overflow-hidden bg-gradient-to-r from-pcu-sky to-cyan-400 py-16 md:py-24">
 <div class="absolute inset-0">
 <img alt="Gedung Petra" class="w-full h-full object-cover opacity-60" src="Assets/Images/Student%20Exchange/student-exchange-1.svg" style="object-position: center 5%;"/>
 </div>
-<div class="absolute inset-0 bg-gradient-to-r from-pcu-blue/70 to-pcu-sky/70"></div>
+<div class="absolute inset-0 bg-gradient-to-r from-pcu-sky/80 to-cyan-400/80"></div>
 <div class="relative max-w-7xl mx-auto px-6 lg:px-8"><a class="inline-flex items-center gap-1 text-white/60 text-sm mb-6 hover:text-white transition" href="#" onclick="navigateTo('home');return false"><i class="w-4 h-4" data-lucide="arrow-left"></i> Back to Home</a>
 <h1 class="font-display text-4xl md:text-5xl font-bold text-white mb-4">Semester Exchange Program</h1>
 <p class="text-white/80 text-lg max-w-3xl">Experience global education by spending a semester at Petra Christian University. Immerse yourself in Indonesian culture while earning academic credits.</p>
@@ -1404,7 +1417,7 @@
 </ul>
 </div>
 </div><!-- Eligibility Section -->
-<div class="mb-20 bg-gradient-to-br from-pcu-blue/10 to-white rounded-3xl p-12 border border-pcu-blue/10">
+<div class="mb-20 bg-gradient-to-br from-pcu-sky/10 to-white rounded-3xl p-12 border border-pcu-sky/10">
 <h2 class="font-display text-2xl md:text-3xl font-bold text-pcu-blue mb-6">Eligibility Requirements</h2>
 <div class="grid md:grid-cols-2 gap-8">
 <div>
@@ -1513,7 +1526,7 @@
 </div>
 </div>
 </div><!-- CTA Section -->
-<div class="bg-gradient-to-r from-pcu-blue to-pcu-sky rounded-3xl p-12 text-white text-center">
+<div class="bg-gradient-to-r from-pcu-sky to-cyan-400 rounded-3xl p-12 text-white text-center">
 <h2 class="font-display text-3xl font-bold mb-3">Ready to Start Your Journey?</h2>
 <p class="text-white/80 mb-8 max-w-2xl mx-auto">Join hundreds of students from around the world who have experienced transformative semesters at Petra Christian University.</p>
 <div class="flex flex-wrap justify-center gap-4"><a class="inline-flex items-center gap-2 px-7 py-3.5 bg-[#1c446d] text-white font-semibold rounded-full hover:bg-[#163553] transition shadow-lg" href="#"> Apply Now <i class="w-4 h-4" data-lucide="arrow-right"></i> </a> <a class="inline-flex items-center gap-2 px-7 py-3.5 border-2 border-white/40 text-white font-semibold rounded-full hover:bg-white/10 transition" href="#"> Contact Us </a>
@@ -1525,11 +1538,11 @@
 </div><!-- ==================== INTERNATIONAL COMMUNITY OUTREACH PROGRAM PAGE ==================== -->
 <div class="page" id="page-cop">
 <div style="padding-top: 80px;"><!-- Hero Section -->
-<div class="relative overflow-hidden bg-gradient-to-r from-pcu-gold to-yellow-500 py-16 md:py-24">
+<div class="relative overflow-hidden bg-gradient-to-r from-pcu-sky to-cyan-400 py-16 md:py-24">
 <div class="absolute inset-0">
 <img alt="Gedung Petra" class="w-full h-full object-cover opacity-60" src="Assets/Images/ICOP/icop-1.png" style="object-position: center 50%;"/>
 </div>
-<div class="absolute inset-0 bg-gradient-to-r from-pcu-gold/70 to-yellow-500/70"></div>
+<div class="absolute inset-0 bg-gradient-to-r from-pcu-sky/80 to-cyan-400/80"></div>
 <div class="relative max-w-7xl mx-auto px-6 lg:px-8"><a class="inline-flex items-center gap-1 text-white/60 text-sm mb-6 hover:text-white transition" href="#" onclick="navigateTo('home');return false"><i class="w-4 h-4" data-lucide="arrow-left"></i> Back to Home</a>
 <h1 class="font-display text-4xl md:text-5xl font-bold text-white mb-4">International Community Outreach Program</h1>
 <p class="text-white/80 text-lg max-w-3xl">Transform communities while transforming yourself through meaningful service learning in rural Indonesia.</p>
@@ -1537,7 +1550,7 @@
 </div><!-- Content Section -->
 <div class="bg-transparent">
 <div class="max-w-7xl mx-auto px-6 lg:px-8 py-20"><!-- Program Overview -->
-<div class="mb-20 bg-gradient-to-br from-pcu-light/50 to-white rounded-3xl p-12 border border-pcu-blue/10">
+<div class="mb-20 bg-gradient-to-br from-pcu-light/50 to-white rounded-3xl p-12 border border-pcu-sky/10">
 <h2 class="font-display text-2xl md:text-3xl font-bold text-pcu-blue mb-6">Program Overview</h2>
 <p class="text-gray-700 leading-relaxed mb-6">The International Community Outreach Program (COP) is an integrated service-learning program that combines academic study with meaningful community engagement. Students partner with local communities across rural Java to address real social challenges while developing cross-cultural competence, leadership skills, and global citizenship.</p>
 <div class="grid md:grid-cols-3 gap-6 mt-8">
@@ -1673,7 +1686,7 @@
 </div>
 </div>
 </div><!-- Program Timeline -->
-<div class="mb-20 bg-gradient-to-br from-pcu-light/50 to-white rounded-3xl p-12 border border-pcu-blue/10">
+<div class="mb-20 bg-gradient-to-br from-pcu-light/50 to-white rounded-3xl p-12 border border-pcu-sky/10">
 <h2 class="font-display text-2xl md:text-3xl font-bold text-pcu-blue mb-12">Typical Program Flow</h2>
 <div class="space-y-6">
 <div class="flex gap-4">
@@ -1681,7 +1694,7 @@
 <div class="w-10 h-10 rounded-full bg-pcu-gold text-white flex items-center justify-center font-bold mb-2">
             1
            </div>
-<div class="w-0.5 h-16 bg-gradient-to-b from-pcu-gold to-gray-300"></div>
+<div class="w-0.5 h-16 bg-gradient-to-b from-pcu-sky to-gray-300"></div>
 </div>
 <div>
 <h3 class="font-semibold text-pcu-blue text-lg mb-1">Pre-Departure Preparation (1-2 weeks)</h3>
@@ -1693,7 +1706,7 @@
 <div class="w-10 h-10 rounded-full bg-pcu-gold text-white flex items-center justify-center font-bold mb-2">
             2
            </div>
-<div class="w-0.5 h-16 bg-gradient-to-b from-pcu-gold to-gray-300"></div>
+<div class="w-0.5 h-16 bg-gradient-to-b from-pcu-sky to-gray-300"></div>
 </div>
 <div>
 <h3 class="font-semibold text-pcu-blue text-lg mb-1">Community Integration (Days 1-3)</h3>
@@ -1705,7 +1718,7 @@
 <div class="w-10 h-10 rounded-full bg-pcu-gold text-white flex items-center justify-center font-bold mb-2">
             3
            </div>
-<div class="w-0.5 h-16 bg-gradient-to-b from-pcu-gold to-gray-300"></div>
+<div class="w-0.5 h-16 bg-gradient-to-b from-pcu-sky to-gray-300"></div>
 </div>
 <div>
 <h3 class="font-semibold text-pcu-blue text-lg mb-1">Active Service &amp; Learning (Days 4-End)</h3>
@@ -1807,7 +1820,7 @@
 </div>
 </div>
 </div><!-- Program Costs -->
-<div class="mb-20 bg-gradient-to-br from-pcu-light/50 to-white rounded-3xl p-12 border border-pcu-blue/10">
+<div class="mb-20 bg-gradient-to-br from-pcu-light/50 to-white rounded-3xl p-12 border border-pcu-sky/10">
 <h2 class="font-display text-2xl md:text-3xl font-bold text-pcu-blue mb-8">Program Costs &amp; Support</h2>
 <p class="text-gray-600 mb-8">COP offers flexible pricing based on program length and background of participants. Scholarships and financial aid available for eligible candidates.</p>
 <div class="grid md:grid-cols-2 gap-8">
@@ -1835,7 +1848,7 @@
 </div>
 <p class="text-sm text-gray-500 mt-8 p-4 bg-white rounded-xl border border-pcu-gold/10"><strong>Contact the International Office:</strong> io@petra.ac.id for current pricing, scholarship opportunities, and payment plans.</p>
 </div><!-- CTA Section -->
-<div class="bg-gradient-to-r from-pcu-gold to-yellow-500 rounded-3xl p-12 text-white text-center">
+<div class="bg-gradient-to-r from-pcu-sky to-cyan-400 rounded-3xl p-12 text-white text-center">
 <h2 class="font-display text-3xl font-bold mb-3">Ready to Make a Difference?</h2>
 <p class="text-white/80 mb-8 max-w-2xl mx-auto">Join the International Community Outreach Program and become part of a global movement toward sustainable development and social justice.</p>
 <div class="flex flex-wrap justify-center gap-4"><a class="inline-flex items-center gap-2 px-7 py-3.5 bg-[#1c446d] text-white font-semibold rounded-full hover:bg-[#163553] transition shadow-lg" href="#"> Apply Now <i class="w-4 h-4" data-lucide="arrow-right"></i> </a> <a class="inline-flex items-center gap-2 px-7 py-3.5 border-2 border-white/40 text-white font-semibold rounded-full hover:bg-white/10 transition" href="#"> Get More Info </a>
@@ -1847,11 +1860,11 @@
 </div><!-- ==================== JOINT/DOUBLE DEGREE PAGE ==================== -->
 <div class="page" id="page-joint-double-degree">
 <div style="padding-top: 80px;"><!-- Hero Section -->
-<div class="relative overflow-hidden bg-gradient-to-r from-indigo-600 to-pcu-blue py-16 md:py-24">
+<div class="relative overflow-hidden bg-gradient-to-r from-pcu-orange to-amber-400 py-16 md:py-24">
 <div class="absolute inset-0">
 <img alt="Gedung Petra" class="w-full h-full object-cover opacity-60" src="Assets/Images/Student%20Exchange/student-exchange-4.JPG" style="object-position: center 50%;"/>
 </div>
-<div class="absolute inset-0 bg-gradient-to-r from-indigo-600/70 to-pcu-blue/70"></div>
+<div class="absolute inset-0 bg-gradient-to-r from-pcu-orange/70 to-amber-400/70"></div>
 <div class="relative max-w-7xl mx-auto px-6 lg:px-8"><a class="inline-flex items-center gap-1 text-white/60 text-sm mb-6 hover:text-white transition" href="#" onclick="navigateTo('home');return false"><i class="w-4 h-4" data-lucide="arrow-left"></i> Back to Home</a>
 <a class="inline-flex items-center gap-1 text-white/70 text-sm mb-4 hover:text-white transition" href="#" onclick="navigateTo('pcu-students');return false"><i class="w-4 h-4" data-lucide="arrow-left"></i> Back to Local Students</a>
 <h1 class="font-display text-4xl md:text-5xl font-bold text-white mb-4">Joint &amp; Double Degree Programs</h1>
@@ -1864,22 +1877,22 @@
 <h2 class="font-display text-2xl md:text-3xl font-bold text-pcu-blue mb-12 text-center">Choose Your Path</h2>
 <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
 <!-- Joint Degree Option -->
-<div class="program-card bg-white rounded-3xl overflow-hidden border-2 border-pcu-blue cursor-pointer group hover:shadow-xl transition" id="jointCard" onclick="showProgramType('joint')">
-<div class="h-56 bg-gradient-to-br from-pcu-blue to-pcu-sky flex items-center justify-center relative overflow-hidden">
+<div class="program-card bg-white rounded-3xl overflow-hidden border-2 border-pcu-orange cursor-pointer group hover:shadow-xl transition" id="jointCard" onclick="showProgramType('joint')">
+<div class="h-56 bg-gradient-to-br from-pcu-orange to-amber-400 flex items-center justify-center relative overflow-hidden">
 <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(255,255,255,0.1),transparent)]"></div><i class="w-24 h-24 text-white/70 group-hover:scale-110 transition-transform duration-500" data-lucide="link"></i>
 </div>
 <div class="p-8">
 <h2 class="font-display text-2xl font-bold text-pcu-blue mb-3">Joint Degree</h2>
-<p class="text-gray-600 leading-relaxed mb-6">Earn one recognized degree awarded jointly by PCU and an international partner university. Complete part of your studies in Indonesia and part abroad.</p><span class="inline-flex items-center gap-2 px-6 py-3 bg-pcu-blue text-white font-semibold rounded-full group-hover:bg-pcu-sky transition">Explore <i class="w-4 h-4" data-lucide="arrow-right"></i></span>
+<p class="text-gray-600 leading-relaxed mb-6">Earn one recognized degree awarded jointly by PCU and an international partner university. Complete part of your studies in Indonesia and part abroad.</p><span class="inline-flex items-center gap-2 px-6 py-3 bg-pcu-orange text-white font-semibold rounded-full group-hover:bg-amber-500 transition">Explore <i class="w-4 h-4" data-lucide="arrow-right"></i></span>
 </div>
 </div><!-- Double Degree Option -->
-<div class="program-card bg-white rounded-3xl overflow-hidden border-2 border-pcu-sky cursor-pointer group hover:shadow-xl transition" id="doubleCard" onclick="showProgramType('double')">
-<div class="h-56 bg-gradient-to-br from-pcu-sky to-blue-400 flex items-center justify-center relative overflow-hidden">
+<div class="program-card bg-white rounded-3xl overflow-hidden border-2 border-amber-400 cursor-pointer group hover:shadow-xl transition" id="doubleCard" onclick="showProgramType('double')">
+<div class="h-56 bg-gradient-to-br from-pcu-orange to-amber-500 flex items-center justify-center relative overflow-hidden">
 <div class="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,rgba(255,255,255,0.1),transparent)]"></div><i class="w-24 h-24 text-white/70 group-hover:scale-110 transition-transform duration-500" data-lucide="graduation-cap"></i>
 </div>
 <div class="p-8">
 <h2 class="font-display text-2xl font-bold text-pcu-blue mb-3">Double Degree</h2>
-<p class="text-gray-600 leading-relaxed mb-6">Earn two separate degrees: one from PCU and one from your partner university. Complete full programs at both institutions for dual credentials.</p><span class="inline-flex items-center gap-2 px-6 py-3 bg-pcu-sky text-white font-semibold rounded-full group-hover:bg-blue-500 transition">Explore <i class="w-4 h-4" data-lucide="arrow-right"></i></span>
+<p class="text-gray-600 leading-relaxed mb-6">Earn two separate degrees: one from PCU and one from your partner university. Complete full programs at both institutions for dual credentials.</p><span class="inline-flex items-center gap-2 px-6 py-3 bg-amber-400 text-white font-semibold rounded-full group-hover:bg-amber-500 transition">Explore <i class="w-4 h-4" data-lucide="arrow-right"></i></span>
 </div>
 </div>
 </div>
@@ -2153,7 +2166,7 @@
 <div class="w-10 h-10 rounded-full bg-pcu-blue text-white flex items-center justify-center font-bold mb-2">
               1
              </div>
-<div class="w-0.5 h-20 bg-gradient-to-b from-pcu-blue to-gray-300"></div>
+<div class="w-0.5 h-20 bg-gradient-to-b from-pcu-orange to-gray-300"></div>
 </div>
 <div>
 <h3 class="font-semibold text-pcu-blue text-lg mb-1">Year 1-2: Foundation at PCU</h3>
@@ -2165,7 +2178,7 @@
 <div class="w-10 h-10 rounded-full bg-pcu-blue text-white flex items-center justify-center font-bold mb-2">
               2
              </div>
-<div class="w-0.5 h-20 bg-gradient-to-b from-pcu-blue to-gray-300"></div>
+<div class="w-0.5 h-20 bg-gradient-to-b from-pcu-orange to-gray-300"></div>
 </div>
 <div>
 <h3 class="font-semibold text-pcu-blue text-lg mb-1">Year 3-4: Specialization at Partner University</h3>
@@ -2185,7 +2198,7 @@
 </div>
 </div>
 </div><!-- CTA -->
-<div class="bg-gradient-to-r from-pcu-blue to-pcu-sky rounded-3xl p-12 text-white text-center">
+<div class="bg-gradient-to-r from-pcu-orange to-amber-400 rounded-3xl p-12 text-white text-center">
 <h2 class="font-display text-3xl font-bold mb-3">Ready to Pursue a Joint Degree?</h2>
 <p class="text-white/80 mb-8 max-w-2xl mx-auto">Combine the best of two worlds and earn an internationally recognized degree from PCU and our esteemed partners.</p>
 <div class="flex flex-wrap justify-center gap-4"><a class="inline-flex items-center gap-2 px-7 py-3.5 bg-[#1c446d] text-white font-semibold rounded-full hover:bg-[#163553] transition shadow-lg" href="#"> Apply Now <i class="w-4 h-4" data-lucide="arrow-right"></i> </a> <a class="inline-flex items-center gap-2 px-7 py-3.5 border-2 border-white/40 text-white font-semibold rounded-full hover:bg-white/10 transition" href="#"> Get More Info </a>
@@ -2363,7 +2376,7 @@
 <div class="w-10 h-10 rounded-full bg-pcu-sky text-white flex items-center justify-center font-bold mb-2">
               1
              </div>
-<div class="w-0.5 h-20 bg-gradient-to-b from-pcu-sky to-gray-300"></div>
+<div class="w-0.5 h-20 bg-gradient-to-b from-pcu-orange to-gray-300"></div>
 </div>
 <div>
 <h3 class="font-semibold text-pcu-blue text-lg mb-1">Year 1-2: Foundation at PCU</h3>
@@ -2375,7 +2388,7 @@
 <div class="w-10 h-10 rounded-full bg-pcu-sky text-white flex items-center justify-center font-bold mb-2">
               2
              </div>
-<div class="w-0.5 h-20 bg-gradient-to-b from-pcu-sky to-gray-300"></div>
+<div class="w-0.5 h-20 bg-gradient-to-b from-pcu-orange to-gray-300"></div>
 </div>
 <div>
 <h3 class="font-semibold text-pcu-blue text-lg mb-1">Year 3-4: Full Program at Partner University</h3>
@@ -2395,7 +2408,7 @@
 </div>
 </div>
 </div><!-- CTA -->
-<div class="bg-gradient-to-r from-pcu-sky to-blue-400 rounded-3xl p-12 text-white text-center">
+<div class="bg-gradient-to-r from-pcu-orange to-amber-400 rounded-3xl p-12 text-white text-center">
 <h2 class="font-display text-3xl font-bold mb-3">Earn Two Degrees, Double Your Opportunities</h2>
 <p class="text-white/80 mb-8 max-w-2xl mx-auto">Complete your double degree and gain credentials from two world-class institutions across different continents.</p>
 <div class="flex flex-wrap justify-center gap-4"><a class="inline-flex items-center gap-2 px-7 py-3.5 bg-[#1c446d] text-white font-semibold rounded-full hover:bg-[#163553] transition shadow-lg" href="#"> Apply Now <i class="w-4 h-4" data-lucide="arrow-right"></i> </a> <a class="inline-flex items-center gap-2 px-7 py-3.5 border-2 border-white/40 text-white font-semibold rounded-full hover:bg-white/10 transition" href="#"> Get More Info </a>
@@ -2409,11 +2422,11 @@
 </div><!-- ==================== INTERNATIONAL DEGREE PROGRAM PAGE ==================== -->
 <div class="page" id="page-intl-degree">
 <div style="padding-top: 80px;"><!-- Hero Section -->
-<div class="relative overflow-hidden bg-gradient-to-r from-indigo-600 to-pcu-blue py-16 md:py-24">
+<div class="relative overflow-hidden bg-gradient-to-r from-pcu-sky to-cyan-400 py-16 md:py-24">
 <div class="absolute inset-0">
 <img alt="Gedung Petra" class="w-full h-full object-cover opacity-60" src="Assets/Images/Student%20Exchange/student-exchange-3.jpg" style="object-position: center 50%;"/>
 </div>
-<div class="absolute inset-0 bg-gradient-to-r from-indigo-600/70 to-pcu-blue/70"></div>
+<div class="absolute inset-0 bg-gradient-to-r from-pcu-sky/80 to-cyan-400/80"></div>
 <div class="relative max-w-7xl mx-auto px-6 lg:px-8"><a class="inline-flex items-center gap-1 text-white/60 text-sm mb-6 hover:text-white transition" href="#" onclick="navigateTo('home');return false"><i class="w-4 h-4" data-lucide="arrow-left"></i> Back to Home</a>
 <h1 class="font-display text-4xl md:text-5xl font-bold text-white mb-4">International Degree Program</h1>
 <p class="text-white/80 text-lg max-w-3xl">Pursue your complete undergraduate degree at Petra Christian University with world-class education and global perspectives across 9 specialized departments.</p>
@@ -2509,7 +2522,7 @@
 </div>
 </div>
 </div><!-- Program Highlights -->
-<div class="mb-20 bg-gradient-to-br from-pcu-purple/20 to-white rounded-3xl p-12 border border-pcu-blue/10">
+<div class="mb-20 bg-gradient-to-br from-pcu-sky/10 to-white rounded-3xl p-12 border border-pcu-sky/10">
 <h2 class="font-display text-2xl md:text-3xl font-bold text-pcu-blue mb-8">Program Highlights</h2>
 <div class="grid md:grid-cols-2 gap-6">
 <div class="space-y-4">
@@ -2558,7 +2571,7 @@
 </div>
 </div>
 </div><!-- CTA Section -->
-<div class="bg-gradient-to-r from-indigo-600 to-pcu-blue rounded-3xl p-12 text-white text-center">
+<div class="bg-gradient-to-r from-pcu-sky to-cyan-400 rounded-3xl p-12 text-white text-center">
 <h2 class="font-display text-3xl font-bold mb-3">Begin Your Degree at PCU</h2>
 <p class="text-white/80 mb-8 max-w-2xl mx-auto">Join our diverse community of international students and earn your degree from one of Indonesia's premier universities.</p>
 <div class="flex flex-wrap justify-center gap-4"><a class="inline-flex items-center gap-2 px-7 py-3.5 bg-[#1c446d] text-white font-semibold rounded-full hover:bg-[#163553] transition shadow-lg" href="#"> Apply Now <i class="w-4 h-4" data-lucide="arrow-right"></i> </a> <a class="inline-flex items-center gap-2 px-7 py-3.5 border-2 border-white/40 text-white font-semibold rounded-full hover:bg-white/10 transition" href="#"> Learn More </a>
@@ -2571,11 +2584,11 @@
 <!-- ==================== INTERNATIONAL PARTNERSHIP PAGE ==================== -->
 <div class="page" id="page-international-partnership">
 <div style="padding-top: 80px;"><!-- Hero Section -->
-<div class="relative overflow-hidden bg-gradient-to-r from-teal-600 to-emerald-500 py-16 md:py-24">
+<div class="relative overflow-hidden bg-gradient-to-r from-pcu-purple to-violet-500 py-16 md:py-24">
 <div class="absolute inset-0">
 <img alt="Gedung Petra" class="w-full h-full object-cover opacity-60" src="Assets/Images/Partnership/partnership-1.JPG" style="object-position: center 50%;"/>
 </div>
-<div class="absolute inset-0 bg-gradient-to-r from-teal-600/70 to-emerald-500/70"></div>
+<div class="absolute inset-0 bg-gradient-to-r from-pcu-purple/70 to-violet-500/70"></div>
 <div class="relative max-w-7xl mx-auto px-6 lg:px-8"><a class="inline-flex items-center gap-1 text-white/60 text-sm mb-6 hover:text-white transition" href="#" onclick="navigateTo('home');return false"><i class="w-4 h-4" data-lucide="arrow-left"></i> Back to Home</a>
 <a class="inline-flex items-center gap-1 text-white/70 text-sm mb-4 hover:text-white transition" href="#" onclick="navigateTo('pcu-students');return false"><i class="w-4 h-4" data-lucide="arrow-left"></i> Back to Local Students</a>
 <h1 class="font-display text-4xl md:text-5xl font-bold text-white mb-4">International Partnership</h1>
@@ -2595,18 +2608,20 @@
 <div class="text-4xl font-bold text-pcu-blue mb-2">184</div>
 <p class="text-gray-600 text-sm font-medium">International Partners</p>
 </div>
-<div class="text-center cursor-pointer p-8 bg-white rounded-3xl shadow-sm border border-gray-100 hover:shadow-md transition" onclick="togglePartnershipBox('countries','-ip')">
+<div class="text-center cursor-pointer p-8 bg-white rounded-3xl shadow-sm border border-gray-100 hover:shadow-md transition" onclick="openPartnershipModal('countries')">
 <div class="text-4xl font-bold text-pcu-blue mb-2">32</div>
 <p class="text-gray-600 text-sm font-medium">Countries</p>
 </div>
-<div class="text-center cursor-pointer p-8 bg-white rounded-3xl shadow-sm border border-gray-100 hover:shadow-md transition" onclick="togglePartnershipBox('continents','-ip')">
+<div class="text-center cursor-pointer p-8 bg-white rounded-3xl shadow-sm border border-gray-100 hover:shadow-md transition" onclick="openPartnershipModal('continents')">
 <div class="text-4xl font-bold text-pcu-blue mb-2">4</div>
 <p class="text-gray-600 text-sm font-medium">Continents</p>
 </div>
 </div>
 <div class="mt-10 hidden bg-white rounded-3xl p-8 border border-gray-100" id="partners-box-ip">
 <h3 class="font-display text-2xl font-bold text-pcu-blue mb-6">Our International Partners</h3>
-<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6" id="partners-logos-ip"></div>
+<div class="dp-carousel-wrapper py-2">
+<div class="dp-carousel-track" id="partners-logos-ip"></div>
+</div>
 </div>
 <div class="mt-10 hidden bg-white rounded-3xl p-8 border border-gray-100" id="countries-box-ip">
 <h3 class="font-display text-2xl font-bold text-pcu-blue mb-6">Partner Countries</h3>
@@ -2651,11 +2666,11 @@
 <li>• Academic and research collaboration planning</li>
 </ul>
 </div>
-<div class="rounded-3xl bg-gradient-to-br from-pcu-blue to-pcu-sky text-white p-8 shadow-lg">
+<div class="rounded-3xl bg-gradient-to-br from-pcu-purple to-violet-500 text-white p-8 shadow-lg">
 <span class="inline-flex items-center gap-2 px-3 py-1.5 bg-white/15 text-white text-xs font-semibold rounded-full uppercase tracking-wide">Meeting Request</span>
 <h3 class="font-display text-2xl text-white font-bold mt-6 mb-4">Request a Partnership Meeting</h3>
 <p class="text-white/80 mb-6">Organize a bilateral meeting with PCU’s partnership team for program planning, campus visits, or virtual consultation.</p>
-<a class="inline-flex items-center gap-2 px-5 py-3 bg-white text-pcu-blue font-semibold rounded-full shadow-lg hover:bg-white/90 transition" href="#">Download Request Form</a>
+<a class="inline-flex items-center gap-2 px-5 py-3 bg-white text-pcu-purple font-semibold rounded-full shadow-lg hover:bg-white/90 transition" href="#">Download Request Form</a>
 <p class="text-white/75 text-sm mt-5">Or email <a class="underline text-white/90" href="mailto:head-partnership@petra.ac.id">head-partnership@petra.ac.id</a></p>
 </div>
 <div class="rounded-3xl bg-white border border-gray-100 p-8 shadow-sm">
@@ -2671,7 +2686,7 @@
 </div>
 </div><!-- Selected Country Institutions -->
 <div class="mb-20 hidden" id="selectedCountrySection">
-<div class="bg-gradient-to-br from-pcu-blue/5 to-pcu-sky/5 rounded-2xl border border-pcu-blue/20 p-8">
+<div class="bg-gradient-to-br from-pcu-purple/5 to-violet-50 rounded-2xl border border-pcu-purple/20 p-8">
 <div class="flex items-center justify-between mb-6">
 <h2 class="font-display text-2xl md:text-3xl font-bold text-pcu-blue" id="selectedCountryTitle">Partner Institutions</h2>
 <button class="text-gray-400 hover:text-gray-600 transition" onclick="clearSelectedCountry()">
@@ -2713,7 +2728,7 @@
 </div>
 <div class="page" id="page-facilities">
 <div class="min-h-screen bg-transparent" style="padding-top: 80px;">
-<div class="bg-gradient-to-r from-pcu-blue to-pcu-sky py-20" style="background-image: linear-gradient(rgba(14,165,233,0.40), rgba(59,130,246,0.40)), url('Assets/Images/Gedung Petra/gedung-q-1.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+<div class="bg-gradient-to-r from-[#0d2137] to-pcu-navy py-20" style="background-image: linear-gradient(rgba(13,33,55,0.60), rgba(29,68,110,0.60)), url('Assets/Images/Gedung Petra/gedung-q-1.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
 <div class="max-w-7xl mx-auto px-6 lg:px-8"><a class="inline-flex items-center gap-1 text-white/70 text-sm mb-6 hover:text-white transition" href="#" onclick="navigateTo('home');return false"><i class="w-4 h-4" data-lucide="arrow-left"></i> Back to Home</a>
 <h1 class="font-display text-4xl md:text-5xl font-bold text-white mb-4">Facilities</h1>
 <p class="text-white/75 text-lg max-w-3xl">Discover Petra Christian University’s campus facilities designed to support academic excellence, student wellbeing, and international engagement.</p>
@@ -2803,28 +2818,113 @@
 </div>
 </div>
 <div class="page" id="page-domestic-partnership">
-<div class="min-h-screen bg-gradient-to-b from-pcu-light/50 to-white" style="padding-top: 80px;">
-<div class="max-w-7xl mx-auto px-6 lg:px-8 py-24">
-<div class="text-center mb-8"><span class="inline-block px-4 py-1.5 bg-pcu-gold/10 text-pcu-gold text-xs font-semibold rounded-full mb-4 uppercase tracking-wider">Partnership</span>
-<h1 class="font-display text-4xl md:text-5xl font-bold text-pcu-blue mb-4">Domestic Partnership</h1>
-<p class="text-gray-500 text-lg max-w-3xl mx-auto">This page is being prepared. Information about domestic partnerships with Petra Christian University will appear here soon.</p>
+<div style="padding-top: 80px;"><!-- Hero Section -->
+<div class="relative overflow-hidden py-16 md:py-24" style="background: linear-gradient(to right, #166534, #0d9488);">
+<div class="absolute inset-0">
+<img alt="PCU Campus Partnership" class="w-full h-full object-cover opacity-50" src="Assets/Images/Partnership/partnership-1.JPG" style="object-position: center 50%;"/>
 </div>
+<div class="absolute inset-0" style="background: linear-gradient(to right, rgba(22,101,52,0.7), rgba(13,148,136,0.7));"></div>
+<div class="relative max-w-7xl mx-auto px-6 lg:px-8"><a class="inline-flex items-center gap-1 text-white/60 text-sm mb-6 hover:text-white transition" href="#" onclick="navigateTo('home');return false"><i class="w-4 h-4" data-lucide="arrow-left"></i> Back to Home</a>
+<h1 class="font-display text-4xl md:text-5xl font-bold text-white mb-4">Domestic Partnership</h1>
+<p class="text-white/80 text-lg max-w-3xl">Discover our extensive network of domestic partnerships spanning industries, education institutions, government agencies, and regional organizations across Indonesia.</p>
+</div>
+</div><!-- Content Section -->
+<div class="bg-transparent">
+<div class="max-w-7xl mx-auto px-6 lg:px-8 py-20">
+<section class="mb-20 bg-gradient-to-b from-white to-pcu-light/20 rounded-3xl p-8 border border-gray-100 shadow-sm reveal">
+<div class="text-center mb-10">
+<span class="inline-block px-4 py-1.5 bg-pcu-green/10 text-pcu-green text-xs font-semibold rounded-full uppercase tracking-wider">Domestic Partnerships</span>
+<h2 class="font-display text-3xl md:text-4xl font-bold text-pcu-blue mt-4">List of our Domestic Partners</h2>
+<p class="text-gray-600 mt-3 max-w-2xl mx-auto">Explore our extensive network of domestic partners across cities throughout Indonesia. Click any card to explore.</p>
+</div>
+<div class="grid md:grid-cols-3 gap-6">
+<div class="text-center cursor-pointer p-8 bg-white rounded-3xl shadow-sm border border-gray-100 hover:shadow-md hover:border-green-300 transition" onclick="toggleDomesticBox('total')">
+<div class="text-4xl font-bold text-pcu-blue mb-2">321</div>
+<p class="text-gray-600 text-sm font-medium">Total</p>
+</div>
+<div class="text-center cursor-pointer p-8 bg-white rounded-3xl shadow-sm border border-gray-100 hover:shadow-md hover:border-green-300 transition" onclick="toggleDomesticBox('cities')">
+<div class="text-4xl font-bold text-pcu-blue mb-2">52</div>
+<p class="text-gray-600 text-sm font-medium">Cities</p>
+</div>
+<div class="text-center cursor-pointer p-8 bg-white rounded-3xl shadow-sm border border-gray-100 hover:shadow-md hover:border-green-300 transition" onclick="toggleDomesticBox('type')">
+<div class="text-4xl font-bold text-pcu-blue mb-2">5</div>
+<p class="text-gray-600 text-sm font-medium">Type</p>
+</div>
+</div>
+<div class="mt-10 hidden bg-white rounded-3xl p-8 border border-gray-100" id="dp-total-box">
+<h3 class="font-display text-2xl font-bold text-pcu-blue mb-6">Our Domestic Partners</h3>
+<div class="dp-carousel-wrapper py-2">
+<div class="dp-carousel-track" id="dp-logos-grid"></div>
+</div>
+</div>
+</section>
+<div class="mb-20 reveal">
+<div class="text-center mb-12">
+<h2 class="font-display text-2xl md:text-3xl font-bold text-pcu-blue mb-4">Partnership Support &amp; Agreements</h2>
+<p class="text-gray-600 max-w-2xl mx-auto">Download meeting request forms, explore our agreement support services, and engage with PCU's domestic partnership team.</p>
+</div>
+<div class="grid gap-6 lg:grid-cols-3">
+<div class="rounded-3xl bg-white border border-gray-100 p-8 shadow-sm">
+<span class="inline-flex items-center gap-2 px-3 py-1.5 bg-pcu-blue/10 text-pcu-blue text-xs font-semibold rounded-full uppercase tracking-wide">Agreement Support</span>
+<h3 class="font-display text-2xl text-pcu-blue font-bold mt-6 mb-4">Domestic Agreements</h3>
+<p class="text-gray-600 mb-6">PCU supports MoU, MoA, IA/IR, and strategic collaboration frameworks for industry-wide internships, research projects, and student placement programs.</p>
+<ul class="space-y-3 text-gray-600 text-sm">
+<li>• Partnership agreement drafting</li>
+<li>• Renewal and review coordination</li>
+<li>• Academic and industry collaboration planning</li>
+</ul>
+</div>
+<div class="rounded-3xl bg-gradient-to-br from-pcu-purple to-violet-500 text-white p-8 shadow-lg">
+<span class="inline-flex items-center gap-2 px-3 py-1.5 bg-white/15 text-white text-xs font-semibold rounded-full uppercase tracking-wide">Meeting Request</span>
+<h3 class="font-display text-2xl text-white font-bold mt-6 mb-4">Request a Partnership Meeting</h3>
+<p class="text-white/80 mb-6">Organize a bilateral meeting with PCU's partnership team for program planning, campus visits, or virtual consultation.</p>
+<a class="inline-flex items-center gap-2 px-5 py-3 bg-white text-pcu-purple font-semibold rounded-full shadow-lg hover:bg-white/90 transition" href="#">Download Request Form</a>
+<p class="text-white/75 text-sm mt-5">Or email <a class="underline text-white/90" href="mailto:head-partnership@petra.ac.id">head-partnership@petra.ac.id</a></p>
+</div>
+<div class="rounded-3xl bg-white border border-gray-100 p-8 shadow-sm">
+<span class="inline-flex items-center gap-2 px-3 py-1.5 bg-pcu-gold/10 text-pcu-gold text-xs font-semibold rounded-full uppercase tracking-wide">Strategic Initiatives</span>
+<h3 class="font-display text-2xl text-pcu-blue font-bold mt-6 mb-4">Domestic Partnership Planning</h3>
+<p class="text-gray-600 mb-6">Support for agenda setting, joint program development, and domestic mobility operations for partner organizations.</p>
+<div class="grid gap-3 text-sm text-gray-600">
+<div class="rounded-2xl bg-pcu-light p-4">On-site visit coordination</div>
+<div class="rounded-2xl bg-pcu-light p-4">Agreement timeline management</div>
+<div class="rounded-2xl bg-pcu-light p-4">Partner engagement planning</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div><!-- Domestic Partnership Modal -->
+<div id="dp-modal" class="fixed inset-0 z-50 items-center justify-center p-4" style="display:none; background: rgba(0,0,0,0.5);" onclick="if(event.target===this)closeDomesticModal()">
+<div class="bg-white rounded-3xl shadow-2xl w-full max-w-2xl flex flex-col" style="max-height: 80vh;">
+<div class="flex items-center justify-between p-6 border-b border-gray-100 flex-shrink-0">
+<span class="font-semibold text-gray-400 text-sm uppercase tracking-wider">Domestic Partners</span>
+<button class="p-2 rounded-lg hover:bg-gray-100 transition" onclick="closeDomesticModal()"><i class="w-5 h-5 text-gray-600" data-lucide="x"></i></button>
+</div>
+<div class="p-6 overflow-y-auto flex-1" id="dp-modal-body"></div>
 </div>
 </div>
 </div>
 <div class="page" id="page-consortium-association">
-<div class="min-h-screen bg-gradient-to-b from-pcu-light/50 to-white" style="padding-top: 80px;">
-<div class="max-w-7xl mx-auto px-6 lg:px-8 py-24">
-<div class="text-center mb-8"><span class="inline-block px-4 py-1.5 bg-pcu-blue/10 text-pcu-blue text-xs font-semibold rounded-full mb-4 uppercase tracking-wider">Partnership</span>
-<h1 class="font-display text-4xl md:text-5xl font-bold text-pcu-blue mb-4">Consortium &amp; Association</h1>
-<p class="text-gray-500 text-lg max-w-3xl mx-auto">Information about consortium and association partnerships at PCU will be available here shortly.</p>
+<div class="min-h-screen bg-gradient-to-b from-pcu-light/50 to-white" style="padding-top: 80px;"><!-- Hero Section -->
+<div class="relative overflow-hidden bg-gradient-to-r from-pcu-purple to-violet-500 py-16 md:py-24">
+<div class="absolute inset-0">
+<img alt="Partnership" class="w-full h-full object-cover opacity-60" src="Assets/Images/Partnership/partnership-1.JPG" style="object-position: center 50%;"/>
 </div>
+<div class="absolute inset-0 bg-gradient-to-r from-pcu-purple/70 to-violet-500/70"></div>
+<div class="relative max-w-7xl mx-auto px-6 lg:px-8"><a class="inline-flex items-center gap-1 text-white/60 text-sm mb-6 hover:text-white transition" href="#" onclick="navigateTo('home');return false"><i class="w-4 h-4" data-lucide="arrow-left"></i> Back to Home</a>
+<h1 class="font-display text-4xl md:text-5xl font-bold text-white mb-4">Consortium &amp; Association</h1>
+<p class="text-white/80 text-lg max-w-3xl">Information about consortium and association partnerships at PCU will be available here shortly.</p>
+</div>
+</div>
+<div class="max-w-7xl mx-auto px-6 lg:px-8 py-24">
 </div>
 </div>
 </div>
 <div class="page" id="page-partnership-meet-us">
 <div class="min-h-screen bg-white" style="padding-top: 80px;">
-<div class="bg-gradient-to-r from-pcu-blue to-pcu-sky py-20">
+<div class="bg-gradient-to-r from-pcu-purple to-violet-500 py-20">
 <div class="max-w-7xl mx-auto px-6 lg:px-8">
 <a class="inline-flex items-center gap-1 text-white/70 text-sm mb-6 hover:text-white transition" href="#" onclick="navigateTo('home');return false"><i class="w-4 h-4" data-lucide="arrow-left"></i> Back to Home</a>
 <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
@@ -2832,7 +2932,7 @@
 <h1 class="font-display text-4xl md:text-5xl font-bold text-white mb-4">Meet Us</h1>
 <p class="text-white/75 text-lg max-w-3xl">Get to know Petra Christian University's partnership team and learn how we collaborate with international institutions.</p>
 </div>
-<a class="inline-flex items-center gap-2 px-6 py-3.5 bg-white text-pcu-blue font-semibold rounded-full shadow-lg hover:bg-white/90 transition" href="mailto:head-partnership@petra.ac.id">Email Partnership Team</a>
+<a class="inline-flex items-center gap-2 px-6 py-3.5 bg-white text-pcu-purple font-semibold rounded-full shadow-lg hover:bg-white/90 transition" href="mailto:head-partnership@petra.ac.id">Email Partnership Team</a>
 </div>
 </div>
 </div>
@@ -2894,11 +2994,11 @@
 <!-- ==================== PCU AT GLANCE PAGE ==================== -->
 <div class="page" id="page-pcu-at-glance">
 <div style="padding-top: 80px;"><!-- Hero Section -->
-<div class="relative overflow-hidden bg-gradient-to-r from-pcu-blue to-pcu-sky py-16 md:py-24">
+<div class="relative overflow-hidden bg-gradient-to-r from-[#0d2137] to-pcu-navy py-16 md:py-24">
 <div class="absolute inset-0">
 <img alt="Gedung Petra" class="w-full h-full object-cover opacity-40" src="Assets/Images/Gedung%20Petra/gedung-petra-1.png" style="object-position: center 75%;"/>
 </div>
-<div class="absolute inset-0 bg-gradient-to-r from-pcu-blue/70 to-pcu-sky/70"></div>
+<div class="absolute inset-0 bg-gradient-to-r from-[#0d2137]/70 to-pcu-navy/70"></div>
 <div class="relative max-w-7xl mx-auto px-6 lg:px-8"><a class="inline-flex items-center gap-1 text-white/60 text-sm mb-6 hover:text-white transition" href="#" onclick="navigateTo('home');return false"><i class="w-4 h-4" data-lucide="arrow-left"></i> Back to Home</a>
 <h1 class="font-display text-4xl md:text-5xl font-bold text-white mb-4">PCU at Glance</h1>
 <p class="text-white/80 text-lg max-w-3xl">Transforming the Society for the Glory of God.</p>
@@ -3085,7 +3185,7 @@
 </div>
 </div>
 </div><!-- CTA Section -->
-<div class="bg-gradient-to-r from-pcu-blue to-pcu-sky rounded-3xl p-12 text-white text-center">
+<div class="bg-gradient-to-r from-[#0d2137] to-pcu-navy rounded-3xl p-12 text-white text-center">
 <h2 class="font-display text-3xl font-bold mb-3">Join the PCU Community</h2>
 <p class="text-white/80 mb-8 max-w-2xl mx-auto">Become part of a university that transforms society for God's glory and prepares you to be a global leader.</p>
 <div class="flex flex-wrap justify-center gap-4"><a class="inline-flex items-center gap-2 px-7 py-3.5 bg-white text-pcu-blue font-semibold rounded-full hover:bg-pcu-light transition shadow-lg" href="#"> Learn More <i class="w-4 h-4" data-lucide="arrow-right"></i> </a> <a class="inline-flex items-center gap-2 px-7 py-3.5 border-2 border-white/40 text-white font-semibold rounded-full hover:bg-white/10 transition" href="#"> Visit Campus </a></div>
@@ -3097,11 +3197,11 @@
 <!-- ==================== INDONESIAN SPECTRUM PAGE ==================== -->
 <div class="page" id="page-indonesian-spectrum">
 <div style="padding-top: 80px;"><!-- Hero Section -->
-<div class="relative overflow-hidden bg-gradient-to-r from-violet-500 to-purple-700 py-16 md:py-24">
+<div class="relative overflow-hidden bg-gradient-to-r from-pcu-sky to-cyan-400 py-16 md:py-24">
 <div class="absolute inset-0">
 <img alt="Gedung Petra" class="w-full h-full object-cover opacity-60" src="Assets/Images/Student%20Exchange/student-exchange-4.JPG" style="object-position: center 60%;"/>
 </div>
-<div class="absolute inset-0 bg-gradient-to-r from-violet-500/70 to-purple-700/70"></div>
+<div class="absolute inset-0 bg-gradient-to-r from-pcu-sky/80 to-cyan-400/80"></div>
 <div class="relative max-w-7xl mx-auto px-6 lg:px-8"><a class="inline-flex items-center gap-1 text-white/60 text-sm mb-6 hover:text-white transition" href="#" onclick="navigateTo('home');return false"><i class="w-4 h-4" data-lucide="arrow-left"></i> Back to Home</a>
 <h1 class="font-display text-4xl md:text-5xl font-bold text-white mb-4">Indonesian SPECTRUM</h1>
 <p class="text-white/80 text-lg max-w-3xl">A short-term cultural and academic immersion program exploring Indonesia's rich heritage and modern landscape.</p>
@@ -3144,7 +3244,7 @@
 </ul>
 </div>
 </div><!-- Program Content -->
-<div class="mb-20 bg-gradient-to-br from-pcu-light/50 to-white rounded-3xl p-12 border border-pcu-blue/10">
+<div class="mb-20 bg-gradient-to-br from-pcu-light/50 to-white rounded-3xl p-12 border border-pcu-sky/10">
 <h2 class="font-display text-2xl md:text-3xl font-bold text-pcu-blue mb-6">Program Components</h2>
 <div class="grid md:grid-cols-2 gap-8">
 <div>
@@ -3190,7 +3290,7 @@
 </div>
 </div>
 </div><!-- CTA Section -->
-<div class="bg-gradient-to-r from-violet-500 to-purple-700 rounded-3xl p-12 text-white text-center">
+<div class="bg-gradient-to-r from-pcu-sky to-cyan-400 rounded-3xl p-12 text-white text-center">
 <h2 class="font-display text-3xl font-bold mb-3">Experience Indonesian Culture</h2>
 <p class="text-white/80 mb-8 max-w-2xl mx-auto">Join Indonesian SPECTRUM and discover the beauty and diversity of Indonesia through an unforgettable cultural journey.</p>
 <div class="flex flex-wrap justify-center gap-4"><a class="inline-flex items-center gap-2 px-7 py-3.5 bg-[#1c446d] text-white font-semibold rounded-full hover:bg-[#163553] transition shadow-lg" href="#"> Apply Now <i class="w-4 h-4" data-lucide="arrow-right"></i> </a> <a class="inline-flex items-center gap-2 px-7 py-3.5 border-2 border-white/40 text-white font-semibold rounded-full hover:bg-white/10 transition" href="#"> Learn More </a>
@@ -3203,8 +3303,12 @@
 <!-- ==================== VISA & IMMIGRATION PAGE ==================== -->
 <div class="page" id="page-visa-immigration">
 <div class="min-h-screen bg-transparent" style="padding-top: 80px;">
-<div class="bg-gradient-to-r from-pcu-blue to-pcu-sky py-20">
-<div class="max-w-7xl mx-auto px-6 lg:px-8">
+<div class="relative overflow-hidden bg-gradient-to-r from-pcu-green to-emerald-500 py-20">
+<div class="absolute inset-0">
+<img alt="Life at PCU" class="w-full h-full object-cover opacity-60" src="Assets/Images/Student%20Exchange/student-exchange-2.JPG" style="object-position: center 50%;"/>
+</div>
+<div class="absolute inset-0 bg-gradient-to-r from-pcu-green/80 to-emerald-500/80"></div>
+<div class="relative max-w-7xl mx-auto px-6 lg:px-8">
 <a class="inline-flex items-center gap-1 text-white/70 text-sm mb-6 hover:text-white transition" href="#" onclick="navigateTo('home');return false"><i class="w-4 h-4" data-lucide="arrow-left"></i> Back to Home</a>
 <h1 class="font-display text-4xl md:text-5xl font-bold text-white mb-4">Visa &amp; Immigration</h1>
 <p class="text-white/75 text-lg max-w-3xl">Essential information about visa requirements and immigration procedures for international students studying at Petra Christian University in Indonesia.</p>
@@ -3214,84 +3318,84 @@
 <div class="grid lg:grid-cols-2 gap-10 mb-16">
 <div class="space-y-6">
 <div class="bg-white rounded-3xl border border-gray-100 p-8 shadow-sm">
-<h2 class="font-semibold text-pcu-blue text-2xl mb-4">Student Visa Types</h2>
+<h2 class="font-semibold text-pcu-green text-2xl mb-4">Student Visa Types</h2>
 <div class="space-y-4">
-<div class="border-l-4 border-pcu-blue pl-4">
-<h3 class="font-semibold text-pcu-blue mb-2">Student Visa (KITAS)</h3>
+<div class="border-l-4 border-pcu-green pl-4">
+<h3 class="font-semibold text-pcu-green mb-2">Student Visa (KITAS)</h3>
 <p class="text-gray-600">Limited Stay Permit for students enrolled in Indonesian educational institutions. Valid for up to 1 year, renewable.</p>
 </div>
 <div class="border-l-4 border-pcu-gold pl-4">
-<h3 class="font-semibold text-pcu-blue mb-2">Social-Cultural Visa</h3>
+<h3 class="font-semibold text-pcu-green mb-2">Social-Cultural Visa</h3>
 <p class="text-gray-600">For participants in exchange programs, research, or cultural activities. Maximum stay of 90 days.</p>
 </div>
 <div class="border-l-4 border-green-500 pl-4">
-<h3 class="font-semibold text-pcu-blue mb-2">Business Visa</h3>
+<h3 class="font-semibold text-pcu-green mb-2">Business Visa</h3>
 <p class="text-gray-600">For internship programs or research activities with business purposes.</p>
 </div>
 </div>
 </div>
 <div class="bg-white rounded-3xl border border-gray-100 p-8 shadow-sm">
-<h2 class="font-semibold text-pcu-blue text-2xl mb-4">Required Documents</h2>
+<h2 class="font-semibold text-pcu-green text-2xl mb-4">Required Documents</h2>
 <ul class="space-y-3 text-gray-600">
-<li class="flex gap-3"><i class="w-5 h-5 text-pcu-blue mt-1" data-lucide="check-circle"></i> Valid passport (minimum 6 months validity)</li>
-<li class="flex gap-3"><i class="w-5 h-5 text-pcu-blue mt-1" data-lucide="check-circle"></i> University acceptance letter from PCU</li>
-<li class="flex gap-3"><i class="w-5 h-5 text-pcu-blue mt-1" data-lucide="check-circle"></i> Health insurance certificate</li>
-<li class="flex gap-3"><i class="w-5 h-5 text-pcu-blue mt-1" data-lucide="check-circle"></i> Financial proof (bank statements, sponsorship letter)</li>
-<li class="flex gap-3"><i class="w-5 h-5 text-pcu-blue mt-1" data-lucide="check-circle"></i> Police clearance certificate</li>
-<li class="flex gap-3"><i class="w-5 h-5 text-pcu-blue mt-1" data-lucide="check-circle"></i> Medical certificate</li>
+<li class="flex gap-3"><i class="w-5 h-5 text-pcu-green mt-1" data-lucide="check-circle"></i> Valid passport (minimum 6 months validity)</li>
+<li class="flex gap-3"><i class="w-5 h-5 text-pcu-green mt-1" data-lucide="check-circle"></i> University acceptance letter from PCU</li>
+<li class="flex gap-3"><i class="w-5 h-5 text-pcu-green mt-1" data-lucide="check-circle"></i> Health insurance certificate</li>
+<li class="flex gap-3"><i class="w-5 h-5 text-pcu-green mt-1" data-lucide="check-circle"></i> Financial proof (bank statements, sponsorship letter)</li>
+<li class="flex gap-3"><i class="w-5 h-5 text-pcu-green mt-1" data-lucide="check-circle"></i> Police clearance certificate</li>
+<li class="flex gap-3"><i class="w-5 h-5 text-pcu-green mt-1" data-lucide="check-circle"></i> Medical certificate</li>
 </ul>
 </div>
 </div>
 <div class="space-y-6">
 <div class="bg-white rounded-3xl border border-gray-100 p-8 shadow-sm">
-<h2 class="font-semibold text-pcu-blue text-2xl mb-4">Application Process</h2>
+<h2 class="font-semibold text-pcu-green text-2xl mb-4">Application Process</h2>
 <div class="space-y-4">
 <div class="flex gap-4">
-<div class="w-8 h-8 rounded-full bg-pcu-blue text-white flex items-center justify-center font-bold text-sm">1</div>
+<div class="w-8 h-8 rounded-full bg-pcu-green text-white flex items-center justify-center font-bold text-sm">1</div>
 <div>
-<h3 class="font-semibold text-pcu-blue mb-1">Apply to PCU</h3>
+<h3 class="font-semibold text-pcu-green mb-1">Apply to PCU</h3>
 <p class="text-gray-600 text-sm">Receive official acceptance letter from Petra Christian University.</p>
 </div>
 </div>
 <div class="flex gap-4">
-<div class="w-8 h-8 rounded-full bg-pcu-blue text-white flex items-center justify-center font-bold text-sm">2</div>
+<div class="w-8 h-8 rounded-full bg-pcu-green text-white flex items-center justify-center font-bold text-sm">2</div>
 <div>
-<h3 class="font-semibold text-pcu-blue mb-1">Prepare Documents</h3>
+<h3 class="font-semibold text-pcu-green mb-1">Prepare Documents</h3>
 <p class="text-gray-600 text-sm">Gather all required documents and have them legalized if necessary.</p>
 </div>
 </div>
 <div class="flex gap-4">
-<div class="w-8 h-8 rounded-full bg-pcu-blue text-white flex items-center justify-center font-bold text-sm">3</div>
+<div class="w-8 h-8 rounded-full bg-pcu-green text-white flex items-center justify-center font-bold text-sm">3</div>
 <div>
-<h3 class="font-semibold text-pcu-blue mb-1">Apply for Visa</h3>
+<h3 class="font-semibold text-pcu-green mb-1">Apply for Visa</h3>
 <p class="text-gray-600 text-sm">Submit visa application at Indonesian embassy or consulate in your country.</p>
 </div>
 </div>
 <div class="flex gap-4">
-<div class="w-8 h-8 rounded-full bg-pcu-blue text-white flex items-center justify-center font-bold text-sm">4</div>
+<div class="w-8 h-8 rounded-full bg-pcu-green text-white flex items-center justify-center font-bold text-sm">4</div>
 <div>
-<h3 class="font-semibold text-pcu-blue mb-1">Immigration on Arrival</h3>
+<h3 class="font-semibold text-pcu-green mb-1">Immigration on Arrival</h3>
 <p class="text-gray-600 text-sm">Complete immigration procedures at the airport and register with local immigration office.</p>
 </div>
 </div>
 </div>
 </div>
 <div class="bg-pcu-light rounded-3xl border border-gray-100 p-8 shadow-sm">
-<h2 class="font-semibold text-pcu-blue text-2xl mb-4">Important Information</h2>
+<h2 class="font-semibold text-pcu-green text-2xl mb-4">Important Information</h2>
 <div class="space-y-3 text-gray-600">
-<p><strong class="text-pcu-blue">Processing Time:</strong> Visa applications typically take 3-7 business days at Indonesian embassies.</p>
-<p><strong class="text-pcu-blue">Visa Fee:</strong> Varies by nationality and visa type. Contact your nearest Indonesian embassy for current fees.</p>
-<p><strong class="text-pcu-blue">Health Insurance:</strong> Mandatory for all international students. Must cover at least $10,000 for medical expenses.</p>
-<p><strong class="text-pcu-blue">Reporting:</strong> Must report to local immigration office within 10 days of arrival for KITAS extension.</p>
+<p><strong class="text-pcu-green">Processing Time:</strong> Visa applications typically take 3-7 business days at Indonesian embassies.</p>
+<p><strong class="text-pcu-green">Visa Fee:</strong> Varies by nationality and visa type. Contact your nearest Indonesian embassy for current fees.</p>
+<p><strong class="text-pcu-green">Health Insurance:</strong> Mandatory for all international students. Must cover at least $10,000 for medical expenses.</p>
+<p><strong class="text-pcu-green">Reporting:</strong> Must report to local immigration office within 10 days of arrival for KITAS extension.</p>
 </div>
 </div>
 </div>
 </div>
-<div class="bg-gradient-to-r from-pcu-blue to-pcu-sky rounded-3xl p-10 text-white text-center">
+<div class="bg-gradient-to-r from-pcu-green to-emerald-500 rounded-3xl p-10 text-white text-center">
 <i class="w-12 h-12 mx-auto mb-4 text-white/80" data-lucide="shield"></i>
 <h3 class="font-display text-2xl font-bold mb-3">Need Help with Your Visa?</h3>
 <p class="text-white/80 mb-6 max-w-2xl mx-auto">The International Office at Petra Christian University provides guidance and support for visa applications and immigration procedures. Contact us for assistance.</p>
-<a class="inline-flex items-center gap-2 px-8 py-3.5 bg-white text-pcu-blue font-semibold rounded-full hover:bg-pcu-light transition shadow-lg" href="mailto:io@petra.ac.id">
+<a class="inline-flex items-center gap-2 px-8 py-3.5 bg-white text-pcu-green font-semibold rounded-full hover:bg-pcu-light transition shadow-lg" href="mailto:io@petra.ac.id">
 <i class="w-4 h-4" data-lucide="mail"></i> Contact International Office
        </a>
 </div>
@@ -3304,8 +3408,8 @@
 <div class="max-w-4xl mx-auto px-6 lg:px-8">
 <!-- Header -->
 <div class="text-center mb-14 reveal">
-<span class="inline-block px-4 py-1.5 bg-pcu-blue/10 text-pcu-blue text-xs font-semibold rounded-full mb-4 uppercase tracking-wider">International Office</span>
-<h1 class="font-display text-4xl md:text-5xl font-bold text-pcu-blue mb-5">Contact Us</h1>
+<span class="inline-block px-4 py-1.5 bg-pcu-navy/10 text-pcu-navy text-xs font-semibold rounded-full mb-4 uppercase tracking-wider">International Office</span>
+<h1 class="font-display text-4xl md:text-5xl font-bold text-pcu-navy mb-5">Contact Us</h1>
 <p class="text-gray-500 text-lg max-w-xl mx-auto leading-relaxed">For more information, please contact us here:</p>
 <div class="w-16 h-1 bg-pcu-gold rounded-full mx-auto mt-6"></div>
 </div>
@@ -3427,6 +3531,18 @@
 <p class="text-xs text-white/30">© 2025 PCU Global — Petra Christian University. All rights reserved.</p>
 </div>
 </footer>
+</div>
+<!-- Partnership Pop-up Modal -->
+<div id="partnership-modal" class="fixed inset-0 z-[200] hidden items-center justify-center p-4 bg-black/50 backdrop-blur-sm" onclick="closePartnershipModal(event)">
+  <div class="bg-white rounded-3xl shadow-2xl w-full max-w-4xl max-h-[80vh] overflow-y-auto relative" onclick="event.stopPropagation()">
+    <div class="sticky top-0 bg-white rounded-t-3xl border-b border-gray-100 px-8 py-5 flex items-center justify-between z-10">
+      <h3 id="partnership-modal-title" class="font-display text-2xl font-bold text-pcu-blue"></h3>
+      <button class="text-gray-400 hover:text-gray-600 transition p-2 rounded-full hover:bg-gray-100" onclick="closePartnershipModal()">
+        <i data-lucide="x" class="w-6 h-6"></i>
+      </button>
+    </div>
+    <div id="partnership-modal-content" class="px-8 py-6"></div>
+  </div>
 </div>
 <script src="JS/main.js"></script></body>
 </html>

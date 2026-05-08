@@ -265,33 +265,34 @@ const countryFlags = {
 
 const institutionLogos = {
   'Philippines': {
-    'Bicol University': 'Assets/Images/Logo/Philippines/Bicol University, Phillipines.png',
+    'Bicol University': 'Assets/Images/Logo/Philippines/Bicol University, Phillipines.jpg',
     'Camarines Sur Polytechnic Colleges': 'Assets/Images/Logo/Philippines/Camarines Sur Polytechnic Colleges, Philippines.png',
     'Central Bicol State University of Agriculture San Jose': 'Assets/Images/Logo/Philippines/Central Bicol State University of Agriculture San Jose, Philippines.png',
     'Central Philippine University': 'Assets/Images/Logo/Philippines/Central Philippine University, Philippines.png',
-    'Iloilo Science and Technology University': 'Assets/Images/Logo/Philippines/Iloilo Science and Technology University, Philippines.png',
-    'Northwest Samar State University': 'Assets/Images/Logo/Philippines/Northwest Samar State University, Philippines.png',
+    'Iloilo Science and Technolgy University': 'Assets/Images/Logo/Philippines/Iloilo Science and Technolgy University, Philippines.png',
+    'Northwest Samar State University': 'Assets/Images/Logo/Philippines/Northwest Samar State University, Philippines.jpg',
     'Panpacific University': 'Assets/Images/Logo/Philippines/Panpacific University, Philippines.png',
-    'Philippine Christian University': 'Assets/Images/Logo/Philippines/Philippine Christian University, Philippines.png',
+    'Philippine Christian University': 'Assets/Images/Logo/Philippines/Philippine Christian University, Philippine.png',
     'Philippine Normal University': 'Assets/Images/Logo/Philippines/Philippine Normal University, Philippines.png',
-    'Samar State University': 'Assets/Images/Logo/Philippines/Samar State University, Philippines.png',
-    'Siliman University': 'Assets/Images/Logo/Philippines/Siliman University, Philippines.png',
+    'Samar State University': 'Assets/Images/Logo/Philippines/Samar State University, Philippines.jpg',
+    'Silliman University': 'Assets/Images/Logo/Philippines/Silliman University, Philippines.png',
     'University of Mindanao': 'Assets/Images/Logo/Philippines/University of Mindanao, Philippines.png',
-    'University of St La Salle': 'Assets/Images/Logo/Philippines/University of St La Salle.png',
-    'University of the East': 'Assets/Images/Logo/Philippines/University of the East, Philippines.png',
+    'University of St. La Salle': 'Assets/Images/Logo/Philippines/University of St. La Salle.png',
+    'University of the East': 'Assets/Images/Logo/Philippines/University of the East.png',
   },
   'Malaysia': {
-    'Asia Pacific University of Technology and Innovation (APU)': 'Assets/Images/Logo/Malaysia/Asia Pacific University of Technology & Innovation (APU), Malaysia.png',
-    'INTI International University': 'Assets/Images/Logo/Malaysia/INTI International University, Malaysia.png',
-    'Sunway University': 'Assets/Images/Logo/Malaysia/Sunway University SDN BHD.png',
+    'Asia Pacific University of Technology & Innovation (APU)': 'Assets/Images/Logo/Malaysia/Asia Pacific University of Technology & Innovation (APU), Malaysia.png',
+    'Holiday Inn Melaka': 'Assets/Images/Logo/Malaysia/Holiday Inn Melaka.jpg',
+    'INTI International University': 'Assets/Images/Logo/Malaysia/INTI International University, Malaysia.jpg',
+    'Sunway University': 'Assets/Images/Logo/Malaysia/Sunway University SDN BHD.jpg',
     'Tunku Abdul Rahman University of Management and Technology (TARUMT)': 'Assets/Images/Logo/Malaysia/Tunku Abdul Rahman University of Management and Technology (TARUMT), Malaysia.png',
-    'UCSI University': 'Assets/Images/Logo/Malaysia/UCSI University, Malaysia.png',
+    'UCSI University': 'Assets/Images/Logo/Malaysia/UCSI University, Malaysia.jpg',
     'Universiti Malaysia Perlis (UniMAP)': 'Assets/Images/Logo/Malaysia/Universiti Malaysia Perlis (UniMAP), Malaysia.png',
     'Universiti Malaysia Sarawak (UNIMAS)': 'Assets/Images/Logo/Malaysia/Universiti Malaysia Sarawak (UNIMAS), Malaysia.png',
-    'Universiti Sains Malaysia (USM)': 'Assets/Images/Logo/Malaysia/Universiti Sains Malaysia (USM), Malaysia.png',
-    'Universiti Teknologi Mara (UiTM)': 'Assets/Images/Logo/Malaysia/Universiti Teknologi MARA (UiTM), Malaysia.png',
+    'Universiti Sains Malaysia (USM)': 'Assets/Images/Logo/Malaysia/Universiti Sains Malaysia (USM), Malaysia.jpg',
+    'Universiti Teknologi MARA (UiTM)': 'Assets/Images/Logo/Malaysia/Universiti Teknologi MARA (UiTM), Malaysia.png',
     'Universiti Tun Hussein Onn Malaysia (UTHM)': 'Assets/Images/Logo/Malaysia/Universiti Tun Hussein Onn Malaysia (UTHM), Malaysia.png',
-    "Universiti Tunku Abdul Rahman (UTAR)": 'Assets/Images/Logo/Malaysia/Universiti Tunku Abdul Rahman (UTAR), Malaysia.png',
+    'Universiti Tunku Abdul Rahman (UTAR)': 'Assets/Images/Logo/Malaysia/Universiti Tunku Abdul Rahman (UTAR), Malaysia.jpg',
   },
   'China': {
     'Anhui University': "Assets/Images/Logo/China/Anhui University, China.jpg",
@@ -342,6 +343,131 @@ const institutionLogos = {
     'Shizuoka University': 'Assets/Images/Logo/Japan/Shizuoka University, Japan.jpeg',
     'Sophia University': 'Assets/Images/Logo/Japan/Sophia University, Japan.png',
     'University of Niigata Prefecture': 'Assets/Images/Logo/Japan/University of Niigata Perfecture, Japan.jpeg'
+  },
+  'Australia': {
+    'Macquarie University': 'Assets/Images/Logo/Australia/Macquarie University, Australia.png',
+    'Monash University': 'Assets/Images/Logo/Australia/Monash University, Australia.png',
+    'Queensland University of Technology': 'Assets/Images/Logo/Australia/Queensland University of Technology (QUT), Australia.jpg',
+    'University of Tasmania': 'Assets/Images/Logo/Australia/University of Tasmania, Australia.png'
+  },
+  'Bangladesh': {
+    'Daffodil International University': 'Assets/Images/Logo/Bangladesh/Daffodil International University, Bangladesh.png',
+    'Southern University Bangladesh': 'Assets/Images/Logo/Bangladesh/Southern University Bangladesh.jpg'
+  },
+  'Cambodia': {
+    'Cambodian University for Specialties (CUS)': 'Assets/Images/Logo/Cambodia/Cambodian University for Specialties (CUS), Cambodia.png',
+    'National University of Management (NUM)': 'Assets/Images/Logo/Cambodia/National University of Management (NUM), Cambodia.jpg',
+    'Royal University of Phnom Penh (RUPP)': 'Assets/Images/Logo/Cambodia/Royal University of Phnom Penh (RUPP), Cambodia.png',
+    'University of Puthisastra': 'Assets/Images/Logo/Cambodia/University of Puthisastra, Cambodia.jpg'
+  },
+  'Canada': {
+    'University of the Fraser Valley (UFV)': 'Assets/Images/Logo/Canada/University of the Fraser Valley (UFV), Canada.png'
+  },
+  'France': {
+    'Rennes School of Business': 'Assets/Images/Logo/France/Rennes School of Business, France.jpg'
+  },
+  'Germany': {
+    'Hochschule Fresenius University of Applied Sciences': 'Assets/Images/Logo/Germany/Hochschule Fresenius University of Applied Sciences, Germany.png',
+    'Hochschule Mainz - University of Applied Sciences': 'Assets/Images/Logo/Germany/Hochschule Mainz - University of Applied Sciences, Germany.png',
+    'Osnabrück University of Applied Sciences': 'Assets/Images/Logo/Germany/Osnabru╠êck University of Applied Sciences, Germany (Faculty of Business Management and Social Sciences).png',
+    'Univeristy of Applied Sciences Darmstadt': 'Assets/Images/Logo/Germany/Univeristy of Applied Sciences Darmstadt (Hochschule Darmstadt) (h_da), Germany.png'
+  },
+  'Hong Kong': {
+    'Centennial College': 'Assets/Images/Logo/Hong Kong/Centennial College, Hong Kong.jpg',
+    'City University of Hong Kong (CityU)': 'Assets/Images/Logo/Hong Kong/City University of Hong Kong (CityU), Hong Kong.jpg',
+    'Lingnan University': 'Assets/Images/Logo/Hong Kong/Lingnan University, Hongkong.png',
+    'The Education University of Hongkong': 'Assets/Images/Logo/Hong Kong/The Education University of Hongkong, Hongkong.png'
+  },
+  'Hungary': {
+    'Budapest University of Technology and Economics': 'Assets/Images/Logo/Hungary/Budapest University of Technology and Economics, Hungary.jpg'
+  },
+  'India': {
+    'Assam Down Town University': 'Assets/Images/Logo/India/Assam Down Town University, India.png',
+    'Lady Doak College': 'Assets/Images/Logo/India/Lady Doak College, India.jpg',
+    'Vellore Institute of Technology (VIT)': 'Assets/Images/Logo/India/Vellore Institute of Technology (VIT), India.png',
+    'VIT Bhopal University': 'Assets/Images/Logo/India/VIT Bhopal University, India.png',
+    'VIT-AP University': 'Assets/Images/Logo/India/VIT-AP University, India.png'
+  },
+  'Ireland': {
+    'Athlone Institute of Technology': 'Assets/Images/Logo/Ireland/Athlone Institute of Technology, Irlandia.jpg'
+  },
+  'Lithuania': {
+    'Mykolas Romeris University': 'Assets/Images/Logo/Lithuania/Mykolas Romeris University, Lithuania.png'
+  },
+  'Macau': {
+    'Macau Millennium College (MMC)': 'Assets/Images/Logo/Macau/Macau Millennium College (MMC), Macau.png',
+    'Macau University of Science and Technology': 'Assets/Images/Logo/Macau/Macau University of Science and Technology, Macau.png'
+  },
+  'Mongolia': {
+    'German-Mongolian Institute for Resources and Technology (GMIT)': 'Assets/Images/Logo/Mongolia/German-Mongolian Institute for Resources and Technology (GMIT), Mongolia.png',
+    'Huree University of Information and Communication Technology': 'Assets/Images/Logo/Mongolia/Huree University of Information and Communication Technology, Mongolia.jpg'
+  },
+  'Netherlands': {
+    'Fontys University of Applied Sciences': 'Assets/Images/Logo/Netherlands/Fontys University of Applied Sciences, The Netherlands.png',
+    'Saxion University of Applied Sciences': 'Assets/Images/Logo/Netherlands/Saxion University of Applied Sciences, the Netherlands.png'
+  },
+  'New Zealand': {
+    'Massey University': 'Assets/Images/Logo/New Zealand/Massey University, New Zealand.png'
+  },
+  'Poland': {
+    'AGH University of Science and Technology': 'Assets/Images/Logo/Poland/AGH University of Science and Technology, Poland.png'
+  },
+  'Portugal': {
+    'Lusofona University of Humanitites and Technologies': 'Assets/Images/Logo/Portugal/Lusofona University of Humanitites and Technologies (Universidade Lusofona de Humanidades e Tecnologias), Portugal.png'
+  },
+  'Romania': {
+    'Stefan Cel Mare University of Suceava': 'Assets/Images/Logo/Romania/Stefan Cel Mare University of Suceava, Romania.png'
+  },
+  'Singapore': {
+    'James Cook University (JCU)': 'Assets/Images/Logo/Singapore/James Cook University (JCU), Singapore.png',
+    'National University of Singapore (NUS)': 'Assets/Images/Logo/Singapore/National University of Singapore (NUS),  Singapore.jpg',
+    'Ngee Ann Polytechnic (NP)': 'Assets/Images/Logo/Singapore/Ngee Ann Polytechnic (NP), Singapore.png',
+    'Singapore University of Technology and Design (SUTD)': 'Assets/Images/Logo/Singapore/Singapore University of Technology and Design (SUTD), Singapore.jpg'
+  },
+  'Switzerland': {
+    'International Hotel Management Institute': 'Assets/Images/Logo/Switzerland/International Hotel Management Institute (IMI Partners AG Switzerland), Switzerland.jpg'
+  },
+  'Taiwan': {
+    'Chang Jung Christian University': 'Assets/Images/Logo/Taiwan/Chang Jung Christian University, Taiwan.png',
+    'Chung Yuan Christian University': 'Assets/Images/Logo/Taiwan/Chung Yuan Christian University, Taiwan.png',
+    'Fu Jen Catholic University': 'Assets/Images/Logo/Taiwan/Fu Jen Catholic University, Taiwan.png',
+    'I-Shou University': 'Assets/Images/Logo/Taiwan/I-Shou University, Taiwan.jpg',
+    'Kun Shan University': 'Assets/Images/Logo/Taiwan/Kun Shan University, Taiwan.png',
+    'Ming Chuan University': 'Assets/Images/Logo/Taiwan/Ming Chuan University, Taiwan.png',
+    'National Central University': 'Assets/Images/Logo/Taiwan/National Central University, Taiwan.png',
+    'National Chi Nan University': 'Assets/Images/Logo/Taiwan/National Chi Nan University, Taiwan.jpg',
+    'National Ilan University': 'Assets/Images/Logo/Taiwan/National Ilan University, Taiwan.png',
+    'National Kaohsiung University of Science and Technology (NKUST)': 'Assets/Images/Logo/Taiwan/National Kaohsiung University of Science and Technology (NKUST), Taiwan.jpg',
+    'National Sun Yat Sen University (NSYSU)': 'Assets/Images/Logo/Taiwan/National Sun Yat Sen University (NSYSU), Taiwan.png',
+    'National Taiwan University of Science and Technology (NTUST)': 'Assets/Images/Logo/Taiwan/National Taiwan University of Science and Technology (NTUST), Taiwan.png',
+    'Tunghai University': 'Assets/Images/Logo/Taiwan/Tunghai University, Taiwan.jpg',
+    'Wenzao Ursuline University of Languages': 'Assets/Images/Logo/Taiwan/Wenzao Ursuline University of Languages, Taiwan.jpg',
+    'Yuan Ze University Taoyuan': 'Assets/Images/Logo/Taiwan/Yuan Ze University Taoyuan, Taiwan.png'
+  },
+  'Thailand': {
+    'Bangkok University': 'Assets/Images/Logo/Thailand/Bangkok University, Thailand.jpg',
+    'Naresuan University': 'Assets/Images/Logo/Thailand/Naresuan University, Thailand.jpg',
+    'Siam University': 'Assets/Images/Logo/Thailand/Siam University, Thailand.png',
+    'Silpakorn University': 'Assets/Images/Logo/Thailand/Silpakorn University, Thailand.png',
+    'Srinakharinwirot University (SWU)': 'Assets/Images/Logo/Thailand/Srinakharinwirot University (SWU), Thailand.png',
+    'Thai-Nichi Institute of Technology': 'Assets/Images/Logo/Thailand/Thai-Nichi Institute of Technology, Thailand.png'
+  },
+  'Timor Leste': {
+    "Universidade Nacional Timor Lorosa'e (UNTL)": "Assets/Images/Logo/Timor Leste/Universidade Nacional Timor Lorosa'e (UNTL), Timor-Leste.png"
+  },
+  'United Arab Emirates': {
+    'The Emirates Academy of Hospitality Management': 'Assets/Images/Logo/United Arab Emirates/The Emirates Academy of Hospitality Management, United Arab Emirates.jpg'
+  },
+  'United Kingdom': {
+    'Coventry University': 'Assets/Images/Logo/United Kingdom/Coventry University, UK.png',
+    'Loughborough University': 'Assets/Images/Logo/United Kingdom/Loughborough University, UK.png',
+    'University of Chichester': 'Assets/Images/Logo/United Kingdom/University of Chichester, UK.png'
+  },
+  'United States of America': {
+    'California Baptist University': 'Assets/Images/Logo/United States of America/California Baptist University, USA.png',
+    'Dallas Baptist University': 'Assets/Images/Logo/United States of America/Dallas Baptist University, USA.jpg',
+    'Iowa State University of Science and Technology (ISU)': 'Assets/Images/Logo/United States of America/Iowa State University of Science and Technology (ISU), USA.png',
+    'Valparaiso University (Valpo)': 'Assets/Images/Logo/United States of America/Valparaiso University (Valpo), USA.jpg'
   }
 };
 
@@ -1090,26 +1216,22 @@ function togglePartnershipBox(boxId, suffix = '') {
   });
 }
 
+const intlLogoFiles = ["Australia/Bethany Christian School, Adelaide, Australia.png", "Australia/CPA Australia.png", "Australia/Macquarie University, Australia.png", "Australia/Monash University, Australia.png", "Australia/Queensland University of Technology (QUT), Australia.jpg", "Australia/University of Tasmania, Australia.png", "Bangladesh/Daffodil International University, Bangladesh.png", "Bangladesh/Southern University Bangladesh.jpg", "Cambodia/Cambodian University for Specialties (CUS), Cambodia.png", "Cambodia/National University of Management (NUM), Cambodia.jpg", "Cambodia/Royal University of Phnom Penh (RUPP), Cambodia.png", "Cambodia/University of Puthisastra, Cambodia.jpg", "Canada/University of the Fraser Valley (UFV), Canada.png", "China/Anhui University, China.jpg", "China/Beijing University of Posts and Telecommunication (School of Humanities) (BUPT), Beijing.png", "China/Chaoshan Vocational and Technical College, China.jpg", "China/Fujian Polytechnic Normal University (FPNU), China.jpg", "China/Guangdong University of Foreign Studies (GDUFS), China.png", "China/Guangdong University of Science and Technology (GDUT), China.png", "China/Guangxi Normal University, P. R. China.png", "China/Guangzhou College of Commerce, (GCC), China.jpg", "China/Guangzhou Huanan Business College, China.jpg", "China/Guangzhou Nanyang Polytechnic College, China.jpg", "China/Hua Qiao University, Quanzhou, P. R. China.jpg", "China/Hunan City University, China.png", "China/Nanjing University of Aeronautics and Astronautics (NUAA), China.png", "China/School of Economics, Fudan University, China.png", "China/The Westin Sanya Haitang Bay Resort, China.jpg", "China/Tianjin Foreign Studies University (TFSU), China.jpg", "China/Xi'an Jiatong-Liverpool University (XJTLU), China.jpg", "China/Yangzhou University, China.png", "China/Zhejiang Yuexiu University of Foreign Languages, China.jpg", "France/Rennes School of Business, France.jpg", "Germany/Hochschule Fresenius University of Applied Sciences, Germany.png", "Germany/Hochschule Mainz - University of Applied Sciences, Germany.png", "Germany/Osnabru╠êck University of Applied Sciences, Germany (Faculty of Business Management and Social Sciences).png", "Germany/Univeristy of Applied Sciences Darmstadt (Hochschule Darmstadt) (h_da), Germany.png", "Hong Kong/Centennial College, Hong Kong.jpg", "Hong Kong/City University of Hong Kong (CityU), Hong Kong.jpg", "Hong Kong/Hong Kong Baptist University.png", "Hong Kong/Lingnan University, Hongkong.png", "Hong Kong/The Education University of Hongkong, Hongkong.png", "Hungary/Budapest University of Technology and Economics, Hungary.jpg", "India/Assam Down Town University, India.png", "India/Lady Doak College, India.jpg", "India/VIT Bhopal University, India.png", "India/VIT-AP University, India.png", "India/Vellore Institute of Technology (VIT), India.png", "Ireland/Athlone Institute of Technology, Irlandia.jpg", "Japan/Asia University, Japan.png", "Japan/Clark Memorial International High School, Japan.png", "Japan/International Christian University (ICU), Japan.jpg", "Japan/International Pacific University (IPU), Japan.png", "Japan/Josai International University, Japan.jpg", "Japan/Kaichi International University, Japan.png", "Japan/Kansai Gaidai University, Japan.jpg", "Japan/Kansai University of International Studies, Japan.png", "Japan/Kwansei Gakuin University, Japan.png", "Japan/Meiji University, Japan.png", "Japan/Momoyama Gakuin University, Japan.png", "Japan/Nihon University, Japan.jpg", "Japan/Shizuoka University, Japan.jpeg", "Japan/Sophia University, Japan.png", "Japan/University of Niigata Perfecture, Japan.jpeg", "Lithuania/Mykolas Romeris University, Lithuania.png", "Macau/Macau Millennium College (MMC), Macau.png", "Macau/Macau University of Science and Technology, Macau.png", "Macau/University of Saint Joseph, Macau.jpg", "Malaysia/Aloft Kuala Lumpur.jpg", "Malaysia/Asia Pacific University of Technology & Innovation (APU), Malaysia.png", "Malaysia/Holiday Inn Melaka.jpg", "Malaysia/INTI International University, Malaysia.jpg", "Malaysia/Pullman Kuala Lumpur, Malaysia.png", "Malaysia/Shangri La Hotel, Kuala Lumpur, Malaysia.png", "Malaysia/Shangri-La Hotel Kuala Lumpur.png", "Malaysia/Sheraton Hotels and Resorts (Malaysia & Taipei).png", "Malaysia/Sheraton Petaling Jaya Hotel.jpg", "Malaysia/Sofitel Kuala Lumpur.png", "Malaysia/Sunway University SDN BHD.jpg", "Malaysia/Tunku Abdul Rahman University of Management and Technology (TARUMT), Malaysia.png", "Malaysia/UCSI University, Malaysia.jpg", "Malaysia/Universiti Malaya.png", "Malaysia/Universiti Malaysia Perlis (UniMAP), Malaysia.png", "Malaysia/Universiti Malaysia Sarawak (UNIMAS), Malaysia.png", "Malaysia/Universiti Sains Malaysia (USM), Malaysia.jpg", "Malaysia/Universiti Teknologi MARA (UiTM), Malaysia.png", "Malaysia/Universiti Tun Hussein Onn Malaysia (UTHM), Malaysia.png", "Malaysia/Universiti Tunku Abdul Rahman (UTAR), Malaysia.jpg", "Malaysia/University of Nottingham Malaysia.jpg", "Malaysia/World Skills Academy SDN BHD.jpg", "Mongolia/German-Mongolian Institute for Resources and Technology (GMIT), Mongolia.png", "Mongolia/Huree University of Information and Communication Technology, Mongolia.jpg", "Netherlands/Fontys University of Applied Sciences, The Netherlands.png", "Netherlands/Saxion University of Applied Sciences, the Netherlands.png", "New Zealand/Massey University, New Zealand.png", "Philippines/Bicol University, Phillipines.jpg", "Philippines/Camarines Sur Polytechnic Colleges, Philippines.png", "Philippines/Central Bicol State University of Agriculture San Jose, Philippines.png", "Philippines/Central Philippine University, Philippines.png", "Philippines/Iloilo Science and Technolgy University, Philippines.png", "Philippines/Northwest Samar State University, Philippines.jpg", "Philippines/Panpacific University, Philippines.png", "Philippines/Philippine Christian University, Philippine.png", "Philippines/Philippine Normal University, Philippines.png", "Philippines/Samar State University, Philippines.jpg", "Philippines/Silliman University, Philippines.png", "Philippines/University of Mindanao, Philippines.png", "Philippines/University of St. La Salle.png", "Philippines/University of the East.png", "Poland/AGH University of Science and Technology, Poland.png", "Portugal/Lusofona University of Humanitites and Technologies (Universidade Lusofona de Humanidades e Tecnologias), Portugal.png", "Romania/Stefan Cel Mare University of Suceava, Romania.png", "Singapore/James Cook University (JCU), Singapore.png", "Singapore/National University of Singapore (NUS),  Singapore.jpg", "Singapore/Ngee Ann Polytechnic (NP), Singapore.png", "Singapore/Singapore University of Technology and Design (SUTD), Singapore.jpg", "Singapore/singapore university of technology.jpg", "South Korea/Busan Digital University (BDU), Korea.png", "South Korea/Busan University of Foreign Studies, Korea.jpg", "South Korea/Changwon National University, Korea.jpg", "South Korea/Chodang University, Korea.png", "South Korea/Dankook University (DKU), Korea.png", "South Korea/Dongseo University, Korea.jpg", "South Korea/Hankuk University of Foreign Studies, Korea.png", "South Korea/Hannam University, Korea.jpg", "South Korea/Keimyung University, Korea.jpg", "South Korea/Myongji University, Korea.png", "South Korea/Pusan National University, Korea.png", "South Korea/Sogang Business School Sogang University, Korea.png", "South Korea/SolBridge International School of Business (Woosong University), Korea.png", "South Korea/Soongsil University, Seoul, Korea.png", "South Korea/Woosong University, Rep. of Korea.png", "South Korea/Yonsei University, Korea.png", "Switzerland/International Hotel Management Institute (IMI Partners AG Switzerland), Switzerland.jpg", "Taiwan/Chang Jung Christian University, Taiwan.png", "Taiwan/Chung Yuan Christian University, Taiwan.png", "Taiwan/Fu Jen Catholic University, Taiwan.png", "Taiwan/I-Shou University, Taiwan.jpg", "Taiwan/Kun Shan University, Taiwan.png", "Taiwan/Le Me╠üridien Taipei, Taiwan.jpg", "Taiwan/Ming Chuan University, Taiwan.png", "Taiwan/National Central University, Taiwan.png", "Taiwan/National Chi Nan University, Taiwan.jpg", "Taiwan/National Ilan University, Taiwan.png", "Taiwan/National Kaohsiung University of Science and Technology (NKUST), Taiwan.jpg", "Taiwan/National Sun Yat Sen University (NSYSU), Taiwan.png", "Taiwan/National Taiwan University of Science and Technology (NTUST), Taiwan.png", "Taiwan/New Palace Taichung Beitun Dist., Taiwan.jpg", "Taiwan/Tunghai University, Taiwan.jpg", "Taiwan/Wenzao Ursuline University of Languages, Taiwan.jpg", "Taiwan/Yuan Ze University Taoyuan, Taiwan.png", "Taiwan/national taiwan university logo.png", "Thailand/Bangkok University, Thailand.jpg", "Thailand/Naresuan University, Thailand.jpg", "Thailand/Siam University, Thailand.png", "Thailand/Silpakorn University, Thailand.png", "Thailand/Srinakharinwirot University (SWU), Thailand.png", "Thailand/Thai-Nichi Institute of Technology, Thailand.png", "The Education University of Hongkong, Hongkong.svg", "Timor Leste/Universidade Nacional Timor Lorosa'e (UNTL), Timor-Leste.png", "United Arab Emirates/The Emirates Academy of Hospitality Management, United Arab Emirates.jpg", "United Kingdom/Coventry University, UK.png", "United Kingdom/Loughborough University, UK.png", "United Kingdom/University of Chichester, UK.png", "United States of America/California Baptist University, USA.png", "United States of America/Dallas Baptist University, USA.jpg", "United States of America/Four Season Atlanta, USA.png", "United States of America/Gaylord Hotels, Nashville, USA.jpg", "United States of America/Iowa State University of Science and Technology (ISU), USA.png", "United States of America/Valparaiso University (Valpo), USA.jpg"];
+
 function loadPartnersLogos(suffix = '') {
-  const container = document.getElementById(`partners-logos${suffix}`);
+  const container = document.getElementById('partners-logos' + suffix);
   if (!container || container.children.length > 0) return;
-  const items = partnerData.slice().sort((a, b) => a.country.localeCompare(b.country) || a.name.localeCompare(b.name));
-  container.innerHTML = items.map(partner => {
-    const logoPath = getInstitutionLogoPath(partner.country, partner.name);
-    return `
-      <div class="bg-white rounded-xl p-3 border border-gray-100 shadow-sm hover:shadow-md transition">
-        <div class="flex items-start gap-3">
-          <div class="w-12 h-12 rounded-2xl bg-pcu-light/80 flex items-center justify-center overflow-hidden flex-shrink-0">
-            ${logoPath ? `<img src="${logoPath}" alt="${partner.name} logo" class="max-h-10 max-w-full object-contain">` : `<i data-lucide="building" class="w-5 h-5 text-pcu-blue"></i>`}
-          </div>
-          <div class="min-w-0">
-            <p class="font-semibold text-sm text-pcu-blue leading-5">${partner.name}</p>
-            <p class="text-gray-500 text-[11px] mt-1">${partner.country}</p>
-          </div>
-        </div>
-      </div>
-    `;
-  }).join('');
+  const makeItem = (file) => {
+    const name = file.replace(/^[^/]+\//, '').replace(/\.[^.]+$/, '');
+    const src = 'Assets/Images/Logo/' + file.split('/').map(encodeURIComponent).join('/');
+    return '<div class="flex flex-col items-center gap-2 flex-shrink-0" style="width:80px;">' +
+      '<div class="w-16 h-16 rounded-full bg-white border-2 border-gray-100 shadow-md flex items-center justify-center overflow-hidden hover:shadow-lg hover:border-pcu-blue/30 transition" style="flex-shrink:0;">' +
+      '<img src="' + src + '" alt="' + name.replace(/"/g, '&quot;') + '" class="max-h-12 max-w-full object-contain p-1" loading="lazy">' +
+      '</div>' +
+    '</div>';
+  };
+  const items = [...intlLogoFiles, ...intlLogoFiles];
+  container.innerHTML = items.map(makeItem).join('');
 }
 
 function loadCountries(suffix = '') {
@@ -1163,6 +1285,127 @@ function getInstitutionsForCountry(country) {
 function initializePartnershipData() {
   // No-op for now. Partnership data is preloaded from the Excel source and used on demand.
 }
+
+// ---- PARTNERSHIP MODAL ----
+let _modalBackType = 'countries';
+
+function openPartnershipModal(type) {
+  const modal = document.getElementById('partnership-modal');
+  const title = document.getElementById('partnership-modal-title');
+  const content = document.getElementById('partnership-modal-content');
+
+  _modalBackType = type;
+
+  if (type === 'countries') {
+    title.textContent = 'Partner Countries';
+    content.innerHTML = `
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        ${uniqueCountries.map(country => {
+          const flagPath = getFlagPath(country);
+          return `
+            <div class="bg-white rounded-xl p-4 border border-gray-100 shadow-sm hover:shadow-md hover:border-pcu-blue/30 transition cursor-pointer" onclick="showCountryInModal('${country.replace(/'/g,"\\'")}')">
+              <div class="flex items-center gap-3">
+                ${flagPath ? `<img src="${flagPath}" alt="${country}" class="w-8 h-6 object-cover rounded shrink-0">` : ''}
+                <span class="font-semibold text-pcu-blue text-sm">${country}</span>
+              </div>
+            </div>`;
+        }).join('')}
+      </div>`;
+  } else if (type === 'continents') {
+    title.textContent = 'Partner Continents';
+    const continentItems = [
+      ['asia', 'Asia'],
+      ['europe', 'Europe'],
+      ['americas', 'Americas'],
+      ['oceania', 'Oceania']
+    ];
+    content.innerHTML = `
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+        ${continentItems.map(([key, label]) => `
+          <div class="text-center cursor-pointer p-5 bg-pcu-light rounded-2xl hover:bg-pcu-blue hover:text-white transition" onclick="showContinentInModal('${key}')">
+            <i data-lucide="globe" class="w-8 h-8 mb-2 mx-auto block"></i>
+            <p class="font-semibold">${label}</p>
+          </div>`).join('')}
+      </div>
+      <div id="modal-continent-countries" class="hidden"></div>`;
+  }
+
+  modal.classList.remove('hidden');
+  modal.classList.add('flex');
+  modal.scrollTop = 0;
+  lucide.createIcons();
+}
+
+function showContinentInModal(continent) {
+  const container = document.getElementById('modal-continent-countries');
+  if (!container) return;
+  container.classList.remove('hidden');
+  const label = { asia: 'Asia', europe: 'Europe', americas: 'Americas', oceania: 'Oceania' }[continent] || continent;
+  const countries = Object.entries(countryToContinent)
+    .filter(([, group]) => group === continent)
+    .map(([name]) => name)
+    .sort((a, b) => a.localeCompare(b));
+  container.innerHTML = `
+    <h4 class="font-semibold text-lg text-pcu-blue mb-4">${label} Countries</h4>
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      ${countries.map(country => {
+        const flagPath = getFlagPath(country);
+        return `
+          <div class="bg-white rounded-xl p-4 border border-gray-100 shadow-sm hover:shadow-md hover:border-pcu-blue/30 transition cursor-pointer" onclick="showCountryInModal('${country.replace(/'/g,"\\'")}')">
+            <div class="flex items-center gap-3">
+              ${flagPath ? `<img src="${flagPath}" alt="${country}" class="w-8 h-6 object-cover rounded shrink-0">` : ''}
+              <span class="font-semibold text-pcu-blue text-sm">${country}</span>
+            </div>
+          </div>`;
+      }).join('')}
+    </div>`;
+  lucide.createIcons();
+  container.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function showCountryInModal(country) {
+  const title = document.getElementById('partnership-modal-title');
+  const content = document.getElementById('partnership-modal-content');
+  const institutions = partnersByCountry[country] || [];
+  const flagPath = getFlagPath(country);
+
+  title.innerHTML = flagPath
+    ? `<img src="${flagPath}" alt="${country}" class="w-8 h-6 object-cover rounded mr-3 inline-block align-middle"> ${country}`
+    : country;
+  title.className = 'font-display text-2xl font-bold text-pcu-blue flex items-center';
+
+  content.innerHTML = `
+    <button class="inline-flex items-center gap-2 text-pcu-blue text-sm font-medium mb-6 hover:underline" onclick="openPartnershipModal('${_modalBackType}')">
+      <i data-lucide="arrow-left" class="w-4 h-4"></i> Back
+    </button>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+      ${institutions.map(inst => {
+        const logoPath = getInstitutionLogoPath(country, inst);
+        return `
+          <div class="bg-white rounded-xl p-5 border border-gray-100 shadow-sm hover:shadow-md hover:border-pcu-blue/30 transition">
+            <div class="flex items-center gap-4">
+              <div class="w-14 h-14 rounded-2xl bg-pcu-light/80 flex items-center justify-center overflow-hidden shrink-0">
+                ${logoPath ? `<img src="${logoPath}" alt="${inst} logo" class="max-h-10 max-w-full object-contain">` : `<i data-lucide="building" class="w-6 h-6 text-pcu-blue"></i>`}
+              </div>
+              <h3 class="font-semibold text-pcu-blue leading-tight text-sm">${inst}</h3>
+            </div>
+          </div>`;
+      }).join('')}
+    </div>`;
+  lucide.createIcons();
+  document.getElementById('partnership-modal').scrollTop = 0;
+}
+
+function closePartnershipModal(event) {
+  if (event && event.target !== document.getElementById('partnership-modal')) return;
+  const modal = document.getElementById('partnership-modal');
+  modal.classList.add('hidden');
+  modal.classList.remove('flex');
+}
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closePartnershipModal();
+});
 
 function initializeCountryGrid() {
   const mapContainer = document.getElementById('worldMap');
@@ -1251,6 +1494,174 @@ function renderOsePartners() {
   `).join('');
   lucide.createIcons();
 }
+
+// ---- DOMESTIC PARTNERSHIP DATA ----
+const domesticPartners = [{"name": "Four Points By Sheraton Surabaya", "city": "Surabaya", "type": "International", "tier": "Iconic", "image": "Four Points By Sheraton Surabaya.jpg"}, {"name": "Hotel Double Tree by Hilton Surabaya", "city": "Surabaya", "type": "International", "tier": "Iconic", "image": "Hotel Double Tree by Hilton Surabaya.png"}, {"name": "JW Marriott Hotel Surabaya", "city": "Surabaya", "type": "International", "tier": "Iconic", "image": "JW Marriott Hotel Surabaya.svg"}, {"name": "PT GoTo Gojek Tokopedia Tbk", "city": "Jakarta", "type": "National", "tier": "Iconic", "image": "PT GoTo Gojek Tokopedia Tbk.svg"}, {"name": "PT Rekso Nasional Food (McDonald's)", "city": "Jakarta", "type": "International", "tier": "Iconic", "image": null}, {"name": "PT Tokopedia", "city": "Jakarta", "type": "National", "tier": "Iconic", "image": "PT Tokopedia.png"}, {"name": "PT. Graha Alam Lestari (The Apurva Kempinski Bali)", "city": "Denpasar", "type": "International", "tier": "Iconic", "image": "PT. Graha Alam Lestari (The Apurva Kempinski Bali).png"}, {"name": "Sheraton Surabaya Hotel", "city": "Surabaya", "type": "International", "tier": "Iconic", "image": "Sheraton Surabaya Hotel.png"}, {"name": "German Academic Exchange Service (DAAD) Indonesia", "city": "Jakarta", "type": "International", "tier": "Major", "image": "German Academic Exchange Service (DAAD) Indonesia.png"}, {"name": "ICAEW Indonesia", "city": "Jakarta", "type": "International", "tier": "Major", "image": "ICAEW Indonesia.png"}, {"name": "Indoprima Group", "city": "Surabaya", "type": "National", "tier": "Major", "image": "Indoprima Group.jpg"}, {"name": "Institut Pertanian Bogor (IPB)", "city": "Bogor", "type": "Education", "tier": "Major", "image": null}, {"name": "Maspion Group", "city": "Surabaya", "type": "National", "tier": "Major", "image": "Maspion Group.jpg"}, {"name": "PT Astra Sedaya Finance", "city": "Jakarta", "type": "National", "tier": "Major", "image": "PT Astra Sedaya Finance.png"}, {"name": "PT Astra Sedaya Finance (2nd agreement)", "city": "Jakarta", "type": "National", "tier": "Major", "image": null}, {"name": "PT Bank Pembangunan Daerah Jawa Timur Tbk (Bank Jatim)", "city": "Surabaya", "type": "National", "tier": "Major", "image": "PT Bank Pembangunan Daerah Jawa Timur Tbk (Bank Jatim).jpg"}, {"name": "PT Erajaya Swasembada Tbk", "city": "Jakarta", "type": "National", "tier": "Major", "image": "PT Erajaya Swasembada Tbk.svg"}, {"name": "PT Global Digital Niaga (Blibli)", "city": "Jakarta", "type": "National", "tier": "Major", "image": "PT Global Digital Niaga (Blibli).jpg"}, {"name": "PT Ishizuka Maspion Indonesia (Maspion Group)", "city": "Surabaya", "type": "National", "tier": "Major", "image": "PT Ishizuka Maspion Indonesia (Maspion Group).png"}, {"name": "PT. Bosch Rexroth", "city": "Jakarta", "type": "International", "tier": "Major", "image": "PT. Bosch Rexroth.png"}, {"name": "PT. Charoen Popkphand Indonesia Tbk - Jawa Timur", "city": "Sidoarjo", "type": "International", "tier": "Major", "image": "PT. Charoen Popkphand Indonesia Tbk - Jawa Timur.png"}, {"name": "PT. Semen Indonesia (Persero) Tbk.", "city": "Jakarta", "type": "National", "tier": "Major", "image": "PT. Semen Indonesia (Persero) Tbk..svg"}, {"name": "Samator Group", "city": "Surabaya", "type": "National", "tier": "Major", "image": "Samator Group.jpg"}, {"name": "Universitas Airlangga", "city": "Surabaya", "type": "Education", "tier": "Major", "image": null}, {"name": "Universitas Andalas", "city": "Sumatera", "type": "Education", "tier": "Major", "image": null}, {"name": "Universitas Hasanuddin (Fak. Kedokteran Gigi)", "city": "Makassar", "type": "Education", "tier": "Major", "image": null}, {"name": "Universitas Indonesia (Fak. Kedokteran Gigi)", "city": "Jakarta", "type": "Education", "tier": "Major", "image": null}, {"name": "Universitas Muhammadiyah Malang", "city": "Malang", "type": "Education", "tier": "Major", "image": null}, {"name": "Universitas Negeri Surabaya (UNESA)", "city": "Surabaya", "type": "Education", "tier": "Major", "image": null}, {"name": "Universitas Padjadjaran", "city": "Sumedang", "type": "Education", "tier": "Major", "image": null}, {"name": "Universitas Padjajaran (Fak. Kedokteran Gigi)", "city": "Sumedang", "type": "Education", "tier": "Major", "image": null}, {"name": "Universitas Sebelas Maret", "city": "Surakarta", "type": "Education", "tier": "Major", "image": null}, {"name": "Universitas Sriwijaya (Fak. Kedokteran Gigi)", "city": "Palembang", "type": "Education", "tier": "Major", "image": null}, {"name": "Universitas Sumatera Utara (Fak. Kedokteran Gigi)", "city": "Medan", "type": "Education", "tier": "Major", "image": null}, {"name": "Wings Group Surabaya", "city": "Surabaya", "type": "National", "tier": "Major", "image": "Wings Group Surabaya.png"}, {"name": "Badan Pengembangan SDM Industri Kemenperin (PIDI)", "city": "Jakarta", "type": "Government", "tier": "Well-known", "image": "Badan Pengembangan SDM Industri Kemenperin (PIDI).png"}, {"name": "Kementrian Pendayagunaan Aparatur Negara dan RB", "city": "Jakarta", "type": "Government", "tier": "Well-known", "image": "Kementrian Pendayagunaan Aparatur Negara dan RB.png"}, {"name": "Komisi Nasional Disabilitas Republik Indonesia", "city": "Jakarta", "type": "Government", "tier": "Well-known", "image": "Komisi Nasional Disabilitas Republik Indonesia.png"}, {"name": "Mayapada Hospital", "city": "Surabaya", "type": "National", "tier": "Well-known", "image": "Mayapada Hospital.png"}, {"name": "Politeknik Negeri Malang", "city": "Malang", "type": "Education", "tier": "Well-known", "image": null}, {"name": "PT Grant Thornton Indonesia", "city": "Jakarta", "type": "International", "tier": "Well-known", "image": "PT Grant Thornton Indonesia.jpg"}, {"name": "PT Martina Berto Tbk (Marta Tilaar)", "city": "Jakarta", "type": "National", "tier": "Well-known", "image": "PT Martina Berto Tbk (Marta Tilaar).png"}, {"name": "PT Rembaka (La Tulipe)", "city": "Surabaya", "type": "National", "tier": "Well-known", "image": "PT Rembaka (La Tulipe).png"}, {"name": "PT Sinarmas Sekuritas", "city": "Jakarta", "type": "National", "tier": "Well-known", "image": "PT Sinarmas Sekuritas.png"}, {"name": "PT. Kosmetika Global Indonesia", "city": "Surabaya", "type": "National", "tier": "Well-known", "image": "PT. Kosmetika Global Indonesia.svg"}, {"name": "PT. Mitra Pinasthika Mulia (MPM)", "city": "Surabaya", "type": "National", "tier": "Well-known", "image": "PT. Mitra Pinasthika Mulia (MPM).jpg"}, {"name": "PT. Transforma Oto Prima (Mercedes-Benz)", "city": "Surabaya", "type": "International", "tier": "Well-known", "image": "PT. Transforma Oto Prima (Mercedes-Benz).jpg"}, {"name": "PT. Wahana Kosmetika Indonesia", "city": "Sidoarjo", "type": "National", "tier": "Well-known", "image": "PT. Wahana Kosmetika Indonesia.png"}, {"name": "RSM Indonesia", "city": "Jakarta", "type": "International", "tier": "Well-known", "image": "RSM Indonesia.png"}, {"name": "Sekretariat Jenderal Kementerian Sosial", "city": "Jakarta", "type": "Government", "tier": "Well-known", "image": "Sekretariat Jenderal Kementerian Sosial.png"}, {"name": "Tentara Nasional Indonesia AL (STTAL)", "city": "Surabaya", "type": "Government", "tier": "Well-known", "image": "Tentara Nasional Indonesia AL (STTAL).png"}, {"name": "Universitas Atma Jaya Yogyakarta", "city": "Yogyakarta", "type": "Education", "tier": "Well-known", "image": null}, {"name": "Universitas Bina Nusantara", "city": "Jakarta", "type": "Education", "tier": "Well-known", "image": null}, {"name": "Universitas Islam Indonesia", "city": "Yogyakarta", "type": "Education", "tier": "Well-known", "image": null}, {"name": "Universitas Islam Sultan Agung", "city": "Semarang", "type": "Education", "tier": "Well-known", "image": null}, {"name": "Universitas Jember (Fak. Kedokteran Gigi)", "city": "Jember", "type": "Education", "tier": "Well-known", "image": null}, {"name": "Universitas Jenderal Ahmad Yani (Fak. Kedokteran Gigi)", "city": "Cimahi", "type": "Education", "tier": "Well-known", "image": null}, {"name": "Universitas Jenderal Soedirman (Fak. Kedokteran Gigi)", "city": "Banyumas", "type": "Education", "tier": "Well-known", "image": null}, {"name": "Universitas Lambung Mangkurat (Fak. Kedokteran Gigi)", "city": "Banjarmasin", "type": "Education", "tier": "Well-known", "image": null}, {"name": "Universitas Muhammadiyah Semarang (Fak. Kedokteran Gigi)", "city": "Semarang", "type": "Education", "tier": "Well-known", "image": null}, {"name": "Universitas Muhammadiyah Surabaya (Fak. Kedokteran Gigi)", "city": "Surabaya", "type": "Education", "tier": "Well-known", "image": null}, {"name": "Universitas Muhammadiyah Yogyakarta (Fak. Kedokteran Gigi)", "city": "Yogyakarta", "type": "Education", "tier": "Well-known", "image": null}, {"name": "Universitas Mulawarman (Fak. Kedokteran Gigi)", "city": "Samarinda", "type": "Education", "tier": "Well-known", "image": null}, {"name": "Universitas Multimedia Nusantara", "city": "Banten", "type": "Education", "tier": "Well-known", "image": null}, {"name": "Universitas Muslim Indonesia (Fak. Kedokteran Gigi)", "city": "Makassar", "type": "Education", "tier": "Well-known", "image": null}, {"name": "Universitas Sanata Dharma", "city": "Yogyakarta", "type": "Education", "tier": "Well-known", "image": null}, {"name": "Yayasan Monash University Indonesia", "city": "Tangerang", "type": "International", "tier": "Well-known", "image": "Yayasan Monash University Indonesia.jpg"}, {"name": "Academy Computer Security Incident Response Team (ACAD CSIRT)", "city": "Jakarta", "type": "National", "tier": "Known", "image": "Academy Computer Security Incident Response Team (ACAD CSIRT).jpg"}, {"name": "Asosiasi Eksportir dan Produsen Handicraft Indonesia (ASEPHI)", "city": "Jakarta", "type": "National", "tier": "Known", "image": "Asosiasi Eksportir dan Produsen Handicraft Indonesia (ASEPHI).jpg"}, {"name": "Bebras Indonesia", "city": "Bandung", "type": "National", "tier": "Known", "image": "Bebras Indonesia.jpg"}, {"name": "Federation Internationale Du Beton Indonesia (FIB)", "city": "Semarang", "type": "International", "tier": "Known", "image": "Federation Internationale Du Beton Indonesia (FIB).png"}, {"name": "Foreign Policy Community of Indonesia (FPCI)", "city": "Jakarta", "type": "National", "tier": "Known", "image": "Foreign Policy Community of Indonesia (FPCI).jpg"}, {"name": "IDP South Jakarta", "city": "Jakarta", "type": "International", "tier": "Known", "image": "IDP South Jakarta.jpg"}, {"name": "Ikatan Akuntan Indonesia (IAI) Jatim", "city": "Surabaya", "type": "National", "tier": "Known", "image": "Ikatan Akuntan Indonesia (IAI) Jatim.png"}, {"name": "Institut Bisnis & Multimedia Asmi", "city": "Jakarta", "type": "Education", "tier": "Known", "image": null}, {"name": "Institut Kesehatan Helvetia", "city": "Medan", "type": "Education", "tier": "Known", "image": null}, {"name": "Institut Pertanian Bogor (IPB)", "city": "Bogor", "type": "Education", "tier": "Known", "image": null}, {"name": "Institut Teknologi dan Bisnis Asia Malang", "city": "Malang", "type": "Education", "tier": "Known", "image": null}, {"name": "Institut Teknologi Nasional Bandung (ITENAS)", "city": "Bandung", "type": "Education", "tier": "Known", "image": null}, {"name": "International Test Center (ITC)", "city": "Jakarta", "type": "International", "tier": "Known", "image": "International Test Center (ITC).png"}, {"name": "Jakarta International University (JIU)", "city": "Jakarta", "type": "Education", "tier": "Known", "image": null}, {"name": "Perkumpulan Project Management Indonesia (PMIIC)", "city": "Jakarta", "type": "National", "tier": "Known", "image": "Perkumpulan Project Management Indonesia (PMIIC).png"}, {"name": "Persatuan Dokter Gigi Indonesia Wilayah Jatim (PDGI)", "city": "Surabaya", "type": "National", "tier": "Known", "image": "Persatuan Dokter Gigi Indonesia Wilayah Jatim (PDGI).jpg"}, {"name": "PT Multi Spunindo Jaya", "city": "Sidoarjo", "type": "National", "tier": "Known", "image": "PT Multi Spunindo Jaya.png"}, {"name": "PT Odoo Software Indonesia", "city": "Tangerang", "type": "International", "tier": "Known", "image": "PT Odoo Software Indonesia.jpg"}, {"name": "PT Semen Imasco Asiatic", "city": "Jember", "type": "National", "tier": "Known", "image": "PT Semen Imasco Asiatic.png"}, {"name": "PT Surabaya Wire", "city": "Gresik", "type": "National", "tier": "Known", "image": "PT Surabaya Wire.png"}, {"name": "PT. Bosch Rexroth", "city": "Jakarta", "type": "International", "tier": "Known", "image": "PT. Bosch Rexroth.png"}, {"name": "PT. PathGen Diagnostik Teknologi", "city": "Jakarta", "type": "National", "tier": "Known", "image": "PT. PathGen Diagnostik Teknologi.png"}, {"name": "PT. Piaget Indonesia", "city": "Jakarta", "type": "International", "tier": "Known", "image": "PT. Piaget Indonesia.png"}, {"name": "PT. Saraswanti Indo Genetech Surabaya (SIG)", "city": "Surabaya", "type": "National", "tier": "Known", "image": "PT. Saraswanti Indo Genetech Surabaya (SIG).png"}, {"name": "PT. Sentra Vidya Utama (Sevima)", "city": "Surabaya", "type": "National", "tier": "Known", "image": "PT. Sentra Vidya Utama (Sevima).jpg"}, {"name": "STIKES Bethesda Yakkum", "city": "Yogyakarta", "type": "Education", "tier": "Known", "image": null}, {"name": "Universitas Abdurachman Saleh Situbondo (UNARS)", "city": "Situbondo", "type": "Education", "tier": "Known", "image": null}, {"name": "Universitas Alma Ata", "city": "Yogyakarta", "type": "Education", "tier": "Known", "image": null}, {"name": "Universitas Almuslim", "city": "Bireuen", "type": "Education", "tier": "Known", "image": null}, {"name": "Universitas Anwar Medika", "city": "Sidoarjo", "type": "Education", "tier": "Known", "image": null}, {"name": "Universitas Baiturrahmah (Fak. Kedokteran Gigi)", "city": "Padang", "type": "Education", "tier": "Known", "image": null}, {"name": "Universitas Dr. Soetomo", "city": "Surabaya", "type": "Education", "tier": "Known", "image": null}, {"name": "Universitas Hamzanwadi", "city": "Lombok", "type": "Education", "tier": "Known", "image": null}, {"name": "Universitas Hang Tuah", "city": "Surabaya", "type": "Education", "tier": "Known", "image": null}, {"name": "Universitas Hayam Wuruk Perbanas", "city": "Surabaya", "type": "Education", "tier": "Known", "image": null}, {"name": "Universitas HKBP Nommensen Medan", "city": "Medan", "type": "Education", "tier": "Known", "image": null}, {"name": "Universitas Islam Darul Ulum Lamongan", "city": "Lamongan", "type": "Education", "tier": "Known", "image": null}, {"name": "Universitas Islam Sultan Agung (Fak. Kedokteran Gigi)", "city": "Semarang", "type": "Education", "tier": "Known", "image": null}, {"name": "Universitas Kadiri (Fak. Kedokteran Gigi)", "city": "Kediri", "type": "Education", "tier": "Known", "image": null}, {"name": "Universitas Kristen Indonesia Maluku (UKIM)", "city": "Ambon", "type": "Education", "tier": "Known", "image": null}, {"name": "Universitas Kristen Indonesia Paulus (UKIP) Makassar", "city": "Makassar", "type": "Education", "tier": "Known", "image": null}, {"name": "Universitas Kristen Papua (UKIP Sorong)", "city": "Sorong", "type": "Education", "tier": "Known", "image": null}, {"name": "Universitas Mahasaraswati (UNMAS)", "city": "Denpasar", "type": "Education", "tier": "Known", "image": null}, {"name": "Universitas Mega Buana Palopo", "city": "Palopo", "type": "Education", "tier": "Known", "image": null}, {"name": "Universitas Merdeka Pasuruan", "city": "Pasuruan", "type": "Education", "tier": "Known", "image": null}, {"name": "Universitas Muhammadiyah Sidoarjo", "city": "Sidoarjo", "type": "Education", "tier": "Known", "image": null}, {"name": "Universitas Muhammadiyah Surakarta (Fak. Teknik)", "city": "Surakarta", "type": "Education", "tier": "Known", "image": null}, {"name": "Universitas Nahdlatul Ulama Surabaya", "city": "Surabaya", "type": "Education", "tier": "Known", "image": null}, {"name": "Universitas Narotama", "city": "Surabaya", "type": "Education", "tier": "Known", "image": null}, {"name": "Universitas Nasional (Fak. Ekonomi dan Bisnis)", "city": "Jakarta", "type": "Education", "tier": "Known", "image": null}, {"name": "Universitas Ottow Geissler Papua", "city": "Jayapura", "type": "Education", "tier": "Known", "image": null}, {"name": "Universitas Pendidikan Ganesha (Undiksha)", "city": "Bali", "type": "Education", "tier": "Known", "image": null}, {"name": "Universitas PGRI Adi Buana Surabaya", "city": "Surabaya", "type": "Education", "tier": "Known", "image": null}, {"name": "Universitas PGRI Kanjuruhan Malang", "city": "Malang", "type": "Education", "tier": "Known", "image": null}, {"name": "Universitas Prima Nusantara Bukittinggi", "city": "Bukittinggi", "type": "Education", "tier": "Known", "image": null}, {"name": "Universitas Prof. Dr. Moestopo (Fak. Kedokteran Gigi)", "city": "Jakarta", "type": "Education", "tier": "Known", "image": null}, {"name": "Universitas Riau Kepulauan (UNRIKA)", "city": "Batam", "type": "Education", "tier": "Known", "image": null}, {"name": "Universitas Syah Kuala (Fak. Kedokteran Gigi)", "city": "Aceh", "type": "Education", "tier": "Known", "image": null}, {"name": "Universitas Triatma Mulya (UNTRIM)", "city": "Bali", "type": "Education", "tier": "Known", "image": null}, {"name": "Universitas Tribhuwana Tunggadewi", "city": "Malang", "type": "Education", "tier": "Known", "image": null}, {"name": "Universitas Widya Kartika (UWIKA)", "city": "Surabaya", "type": "Education", "tier": "Known", "image": null}, {"name": "Universitas Widyatama", "city": "Bandung", "type": "Education", "tier": "Known", "image": null}, {"name": "Universitas Yarsi (Fak. Kedokteran Gigi)", "city": "Jakarta", "type": "Education", "tier": "Known", "image": null}, {"name": "Asosiasi Dosen Pengabdian Kepada Masyarakat Indonesia", "city": "Padang", "type": "National", "tier": "Regional", "image": "Asosiasi Dosen Pengabdian Kepada Masyarakat Indonesia.png"}, {"name": "Badan Arsip dan Perpustakaan Kota Surabaya", "city": "Surabaya", "type": "Government", "tier": "Regional", "image": "Badan Arsip dan Perpustakaan Kota Surabaya.jpg"}, {"name": "Badan Musyawarah Antar Gereja (BAMAG) Kota Surabaya", "city": "Surabaya", "type": "National", "tier": "Regional", "image": "Badan Musyawarah Antar Gereja (BAMAG) Kota Surabaya.jpg"}, {"name": "BPK PENABUR Bandung", "city": "Bandung", "type": "National", "tier": "Regional", "image": null}, {"name": "Forum Perpustakaan PT Indonesia (FPPTI) Jawa Tengah", "city": "Yogyakarta", "type": "National", "tier": "Regional", "image": null}, {"name": "Ikatan Citra Alumni Taiwan Indonesia (ICATI) Jatim", "city": "Surabaya", "type": "National", "tier": "Regional", "image": null}, {"name": "Junior Chamber International (JCI) East Java", "city": "Surabaya", "type": "International", "tier": "Regional", "image": null}, {"name": "PB Taxand", "city": "Surabaya", "type": "National", "tier": "Regional", "image": null}, {"name": "Pemerintah Desa Jarak Kec. Wonosalam Kab. Jombang", "city": "Jombang", "type": "Government", "tier": "Regional", "image": "Pemerintah Desa Jarak Kec. Wonosalam Kab. Jombang.png"}, {"name": "Pemerintah Desa Mojotrisno", "city": "Jombang", "type": "Government", "tier": "Regional", "image": "Pemerintah Desa Mojotrisno.jpg"}, {"name": "Pemerintah Kabupaten Sumba Barat Daya", "city": "NTT", "type": "Government", "tier": "Regional", "image": "Pemerintah Kabupaten Sumba Barat Daya.jpg"}, {"name": "Pemerintah Kabupaten Sumba Timur", "city": "NTT", "type": "Government", "tier": "Regional", "image": null}, {"name": "Pemerintahan Kabupaten Kaimana", "city": "Papua", "type": "Government", "tier": "Regional", "image": "Pemerintahan Kabupaten Kaimana.png"}, {"name": "Perserikatan Kurator dan Pengurus Indonesia (PKPI)", "city": "Surabaya", "type": "National", "tier": "Regional", "image": null}, {"name": "PT Centurion Perkasa Iman (Hotel Royal Tulip)", "city": "Surabaya", "type": "National", "tier": "Regional", "image": null}, {"name": "PT. Puri Padma Management (Padma Hotels)", "city": "Surabaya", "type": "National", "tier": "Regional", "image": null}, {"name": "RS Bhayangkara HS. Samsoeri Mertojoso", "city": "Surabaya", "type": "Government", "tier": "Regional", "image": "RS Bhayangkara HS. Samsoeri Mertojoso.png"}, {"name": "RS Bhayangkara Pusdik Sabhara Porong", "city": "Sidoarjo", "type": "Government", "tier": "Regional", "image": "RS Bhayangkara Pusdik Sabhara Porong.png"}, {"name": "RSUD Bhakti Dharma Husada", "city": "Surabaya", "type": "Government", "tier": "Regional", "image": "RSUD Bhakti Dharma Husada.jpg"}, {"name": "RSUD dr. Mohamad Soewandhie", "city": "Surabaya", "type": "Government", "tier": "Regional", "image": "RSUD dr. Mohamad Soewandhie.jpg"}, {"name": "RSUD Haji Provinsi Jawa Timur", "city": "Surabaya", "type": "Government", "tier": "Regional", "image": "RSUD Haji Provinsi Jawa Timur.jpg"}, {"name": "Rumah Sakit Jiwa Menur (RSJ Menur)", "city": "Surabaya", "type": "Government", "tier": "Regional", "image": "Rumah Sakit Jiwa Menur (RSJ Menur).png"}, {"name": "Sekolah Tinggi Ilmu Ekonomi (STIE) Malangkucecwara", "city": "Malang", "type": "Education", "tier": "Regional", "image": null}, {"name": "STISIP Widuri", "city": "Jakarta", "type": "Education", "tier": "Regional", "image": null}, {"name": "STITEK Dharma Yadi Makassar", "city": "Makassar", "type": "Education", "tier": "Regional", "image": null}, {"name": "STMIK Widuri", "city": "Jakarta", "type": "Education", "tier": "Regional", "image": null}, {"name": "Universitas Baiturahman (Fak. Kedokteran Gigi)", "city": "Padang", "type": "Education", "tier": "Regional", "image": null}, {"name": "Universitas Sains Dan Teknologi Komputer (STEKOM)", "city": "Semarang", "type": "Education", "tier": "Regional", "image": null}, {"name": "Universitas Syah Kuala (Fak. Kedokteran Gigi)", "city": "Aceh", "type": "Education", "tier": "Regional", "image": null}, {"name": "Wisma Jerman", "city": "Surabaya", "type": "International", "tier": "Regional", "image": "Wisma Jerman.jpg"}, {"name": "Artax", "city": "Surabaya", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "Business Number Consulting (BNC)", "city": "Surabaya", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "Chung Chung Christian School", "city": "Surabaya", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "CV Agatha Management (AM Models)", "city": "Surabaya", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "CV C PLUS C Desain Komunikasi (C+C&Co)", "city": "Surabaya", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "CV Zentax Consulting", "city": "Surabaya", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "CV. Jalan Cerita Kesuksesan (JCK Enterprise)", "city": "Surabaya", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "CV. Mycon Indonesia", "city": "Surabaya", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "Elyon Christian School", "city": "Surabaya", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "GENARTA Collection", "city": "Surabaya", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "Gereja Kristen Jawi Wetan (GKJW)", "city": "Malang", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "Gereja Kristen Kalam Kudus (GKKK) Nanga Pinoh", "city": "Melawi", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "Gereja Sidang Jemaat Allah Eben Haezer (GSJA)", "city": "Surabaya", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "GII Commerce", "city": "Surabaya", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "Handyman Smart Home", "city": "Surabaya", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "Indonesia Cyber Education Institute (ICE Institute)", "city": "Tangerang", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "Indonesian Fashion Chamber", "city": "Jakarta", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "Komunitas Surabaya Tempo Dulu", "city": "Surabaya", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "Kumpulan Alumni Teknik Sipil 1979", "city": "Surabaya", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "Lembaga Alkitab Indonesia (LAI)", "city": "Jakarta", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "Lembaga Konseling Keluarga Kreatif (LK3)", "city": "Tangerang", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "M.E. Social Media Management", "city": "Surabaya", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "Mari Works", "city": "Jakarta", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "MMA Center", "city": "Jakarta", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "Nuadu", "city": "Jakarta", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "Ob Anggen School", "city": "Papua", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "Ozora Yatrapaktaja", "city": "Surabaya", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "Perhimpunan INDONESIA TIONGHOA Jawa Timur (INTI)", "city": "Surabaya", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "Perkumpulan HWIE TIAUW KA SURABAYA", "city": "Surabaya", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "Poshana", "city": "Jakarta", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "PPPK Petra Surabaya", "city": "Surabaya", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "PT Agro Mitra Alimentare (AMA)", "city": "Malang", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "PT Aruna Veda Kreasi", "city": "Jakarta", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "PT Asia Bina Parama (English 1 Swara Group)", "city": "Tangerang", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "PT Asuransi Mega Pratama", "city": "Surabaya", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "PT Ayena Mandiri Sinema (Ayena Studio)", "city": "Jakarta", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "PT Bakels Indonesia", "city": "Jakarta", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "PT Berca Hardayaperkasa", "city": "Jakarta", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "PT Berpikir Revolusioner Indonesia (Narasio)", "city": "Surabaya", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "PT Biochem Technology", "city": "Surabaya", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "PT Bukit Vista Nusantara", "city": "Bali", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "PT Creosis International", "city": "Jakarta", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "PT Cross Network Indonesia", "city": "Surabaya", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "PT Deus Digital Tranformasi Universal", "city": "Surabaya", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "PT Dinamika Manajemen Investama (Duo Dinamika)", "city": "Surabaya", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "PT Dora Bisnis Konsultindo", "city": "Jakarta", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "PT Dunia Bayar Indonesia (AiYO)", "city": "Tangerang", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "PT Elefante Infradiji Solusi", "city": "Surabaya", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "PT ePac Flexibles Indonesia", "city": "Tangerang", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "PT Graha Inti Jaya", "city": "Jakarta", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "PT Gree Electric Appliances Indonesia", "city": "Jakarta", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "PT Hatsonsurya Electric (Hartono)", "city": "Surabaya", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "PT Havanna Teguh Sadana", "city": "Surabaya", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "PT IDNFT Menuju Bulan", "city": "Tangerang", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "PT Indo Ceria Plastik dan Printing", "city": "Sidoarjo", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "PT Industrial Robotic Automation (IRA)", "city": "Surabaya", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "PT Insan Sejahtera Engineering", "city": "Sidoarjo", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "PT Intidaya Dinamika Sejati", "city": "Surabaya", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "PT Kawan Main Bersama (Tabletoys Indonesia)", "city": "Surabaya", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "PT Kuncie Pintar Nusantara", "city": "Jakarta", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "PT Lanius", "city": "Surabaya", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "PT Layo Seng Fong", "city": "Jombang", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "PT Lentera Edukasi Global (LEG)", "city": "Surabaya", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "PT Lingkar Indonesia Unggul (ISCEA Indonesia)", "city": "Surabaya", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "PT Mahaghora", "city": "Surabaya", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "PT Mentari Mas Multimoda", "city": "Surabaya", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "PT Mitra Akademi Perkasa", "city": "Jakarta", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "PT Mitra Akselerasi Bersama (MAB Consulting)", "city": "Surabaya", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "PT Murni Solusindo Nusantara", "city": "Jakarta", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "PT Nusatama Properta Panbil", "city": "Batam", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "PT Pasagung Anthrakia Semesta", "city": "Surabaya", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "PT Perkumpulan Prakarsa Jaringan Cerdas Indonesia (PJCI)", "city": "Jakarta", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "PT Populix Informasi Teknologi", "city": "Jakarta", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "PT Purindo Solusi Prosper (DPO&Co)", "city": "Jakarta", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "PT Samaya Multikarya Sentosa", "city": "Surabaya", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "PT Surya Multi Cemerlang", "city": "Sidoarjo", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "PT Surya Sarana Dinamika (SSD)", "city": "Jakarta", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "PT Surya Sukses Abadi Prima", "city": "—", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "PT Tancorp Abadi Nusantara", "city": "Sidoarjo", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "PT Taranium Rantai Blok Indonesia", "city": "Jakarta", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "PT Tiga Dinamika Solusi Indonesia (3DS)", "city": "Surabaya", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "PT Tribelio Digital Global", "city": "Jakarta", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "PT ValuePlus Indoraya", "city": "Jakarta", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "PT Visiniaga Mitra Kreasindo", "city": "Surabaya", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "PT Wahana Kemalaniaga Makmur (WAKENI)", "city": "Jakarta", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "PT Yayasan Sosial Kristen Salib Putih", "city": "Salatiga", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "PT. Berawal Dari Media (Socioworks)", "city": "Surabaya", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "PT. Bintang Sempurna", "city": "Jakarta", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "PT. Bosch Rexroth", "city": "Jakarta", "type": "Regional / local", "tier": "Local", "image": "PT. Bosch Rexroth.png"}, {"name": "PT. Ceria Belajar Edukasi Indonesia (Wondermind)", "city": "Jakarta", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "PT. Damai Sejagtera Abadi Tbk (UFOE)", "city": "Surabaya", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "PT. Fuboru Indonesia", "city": "Sidoarjo", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "PT. Global Industri Teknologi Solusi (GITS)", "city": "Surabaya", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "PT. Himalaya Sinar Abadi", "city": "Jakarta", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "PT. Kresna Karya Teknologi", "city": "Surabaya", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "PT. Mataram Paint", "city": "Sidoarjo", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "PT. Mikatasa Agung", "city": "Surabaya", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "PT. Riliv Psikologi Indonesia", "city": "Sidoarjo", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "PT. Satoria Agro Industri", "city": "Pasuruan", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "PT. Silverstream Indonesia Sehat", "city": "Jakarta", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "PT. Sinko Prima Alloy", "city": "Surabaya", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "PT. Sosial Berkat Kreatif Indonesia (Social Bread)", "city": "Tangerang", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "PT. SRC Indonesia Sembilan", "city": "Jakarta", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "PT. Suparma Tbk", "city": "Surabaya", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "PT. Tata Rapika Globalindo", "city": "Sidoarjo", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "PT. Wiralab Analitika Solusindo", "city": "Jakarta", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "Revolt Industry", "city": "Surabaya", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "Riza & Yenny Family", "city": "Australia", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "Rumah Sakit William Booth", "city": "Surabaya", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "SD Negeri Siwalankerto II/419", "city": "Surabaya", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "Sekolah Betzata", "city": "Minahasa", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "Sekolah Buin Batu", "city": "NTB", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "Sekolah Dasar Kristen Anugerah", "city": "Jakarta", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "Sekolah Kristen Anak Bangsa", "city": "Surabaya", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "Sekolah Kristen Kalam Kudus (SKKK) Pematang Siantar", "city": "Pematang Siantar", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "Sekolah Luar Biasa (SLB) Siswa Budhi", "city": "Surabaya", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "Sekolah Teologi Kristen Pelangi Kristus", "city": "Surabaya", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "Sekolah Tinggi Teologi (STT) Amadeus", "city": "Surabaya", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "Sekolah Tinggi Teologi (STT) Tawangmangu", "city": "Karanganyar", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "Sekolah Tinggi Teologi (STT) Torsina", "city": "Karanganyar", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "Sekolah Tinggi Teologi Reformed Indonesia (STTRI)", "city": "Jakarta", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "Sending WEC Indonesia", "city": "Sidoarjo", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "SMALB Siswa Budhi", "city": "Surabaya", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "SMP Negeri 57 Surabaya", "city": "Surabaya", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "SMPLB-A YPAB Surabaya", "city": "Surabaya", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "Surya Megah Expertindo", "city": "Surabaya", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "Tanda Seru", "city": "Jakarta", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "Universitas Pradita", "city": "Jakarta", "type": "Education", "tier": "Local", "image": null}, {"name": "Visualcast Designology (CV Signum Prospera)", "city": "Surabaya", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "Vooya", "city": "Jakarta", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "Yayasan Atedia Sumber Damai", "city": "Surabaya", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "Yayasan Bersatu Membangun Bangsa", "city": "Pontianak", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "Yayasan Caraka Mulia", "city": "Surabaya", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "Yayasan Cinta Baca", "city": "Bogor", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "Yayasan Eben Haezar", "city": "Manado", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "Yayasan Edukasi Inti Pratama (IDS College)", "city": "Jakarta", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "Yayasan Exodus (REC)", "city": "Surabaya", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "Yayasan Habitat Kemanusiaan Indonesia (YHKI)", "city": "Jakarta", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "Yayasan Haggai Indonesia", "city": "Jakarta", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "Yayasan Harapan Cerah", "city": "Jakarta", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "Yayasan Indonesia Sejahtera Barokah (YISB)", "city": "Surabaya", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "Yayasan K-Pact Nusantara", "city": "Kupang", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "Yayasan Kalam Kudus Indonesia (YKKI) Ambon", "city": "Ambon", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "Yayasan Kalam Kudus Indonesia (YKKI) Medan", "city": "Medan", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "Yayasan Mawar Sharon Peduli", "city": "Surabaya", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "Yayasan Medicom Charity", "city": "Malang", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "Yayasan Monash University Indonesia", "city": "Tangerang", "type": "International", "tier": "Local", "image": "Yayasan Monash University Indonesia.jpg"}, {"name": "Yayasan Pakta Peduli Indonesia", "city": "Surabaya", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "Yayasan Pendidikan Kristen (YPK) Jawa Timur", "city": "Malang", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "Yayasan Pendidikan Kristen Gloria", "city": "Surabaya", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "Yayasan Pendidikan Kristen Sunodia", "city": "Samarinda", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "Yayasan Reformasi Injili Millennium", "city": "Jakarta", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "Yong Chun Chinese Language Center", "city": "Surabaya", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "Perkumpulan Talenta Karya Sentosa", "city": "Surabaya", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "PT Biochem Technology", "city": "Surabaya", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "PT Elefante Infradiji Solusi", "city": "Surabaya", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "PT Starr Panel Industri", "city": "Pasuruan", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "PT Wahana Kosmetika Indonesia", "city": "Sidoarjo", "type": "Regional / local", "tier": "Local", "image": null}, {"name": "PT. Kosmetika Global Indonesia", "city": "Surabaya", "type": "Regional / local", "tier": "Local", "image": "PT. Kosmetika Global Indonesia.svg"}, {"name": "Sekolah Tinggi Informatika & Komputer Indonesia (STIKI)", "city": "Malang", "type": "Education", "tier": "Local", "image": null}, {"name": "Universitas Katolik Indonesia Santu Paulus Ruteng", "city": "NTT", "type": "Education", "tier": "Local", "image": null}];
+
+function toggleDomesticBox(boxId) {
+  if (boxId === 'cities' || boxId === 'type') {
+    openDomesticModal(boxId);
+    return;
+  }
+  const box = document.getElementById('dp-total-box');
+  if (box) {
+    const wasHidden = box.classList.contains('hidden');
+    box.classList.toggle('hidden');
+    if (wasHidden) loadDomesticLogos();
+  }
+}
+
+const domesticLogoFiles = [
+  "PT Multi Spunindo Jaya.png","IDP South Jakarta.jpg","Four Points By Sheraton Surabaya.jpg",
+  "Pemerintah Kabupaten Sumba Timur logo.jpg","Pemerintah Desa Jarak Kec. Wonosalam Kab. Jombang.png",
+  "PT Surabaya Wire.png","Federation Internationale Du Beton Indonesia (FIB).png",
+  "Badan Pengembangan SDM Industri Kemenperin (PIDI).png","PT. Mitra Pinasthika Mulia (MPM).jpg",
+  "Sheraton Surabaya Hotel.png","Asosiasi Dosen Pengabdian Kepada Masyarakat Indonesia.png",
+  "Perkumpulan Project Management Indonesia (PMIIC).png","PT Tokopedia.png",
+  "PT Astra Sedaya Finance.png","Badan Musyawarah Antar Gereja (BAMAG) Kota Surabaya.jpg",
+  "PT Sinarmas Sekuritas.png","Komisi Nasional Disabilitas Republik Indonesia.png",
+  "PT. Bosch Rexroth.png","PT Bank Pembangunan Daerah Jawa Timur Tbk (Bank Jatim).jpg",
+  "RS Bhayangkara HS. Samsoeri Mertojoso.png","PT. Semen Indonesia (Persero) Tbk..svg",
+  "PT. PathGen Diagnostik Teknologi.png","Foreign Policy Community of Indonesia (FPCI).jpg",
+  "Academy Computer Security Incident Response Team (ACAD CSIRT).jpg",
+  "RS Bhayangkara Pusdik Sabhara Porong.png","Sekretariat Jenderal Kementerian Sosial.png",
+  "PT Ishizuka Maspion Indonesia (Maspion Group).png","PT. Sentra Vidya Utama (Sevima).jpg",
+  "PT Semen Imasco Asiatic.png","Maspion Group.jpg","Bebras Indonesia.jpg",
+  "Yayasan Monash University Indonesia.jpg","Pemerintahan Kabupaten Kaimana.png",
+  "Mayapada Hospital.png","PT Martina Berto Tbk (Marta Tilaar).png",
+  "Tentara Nasional Indonesia AL (STTAL).png","PT. Wahana Kosmetika Indonesia.png",
+  "PT Rekso Nasional Food (McDonald_s).png","PT Erajaya Swasembada Tbk.svg",
+  "PT Rembaka (La Tulipe).png","Kementrian Pendayagunaan Aparatur Negara dan RB.png",
+  "Badan Arsip dan Perpustakaan Kota Surabaya.jpg","German Academic Exchange Service (DAAD) Indonesia.png",
+  "Indoprima Group.jpg","International Test Center (ITC).png",
+  "Pemerintah Kabupaten Sumba Barat Daya.jpg","Wisma Jerman.jpg","Samator Group.jpg",
+  "JW Marriott Hotel Surabaya.svg","Hotel Double Tree by Hilton Surabaya.png","ICAEW Indonesia.png",
+  "PT Odoo Software Indonesia.jpg","PT. Piaget Indonesia.png","Pemerintah Desa Mojotrisno.jpg",
+  "Persatuan Dokter Gigi Indonesia Wilayah Jatim (PDGI).jpg",
+  "PT. Charoen Popkphand Indonesia Tbk - Jawa Timur.png",
+  "Asosiasi Eksportir dan Produsen Handicraft Indonesia (ASEPHI).jpg",
+  "RSUD Haji Provinsi Jawa Timur.jpg","RSUD dr. Mohamad Soewandhie.jpg",
+  "Rumah Sakit Jiwa Menur (RSJ Menur).png","PT. Graha Alam Lestari (The Apurva Kempinski Bali).png",
+  "PT. Transforma Oto Prima (Mercedes-Benz).jpg","PT Grant Thornton Indonesia.jpg",
+  "PT GoTo Gojek Tokopedia Tbk.svg","PT Global Digital Niaga (Blibli).jpg",
+  "PT. Kosmetika Global Indonesia.svg","PT. Saraswanti Indo Genetech Surabaya (SIG).png",
+  "Ikatan Akuntan Indonesia (IAI) Jatim.png","RSM Indonesia.png",
+  "RSUD Bhakti Dharma Husada.jpg","Wings Group Surabaya.png"
+];
+
+function loadDomesticLogos() {
+  const container = document.getElementById('dp-logos-grid');
+  if (!container || container.children.length > 0) return;
+  const makeItem = (file) => {
+    const name = file.replace(/\.[^.]+$/, '');
+    const src = 'Assets/Images/Industries/' + encodeURIComponent(file);
+    return '<div class="flex flex-col items-center gap-2 flex-shrink-0" style="width:80px;">' +
+      '<div class="w-16 h-16 rounded-full bg-white border-2 border-gray-100 shadow-md flex items-center justify-center overflow-hidden hover:shadow-lg hover:border-pcu-blue/30 transition" style="flex-shrink:0;">' +
+      '<img src="' + src + '" alt="' + name.replace(/"/g, '&quot;') + '" class="max-h-12 max-w-full object-contain p-1" loading="lazy">' +
+      '</div>' +
+    '</div>';
+  };
+  const items = [...domesticLogoFiles, ...domesticLogoFiles];
+  container.innerHTML = items.map(makeItem).join('');
+}
+
+function openDomesticModal(view) {
+  const modal = document.getElementById('dp-modal');
+  if (!modal) return;
+  modal.style.display = 'flex';
+  document.getElementById('app').style.overflow = 'hidden';
+  renderDomesticModalContent(view);
+}
+
+function closeDomesticModal() {
+  const modal = document.getElementById('dp-modal');
+  if (modal) modal.style.display = 'none';
+  document.getElementById('app').style.overflow = '';
+}
+
+window._dpView = null;
+
+function renderDomesticModalContent(view, selected) {
+  window._dpView = view;
+  const modalBody = document.getElementById('dp-modal-body');
+  if (!modalBody) return;
+
+  const typeIcons = { 'Education': 'graduation-cap', 'Government': 'landmark', 'International': 'globe', 'National': 'flag', 'Regional / local': 'map-pin' };
+  const typeColors = { 'Education': 'bg-blue-50 text-blue-600', 'Government': 'bg-purple-50 text-purple-600', 'International': 'bg-teal-50 text-teal-600', 'National': 'bg-orange-50 text-orange-600', 'Regional / local': 'bg-green-50 text-green-600' };
+
+  if (view === 'cities') {
+    if (selected !== undefined) {
+      const pts = domesticPartners.filter(p => p.city === selected);
+      modalBody.innerHTML = '<div class="flex items-center gap-3 mb-6">' +
+        '<button onclick="renderDomesticModalContent(\'cities\')" class="p-2 rounded-lg hover:bg-gray-100 transition flex-shrink-0"><i data-lucide="arrow-left" class="w-5 h-5 text-gray-600"></i></button>' +
+        '<div><h3 class="font-display text-xl font-bold text-pcu-blue">' + selected + '</h3>' +
+        '<p class="text-gray-500 text-sm">' + pts.length + ' partner' + (pts.length !== 1 ? 's' : '') + '</p></div>' +
+        '</div>' +
+        '<div class="space-y-2">' +
+        pts.map((p, i) =>
+          '<div class="flex items-center gap-3 p-3 bg-gray-50 rounded-xl">' +
+          '<span class="text-xs font-bold text-gray-400 w-6 text-right flex-shrink-0">' + (i+1) + '</span>' +
+          '<span class="font-medium text-gray-800 text-sm flex-1">' + p.name + '</span>' +
+          '<span class="ml-auto px-2 py-0.5 text-xs rounded-full bg-pcu-blue/10 text-pcu-blue flex-shrink-0">' + p.type + '</span>' +
+          '</div>'
+        ).join('') +
+        '</div>';
+    } else {
+      const counts = {};
+      domesticPartners.forEach(p => { counts[p.city] = (counts[p.city] || 0) + 1; });
+      const cities = Object.keys(counts).sort((a, b) => counts[b] - counts[a]);
+      modalBody.innerHTML = '<h3 class="font-display text-xl font-bold text-pcu-blue mb-5">Partner Cities</h3>' +
+        '<div class="grid grid-cols-2 md:grid-cols-3 gap-3" id="dp-cities-grid"></div>';
+      const grid = modalBody.querySelector('#dp-cities-grid');
+      cities.forEach(city => {
+        const btn = document.createElement('button');
+        btn.className = 'flex items-center justify-between p-4 bg-gray-50 rounded-xl hover:bg-pcu-blue hover:text-white transition text-left group';
+        btn.innerHTML = '<span class="font-semibold text-sm text-gray-700 group-hover:text-white truncate pr-2">' + city + '</span>' +
+          '<span class="text-xs font-bold text-gray-400 group-hover:text-white/80 flex-shrink-0">' + counts[city] + '</span>';
+        btn.addEventListener('click', () => renderDomesticModalContent('cities', city));
+        grid.appendChild(btn);
+      });
+    }
+  } else {
+    if (selected !== undefined) {
+      const pts = domesticPartners.filter(p => p.type === selected);
+      modalBody.innerHTML = '<div class="flex items-center gap-3 mb-6">' +
+        '<button onclick="renderDomesticModalContent(\'type\')" class="p-2 rounded-lg hover:bg-gray-100 transition flex-shrink-0"><i data-lucide="arrow-left" class="w-5 h-5 text-gray-600"></i></button>' +
+        '<div><h3 class="font-display text-xl font-bold text-pcu-blue">' + selected + '</h3>' +
+        '<p class="text-gray-500 text-sm">' + pts.length + ' partner' + (pts.length !== 1 ? 's' : '') + '</p></div>' +
+        '</div>' +
+        '<div class="space-y-2">' +
+        pts.map((p, i) =>
+          '<div class="flex items-center gap-3 p-3 bg-gray-50 rounded-xl">' +
+          '<span class="text-xs font-bold text-gray-400 w-6 text-right flex-shrink-0">' + (i+1) + '</span>' +
+          '<span class="font-medium text-gray-800 text-sm flex-1">' + p.name + '</span>' +
+          '<span class="ml-auto px-2 py-0.5 text-xs rounded-full bg-gray-100 text-gray-500 flex-shrink-0">' + p.city + '</span>' +
+          '</div>'
+        ).join('') +
+        '</div>';
+    } else {
+      const counts = {};
+      domesticPartners.forEach(p => { counts[p.type] = (counts[p.type] || 0) + 1; });
+      const types = Object.keys(counts).sort();
+      modalBody.innerHTML = '<h3 class="font-display text-xl font-bold text-pcu-blue mb-5">Partner Types</h3>' +
+        '<div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="dp-types-grid"></div>';
+      const grid = modalBody.querySelector('#dp-types-grid');
+      types.forEach(type => {
+        const btn = document.createElement('button');
+        btn.className = 'flex items-center gap-4 p-5 bg-gray-50 rounded-2xl hover:bg-pcu-blue hover:text-white transition text-left group';
+        const colorClass = typeColors[type] || 'bg-gray-100 text-gray-500';
+        const iconName = typeIcons[type] || 'building';
+        btn.innerHTML = '<div class="w-10 h-10 rounded-xl ' + colorClass + ' flex items-center justify-center flex-shrink-0 group-hover:bg-white/20"><i data-lucide="' + iconName + '" class="w-5 h-5"></i></div>' +
+          '<div><p class="font-semibold text-gray-800 group-hover:text-white">' + type + '</p>' +
+          '<p class="text-sm text-gray-400 group-hover:text-white/70">' + counts[type] + ' partners</p></div>';
+        btn.addEventListener('click', () => renderDomesticModalContent('type', type));
+        grid.appendChild(btn);
+      });
+    }
+  }
+  lucide.createIcons();
+}
+
 
 // ---- INTERNSHIP DATA ----
 const industryPartners = [

@@ -9,14 +9,27 @@ A single-page application (SPA) for the PCU International Office, showcasing inb
 ```
 ├── index.html          # Main HTML file — all pages are rendered as sections inside here
 ├── CSS/
-│   └── styles.css      # Custom styles, animations, and PCU brand variables
+│   └── styles.css      # Custom styles, animations, page color themes, and PCU brand variables
 ├── JS/
-│   └── main.js         # Navigation logic, dynamic rendering, and SDK integration
+│   └── main.js         # Navigation, dynamic rendering, partnership modals, and SDK integration
 ├── Assets/
-│   └── Graphics/
-│       ├── logo-UKP.svg
-│       └── Petra Graphic Asset/
-│           └── *.svg   # Decorative background illustrations
+│   ├── Graphics/
+│   │   ├── logo-UKP.svg
+│   │   └── Petra Graphic Asset/
+│   │       └── *.svg               # Decorative background illustrations
+│   └── Images/
+│       ├── Accreditation/          # Accreditation certificate images
+│       ├── Facilities/             # Campus facility photos
+│       ├── Faculty/                # Faculty photos
+│       ├── Flag/                   # Country flag images
+│       ├── Foto Rektorat/          # Rector office photos
+│       ├── Gedung Petra/           # PCU building photos
+│       ├── ICOP/                   # ICOP program photos
+│       ├── Industries/             # Industry partner logos (~71 logos)
+│       ├── Logo/                   # International partner university logos, organized by country
+│       ├── Partnership/            # Partnership event photos
+│       ├── Student Exchange/       # Student exchange program photos
+│       └── Thumbnails/             # Thumbnail images
 ├── fix_news.py         # One-time dev utility — see note below (safe to ignore)
 ├── .gitignore
 └── README.md
@@ -72,7 +85,7 @@ Navigation is handled client-side via `navigateTo(pageId)`. The following pages 
 - `preparation-arrival` — Arrival guide for incoming students *(placeholder — content pending)*
 - `visa-immigration` — Visa and immigration information *(placeholder — content pending)*
 
-> **Note for IT team:** Pages marked as *placeholder* are incomplete and should not be linked from any public-facing navigation until content is finalized.
+> **Note for IT team:** The three Life at PCU pages marked as *placeholder* are incomplete and should not be linked from any public-facing navigation until content is finalized.
 
 ---
 
@@ -83,6 +96,11 @@ Navigation is handled client-side via `navigateTo(pageId)`. The following pages 
 - **Animated Stat Counters** — Numbers count up when scrolled into view
 - **Flip Cards** — Hover-to-flip program cards (CSS 3D transforms)
 - **Program Type Selector** — Animated slide-in/out transitions for Joint vs Double Degree content
+- **International Partnership Modal** — Drill-down modal: continent → country → individual partner details, populated from `intlLogoFiles` in `main.js`
+- **International Partner Logo Carousel** — Auto-scrolling marquee of partner university logos on the International Partnership page
+- **Domestic Partnership Modal** — Institution detail modal with categorized partner cards and toggleable sections
+- **Domestic Partner Logo Carousel** — Auto-scrolling marquee of domestic partner logos (pauses on hover)
+- **Page Color Theming** — Each section group applies its own accent color via CSS overrides: Inbound (Sky), Outbound (Orange), Partnership (Purple), Life at PCU (Green), About (Navy)
 - **Partner Maps** — Interactive partner university maps with tooltips and popups
 - **News Carousel** — Dynamically rendered news card carousel
 - **Mobile Menu** — Slide-in drawer navigation for small screens
@@ -134,7 +152,7 @@ This is a fully static site — no server-side processing is required. To deploy
 1. Copy the entire repository folder to your web server's public directory (e.g. `/var/www/html/international-office/`).
 2. Ensure the web server (Apache/Nginx) serves `index.html` as the default document.
 3. No `.htaccess` rewrite rules are needed — all navigation is handled client-side via JavaScript.
-4. Verify that the `Assets/` folder and all subfolders are accessible. The folder `Assets/Graphics/Petra Graphic Asset/` contains spaces in its name — confirm your server handles this correctly, or rename the folder and update the references in `index.html` and `styles.css` if needed.
+4. Verify that the `Assets/` folder and all subfolders are accessible. Several folder names contain spaces (`Assets/Graphics/Petra Graphic Asset/`, `Assets/Images/Foto Rektorat/`, etc.) — confirm your server handles these correctly, or rename them and update all references in `index.html`, `styles.css`, and `main.js`.
 
 ---
 
@@ -146,8 +164,11 @@ Several news article pages (`page-news-1` through `page-news-6`) load hero image
 **CDN dependencies**
 The site requires an internet connection to load Tailwind CSS, Lucide Icons, and Google Fonts. If the site needs to work in an offline or intranet environment, these assets must be downloaded and self-hosted.
 
-**`.DS_Store` file**
-A `.DS_Store` file (a macOS system file) was committed to the repository. It is harmless and can be safely deleted. To prevent this in the future, ensure `.DS_Store` is listed in `.gitignore`.
+**Partner logo paths**
+International partner logos are referenced as relative paths inside `intlLogoFiles` in `main.js`, resolved under `Assets/Images/Logo/<Country>/`. If logos are added, renamed, or reorganized, that array must be updated to match.
+
+**`Assets/Images/` folder size**
+The `Assets/Images/` directory contains a large number of images (logos, facilities, faculty, etc.). Ensure your web server is configured to serve these files efficiently, and verify that folder names with spaces (e.g. `Foto Rektorat/`, `Petra Graphic Asset/`) are handled correctly by your server or deployment pipeline.
 
 ---
 
@@ -183,4 +204,4 @@ Social media: [Instagram](https://www.instagram.com/joshuazefanya_) · [LinkedIn
 
 ---
 
-© 2025 Zefanya Kharisma Nugroho — Petra Christian University. All rights reserved.
+© 2025–2026 Zefanya Kharisma Nugroho — Petra Christian University. All rights reserved.

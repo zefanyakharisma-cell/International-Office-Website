@@ -266,3 +266,303 @@ html { scroll-behavior: smooth; }
 
 
 body { box-sizing: border-box; }
+
+/* Domestic partnership logo carousel */
+@keyframes dp-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.dp-carousel-wrapper {
+  overflow: hidden;
+  position: relative;
+  mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+}
+
+.dp-carousel-track {
+  display: flex;
+  gap: 20px;
+  width: max-content;
+  animation: dp-scroll 90s linear infinite;
+}
+
+.dp-carousel-track:hover {
+  animation-play-state: paused;
+}
+
+/* ==============================================
+   PAGE COLOR THEMES — Cards, Boxes & Accents
+   Sky #30aeb4 | Orange #fa6632 | Purple #8d4bb1
+   Green #52ac2d | Navy #1d446e
+   ============================================== */
+
+/* ---- LIFE AT PCU: GREEN ---- */
+#page-how-to-get .bg-pcu-light,
+#page-accommodation .bg-pcu-light,
+#page-preparation-arrival .bg-pcu-light,
+#page-visa-immigration .bg-pcu-light,
+#page-how-to-get .bg-pcu-light\/50,
+#page-preparation-arrival .bg-pcu-light\/50,
+#page-visa-immigration .bg-pcu-light\/50 {
+  background-color: rgba(82, 172, 45, 0.1) !important;
+}
+#page-how-to-get .bg-pcu-blue\/10,
+#page-accommodation .bg-pcu-blue\/10,
+#page-preparation-arrival .bg-pcu-blue\/10,
+#page-visa-immigration .bg-pcu-blue\/10 {
+  background-color: rgba(82, 172, 45, 0.1) !important;
+}
+#page-how-to-get .text-pcu-blue,
+#page-accommodation .text-pcu-blue,
+#page-preparation-arrival .text-pcu-blue,
+#page-visa-immigration .text-pcu-blue {
+  color: #52ac2d !important;
+}
+#page-how-to-get .text-pcu-sky,
+#page-accommodation .text-pcu-sky,
+#page-preparation-arrival .text-pcu-sky,
+#page-visa-immigration .text-pcu-sky {
+  color: #52ac2d !important;
+}
+#page-how-to-get .border-pcu-blue,
+#page-accommodation .border-pcu-blue,
+#page-preparation-arrival .border-pcu-blue,
+#page-visa-immigration .border-pcu-blue {
+  border-color: #52ac2d !important;
+}
+#page-how-to-get .border-pcu-blue\/10,
+#page-accommodation .border-pcu-blue\/10,
+#page-preparation-arrival .border-pcu-blue\/10,
+#page-visa-immigration .border-pcu-blue\/10 {
+  border-color: rgba(82, 172, 45, 0.2) !important;
+}
+#page-how-to-get .rounded-3xl.border.border-gray-100,
+#page-accommodation .rounded-3xl.border.border-gray-100,
+#page-preparation-arrival .rounded-3xl.border.border-gray-100,
+#page-visa-immigration .rounded-3xl.border.border-gray-100,
+#page-how-to-get .rounded-2xl.border.border-gray-100,
+#page-accommodation .rounded-2xl.border.border-gray-100,
+#page-preparation-arrival .rounded-2xl.border.border-gray-100,
+#page-visa-immigration .rounded-2xl.border.border-gray-100 {
+  border-color: rgba(82, 172, 45, 0.2) !important;
+}
+
+/* ---- INBOUND PROGRAMS: SKY ---- */
+#page-intl-students .bg-pcu-light,
+#page-semester-exchange .bg-pcu-light,
+#page-intl-degree .bg-pcu-light,
+#page-cop .bg-pcu-light,
+#page-indonesian-spectrum .bg-pcu-light,
+#page-intl-students .bg-pcu-light\/50,
+#page-semester-exchange .bg-pcu-light\/50,
+#page-intl-degree .bg-pcu-light\/50,
+#page-cop .bg-pcu-light\/50,
+#page-indonesian-spectrum .bg-pcu-light\/50 {
+  background-color: rgba(48, 174, 180, 0.1) !important;
+}
+#page-intl-students .bg-pcu-blue\/10,
+#page-semester-exchange .bg-pcu-blue\/10,
+#page-intl-degree .bg-pcu-blue\/10,
+#page-cop .bg-pcu-blue\/10,
+#page-indonesian-spectrum .bg-pcu-blue\/10 {
+  background-color: rgba(48, 174, 180, 0.1) !important;
+}
+#page-intl-students .text-pcu-blue,
+#page-semester-exchange .text-pcu-blue,
+#page-intl-degree .text-pcu-blue,
+#page-cop .text-pcu-blue,
+#page-indonesian-spectrum .text-pcu-blue {
+  color: #30aeb4 !important;
+}
+#page-semester-exchange .text-pcu-sky,
+#page-intl-degree .text-pcu-sky,
+#page-cop .text-pcu-sky,
+#page-indonesian-spectrum .text-pcu-sky {
+  color: #30aeb4 !important;
+}
+#page-intl-students .border-pcu-blue,
+#page-semester-exchange .border-pcu-blue,
+#page-intl-degree .border-pcu-blue,
+#page-cop .border-pcu-blue,
+#page-indonesian-spectrum .border-pcu-blue {
+  border-color: #30aeb4 !important;
+}
+#page-semester-exchange .border-pcu-blue\/10,
+#page-intl-degree .border-pcu-blue\/10,
+#page-cop .border-pcu-blue\/10,
+#page-indonesian-spectrum .border-pcu-blue\/10 {
+  border-color: rgba(48, 174, 180, 0.2) !important;
+}
+#page-intl-students .rounded-3xl.border.border-gray-100,
+#page-semester-exchange .rounded-3xl.border.border-gray-100,
+#page-intl-degree .rounded-3xl.border.border-gray-100,
+#page-cop .rounded-3xl.border.border-gray-100,
+#page-indonesian-spectrum .rounded-3xl.border.border-gray-100,
+#page-intl-students .rounded-2xl.border.border-gray-100,
+#page-semester-exchange .rounded-2xl.border.border-gray-100,
+#page-intl-degree .rounded-2xl.border.border-gray-100,
+#page-cop .rounded-2xl.border.border-gray-100,
+#page-indonesian-spectrum .rounded-2xl.border.border-gray-100 {
+  border-color: rgba(48, 174, 180, 0.2) !important;
+}
+
+/* ---- OUTBOUND PROGRAMS: ORANGE ---- */
+#page-pcu-students .bg-pcu-light,
+#page-outbound-semester-exchange .bg-pcu-light,
+#page-joint-double-degree .bg-pcu-light,
+#page-internship .bg-pcu-light,
+#page-pcu-students .bg-pcu-light\/50,
+#page-outbound-semester-exchange .bg-pcu-light\/50,
+#page-joint-double-degree .bg-pcu-light\/50,
+#page-internship .bg-pcu-light\/50 {
+  background-color: rgba(250, 102, 50, 0.1) !important;
+}
+#page-pcu-students .bg-pcu-blue\/10,
+#page-outbound-semester-exchange .bg-pcu-blue\/10,
+#page-joint-double-degree .bg-pcu-blue\/10,
+#page-internship .bg-pcu-blue\/10 {
+  background-color: rgba(250, 102, 50, 0.1) !important;
+}
+#page-pcu-students .text-pcu-blue,
+#page-outbound-semester-exchange .text-pcu-blue,
+#page-joint-double-degree .text-pcu-blue,
+#page-internship .text-pcu-blue {
+  color: #fa6632 !important;
+}
+#page-pcu-students .text-pcu-sky,
+#page-outbound-semester-exchange .text-pcu-sky,
+#page-joint-double-degree .text-pcu-sky,
+#page-internship .text-pcu-sky {
+  color: #fa6632 !important;
+}
+#page-pcu-students .border-pcu-blue,
+#page-outbound-semester-exchange .border-pcu-blue,
+#page-joint-double-degree .border-pcu-blue,
+#page-internship .border-pcu-blue {
+  border-color: #fa6632 !important;
+}
+#page-outbound-semester-exchange .border-pcu-blue\/10,
+#page-joint-double-degree .border-pcu-blue\/10,
+#page-internship .border-pcu-blue\/10 {
+  border-color: rgba(250, 102, 50, 0.2) !important;
+}
+#page-pcu-students .rounded-3xl.border.border-gray-100,
+#page-outbound-semester-exchange .rounded-3xl.border.border-gray-100,
+#page-joint-double-degree .rounded-3xl.border.border-gray-100,
+#page-internship .rounded-3xl.border.border-gray-100,
+#page-pcu-students .rounded-2xl.border.border-gray-100,
+#page-outbound-semester-exchange .rounded-2xl.border.border-gray-100,
+#page-joint-double-degree .rounded-2xl.border.border-gray-100,
+#page-internship .rounded-2xl.border.border-gray-100 {
+  border-color: rgba(250, 102, 50, 0.2) !important;
+}
+
+/* ---- PARTNERSHIP: PURPLE ---- */
+#page-international-partnership .bg-pcu-light,
+#page-domestic-partnership .bg-pcu-light,
+#page-consortium-association .bg-pcu-light,
+#page-partnership-meet-us .bg-pcu-light,
+#page-international-partnership .bg-pcu-light\/50,
+#page-domestic-partnership .bg-pcu-light\/50,
+#page-consortium-association .bg-pcu-light\/50,
+#page-partnership-meet-us .bg-pcu-light\/50 {
+  background-color: rgba(141, 75, 177, 0.1) !important;
+}
+#page-international-partnership .bg-pcu-blue\/10,
+#page-domestic-partnership .bg-pcu-blue\/10,
+#page-consortium-association .bg-pcu-blue\/10,
+#page-partnership-meet-us .bg-pcu-blue\/10 {
+  background-color: rgba(141, 75, 177, 0.1) !important;
+}
+#page-international-partnership .text-pcu-blue,
+#page-domestic-partnership .text-pcu-blue,
+#page-consortium-association .text-pcu-blue,
+#page-partnership-meet-us .text-pcu-blue {
+  color: #8d4bb1 !important;
+}
+#page-international-partnership .text-pcu-sky,
+#page-domestic-partnership .text-pcu-sky,
+#page-consortium-association .text-pcu-sky,
+#page-partnership-meet-us .text-pcu-sky {
+  color: #8d4bb1 !important;
+}
+#page-international-partnership .border-pcu-blue,
+#page-domestic-partnership .border-pcu-blue,
+#page-consortium-association .border-pcu-blue,
+#page-partnership-meet-us .border-pcu-blue {
+  border-color: #8d4bb1 !important;
+}
+#page-international-partnership .border-pcu-blue\/10,
+#page-domestic-partnership .border-pcu-blue\/10,
+#page-consortium-association .border-pcu-blue\/10,
+#page-partnership-meet-us .border-pcu-blue\/10 {
+  border-color: rgba(141, 75, 177, 0.2) !important;
+}
+#page-international-partnership .rounded-3xl.border.border-gray-100,
+#page-domestic-partnership .rounded-3xl.border.border-gray-100,
+#page-consortium-association .rounded-3xl.border.border-gray-100,
+#page-partnership-meet-us .rounded-3xl.border.border-gray-100,
+#page-international-partnership .rounded-2xl.border.border-gray-100,
+#page-domestic-partnership .rounded-2xl.border.border-gray-100,
+#page-consortium-association .rounded-2xl.border.border-gray-100,
+#page-partnership-meet-us .rounded-2xl.border.border-gray-100 {
+  border-color: rgba(141, 75, 177, 0.2) !important;
+}
+
+/* ---- ABOUT: NAVY ---- */
+#page-pcu-at-glance .bg-pcu-light,
+#page-facilities .bg-pcu-light,
+#page-contact-us .bg-pcu-light {
+  background-color: rgba(29, 68, 110, 0.08) !important;
+}
+#page-pcu-at-glance .bg-pcu-blue\/10,
+#page-facilities .bg-pcu-blue\/10,
+#page-contact-us .bg-pcu-blue\/10 {
+  background-color: rgba(29, 68, 110, 0.1) !important;
+}
+#page-pcu-at-glance .text-pcu-sky,
+#page-facilities .text-pcu-sky,
+#page-contact-us .text-pcu-sky {
+  color: #1d446e !important;
+}
+#page-pcu-at-glance .rounded-3xl.border.border-gray-100,
+#page-facilities .rounded-3xl.border.border-gray-100,
+#page-contact-us .rounded-3xl.border.border-gray-100,
+#page-pcu-at-glance .rounded-2xl.border.border-gray-100,
+#page-facilities .rounded-2xl.border.border-gray-100,
+#page-contact-us .rounded-2xl.border.border-gray-100 {
+  border-color: rgba(29, 68, 110, 0.15) !important;
+}
+
+/* ---- CARD HOVER GLOW — matches page theme ---- */
+#page-how-to-get .program-card:hover,
+#page-accommodation .program-card:hover,
+#page-preparation-arrival .program-card:hover,
+#page-visa-immigration .program-card:hover {
+  box-shadow: 0 20px 40px rgba(82, 172, 45, 0.15) !important;
+}
+#page-intl-students .program-card:hover,
+#page-semester-exchange .program-card:hover,
+#page-intl-degree .program-card:hover,
+#page-cop .program-card:hover,
+#page-indonesian-spectrum .program-card:hover {
+  box-shadow: 0 20px 40px rgba(48, 174, 180, 0.15) !important;
+}
+#page-pcu-students .program-card:hover,
+#page-outbound-semester-exchange .program-card:hover,
+#page-joint-double-degree .program-card:hover,
+#page-internship .program-card:hover {
+  box-shadow: 0 20px 40px rgba(250, 102, 50, 0.15) !important;
+}
+#page-international-partnership .program-card:hover,
+#page-domestic-partnership .program-card:hover,
+#page-consortium-association .program-card:hover,
+#page-partnership-meet-us .program-card:hover {
+  box-shadow: 0 20px 40px rgba(141, 75, 177, 0.15) !important;
+}
+#page-pcu-at-glance .program-card:hover,
+#page-facilities .program-card:hover,
+#page-contact-us .program-card:hover {
+  box-shadow: 0 20px 40px rgba(29, 68, 110, 0.15) !important;
+}
