@@ -41,6 +41,8 @@ A single-page application (SPA) for the PCU International Office, showcasing inb
 │           ├── preparation-arrival-guide.js
 │           └── visa-immigration.js
 ├── Assets/
+│   ├── Data/
+│   │   └── Meeting Request Form.docx   # Offline version of the partnership meeting request form
 │   ├── Graphics/
 │   │   ├── logo-UKP.svg
 │   │   └── Petra Graphic Asset/
@@ -58,6 +60,11 @@ A single-page application (SPA) for the PCU International Office, showcasing inb
 │       ├── Partnership/            # Partnership event photos
 │       ├── Student Exchange/       # Student exchange program photos
 │       └── Thumbnails/             # Thumbnail images
+├── backend/
+│   ├── server.py           # Flask API — meeting request submission and email notification
+│   ├── requirements.txt    # Python dependencies (flask, flask-cors, python-dotenv)
+│   ├── submissions.db      # SQLite database — auto-created on first run (do not edit manually)
+│   └── .env                # SMTP credentials — see Backend Setup below (NOT committed to git)
 ├── fix_news.py         # One-time dev utility — see note below (safe to ignore)
 ├── .gitignore
 └── README.md
@@ -74,8 +81,10 @@ A single-page application (SPA) for the PCU International Office, showcasing inb
 | [Lucide Icons v0.263](https://lucide.dev) | Icon library (loaded via CDN) |
 | [DM Sans + Playfair Display](https://fonts.google.com) | Typography (loaded via Google Fonts) |
 | Vanilla JavaScript | Hash routing, animations, and dynamic page rendering |
+| Python 3 + Flask | Backend API for meeting request form submission and email notifications |
+| SQLite | Persistent storage for meeting request submissions (`backend/submissions.db`) |
 
-No build step or package manager is required — all dependencies are loaded via CDN.
+The frontend requires no build step — all JS dependencies are loaded via CDN. The backend requires Python 3 and the packages listed in `backend/requirements.txt`.
 
 ---
 
@@ -121,6 +130,7 @@ Navigation is handled client-side via `navigateTo(pageId)`, which pushes `#pageI
 
 - **Hash Routing** — `navigateTo(pageId)` pushes `#pageId` to history; `hashchange` handles back/forward and direct deep-links
 - **Modular JS Pages** — Each page section lives in its own render function file under `JS/pages/`, keeping `main.js` focused on navigation and shared logic
+- **Meeting Request Form** — Multi-step modal form (institution details → meeting details → guest list) that `POST`s to the Flask backend, persists to SQLite, and triggers an HTML email notification
 - **Hero Carousel** — Auto-advancing slides with navigation arrows and dot indicators
 - **Scroll Reveal Animations** — Sections fade in as they enter the viewport via `IntersectionObserver`
 - **Animated Stat Counters** — Numbers count up when scrolled into view
@@ -159,6 +169,8 @@ Defined as CSS custom properties in `styles.css` and extended into Tailwind via 
 
 ## Getting Started
 
+### Frontend
+
 No installation is needed. Simply open `index.html` in a browser:
 
 ```bash
@@ -173,16 +185,60 @@ python -m http.server 8080
 
 > **Note:** SVG background assets are loaded as CSS `background-image` URLs. A local server is recommended so these resolve correctly.
 
+### Backend (Meeting Request Form)
+
+The Meeting Request Form requires the Flask backend to be running. Without it, form submissions will fail with a fallback alert prompting users to email `head-partnership@petra.ac.id` directly.
+
+**1. Create the `.env` file** inside `backend/`:
+
+```
+SMTP_EMAIL=your-email@gmail.com
+SMTP_PASSWORD=your-app-password
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=587
+```
+
+For Gmail, generate an App Password at [myaccount.google.com/apppasswords](https://myaccount.google.com/apppasswords) (requires 2-Step Verification). Do not commit this file — add `backend/.env` to `.gitignore`.
+
+**2. Install dependencies and start the server:**
+
+```bash
+cd backend
+pip install -r requirements.txt
+python server.py
+```
+
+The server starts on `http://localhost:3001`. The SQLite database (`submissions.db`) is created automatically on first run.
+
+**API endpoints:**
+
+| Method | Endpoint | Description |
+|---|---|---|
+| `POST` | `/api/submit-meeting-request` | Save form submission to DB and send email |
+| `GET` | `/api/submissions` | List all submissions (JSON) |
+| `GET` | `/api/health` | Health check |
+
 ---
 
 ## Deployment
 
-This is a fully static site — no server-side processing is required. To deploy:
+### Frontend (Static Files)
 
-1. Copy the entire repository folder to your web server's public directory (e.g. `/var/www/html/international-office/`).
+1. Copy the repository folder (excluding `backend/`) to your web server's public directory (e.g. `/var/www/html/international-office/`).
 2. Ensure the web server (Apache/Nginx) serves `index.html` as the default document.
 3. No `.htaccess` rewrite rules are needed — all navigation is handled client-side via JavaScript.
 4. Verify that the `Assets/` folder and all subfolders are accessible. Several folder names contain spaces (`Assets/Graphics/Petra Graphic Asset/`, `Assets/Images/Foto Rektorat/`, etc.) — confirm your server handles these correctly, or rename them and update all references in `index.html`, `styles.css`, and `main.js`.
+
+### Backend (Flask API)
+
+The backend must be deployed separately and kept running for the Meeting Request Form to work.
+
+1. Copy the `backend/` folder to your server.
+2. Create `backend/.env` with valid SMTP credentials (see Backend Setup above).
+3. Install dependencies: `pip install -r requirements.txt`
+4. Run with a production WSGI server (e.g. Gunicorn): `gunicorn -w 2 -b 0.0.0.0:3001 server:app`
+5. Configure a reverse proxy (Nginx/Apache) to forward `/api/*` requests to the Flask server, or expose port `3001` directly.
+6. Update the `fetch` URL in `main.js` if the backend runs on a different host or port than `http://localhost:3001`.
 
 ---
 
@@ -199,6 +255,12 @@ International partner logos are referenced as relative paths inside `intlLogoFil
 
 **Page render functions**
 Each page is a standalone `render*()` function in `JS/pages/<section>/<page>.js`. When adding a new page, create the render file, add a `<script src="...">` tag plus a matching mount-point call in `index.html` (see the existing entries near line 420–458), and register the page ID in `main.js`.
+
+**Backend API URL hardcoded**
+The meeting request form `POST`s to `http://localhost:3001/api/submit-meeting-request`. Before deploying to production, update this URL in `main.js` to point to the live backend host. If the backend is offline, form submissions fail gracefully with an alert directing users to email `head-partnership@petra.ac.id`.
+
+**SMTP / email config**
+Email notifications require valid SMTP credentials in `backend/.env`. If the credentials are missing or incorrect, the form submission still saves to `submissions.db` but no email is sent (a warning is printed to the server console). Ensure `backend/.env` is never committed to the repository.
 
 **`Assets/Images/` folder size**
 The `Assets/Images/` directory contains a large number of images (logos, facilities, faculty, etc.). Ensure your web server is configured to serve these files efficiently, and verify that folder names with spaces (e.g. `Foto Rektorat/`, `Petra Graphic Asset/`) are handled correctly by your server or deployment pipeline.
