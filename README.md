@@ -7,11 +7,39 @@ A single-page application (SPA) for the PCU International Office, showcasing inb
 ## Project Structure
 
 ```
-├── index.html          # Main HTML file — all pages are rendered as sections inside here
+├── index.html          # Main HTML file — all pages are injected as sections at load time
 ├── CSS/
 │   └── styles.css      # Custom styles, animations, page color themes, and PCU brand variables
 ├── JS/
-│   └── main.js         # Navigation, dynamic rendering, partnership modals, and SDK integration
+│   ├── main.js         # Navigation (hash routing), modals, stat counters, and SDK integration
+│   ├── data/
+│   │   └── news.js     # News article data and render functions (pages 1–6)
+│   └── pages/          # One render function per page, grouped by nav section
+│       ├── home.js
+│       ├── news.js
+│       ├── about/
+│       │   ├── pcu-at-glance.js
+│       │   ├── facilities.js
+│       │   └── contact-us.js
+│       ├── inbound/
+│       │   ├── semester-exchange.js
+│       │   ├── international-degree.js
+│       │   ├── international-community-outreach-program.js
+│       │   └── indonesian-spectrum.js
+│       ├── outbound/
+│       │   ├── outbound-semester-exchange.js
+│       │   ├── joint-double-degree.js
+│       │   └── internship.js
+│       ├── partnership/
+│       │   ├── international-partnership.js
+│       │   ├── domestic-partnership.js
+│       │   ├── consortium-association.js
+│       │   └── meet-us.js
+│       └── life at pcu/
+│           ├── how-to-get-to-pcu.js
+│           ├── accommodation.js
+│           ├── preparation-arrival-guide.js
+│           └── visa-immigration.js
 ├── Assets/
 │   ├── Graphics/
 │   │   ├── logo-UKP.svg
@@ -45,7 +73,7 @@ A single-page application (SPA) for the PCU International Office, showcasing inb
 | [Tailwind CSS v3.4](https://cdn.tailwindcss.com/3.4.17) | Utility-first styling (loaded via CDN) |
 | [Lucide Icons v0.263](https://lucide.dev) | Icon library (loaded via CDN) |
 | [DM Sans + Playfair Display](https://fonts.google.com) | Typography (loaded via Google Fonts) |
-| Vanilla JavaScript | Navigation, animations, and dynamic rendering |
+| Vanilla JavaScript | Hash routing, animations, and dynamic page rendering |
 
 No build step or package manager is required — all dependencies are loaded via CDN.
 
@@ -53,7 +81,7 @@ No build step or package manager is required — all dependencies are loaded via
 
 ## Pages
 
-Navigation is handled client-side via `navigateTo(pageId)`. The following pages are available:
+Navigation is handled client-side via `navigateTo(pageId)`, which pushes `#pageId` to the browser history. Direct links (`example.com/#semester-exchange`) and browser back/forward both work via a `hashchange` listener. The following pages are available:
 
 **About**
 - `home` — Hero carousel, stats counters, and program overview
@@ -82,15 +110,17 @@ Navigation is handled client-side via `navigateTo(pageId)`. The following pages 
 **Life at PCU**
 - `how-to-get` — Directions and transport to PCU
 - `accommodation` — Student housing options *(placeholder — content pending)*
-- `preparation-arrival` — Arrival guide for incoming students *(placeholder — content pending)*
-- `visa-immigration` — Visa and immigration information *(placeholder — content pending)*
+- `preparation-arrival` — Arrival guide for incoming students
+- `visa-immigration` — Visa and immigration information
 
-> **Note for IT team:** The three Life at PCU pages marked as *placeholder* are incomplete and should not be linked from any public-facing navigation until content is finalized.
+> **Note for IT team:** The `accommodation` page is still a placeholder. Do not link it from public-facing navigation until full content is provided.
 
 ---
 
 ## Key Features
 
+- **Hash Routing** — `navigateTo(pageId)` pushes `#pageId` to history; `hashchange` handles back/forward and direct deep-links
+- **Modular JS Pages** — Each page section lives in its own render function file under `JS/pages/`, keeping `main.js` focused on navigation and shared logic
 - **Hero Carousel** — Auto-advancing slides with navigation arrows and dot indicators
 - **Scroll Reveal Animations** — Sections fade in as they enter the viewport via `IntersectionObserver`
 - **Animated Stat Counters** — Numbers count up when scrolled into view
@@ -166,6 +196,9 @@ The site requires an internet connection to load Tailwind CSS, Lucide Icons, and
 
 **Partner logo paths**
 International partner logos are referenced as relative paths inside `intlLogoFiles` in `main.js`, resolved under `Assets/Images/Logo/<Country>/`. If logos are added, renamed, or reorganized, that array must be updated to match.
+
+**Page render functions**
+Each page is a standalone `render*()` function in `JS/pages/<section>/<page>.js`. When adding a new page, create the render file, add a `<script src="...">` tag plus a matching mount-point call in `index.html` (see the existing entries near line 420–458), and register the page ID in `main.js`.
 
 **`Assets/Images/` folder size**
 The `Assets/Images/` directory contains a large number of images (logos, facilities, faculty, etc.). Ensure your web server is configured to serve these files efficiently, and verify that folder names with spaces (e.g. `Foto Rektorat/`, `Petra Graphic Asset/`) are handled correctly by your server or deployment pipeline.
