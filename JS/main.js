@@ -72,11 +72,19 @@ if (window.elementSdk) {
 }
 
 // ---- NAVIGATION ----
-function navigateTo(pageId) {
+function navigateTo(pageId, { updateHash = true } = {}) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   const target = document.getElementById('page-' + pageId);
-  if (target) target.classList.add('active');
+  if (target) {
+    target.classList.add('active');
+  } else {
+    document.getElementById('page-home')?.classList.add('active');
+    pageId = 'home';
+  }
   document.getElementById('app').scrollTop = 0;
+  if (updateHash) {
+    history.pushState(null, '', '#' + pageId);
+  }
   // Re-trigger reveal animations
   setTimeout(initRevealObserver, 100);
   setTimeout(() => lucide.createIcons(), 50);
@@ -88,6 +96,11 @@ function navigateTo(pageId) {
     setTimeout(() => { renderIndustryPartners(); renderInternshipOpportunities(); }, 60);
   }
 }
+
+window.addEventListener('hashchange', () => {
+  const pageId = window.location.hash.slice(1) || 'home';
+  navigateTo(pageId, { updateHash: false });
+});
 
 // ---- PROGRAM TYPE SELECTION ----
 function showProgramType(type) {
@@ -1192,10 +1205,12 @@ function clearSelectedCountry() {
   document.getElementById('selectedCountrySection').classList.add('hidden');
 }
 
-// Initialize map markers
+// Initialize map markers and handle initial hash routing
 document.addEventListener('DOMContentLoaded', function() {
   initializeCountryGrid();
   initializePartnershipData();
+  const pageId = window.location.hash.slice(1) || 'home';
+  navigateTo(pageId, { updateHash: false });
 });
 
 // ---- PARTNERSHIP FUNCTIONS ----
