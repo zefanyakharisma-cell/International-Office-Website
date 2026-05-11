@@ -1896,3 +1896,110 @@ document.getElementById('newsSearchInput')?.addEventListener('input', (e) => {
 lucide.createIcons();
 initRevealObserver();
 applyConfig(defaultConfig);
+
+// ---- MEETING REQUEST FORM MODAL ----
+function openMeetingRequestModal() {
+  const modal = document.getElementById('meeting-request-modal');
+  modal.classList.remove('hidden');
+  modal.classList.add('flex');
+  document.body.style.overflow = 'hidden';
+  lucide.createIcons();
+}
+
+function closeMeetingRequestModal(event) {
+  if (event && event.target !== event.currentTarget) return;
+  const modal = document.getElementById('meeting-request-modal');
+  modal.classList.add('hidden');
+  modal.classList.remove('flex');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape' && !document.getElementById('meeting-request-modal').classList.contains('hidden')) {
+    closeMeetingRequestModal();
+  }
+});
+
+document.getElementById('meetingRequestForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const form = e.target;
+  const raw = Object.fromEntries(new FormData(form));
+
+  const payload = {
+    institutionName: raw.institutionName,
+    address:         raw.address,
+    country:         raw.country,
+    website:         raw.website,
+    fields:          [...form.querySelectorAll('input[name="field"]:checked')].map(el => el.value),
+    fieldOtherText:  document.getElementById('fieldOtherCheck').checked ? raw.fieldOtherText : '',
+    date1: raw.date1, time1: raw.time1, duration1: raw.duration1,
+    date2: raw.date2, time2: raw.time2, duration2: raw.duration2,
+    objectives:  [1,2,3,4,5].map(i => raw['objective'+i]).filter(Boolean),
+    departments: [...form.querySelectorAll('input[name="dept"]:checked')].map(el => el.value),
+    pic: {
+      title:      raw.picTitle,
+      givenName:  raw.picGivenName,
+      familyName: raw.picFamilyName,
+      position:   raw.picPosition,
+      division:   raw.picDivision,
+      email:      raw.picEmail,
+      phone:      raw.picPhone,
+    },
+    participants: [1,2,3,4,5].map(i => ({
+      title:      raw['p'+i+'Title'],
+      givenName:  raw['p'+i+'Given'],
+      familyName: raw['p'+i+'Family'],
+      position:   raw['p'+i+'Position'],
+      division:   raw['p'+i+'Division'],
+    })).filter(p => p.givenName || p.familyName),
+  };
+
+  const submitBtn = form.querySelector('button[type="submit"]');
+  const originalText = submitBtn.textContent;
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Submitting…';
+
+  try {
+    const res = await fetch('http://localhost:3001/api/submit-meeting-request', {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify(payload),
+    });
+    if (!res.ok) throw new Error('Server error ' + res.status);
+    showMeetingRequestSuccess();
+    form.reset();
+  } catch (err) {
+    console.error('Submission failed:', err);
+    alert('Could not submit the form. Please make sure the backend server is running, or email us directly at head-partnership@petra.ac.id');
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.textContent = originalText;
+  }
+});
+
+function showMeetingRequestSuccess() {
+  const modal = document.getElementById('meeting-request-modal');
+  const form  = document.getElementById('meetingRequestForm');
+  form.style.display = 'none';
+
+  const success = document.createElement('div');
+  success.id = 'meetingSuccessMsg';
+  success.className = 'px-8 py-16 flex flex-col items-center text-center';
+  success.innerHTML = `
+    <div class="w-16 h-16 rounded-full bg-violet-100 flex items-center justify-center mb-6">
+      <i data-lucide="check-circle" class="w-8 h-8 text-pcu-purple"></i>
+    </div>
+    <h3 class="font-display text-2xl font-bold text-pcu-purple mb-3">Request Submitted!</h3>
+    <p class="text-gray-500 max-w-sm mb-8">Your meeting request has been received and saved. We'll get back to you at <strong>${document.getElementById('meetingRequestForm').picEmail?.value || 'your email'}</strong> soon.</p>
+    <button onclick="closeMeetingRequestAfterSuccess()" class="px-8 py-2.5 bg-pcu-purple text-white text-sm font-semibold rounded-full hover:bg-violet-600 transition">Close</button>
+  `;
+  modal.querySelector('.bg-white').appendChild(success);
+  lucide.createIcons();
+}
+
+function closeMeetingRequestAfterSuccess() {
+  const success = document.getElementById('meetingSuccessMsg');
+  if (success) success.remove();
+  document.getElementById('meetingRequestForm').style.display = '';
+  closeMeetingRequestModal();
+}

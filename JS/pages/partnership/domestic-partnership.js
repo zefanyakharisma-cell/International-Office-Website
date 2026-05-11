@@ -62,7 +62,7 @@ function renderDomesticPartnership() {
 <span class="inline-flex items-center gap-2 px-3 py-1.5 bg-white/15 text-white text-xs font-semibold rounded-full uppercase tracking-wide">Meeting Request</span>
 <h3 class="font-display text-2xl text-white font-bold mt-6 mb-4">Request a Partnership Meeting</h3>
 <p class="text-white/80 mb-6">Organize a bilateral meeting with PCU's partnership team for program planning, campus visits, or virtual consultation.</p>
-<a class="inline-flex items-center gap-2 px-5 py-3 bg-white text-pcu-purple font-semibold rounded-full shadow-lg hover:bg-white/90 transition" href="#">Download Request Form</a>
+<button class="inline-flex items-center gap-2 px-5 py-3 bg-white text-pcu-purple font-semibold rounded-full shadow-lg hover:bg-white/90 transition" onclick="openMeetingRequestModal()">Download Request Form</button>
 <p class="text-white/75 text-sm mt-5">Or email <a class="underline text-white/90" href="mailto:head-partnership@petra.ac.id">head-partnership@petra.ac.id</a></p>
 </div>
 <div class="rounded-3xl bg-white border border-gray-100 p-8 shadow-sm">
