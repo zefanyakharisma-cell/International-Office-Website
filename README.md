@@ -7,13 +7,14 @@ A single-page application (SPA) for the PCU International Office, showcasing inb
 ## Project Structure
 
 ```
-├── index.html          # Main HTML file — all pages are injected as sections at load time
+├── index.html          # Main HTML file — pages injected at load time; admin modals and FAB included
 ├── CSS/
 │   └── styles.css      # Custom styles, animations, page color themes, and PCU brand variables
 ├── JS/
-│   ├── main.js         # Navigation (hash routing), modals, stat counters, and SDK integration
+│   ├── main.js         # Navigation (hash routing), modals, visit tracking, trending list, and SDK integration
+│   ├── admin.js        # Admin system — login, article CRUD, image upload, localStorage persistence
 │   ├── data/
-│   │   └── news.js     # News article data and render functions (pages 1–6)
+│   │   └── news.js     # Static news seed data and news page renderer (trending populated at runtime)
 │   └── pages/          # One render function per page, grouped by nav section
 │       ├── home.js
 │       ├── news.js
@@ -42,7 +43,8 @@ A single-page application (SPA) for the PCU International Office, showcasing inb
 │           └── visa-immigration.js
 ├── Assets/
 │   ├── Data/
-│   │   └── Meeting Request Form.docx   # Offline version of the partnership meeting request form
+│   │   ├── Meeting Request Form.docx   # Offline version of the partnership meeting request form
+│   │   └── News Form.docx              # Offline template for submitting news article content
 │   ├── Graphics/
 │   │   ├── logo-UKP.svg
 │   │   └── Petra Graphic Asset/
@@ -131,6 +133,10 @@ Navigation is handled client-side via `navigateTo(pageId)`, which pushes `#pageI
 - **Hash Routing** — `navigateTo(pageId)` pushes `#pageId` to history; `hashchange` handles back/forward and direct deep-links
 - **Modular JS Pages** — Each page section lives in its own render function file under `JS/pages/`, keeping `main.js` focused on navigation and shared logic
 - **Meeting Request Form** — Multi-step modal form (institution details → meeting details → guest list) that `POST`s to the Flask backend, persists to SQLite, and triggers an HTML email notification
+- **Admin News System** — Role-based admin panel (Inbound / Outbound / Partnership / Head) for creating, editing, and deleting news articles; articles are persisted in `localStorage` and merged with static seed data at runtime
+- **Article Image Upload** — Drag-and-drop or file-picker image upload in the article form; images stored as base64 data URLs in `localStorage`
+- **Article Visit Tracking** — Each article view is counted in `localStorage`; the News page sidebar "Trending" list is sorted by visit count in real time
+- **Dynamic Article Pages** — Admin-published articles generate full detail pages on the fly (`renderAdminArticlePage`) and are injected into `#adminArticlePages`; no page reload required
 - **Hero Carousel** — Auto-advancing slides with navigation arrows and dot indicators
 - **Scroll Reveal Animations** — Sections fade in as they enter the viewport via `IntersectionObserver`
 - **Animated Stat Counters** — Numbers count up when scrolled into view
@@ -242,6 +248,34 @@ The backend must be deployed separately and kept running for the Meeting Request
 
 ---
 
+## Admin System
+
+The site includes a lightweight CMS for managing news articles — no backend required.
+
+### Roles & Access
+
+| Username | Role | Publishes to tag |
+|---|---|---|
+| `admin_inbound` | Inbound | `#inboundstudents` |
+| `admin_outbound` | Outbound | `#outboundstudents` |
+| `admin_partnership` | Partnership | `#partnership` |
+| `admin_head` | Head | Any tag (unrestricted) |
+
+Passwords are defined in `ADMIN_ACCOUNTS` at the top of `JS/admin.js`. The session is stored in `sessionStorage` and cleared when the tab closes.
+
+### How it works
+
+1. Click the **Admin** button (bottom-right corner) to open the login modal.
+2. After login, a floating action button (FAB) appears with **Add Article** and **Sign Out** options.
+3. The article form collects: title, excerpt, body paragraphs, key highlights, tag, and an optional image (drag-and-drop or file picker — stored as a base64 data URL).
+4. Published articles are saved to `localStorage` under the key `pcu_admin_news` and immediately merged with the static seed articles from `JS/data/news.js` via `refreshNewsData()`.
+5. Admins can edit or delete their own articles; the `Head` role can manage all articles.
+6. The News page "Trending" sidebar is populated from visit counts stored in `localStorage` (`pcu_article_visits`), sorted by view count descending.
+
+> **Note:** Because articles are stored in `localStorage`, they are **device- and browser-specific** — articles published on one device will not appear on another. For a shared content store, the admin articles would need to be persisted server-side.
+
+---
+
 ## Known Dependencies & Limitations
 
 **External image URLs (Unsplash)**
@@ -255,6 +289,12 @@ International partner logos are referenced as relative paths inside `intlLogoFil
 
 **Page render functions**
 Each page is a standalone `render*()` function in `JS/pages/<section>/<page>.js`. When adding a new page, create the render file, add a `<script src="...">` tag plus a matching mount-point call in `index.html` (see the existing entries near line 420–458), and register the page ID in `main.js`.
+
+**Admin credentials in source code**
+Admin usernames and passwords are hardcoded in plain text in `JS/admin.js`. Anyone who can view the page source can read them. For a production deployment, move credentials server-side or use a proper authentication service.
+
+**Admin articles are localStorage-only**
+News articles published via the admin panel are stored in `localStorage` under `pcu_admin_news`. They are per-browser and per-device — clearing browser storage or opening the site in a different browser will lose all admin-published articles. If persistence across devices is needed, articles must be saved server-side.
 
 **Backend API URL hardcoded**
 The meeting request form `POST`s to `http://localhost:3001/api/submit-meeting-request`. Before deploying to production, update this URL in `main.js` to point to the live backend host. If the backend is offline, form submissions fail gracefully with an alert directing users to email `head-partnership@petra.ac.id`.
