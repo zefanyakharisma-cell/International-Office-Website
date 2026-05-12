@@ -112,6 +112,16 @@ def init_db():
                 updated_at   TEXT
             )
         """)
+        conn.execute("""
+            CREATE TABLE IF NOT EXISTS internship_opportunities (
+                id         TEXT PRIMARY KEY,
+                position   TEXT NOT NULL,
+                company    TEXT NOT NULL,
+                link       TEXT DEFAULT '',
+                created_at TEXT NOT NULL,
+                updated_at TEXT
+            )
+        """)
         conn.commit()
 
 
@@ -558,6 +568,75 @@ def delete_ose_program(pid):
         return err
     with get_db() as conn:
         conn.execute("DELETE FROM ose_programs WHERE id=?", (pid,))
+        conn.commit()
+    return jsonify({'ok': True})
+
+
+# ── Internship Opportunities CRUD ─────────────────────────────────────────
+def intern_to_dict(row):
+    d = dict(row)
+    d['createdAt'] = d.pop('created_at', '')
+    d['updatedAt'] = d.pop('updated_at', '')
+    return d
+
+
+@app.route("/api/internship-opportunities", methods=["GET"])
+def list_internship_opportunities():
+    with get_db() as conn:
+        rows = conn.execute(
+            "SELECT * FROM internship_opportunities ORDER BY created_at DESC"
+        ).fetchall()
+    return jsonify([intern_to_dict(r) for r in rows])
+
+
+@app.route("/api/internship-opportunities", methods=["POST"])
+def create_internship_opportunity():
+    _, err = require_admin()
+    if err:
+        return err
+    data = request.get_json(force=True) or {}
+    position = (data.get('position') or '').strip()
+    company  = (data.get('company') or '').strip()
+    if not position or not company:
+        return jsonify({'error': 'position and company are required'}), 400
+    now = datetime.now().isoformat()
+    oid = f"intern-{secrets.token_hex(8)}"
+    with get_db() as conn:
+        conn.execute(
+            "INSERT INTO internship_opportunities (id, position, company, link, created_at) VALUES (?,?,?,?,?)",
+            (oid, position, company, data.get('link', ''), now)
+        )
+        conn.commit()
+        row = conn.execute("SELECT * FROM internship_opportunities WHERE id=?", (oid,)).fetchone()
+    return jsonify(intern_to_dict(row)), 201
+
+
+@app.route("/api/internship-opportunities/<oid>", methods=["PUT"])
+def update_internship_opportunity(oid):
+    _, err = require_admin()
+    if err:
+        return err
+    data = request.get_json(force=True) or {}
+    now = datetime.now().isoformat()
+    with get_db() as conn:
+        conn.execute(
+            "UPDATE internship_opportunities SET position=?, company=?, link=?, updated_at=? WHERE id=?",
+            (data.get('position', ''), data.get('company', ''), data.get('link', ''), now, oid)
+        )
+        conn.commit()
+        row = conn.execute("SELECT * FROM internship_opportunities WHERE id=?", (oid,)).fetchone()
+    if not row:
+        return jsonify({'error': 'Not found'}), 404
+    return jsonify(intern_to_dict(row))
+
+
+@app.route("/api/internship-opportunities/<oid>", methods=["DELETE"])
+def delete_internship_opportunity(oid):
+    _, err = require_admin()
+    if err:
+        return err
+    with get_db() as conn:
+        conn.execute("DELETE FROM internship_opportunities WHERE id=?", (oid,))
         conn.commit()
     return jsonify({'ok': True})
 

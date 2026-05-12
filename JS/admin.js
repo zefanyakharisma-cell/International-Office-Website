@@ -549,6 +549,22 @@ function updateAdminUI() {
       oseFab.classList.add('hidden');
     }
   }
+
+  // Show/hide Add Opportunity button on Internship page
+  const internAddBtn = document.getElementById('internship-admin-add-btn');
+  if (internAddBtn) {
+    const internPage = document.getElementById('page-internship');
+    if (loggedIn && internPage && internPage.classList.contains('active')) {
+      internAddBtn.classList.remove('hidden');
+    } else {
+      internAddBtn.classList.add('hidden');
+    }
+  }
+  // Re-render opportunities to show/hide edit controls when auth state changes
+  const internPage = document.getElementById('page-internship');
+  if (internPage && internPage.classList.contains('active') && typeof renderInternshipOpportunities === 'function') {
+    renderInternshipOpportunities();
+  }
 }
 
 // ---- OSE PROGRAMS MANAGEMENT ----
@@ -720,6 +736,119 @@ async function confirmDeleteOseProgram(id) {
     if (typeof loadOsePrograms === 'function') await loadOsePrograms();
     showAdminToast('Entry deleted.');
     await renderOseManagerList();
+  } catch (err) {
+    alert(`Could not delete: ${err.message}`);
+  }
+}
+
+// ---- INTERNSHIP OPPORTUNITIES MANAGEMENT ----
+let internEditingId = null;
+
+function buildCompanyDatalist() {
+  const dl = document.getElementById('intern-company-datalist');
+  if (!dl || dl.childElementCount > 0) return;
+  const intlNames = (typeof partnerData !== 'undefined' ? partnerData : []).map(p => p.name);
+  const domNames  = (typeof domesticPartners !== 'undefined' ? domesticPartners : []).map(p => p.name);
+  const allNames  = [...new Set([...intlNames, ...domNames])].sort((a, b) => a.localeCompare(b));
+  dl.innerHTML = allNames.map(n => `<option value="${n.replace(/"/g, '&quot;')}"></option>`).join('');
+}
+
+function openInternshipOpportunityModal(id) {
+  if (!isAdminLoggedIn()) { openAdminLoginModal(); return; }
+
+  internEditingId = id || null;
+  const modal = document.getElementById('intern-form-modal');
+  const title = document.getElementById('intern-form-title');
+  const submitText = document.getElementById('intern-form-submit-text');
+
+  if (id) {
+    title.textContent = 'Edit Internship Opportunity';
+    submitText.textContent = 'Save Changes';
+    // Fetch current entry to prefill
+    fetch(`${API_BASE}/api/internship-opportunities`)
+      .then(r => r.json())
+      .then(list => {
+        const entry = list.find(e => e.id === id);
+        if (!entry) return;
+        document.getElementById('intern-form-id').value = entry.id;
+        document.getElementById('intern-form-position').value = entry.position || '';
+        document.getElementById('intern-form-company').value = entry.company || '';
+        document.getElementById('intern-form-link').value = entry.link || '';
+      })
+      .catch(() => {});
+  } else {
+    title.textContent = 'Add Internship Opportunity';
+    submitText.textContent = 'Add Opportunity';
+    document.getElementById('intern-form-id').value = '';
+    document.getElementById('intern-form-position').value = '';
+    document.getElementById('intern-form-company').value = '';
+    document.getElementById('intern-form-link').value = '';
+  }
+
+  buildCompanyDatalist();
+  modal.classList.remove('hidden');
+  modal.classList.add('flex');
+  setTimeout(() => { lucide.createIcons(); document.getElementById('intern-form-position').focus(); }, 50);
+}
+
+function closeInternshipOpportunityModal(event) {
+  if (event && event.target !== document.getElementById('intern-form-modal')) return;
+  document.getElementById('intern-form-modal').classList.add('hidden');
+  document.getElementById('intern-form-modal').classList.remove('flex');
+  internEditingId = null;
+}
+
+async function handleSaveInternshipOpportunity(e) {
+  e.preventDefault();
+  if (!isAdminLoggedIn()) return;
+
+  const btn = document.getElementById('intern-form-submit-btn');
+  btn.disabled = true;
+
+  const payload = {
+    position: document.getElementById('intern-form-position').value.trim(),
+    company:  document.getElementById('intern-form-company').value.trim(),
+    link:     document.getElementById('intern-form-link').value.trim(),
+  };
+
+  try {
+    let res;
+    if (internEditingId) {
+      res = await fetch(`${API_BASE}/api/internship-opportunities/${internEditingId}`, {
+        method: 'PUT',
+        headers: authHeaders(),
+        body: JSON.stringify(payload)
+      });
+    } else {
+      res = await fetch(`${API_BASE}/api/internship-opportunities`, {
+        method: 'POST',
+        headers: authHeaders(),
+        body: JSON.stringify(payload)
+      });
+    }
+    if (!res.ok) throw new Error((await res.json()).error || 'Server error');
+    document.getElementById('intern-form-modal').classList.add('hidden');
+    document.getElementById('intern-form-modal').classList.remove('flex');
+    if (typeof renderInternshipOpportunities === 'function') await renderInternshipOpportunities();
+    showAdminToast(internEditingId ? 'Opportunity updated!' : 'Opportunity added!');
+  } catch (err) {
+    alert(`Could not save: ${err.message}`);
+  } finally {
+    btn.disabled = false;
+    internEditingId = null;
+  }
+}
+
+async function confirmDeleteInternshipOpportunity(id) {
+  if (!confirm('Delete this internship opportunity? This cannot be undone.')) return;
+  try {
+    const res = await fetch(`${API_BASE}/api/internship-opportunities/${id}`, {
+      method: 'DELETE',
+      headers: authHeaders()
+    });
+    if (!res.ok) throw new Error((await res.json()).error || 'Server error');
+    if (typeof renderInternshipOpportunities === 'function') await renderInternshipOpportunities();
+    showAdminToast('Opportunity deleted.');
   } catch (err) {
     alert(`Could not delete: ${err.message}`);
   }

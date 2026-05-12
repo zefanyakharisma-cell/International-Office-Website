@@ -115,7 +115,11 @@ function navigateTo(pageId, { updateHash = true } = {}) {
     }
   }
   if (pageId === 'internship') {
-    setTimeout(() => { renderIndustryPartners(); renderInternshipOpportunities(); }, 60);
+    const addBtn = document.getElementById('internship-admin-add-btn');
+    if (addBtn && typeof isAdminLoggedIn === 'function' && isAdminLoggedIn()) {
+      addBtn.classList.remove('hidden');
+    }
+    setTimeout(() => { filterInternshipPartners(); renderInternshipOpportunities(); }, 60);
   }
 }
 
@@ -1913,21 +1917,6 @@ function renderDomesticModalContent(view, selected) {
 
 
 // ---- INTERNSHIP DATA ----
-const industryPartners = [
-  { name: "Ciputra Group", sector: "manufacturing", desc: "Leading property developer with offices across Indonesia and Southeast Asia.", location: "Surabaya, Indonesia" },
-  { name: "Tokopedia", sector: "technology", desc: "Indonesia's largest e-commerce platform offering tech and business internships.", location: "Jakarta, Indonesia" },
-  { name: "Gojek", sector: "technology", desc: "Super-app providing ride-hailing, logistics, payments, and more.", location: "Jakarta, Indonesia" },
-  { name: "Bank Central Asia (BCA)", sector: "finance", desc: "One of Indonesia's largest private banks with robust internship programs.", location: "Jakarta, Indonesia" },
-  { name: "Mandiri Bank", sector: "finance", desc: "State-owned bank offering finance, risk management, and IT internships.", location: "Jakarta, Indonesia" },
-  { name: "Deloitte Indonesia", sector: "finance", desc: "Global audit and consulting firm with structured internship tracks.", location: "Surabaya / Jakarta" },
-  { name: "Ogilvy Indonesia", sector: "creative", desc: "Global advertising agency offering creative, strategy, and digital internships.", location: "Jakarta, Indonesia" },
-  { name: "KompasGramedia", sector: "creative", desc: "Indonesia's largest media group covering print, digital, and broadcasting.", location: "Jakarta, Indonesia" },
-  { name: "Shangri-La Hotels", sector: "hospitality", desc: "Luxury hotel chain offering internships in hospitality management.", location: "Surabaya, Indonesia" },
-  { name: "Sheraton Hotels & Resorts", sector: "hospitality", desc: "International hotel chain with guest experience and event management tracks.", location: "Surabaya, Indonesia" },
-  { name: "Samsung Electronics", sector: "technology", desc: "Global tech company offering engineering and marketing internships.", location: "Jakarta, Indonesia" },
-  { name: "Astra International", sector: "manufacturing", desc: "Diversified conglomerate in automotive, agribusiness, and infrastructure.", location: "Jakarta, Indonesia" },
-];
-
 const internshipOpportunities = [
   { title: "UI/UX Design Intern", company: "Tokopedia", sector: "technology", duration: "3 months", deadline: "31 July 2025", type: "Paid", description: "Work with the product team to design user-friendly interfaces for Tokopedia's mobile and web platforms." },
   { title: "Finance & Accounting Intern", company: "Deloitte Indonesia", sector: "finance", duration: "6 months", deadline: "15 August 2025", type: "Paid", description: "Support audit teams with financial data analysis, documentation, and client presentations." },
@@ -1937,56 +1926,228 @@ const internshipOpportunities = [
   { title: "Business Development Intern", company: "Astra International", sector: "manufacturing", duration: "3 months", deadline: "25 July 2025", type: "Paid", description: "Support the strategic growth team with market research, partner outreach, and proposal preparation." },
 ];
 
-let ipCurrentSector = 'all';
+// ---- INDUSTRY PARTNERS (Section 1 of Internship page) ----
+const IP_PAGE_SIZE = 30;
+let ipCurrentType = 'international';
+let ipCurrentDomesticType = 'all';
+let ipShowCount = IP_PAGE_SIZE;
 
-function filterPartners(sector) {
-  ipCurrentSector = sector;
-  document.querySelectorAll('.ip-tab').forEach(t => {
-    if (t.dataset.sector === sector) {
-      t.className = 'ip-tab px-5 py-2 rounded-full text-sm font-semibold bg-teal-600 text-white transition';
-    } else {
-      t.className = 'ip-tab px-5 py-2 rounded-full text-sm font-semibold bg-white border border-gray-200 text-gray-700 hover:border-teal-500 hover:text-teal-600 transition';
+function filterInternshipPartners(type) {
+  if (type !== undefined) {
+    ipCurrentType = type;
+    ipShowCount = IP_PAGE_SIZE;
+    // Update tab styles
+    document.querySelectorAll('.ip-tab').forEach(t => {
+      if (t.dataset.ptype === type) {
+        t.className = 'ip-tab px-5 py-2 rounded-full text-sm font-semibold bg-teal-600 text-white transition';
+      } else {
+        t.className = 'ip-tab px-5 py-2 rounded-full text-sm font-semibold bg-white border border-gray-200 text-gray-700 hover:border-teal-500 hover:text-teal-600 transition';
+      }
+    });
+    // Show/hide domestic sub-filter
+    const domFilter = document.getElementById('ip-domestic-filter');
+    if (domFilter) {
+      if (type === 'domestic') {
+        domFilter.classList.remove('hidden');
+        domFilter.classList.add('flex');
+      } else {
+        domFilter.classList.add('hidden');
+        domFilter.classList.remove('flex');
+        ipCurrentDomesticType = 'all';
+        document.querySelectorAll('.dp-type-tab').forEach(t => {
+          t.className = t.dataset.dtype === 'all'
+            ? 'dp-type-tab px-3 py-1.5 rounded-full text-xs font-semibold bg-teal-600 text-white border border-transparent transition'
+            : 'dp-type-tab px-3 py-1.5 rounded-full text-xs font-semibold bg-white border border-gray-200 text-gray-600 hover:border-teal-400 hover:text-teal-600 transition';
+        });
+      }
     }
-  });
-  renderIndustryPartners();
+  }
+  renderInternshipPartners();
 }
 
-function renderIndustryPartners() {
+function filterDomesticType(dtype) {
+  ipCurrentDomesticType = dtype;
+  ipShowCount = IP_PAGE_SIZE;
+  document.querySelectorAll('.dp-type-tab').forEach(t => {
+    if (t.dataset.dtype === dtype) {
+      t.className = 'dp-type-tab px-3 py-1.5 rounded-full text-xs font-semibold bg-teal-600 text-white border border-transparent transition';
+    } else {
+      t.className = 'dp-type-tab px-3 py-1.5 rounded-full text-xs font-semibold bg-white border border-gray-200 text-gray-600 hover:border-teal-400 hover:text-teal-600 transition';
+    }
+  });
+  renderInternshipPartners();
+}
+
+function showMorePartners() {
+  ipShowCount += IP_PAGE_SIZE;
+  renderInternshipPartners();
+}
+
+function renderInternshipPartners() {
   const grid = document.getElementById('industry-partners-grid');
   if (!grid) return;
-  const filtered = ipCurrentSector === 'all' ? industryPartners : industryPartners.filter(p => p.sector === ipCurrentSector);
-  const sectorColors = {
-    technology: 'bg-blue-50 text-blue-700 border-blue-100',
-    finance: 'bg-yellow-50 text-yellow-700 border-yellow-100',
-    manufacturing: 'bg-orange-50 text-orange-700 border-orange-100',
-    creative: 'bg-purple-50 text-purple-700 border-purple-100',
-    hospitality: 'bg-pink-50 text-pink-700 border-pink-100',
-  };
-  const sectorIcons = {
-    technology: 'cpu', finance: 'landmark', manufacturing: 'factory', creative: 'palette', hospitality: 'utensils'
-  };
-  grid.innerHTML = filtered.map(p => `
-    <div class="program-card bg-white rounded-2xl border border-gray-100 p-6 shadow-sm hover:border-teal-300">
-      <div class="flex items-start gap-3 mb-3">
-        <div class="w-10 h-10 rounded-xl bg-teal-50 flex items-center justify-center shrink-0">
-          <i data-lucide="${sectorIcons[p.sector] || 'building'}" class="w-5 h-5 text-teal-600"></i>
-        </div>
-        <div>
-          <h3 class="font-semibold text-pcu-blue leading-snug">${p.name}</h3>
-          <p class="text-xs text-gray-400 flex items-center gap-1 mt-0.5"><i data-lucide="map-pin" class="w-3 h-3"></i> ${p.location}</p>
+
+  const searchEl = document.getElementById('ip-search');
+  const query = (searchEl ? searchEl.value.trim().toLowerCase() : '');
+
+  let source, cards;
+
+  if (ipCurrentType === 'international') {
+    source = partnerData;
+    let filtered = source;
+    if (query) {
+      filtered = source.filter(p =>
+        p.name.toLowerCase().includes(query) ||
+        (p.country || '').toLowerCase().includes(query)
+      );
+    }
+    const total = filtered.length;
+    const showing = query ? filtered : filtered.slice(0, ipShowCount);
+    const remaining = total - showing.length;
+
+    cards = showing.map(p => `
+      <div class="bg-white rounded-2xl border border-gray-100 p-5 shadow-sm hover:border-teal-300 hover:shadow-md transition">
+        <div class="flex items-start gap-3">
+          <div class="w-9 h-9 rounded-xl bg-blue-50 flex items-center justify-center shrink-0">
+            <i data-lucide="globe" class="w-4 h-4 text-blue-600"></i>
+          </div>
+          <div>
+            <h3 class="font-semibold text-pcu-blue text-sm leading-snug">${p.name}</h3>
+            <p class="text-xs text-gray-400 mt-0.5 flex items-center gap-1"><i data-lucide="map-pin" class="w-3 h-3"></i> ${p.country}</p>
+          </div>
         </div>
       </div>
-      <p class="text-sm text-gray-500 leading-relaxed mb-3">${p.desc}</p>
-      <span class="inline-block px-2.5 py-0.5 text-xs font-semibold rounded-full border capitalize ${sectorColors[p.sector] || 'bg-gray-50 text-gray-600'}">${p.sector.replace('_',' ')}</span>
-    </div>
-  `).join('');
+    `).join('');
+
+    const countLabel = document.getElementById('ip-count-label');
+    if (countLabel) countLabel.textContent = query
+      ? `Showing ${total} result${total !== 1 ? 's' : ''} for "${searchEl.value.trim()}"`
+      : `Showing ${showing.length} of ${total} international partners`;
+
+    const showMoreEl = document.getElementById('ip-show-more');
+    const showMoreCount = document.getElementById('ip-show-more-count');
+    if (showMoreEl) {
+      if (!query && remaining > 0) {
+        showMoreEl.classList.remove('hidden');
+        if (showMoreCount) showMoreCount.textContent = `(${remaining} more)`;
+      } else {
+        showMoreEl.classList.add('hidden');
+      }
+    }
+  } else {
+    source = domesticPartners;
+    let filtered = ipCurrentDomesticType === 'all'
+      ? source
+      : source.filter(p => p.type === ipCurrentDomesticType);
+    if (query) {
+      filtered = filtered.filter(p =>
+        p.name.toLowerCase().includes(query) ||
+        (p.city || '').toLowerCase().includes(query) ||
+        (p.type || '').toLowerCase().includes(query)
+      );
+    }
+    const total = filtered.length;
+    const showing = query ? filtered : filtered.slice(0, ipShowCount);
+    const remaining = total - showing.length;
+
+    const typeColors = {
+      'International': 'bg-blue-50 text-blue-700',
+      'National': 'bg-teal-50 text-teal-700',
+      'Government': 'bg-orange-50 text-orange-700',
+      'Education': 'bg-purple-50 text-purple-700',
+      'Regional / local': 'bg-gray-100 text-gray-600',
+    };
+
+    cards = showing.map(p => `
+      <div class="bg-white rounded-2xl border border-gray-100 p-5 shadow-sm hover:border-teal-300 hover:shadow-md transition">
+        <div class="flex items-start gap-3">
+          <div class="w-9 h-9 rounded-xl bg-teal-50 flex items-center justify-center shrink-0">
+            <i data-lucide="building-2" class="w-4 h-4 text-teal-600"></i>
+          </div>
+          <div class="min-w-0">
+            <h3 class="font-semibold text-pcu-blue text-sm leading-snug">${p.name}</h3>
+            <div class="flex items-center gap-1.5 mt-0.5 flex-wrap">
+              <p class="text-xs text-gray-400">${p.city || '—'}</p>
+              <span class="px-1.5 py-0.5 text-xs rounded-full font-medium ${typeColors[p.type] || 'bg-gray-100 text-gray-600'}">${p.type || ''}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    `).join('');
+
+    const countLabel = document.getElementById('ip-count-label');
+    if (countLabel) countLabel.textContent = query
+      ? `Showing ${total} result${total !== 1 ? 's' : ''} for "${searchEl.value.trim()}"`
+      : `Showing ${showing.length} of ${total} domestic partners`;
+
+    const showMoreEl = document.getElementById('ip-show-more');
+    const showMoreCount = document.getElementById('ip-show-more-count');
+    if (showMoreEl) {
+      if (!query && remaining > 0) {
+        showMoreEl.classList.remove('hidden');
+        if (showMoreCount) showMoreCount.textContent = `(${remaining} more)`;
+      } else {
+        showMoreEl.classList.add('hidden');
+      }
+    }
+  }
+
+  grid.innerHTML = cards || '<p class="text-gray-400 text-sm col-span-3 text-center py-8">No partners found.</p>';
   lucide.createIcons();
 }
 
-function renderInternshipOpportunities() {
+async function renderInternshipOpportunities() {
   const list = document.getElementById('internship-opportunities-list');
   if (!list) return;
-  list.innerHTML = internshipOpportunities.map(op => `
+
+  const isAdmin = typeof isAdminLoggedIn === 'function' && isAdminLoggedIn();
+
+  // Fetch API entries
+  let apiEntries = [];
+  try {
+    const base = typeof API_BASE !== 'undefined' ? API_BASE : 'https://international-office-website-production.up.railway.app';
+    const res = await fetch(`${base}/api/internship-opportunities`);
+    if (res.ok) apiEntries = await res.json();
+  } catch {}
+
+  const parts = [];
+
+  // API entries (admin-managed)
+  if (apiEntries.length > 0) {
+    parts.push(...apiEntries.map(op => `
+      <div class="bg-white rounded-2xl border border-teal-100 p-6 shadow-sm hover:shadow-md hover:border-teal-300 transition">
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div class="flex-1">
+            <div class="flex flex-wrap items-center gap-2 mb-2">
+              <h3 class="font-semibold text-pcu-blue text-lg">${op.position}</h3>
+              <span class="px-2.5 py-0.5 text-xs font-semibold rounded-full bg-teal-50 text-teal-700 border border-teal-100">Open</span>
+            </div>
+            <p class="text-sm font-medium text-gray-500 flex items-center gap-1.5">
+              <i data-lucide="building-2" class="w-3.5 h-3.5 text-teal-500"></i> ${op.company}
+            </p>
+          </div>
+          <div class="flex items-center gap-2 sm:shrink-0 flex-wrap">
+            ${op.link ? `<a href="${op.link}" target="_blank" rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 px-5 py-2.5 bg-teal-600 text-white text-sm font-semibold rounded-full hover:bg-teal-700 transition whitespace-nowrap">
+              Apply / View <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+            </a>` : ''}
+            ${isAdmin ? `
+              <button onclick="openInternshipOpportunityModal('${op.id}')"
+                class="p-2 rounded-xl bg-pcu-blue/10 text-pcu-blue hover:bg-pcu-blue/20 transition" title="Edit">
+                <i data-lucide="pencil" class="w-4 h-4"></i>
+              </button>
+              <button onclick="confirmDeleteInternshipOpportunity('${op.id}')"
+                class="p-2 rounded-xl bg-red-50 text-red-400 hover:bg-red-100 transition" title="Delete">
+                <i data-lucide="trash-2" class="w-4 h-4"></i>
+              </button>` : ''}
+          </div>
+        </div>
+      </div>
+    `));
+  }
+
+  // Static entries (always shown)
+  parts.push(...internshipOpportunities.map(op => `
     <div class="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm hover:shadow-md hover:border-teal-200 transition">
       <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
         <div class="flex-1">
@@ -2008,7 +2169,13 @@ function renderInternshipOpportunities() {
         </div>
       </div>
     </div>
-  `).join('');
+  `));
+
+  if (parts.length === 0) {
+    list.innerHTML = '<p class="text-gray-400 text-center py-8">No internship opportunities available at the moment.</p>';
+  } else {
+    list.innerHTML = parts.join('');
+  }
   lucide.createIcons();
 }
 
