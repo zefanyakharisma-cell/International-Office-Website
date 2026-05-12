@@ -531,10 +531,204 @@ function updateAdminUI() {
     if (loginBtn) loginBtn.classList.remove('hidden');
     if (userLabel) userLabel.textContent = '';
   }
+
+  // Show admin edit buttons in open OSE modal
+  const oseAdminBtn = document.getElementById('ose-modal-admin-edit-btn');
+  if (oseAdminBtn) {
+    if (loggedIn) oseAdminBtn.classList.remove('hidden');
+    else oseAdminBtn.classList.add('hidden');
+  }
+
+  // Show/hide OSE manager FAB on OSE page
+  const oseFab = document.getElementById('oseManagerFabBtn');
+  if (oseFab) {
+    const osePage = document.getElementById('page-outbound-semester-exchange');
+    if (loggedIn && osePage && osePage.classList.contains('active')) {
+      oseFab.classList.remove('hidden');
+    } else {
+      oseFab.classList.add('hidden');
+    }
+  }
+}
+
+// ---- OSE PROGRAMS MANAGEMENT ----
+let oseEditingId = null;
+
+async function openOseManagerModal() {
+  if (!isAdminLoggedIn()) { openAdminLoginModal(); return; }
+  await renderOseManagerList();
+  const modal = document.getElementById('ose-manager-modal');
+  modal.classList.remove('hidden');
+  modal.classList.add('flex');
+  setTimeout(() => lucide.createIcons(), 30);
+}
+
+function closeOseManagerModal(event) {
+  if (event && event.target !== document.getElementById('ose-manager-modal')) return;
+  document.getElementById('ose-manager-modal').classList.add('hidden');
+  document.getElementById('ose-manager-modal').classList.remove('flex');
+}
+
+async function renderOseManagerList() {
+  const container = document.getElementById('ose-manager-list');
+  if (!container) return;
+  container.innerHTML = '<p class="text-gray-400 text-sm text-center py-4">Loading...</p>';
+
+  let list = [];
+  try {
+    const res = await fetch(`${API_BASE}/api/ose-programs`);
+    if (res.ok) list = await res.json();
+  } catch (e) {}
+
+  if (!list.length) {
+    container.innerHTML = '<p class="text-gray-400 text-sm text-center py-8">No program details added yet. Click "Add University" to get started.</p>';
+    return;
+  }
+
+  container.innerHTML = list.map(entry => `
+    <div class="flex items-start justify-between gap-4 p-4 bg-gray-50 rounded-2xl border border-gray-100">
+      <div class="flex-1 min-w-0">
+        <div class="flex items-center gap-2 flex-wrap">
+          <p class="font-semibold text-pcu-blue text-sm">${entry.name}</p>
+          ${entry.isCustom ? '<span class="px-2 py-0.5 bg-pcu-orange/10 text-pcu-orange text-xs rounded-full font-medium">Custom</span>' : ''}
+        </div>
+        <p class="text-xs text-gray-400 mt-0.5">${entry.country || ''}${entry.region ? ' · ' + entry.region : ''}</p>
+        ${entry.description ? `<p class="text-xs text-gray-500 mt-1 line-clamp-2">${entry.description}</p>` : ''}
+        <div class="flex flex-wrap gap-1 mt-2">
+          ${(entry.programs || []).map(p => `<span class="px-2 py-0.5 bg-pcu-light text-pcu-blue text-xs rounded-full">${p}</span>`).join('')}
+        </div>
+      </div>
+      <div class="flex gap-2 flex-shrink-0">
+        <button onclick="openOseEditForm(${JSON.stringify(entry).replace(/"/g, '&quot;')})"
+          class="p-2 rounded-xl bg-pcu-blue/10 text-pcu-blue hover:bg-pcu-blue/20 transition">
+          <i data-lucide="pencil" class="w-4 h-4"></i>
+        </button>
+        <button onclick="confirmDeleteOseProgram('${entry.id}')"
+          class="p-2 rounded-xl bg-red-50 text-red-400 hover:bg-red-100 transition">
+          <i data-lucide="trash-2" class="w-4 h-4"></i>
+        </button>
+      </div>
+    </div>
+  `).join('');
+  lucide.createIcons();
+}
+
+function openOseEditForm(entryOrNull, prefillName) {
+  if (!isAdminLoggedIn()) { openAdminLoginModal(); return; }
+
+  // Close manager modal if open (we'll reopen after save)
+  const managerModal = document.getElementById('ose-manager-modal');
+  if (managerModal) {
+    managerModal.classList.add('hidden');
+    managerModal.classList.remove('flex');
+  }
+
+  const entry = (entryOrNull && entryOrNull.id) ? entryOrNull : null;
+  oseEditingId = entry ? entry.id : null;
+
+  document.getElementById('ose-form-title').textContent = entry ? 'Edit University Program' : 'Add University Program';
+  document.getElementById('ose-form-submit-text').textContent = entry ? 'Save Changes' : 'Add Program';
+  document.getElementById('ose-form-id').value = entry ? entry.id : '';
+  document.getElementById('ose-form-name').value = entry ? entry.name : (prefillName || '');
+  document.getElementById('ose-form-country').value = entry ? (entry.country || '') : '';
+  document.getElementById('ose-form-region').value = entry ? (entry.region || '') : '';
+  document.getElementById('ose-form-programs').value = entry ? (entry.programs || []).join(', ') : 'Semester Exchange, Study Abroad';
+  document.getElementById('ose-form-description').value = entry ? (entry.description || '') : '';
+  document.getElementById('ose-form-duration').value = entry ? (entry.duration || '') : '';
+  document.getElementById('ose-form-deadline').value = entry ? (entry.deadline || '') : '';
+  document.getElementById('ose-form-requirements').value = entry ? (entry.requirements || '') : '';
+  document.getElementById('ose-form-website').value = entry ? (entry.website || '') : '';
+  document.getElementById('ose-form-notes').value = entry ? (entry.notes || '') : '';
+  document.getElementById('ose-form-is-custom').checked = entry ? !!entry.isCustom : false;
+
+  const modal = document.getElementById('ose-form-modal');
+  modal.classList.remove('hidden');
+  modal.classList.add('flex');
+  setTimeout(() => { lucide.createIcons(); document.getElementById('ose-form-name').focus(); }, 50);
+}
+
+function closeOseEditForm(event) {
+  if (event && event.target !== document.getElementById('ose-form-modal')) return;
+  document.getElementById('ose-form-modal').classList.add('hidden');
+  document.getElementById('ose-form-modal').classList.remove('flex');
+  oseEditingId = null;
+}
+
+async function handleSaveOseProgram(e) {
+  e.preventDefault();
+  if (!isAdminLoggedIn()) return;
+
+  const btn = document.getElementById('ose-form-submit-btn');
+  btn.disabled = true;
+
+  const programsRaw = document.getElementById('ose-form-programs').value;
+  const programs = programsRaw.split(',').map(s => s.trim()).filter(Boolean);
+
+  const payload = {
+    name:         document.getElementById('ose-form-name').value.trim(),
+    country:      document.getElementById('ose-form-country').value.trim(),
+    region:       document.getElementById('ose-form-region').value,
+    programs,
+    description:  document.getElementById('ose-form-description').value.trim(),
+    duration:     document.getElementById('ose-form-duration').value.trim(),
+    deadline:     document.getElementById('ose-form-deadline').value.trim(),
+    requirements: document.getElementById('ose-form-requirements').value.trim(),
+    website:      document.getElementById('ose-form-website').value.trim(),
+    notes:        document.getElementById('ose-form-notes').value.trim(),
+    isCustom:     document.getElementById('ose-form-is-custom').checked,
+  };
+
+  try {
+    let res;
+    if (oseEditingId) {
+      res = await fetch(`${API_BASE}/api/ose-programs/${oseEditingId}`, {
+        method: 'PUT',
+        headers: authHeaders(),
+        body: JSON.stringify(payload)
+      });
+    } else {
+      res = await fetch(`${API_BASE}/api/ose-programs`, {
+        method: 'POST',
+        headers: authHeaders(),
+        body: JSON.stringify(payload)
+      });
+    }
+    if (!res.ok) throw new Error((await res.json()).error || 'Server error');
+
+    closeOseEditForm();
+    // Reload OSE program data and re-render
+    if (typeof loadOsePrograms === 'function') await loadOsePrograms();
+    showAdminToast(oseEditingId ? 'University program updated!' : 'University program added!');
+    // Reopen manager modal
+    await openOseManagerModal();
+  } catch (err) {
+    alert(`Could not save: ${err.message}`);
+  } finally {
+    btn.disabled = false;
+    oseEditingId = null;
+  }
+}
+
+async function confirmDeleteOseProgram(id) {
+  if (!confirm('Delete this university program entry? This cannot be undone.')) return;
+  try {
+    const res = await fetch(`${API_BASE}/api/ose-programs/${id}`, {
+      method: 'DELETE',
+      headers: authHeaders()
+    });
+    if (!res.ok) throw new Error((await res.json()).error || 'Server error');
+    if (typeof loadOsePrograms === 'function') await loadOsePrograms();
+    showAdminToast('Entry deleted.');
+    await renderOseManagerList();
+  } catch (err) {
+    alert(`Could not delete: ${err.message}`);
+  }
 }
 
 // ---- INIT ----
 document.addEventListener('DOMContentLoaded', async function() {
   updateAdminUI();
   await refreshNewsData();
+  // Load OSE program details in background
+  if (typeof loadOsePrograms === 'function') loadOsePrograms();
 });

@@ -94,6 +94,24 @@ def init_db():
                 participants    TEXT
             )
         """)
+        conn.execute("""
+            CREATE TABLE IF NOT EXISTS ose_programs (
+                id           TEXT PRIMARY KEY,
+                name         TEXT NOT NULL,
+                country      TEXT DEFAULT '',
+                region       TEXT DEFAULT '',
+                programs     TEXT DEFAULT '["Semester Exchange"]',
+                description  TEXT DEFAULT '',
+                requirements TEXT DEFAULT '',
+                duration     TEXT DEFAULT '',
+                deadline     TEXT DEFAULT '',
+                website      TEXT DEFAULT '',
+                notes        TEXT DEFAULT '',
+                is_custom    INTEGER DEFAULT 0,
+                created_at   TEXT NOT NULL,
+                updated_at   TEXT
+            )
+        """)
         conn.commit()
 
 
@@ -447,6 +465,99 @@ def delete_article(article_id):
 def visit_article(article_id):
     with get_db() as conn:
         conn.execute("UPDATE articles SET visits = visits + 1 WHERE id=?", (article_id,))
+        conn.commit()
+    return jsonify({'ok': True})
+
+
+# ── OSE Programs CRUD ──────────────────────────────────────────────────────
+def ose_to_dict(row):
+    d = dict(row)
+    try:
+        d['programs'] = json.loads(d.get('programs') or '["Semester Exchange"]')
+    except Exception:
+        d['programs'] = ['Semester Exchange']
+    d['isCustom'] = bool(d.pop('is_custom', 0))
+    d['createdAt'] = d.pop('created_at', '')
+    d['updatedAt'] = d.pop('updated_at', '')
+    return d
+
+
+@app.route("/api/ose-programs", methods=["GET"])
+def list_ose_programs():
+    with get_db() as conn:
+        rows = conn.execute("SELECT * FROM ose_programs ORDER BY name").fetchall()
+    return jsonify([ose_to_dict(r) for r in rows])
+
+
+@app.route("/api/ose-programs", methods=["POST"])
+def create_ose_program():
+    _, err = require_admin()
+    if err:
+        return err
+    data = request.get_json(force=True) or {}
+    name = (data.get('name') or '').strip()
+    if not name:
+        return jsonify({'error': 'name required'}), 400
+    now = datetime.now().isoformat()
+    pid = f"ose-{secrets.token_hex(8)}"
+    with get_db() as conn:
+        conn.execute("""
+            INSERT INTO ose_programs
+              (id, name, country, region, programs, description, requirements,
+               duration, deadline, website, notes, is_custom, created_at)
+            VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)
+        """, (
+            pid, name,
+            data.get('country', ''), data.get('region', ''),
+            json.dumps(data.get('programs', ['Semester Exchange'])),
+            data.get('description', ''), data.get('requirements', ''),
+            data.get('duration', ''), data.get('deadline', ''),
+            data.get('website', ''), data.get('notes', ''),
+            1 if data.get('isCustom') else 0,
+            now,
+        ))
+        conn.commit()
+        row = conn.execute("SELECT * FROM ose_programs WHERE id=?", (pid,)).fetchone()
+    return jsonify(ose_to_dict(row)), 201
+
+
+@app.route("/api/ose-programs/<pid>", methods=["PUT"])
+def update_ose_program(pid):
+    _, err = require_admin()
+    if err:
+        return err
+    data = request.get_json(force=True) or {}
+    now = datetime.now().isoformat()
+    with get_db() as conn:
+        conn.execute("""
+            UPDATE ose_programs SET
+              name=?, country=?, region=?, programs=?, description=?,
+              requirements=?, duration=?, deadline=?, website=?, notes=?,
+              is_custom=?, updated_at=?
+            WHERE id=?
+        """, (
+            data.get('name', ''), data.get('country', ''), data.get('region', ''),
+            json.dumps(data.get('programs', ['Semester Exchange'])),
+            data.get('description', ''), data.get('requirements', ''),
+            data.get('duration', ''), data.get('deadline', ''),
+            data.get('website', ''), data.get('notes', ''),
+            1 if data.get('isCustom') else 0,
+            now, pid,
+        ))
+        conn.commit()
+        row = conn.execute("SELECT * FROM ose_programs WHERE id=?", (pid,)).fetchone()
+    if not row:
+        return jsonify({'error': 'Not found'}), 404
+    return jsonify(ose_to_dict(row))
+
+
+@app.route("/api/ose-programs/<pid>", methods=["DELETE"])
+def delete_ose_program(pid):
+    _, err = require_admin()
+    if err:
+        return err
+    with get_db() as conn:
+        conn.execute("DELETE FROM ose_programs WHERE id=?", (pid,))
         conn.commit()
     return jsonify({'ok': True})
 

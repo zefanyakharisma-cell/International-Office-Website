@@ -103,7 +103,16 @@ function navigateTo(pageId, { updateHash = true } = {}) {
   setTimeout(() => lucide.createIcons(), 50);
   // Lazy render new pages
   if (pageId === 'outbound-semester-exchange') {
-    setTimeout(() => { renderOsePartners(); }, 60);
+    setTimeout(() => { loadOsePrograms(); }, 60);
+  }
+  // Show/hide OSE manager FAB
+  const oseFab = document.getElementById('oseManagerFabBtn');
+  if (oseFab) {
+    if (pageId === 'outbound-semester-exchange' && typeof isAdminLoggedIn === 'function' && isAdminLoggedIn()) {
+      oseFab.classList.remove('hidden');
+    } else {
+      oseFab.classList.add('hidden');
+    }
   }
   if (pageId === 'internship') {
     setTimeout(() => { renderIndustryPartners(); renderInternshipOpportunities(); }, 60);
@@ -1526,12 +1535,48 @@ function renderNews(container, items) {
 }
 
 // ---- OUTBOUND SEMESTER EXCHANGE DATA ----
-const osePartners = partnerData.map(partner => ({
+const oseBasePartners = partnerData.map(partner => ({
   name: partner.name,
   country: partner.country,
   region: countryToContinent[partner.country] || 'all',
   programs: ["Exchange", "Study Abroad"]
 }));
+
+// Populated from backend by loadOsePrograms()
+window.oseProgramData = {};
+window.oseCustomUniversities = [];
+
+// Combined list used for rendering (base + custom)
+let osePartners = [...oseBasePartners];
+
+async function loadOsePrograms() {
+  const base = typeof API_BASE !== 'undefined' ? API_BASE : 'https://international-office-website-production.up.railway.app';
+  try {
+    const res = await fetch(`${base}/api/ose-programs`);
+    if (!res.ok) return;
+    const list = await res.json();
+    window.oseProgramData = {};
+    window.oseCustomUniversities = [];
+    list.forEach(entry => {
+      window.oseProgramData[entry.name] = entry;
+      if (entry.isCustom) {
+        window.oseCustomUniversities.push({
+          name: entry.name,
+          country: entry.country || '',
+          region: entry.region || 'all',
+          programs: entry.programs || ['Semester Exchange']
+        });
+      }
+    });
+    // Rebuild combined list
+    const baseNames = new Set(oseBasePartners.map(p => p.name));
+    osePartners = [
+      ...oseBasePartners,
+      ...window.oseCustomUniversities.filter(c => !baseNames.has(c.name))
+    ];
+    renderOsePartners();
+  } catch (e) {}
+}
 
 let oseCurrentRegion = 'all';
 
@@ -1547,30 +1592,156 @@ function oseShowRegion(region) {
   renderOsePartners();
 }
 
+const OSE_REGION_BADGE = {
+  asia:     'bg-blue-50 text-blue-600',
+  europe:   'bg-purple-50 text-purple-600',
+  oceania:  'bg-green-50 text-green-600',
+  americas: 'bg-orange-50 text-orange-600'
+};
+
 function renderOsePartners() {
   const grid = document.getElementById('ose-partner-grid');
   if (!grid) return;
-  const filtered = oseCurrentRegion === 'all' ? osePartners : osePartners.filter(p => p.region === oseCurrentRegion);
-  grid.innerHTML = filtered.map(p => `
-    <div class="program-card bg-white rounded-2xl border border-gray-100 p-6 shadow-sm hover:border-pcu-blue/30">
+  const filtered = oseCurrentRegion === 'all'
+    ? osePartners
+    : osePartners.filter(p => p.region === oseCurrentRegion);
+
+  grid.innerHTML = filtered.map(p => {
+    const extra = window.oseProgramData[p.name] || {};
+    const programs = (extra.programs && extra.programs.length) ? extra.programs : p.programs;
+    const hasDetails = !!(extra.description || extra.requirements || extra.deadline || extra.website);
+    const badgeClass = OSE_REGION_BADGE[p.region] || 'bg-gray-50 text-gray-500';
+    return `
+    <div class="program-card bg-white rounded-2xl border border-gray-100 p-6 shadow-sm hover:border-pcu-orange/40 hover:shadow-md transition cursor-pointer group"
+         onclick="openOseUniversityModal(this.dataset.name)" data-name="${p.name.replace(/"/g, '&quot;')}">
       <div class="flex items-start justify-between mb-3">
-        <div>
-          <h3 class="font-semibold text-pcu-blue text-base leading-snug">${p.name}</h3>
-          <p class="text-sm text-gray-400 mt-0.5 flex items-center gap-1"><i data-lucide="map-pin" class="w-3.5 h-3.5"></i> ${p.country}</p>
+        <div class="flex-1 min-w-0 pr-2">
+          <h3 class="font-semibold text-pcu-blue text-base leading-snug group-hover:text-pcu-orange transition">${p.name}</h3>
+          <p class="text-sm text-gray-400 mt-0.5 flex items-center gap-1">
+            <i data-lucide="map-pin" class="w-3.5 h-3.5 flex-shrink-0"></i> ${p.country}
+          </p>
         </div>
-        <span class="px-2.5 py-1 text-xs font-semibold rounded-full capitalize ${{
-          asia: 'bg-blue-50 text-blue-600',
-          europe: 'bg-purple-50 text-purple-600',
-          oceania: 'bg-green-50 text-green-600',
-          americas: 'bg-orange-50 text-orange-600'
-        }[p.region]}">${p.region}</span>
+        <span class="px-2.5 py-1 text-xs font-semibold rounded-full capitalize flex-shrink-0 ${badgeClass}">${p.region || '—'}</span>
       </div>
-      <div class="flex flex-wrap gap-1.5">
-        ${p.programs.map(prog => `<span class="px-2.5 py-0.5 bg-pcu-light text-pcu-blue text-xs rounded-full">${prog}</span>`).join('')}
+      <div class="flex flex-wrap gap-1.5 mb-3">
+        ${programs.map(prog => `<span class="px-2.5 py-0.5 bg-pcu-light text-pcu-blue text-xs rounded-full">${prog}</span>`).join('')}
       </div>
-    </div>
-  `).join('');
+      <div class="flex items-center justify-between">
+        <span class="text-xs text-pcu-orange font-medium flex items-center gap-1 opacity-0 group-hover:opacity-100 transition">
+          View details <i data-lucide="arrow-right" class="w-3 h-3"></i>
+        </span>
+        ${hasDetails ? '<span class="w-2 h-2 rounded-full bg-pcu-orange flex-shrink-0" title="Program info available"></span>' : ''}
+      </div>
+    </div>`;
+  }).join('');
   lucide.createIcons();
+}
+
+// ---- OSE UNIVERSITY DETAIL MODAL ----
+let oseModalCurrentName = null;
+
+function openOseUniversityModal(name) {
+  oseModalCurrentName = name;
+  const partner = osePartners.find(p => p.name === name) || { name, country: '', region: '' };
+  const extra = window.oseProgramData[name] || {};
+  const programs = (extra.programs && extra.programs.length) ? extra.programs : (partner.programs || ['Semester Exchange', 'Study Abroad']);
+  const region = extra.region || partner.region || '';
+
+  // Header
+  document.getElementById('ose-modal-name').textContent = name;
+  document.getElementById('ose-modal-country').querySelector('span').textContent = extra.country || partner.country || '';
+
+  const badge = document.getElementById('ose-modal-region-badge');
+  badge.textContent = region || 'International';
+  badge.className = 'inline-block px-3 py-1 text-xs font-semibold rounded-full mb-2 capitalize ' + (OSE_REGION_BADGE[region] || 'bg-gray-100 text-gray-600');
+
+  // Programs
+  document.getElementById('ose-modal-programs').innerHTML = programs.map(
+    prog => `<span class="px-3 py-1 bg-pcu-light text-pcu-blue text-sm rounded-full font-medium">${prog}</span>`
+  ).join('');
+
+  // Description
+  const descWrap = document.getElementById('ose-modal-description-wrap');
+  if (extra.description) {
+    descWrap.classList.remove('hidden');
+    document.getElementById('ose-modal-description').textContent = extra.description;
+  } else {
+    descWrap.classList.add('hidden');
+  }
+
+  // Duration
+  const durWrap = document.getElementById('ose-modal-duration-wrap');
+  if (extra.duration) {
+    durWrap.classList.remove('hidden');
+    document.getElementById('ose-modal-duration').textContent = extra.duration;
+  } else {
+    durWrap.classList.add('hidden');
+  }
+
+  // Deadline
+  const dlWrap = document.getElementById('ose-modal-deadline-wrap');
+  if (extra.deadline) {
+    dlWrap.classList.remove('hidden');
+    document.getElementById('ose-modal-deadline').textContent = extra.deadline;
+  } else {
+    dlWrap.classList.add('hidden');
+  }
+
+  // Requirements
+  const reqWrap = document.getElementById('ose-modal-requirements-wrap');
+  if (extra.requirements) {
+    reqWrap.classList.remove('hidden');
+    document.getElementById('ose-modal-requirements').textContent = extra.requirements;
+  } else {
+    reqWrap.classList.add('hidden');
+  }
+
+  // Notes
+  const notesWrap = document.getElementById('ose-modal-notes-wrap');
+  if (extra.notes) {
+    notesWrap.classList.remove('hidden');
+    document.getElementById('ose-modal-notes').textContent = extra.notes;
+  } else {
+    notesWrap.classList.add('hidden');
+  }
+
+  // Website
+  const websiteBtn = document.getElementById('ose-modal-website');
+  if (extra.website) {
+    websiteBtn.href = extra.website;
+    websiteBtn.classList.remove('hidden');
+  } else {
+    websiteBtn.classList.add('hidden');
+  }
+
+  // Admin edit button
+  const adminBtn = document.getElementById('ose-modal-admin-edit-btn');
+  if (typeof isAdminLoggedIn === 'function' && isAdminLoggedIn()) {
+    adminBtn.classList.remove('hidden');
+  } else {
+    adminBtn.classList.add('hidden');
+  }
+
+  const modal = document.getElementById('ose-university-modal');
+  modal.classList.remove('hidden');
+  modal.classList.add('flex');
+  setTimeout(() => lucide.createIcons(), 30);
+}
+
+function openOseEditFormFromModal() {
+  if (!oseModalCurrentName) return;
+  closeOseUniversityModal();
+  const raw = window.oseProgramData[oseModalCurrentName];
+  const extra = (raw && raw.id) ? raw : null;
+  if (typeof openOseEditForm === 'function') openOseEditForm(extra, oseModalCurrentName);
+}
+
+function closeOseUniversityModal(event) {
+  if (event && event.target !== document.getElementById('ose-university-modal')) return;
+  const modal = document.getElementById('ose-university-modal');
+  modal.classList.add('hidden');
+  modal.classList.remove('flex');
+  oseModalCurrentName = null;
 }
 
 // ---- DOMESTIC PARTNERSHIP DATA ----
