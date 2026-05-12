@@ -73,6 +73,11 @@ if (window.elementSdk) {
 
 // ---- NAVIGATION ----
 function navigateTo(pageId, { updateHash = true } = {}) {
+  // Inject admin article page on-demand if not yet in DOM
+  if (pageId.startsWith('admin-news-') && typeof injectAdminArticlePage === 'function') {
+    const article = (window.allNews || []).find(a => a.id === pageId);
+    if (article) injectAdminArticlePage(article);
+  }
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   const target = document.getElementById('page-' + pageId);
   if (target) {
@@ -84,6 +89,14 @@ function navigateTo(pageId, { updateHash = true } = {}) {
   document.getElementById('app').scrollTop = 0;
   if (updateHash) {
     history.pushState(null, '', '#' + pageId);
+  }
+  // Track visits for article pages
+  if (pageId.startsWith('news-') || pageId.startsWith('admin-news-')) {
+    trackArticleVisit(pageId);
+  }
+  // Refresh trending list whenever the news page is opened
+  if (pageId === 'news') {
+    setTimeout(renderTrending, 60);
   }
   // Re-trigger reveal animations
   setTimeout(initRevealObserver, 100);
@@ -101,6 +114,49 @@ window.addEventListener('hashchange', () => {
   const pageId = window.location.hash.slice(1) || 'home';
   navigateTo(pageId, { updateHash: false });
 });
+
+// ---- ARTICLE VISIT TRACKING ----
+const VISITS_KEY = 'pcu_article_visits';
+
+function getArticleVisits() {
+  try { return JSON.parse(localStorage.getItem(VISITS_KEY)) || {}; } catch { return {}; }
+}
+
+function trackArticleVisit(id) {
+  if (!id.startsWith('news-') && !id.startsWith('admin-news-')) return;
+  const visits = getArticleVisits();
+  visits[id] = (visits[id] || 0) + 1;
+  try { localStorage.setItem(VISITS_KEY, JSON.stringify(visits)); } catch {}
+  renderTrending();
+}
+
+function renderTrending() {
+  const container = document.getElementById('trendingContainer');
+  if (!container) return;
+
+  const visits  = getArticleVisits();
+  const articles = (window.allNews || []);
+
+  // Sort visited articles by count desc; fall back to most recent
+  const ranked = articles
+    .map(a => ({ ...a, visits: visits[a.id] || 0 }))
+    .sort((a, b) => b.visits - a.visits || 0)
+    .slice(0, 5);
+
+  if (ranked.length === 0) {
+    container.innerHTML = '<li class="text-gray-400 italic">No articles yet.</li>';
+    return;
+  }
+
+  container.innerHTML = ranked.map((a, i) => `
+    <li>
+      <a href="#" onclick="navigateTo('${a.id}');return false;"
+         class="flex items-start gap-3 group hover:text-pcu-blue transition">
+        <span class="flex-shrink-0 w-6 h-6 mt-0.5 rounded-full bg-pcu-blue/10 text-pcu-blue text-xs font-bold flex items-center justify-center">${i + 1}</span>
+        <span class="text-gray-600 group-hover:text-pcu-blue leading-snug">${a.title}</span>
+      </a>
+    </li>`).join('');
+}
 
 // ---- PROGRAM TYPE SELECTION ----
 function showProgramType(type) {
@@ -230,14 +286,11 @@ document.getElementById('app').addEventListener('scroll', function() {
 });
 
 // ---- NEWS DATA ----
-const allNews = [
-  { id: 'news-1', title: 'PCU Welcomes 45 Exchange Students from 12 Countries', date: 'Dec 15, 2024', tag: '#inboundstudents', color: 'from-pcu-blue to-pcu-sky', excerpt: 'Petra Christian University opens its campus to 45 incoming students from 12 partner countries for a semester of cultural exchange and academic collaboration.' },
-  { id: 'news-2', title: 'New Partnership with University of Tokyo Announced', date: 'Nov 28, 2024', tag: '#partnership', color: 'from-pcu-gold to-yellow-500', excerpt: 'PCU Global signs a strategic new partnership with the University of Tokyo, expanding opportunities for joint research and student mobility.' },
-  { id: 'news-3', title: 'PCU Students Win International Innovation Competition', date: 'Nov 10, 2024', tag: '#outboundstudents', color: 'from-teal-500 to-emerald-600', excerpt: 'A team of PCU students earns international recognition for creative solutions in sustainability and social innovation.' },
-  { id: 'news-4', title: 'Indonesian SPECTRUM Program Opens Registration', date: 'Oct 22, 2024', tag: '#inboundstudents', color: 'from-violet-500 to-purple-600', excerpt: 'Registration is now open for Indonesian SPECTRUM, offering visiting students a curated cultural learning journey across East Java.' },
-  { id: 'news-5', title: '20 PCU Students Depart for Semester Exchange in Europe', date: 'Oct 5, 2024', tag: '#outboundstudents', color: 'from-pcu-sky to-blue-400', excerpt: 'Twenty Petra Christian University students embark on semester exchange programs at partner institutions across Europe.' },
-  { id: 'news-6', title: 'International Community Outreach in East Java', date: 'Sep 18, 2024', tag: '#inboundstudents', color: 'from-pcu-gold to-orange-400', excerpt: 'PCU organizes community outreach activities in East Java, connecting visitors with local culture and service projects.' },
-];
+// staticNews holds the built-in articles; allNews is rebuilt dynamically by admin.js
+window.staticNews = [];
+// allNews starts as staticNews; admin.js refreshNewsData() updates window.allNews at runtime
+window.allNews = [...window.staticNews];
+var allNews = window.allNews; // alias for legacy references below
 
 // Country to flag mapping
 const countryFlags = {
@@ -1443,11 +1496,29 @@ function initializeCountryGrid() {
 function renderNews(container, items) {
   const el = document.getElementById(container);
   if (!el) return;
-  el.innerHTML = items.map(n => `
-    <article onclick="navigateTo('${n.id}');return false" class="program-card bg-white rounded-3xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-md transition cursor-pointer">
-      <div class="h-52 news-img ${n.color ? 'bg-gradient-to-br ' + n.color : ''} relative overflow-hidden">
-        <div class="absolute inset-0 bg-black/10"></div>
+  const isAdmin = typeof isAdminLoggedIn === 'function' && isAdminLoggedIn();
+  el.innerHTML = items.map(n => {
+    const isDynamic = n.id && n.id.startsWith('admin-news-');
+    const adminOverlay = (isAdmin && isDynamic) ? `
+      <div class="absolute top-3 right-3 flex gap-1.5 z-10">
+        <button onclick="event.stopPropagation();openEditArticleModal('${n.id}')"
+          class="p-1.5 bg-white/90 text-pcu-blue rounded-full shadow hover:bg-pcu-light transition" title="Edit article">
+          <i data-lucide="pencil" class="w-3.5 h-3.5"></i>
+        </button>
+        <button onclick="event.stopPropagation();confirmDeleteArticle('${n.id}')"
+          class="p-1.5 bg-white/90 text-red-500 rounded-full shadow hover:bg-red-50 transition" title="Delete article">
+          <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+        </button>
+      </div>` : '';
+    const thumbBg = n.imageUrl
+      ? `style="background-image:url('${n.imageUrl}');background-size:cover;background-position:center;"` : '';
+    const gradClass = n.imageUrl ? '' : (n.color ? 'bg-gradient-to-br ' + n.color : '');
+    return `
+    <article onclick="navigateTo('${n.id}');return false" class="program-card bg-white rounded-3xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-md transition cursor-pointer relative">
+      <div class="h-52 news-img ${gradClass} relative overflow-hidden" ${thumbBg}>
+        <div class="absolute inset-0 ${n.imageUrl ? 'bg-black/15' : 'bg-black/10'}"></div>
         <div class="absolute top-4 left-4 px-3 py-1 bg-white/90 text-xs font-semibold rounded-full text-pcu-navy backdrop-blur">${n.tag.replace('#', '')}</div>
+        ${adminOverlay}
       </div>
       <div class="p-6">
         <div class="flex items-center justify-between text-xs text-gray-400 mb-3">
@@ -1458,8 +1529,8 @@ function renderNews(container, items) {
         <p class="text-gray-600 text-sm mb-5">${n.excerpt || 'Read more about this latest update from PCU Global.'}</p>
         <span class="inline-flex items-center gap-2 text-pcu-sky font-semibold">Read more <i data-lucide="arrow-right" class="w-3 h-3"></i></span>
       </div>
-    </article>
-  `).join('');
+    </article>`;
+  }).join('');
 }
 
 // ---- OUTBOUND SEMESTER EXCHANGE DATA ----
@@ -1780,19 +1851,26 @@ function renderInternshipOpportunities() {
 
 // ---- NEWS CAROUSEL ----
 let newsCarouselIndex = 0;
-const latestNews = allNews.slice(0, 4);
+// latestNewsData is kept in sync by admin.js refreshNewsData(); starts from allNews
+window.latestNewsData = allNews.slice(0, 4);
 
 function renderNewsCarousel() {
   const container = document.getElementById('newsCarouselContainer');
   if (!container) return;
-  
-  const currentNews = latestNews[newsCarouselIndex];
+  const latest = window.latestNewsData || allNews.slice(0, 4);
+  if (newsCarouselIndex >= latest.length) newsCarouselIndex = 0;
+  const currentNews = latest[newsCarouselIndex];
+  const bgStyle = currentNews.imageUrl
+    ? `background-image:url('${currentNews.imageUrl}');background-size:cover;background-position:center;`
+    : '';
+  const gradientClass = currentNews.imageUrl ? '' : `bg-gradient-to-br ${currentNews.color || 'from-pcu-blue to-pcu-sky'}`;
   container.innerHTML = `
-    <div class="w-full h-full bg-gradient-to-br ${currentNews.color || 'from-pcu-blue to-pcu-sky'} flex items-center justify-center cursor-pointer group" onclick="navigateTo('${currentNews.id}');return false">
-      <div class="text-center text-white px-6">
+    <div class="w-full h-full ${gradientClass} relative overflow-hidden cursor-pointer group" style="${bgStyle}" onclick="navigateTo('${currentNews.id}');return false">
+      ${currentNews.imageUrl ? '<div class="absolute inset-0 bg-black/50"></div>' : '<div class="absolute inset-0 bg-black/20"></div>'}
+      <div class="absolute inset-0 flex flex-col items-center justify-center text-center text-white px-8">
         <div class="inline-block px-4 py-1.5 bg-white/20 text-white text-xs font-semibold rounded-full mb-4 uppercase tracking-wider">${currentNews.tag.replace('#', '')}</div>
-        <h2 class="text-3xl md:text-4xl font-bold mb-4 leading-tight">${currentNews.title}</h2>
-        <p class="text-white/75 text-lg max-w-2xl mb-6">${currentNews.excerpt}</p>
+        <h2 class="text-3xl md:text-4xl font-bold mb-3 leading-tight max-w-3xl">${currentNews.title}</h2>
+        <p class="text-white/80 text-base max-w-2xl mb-5 line-clamp-2">${currentNews.excerpt}</p>
         <span class="inline-flex items-center gap-2 text-white font-semibold group-hover:gap-3 transition-all">Read Full Article <i data-lucide="arrow-right" class="w-5 h-5"></i></span>
       </div>
     </div>
@@ -1804,23 +1882,27 @@ function renderNewsCarousel() {
 function updateCarouselDots() {
   const dotsContainer = document.getElementById('carouselDots');
   if (!dotsContainer) return;
-  dotsContainer.innerHTML = latestNews.map((_, i) => `
+  const latest = window.latestNewsData || allNews.slice(0, 4);
+  dotsContainer.innerHTML = latest.map((_, i) => `
     <div class="dot ${i === newsCarouselIndex ? 'active' : ''}" onclick="newsCarouselGo(${i})" style="cursor: pointer;"></div>
   `).join('');
 }
 
 function newsCarouselNext() {
-  newsCarouselIndex = (newsCarouselIndex + 1) % latestNews.length;
+  const latest = window.latestNewsData || allNews.slice(0, 4);
+  newsCarouselIndex = (newsCarouselIndex + 1) % latest.length;
   renderNewsCarousel();
 }
 
 function newsCarouselPrev() {
-  newsCarouselIndex = (newsCarouselIndex - 1 + latestNews.length) % latestNews.length;
+  const latest = window.latestNewsData || allNews.slice(0, 4);
+  newsCarouselIndex = (newsCarouselIndex - 1 + latest.length) % latest.length;
   renderNewsCarousel();
 }
 
 function newsCarouselGo(index) {
-  newsCarouselIndex = Math.max(0, Math.min(index, latestNews.length - 1));
+  const latest = window.latestNewsData || allNews.slice(0, 4);
+  newsCarouselIndex = Math.max(0, Math.min(index, latest.length - 1));
   renderNewsCarousel();
 }
 
@@ -1832,12 +1914,13 @@ function renderCategories() {
   const container = document.getElementById('categoriesContainer');
   if (!container) return;
   
-  const categories = ['all', '#inboundstudents', '#outboundstudents', '#partnership'];
+  const categories = ['all', '#inboundstudents', '#outboundstudents', '#partnership', '#general'];
   const categoryLabels = {
     'all': 'All News',
     '#inboundstudents': 'Inbound Students',
     '#outboundstudents': 'Outbound Students',
-    '#partnership': 'Partnership'
+    '#partnership': 'Partnership',
+    '#general': 'General'
   };
   
   container.innerHTML = categories.map(cat => `
@@ -1853,23 +1936,21 @@ function filterNewsByCategory(category) {
 
 // ---- NEWS SEARCH ----
 function filterAndRenderNews() {
-  let filtered = allNews;
-  
-  // Filter by category
+  let filtered = window.allNews || allNews;
+
   if (selectedCategory !== 'all') {
     filtered = filtered.filter(n => n.tag === selectedCategory);
   }
-  
-  // Filter by search query
+
   if (searchQuery.trim()) {
     const query = searchQuery.toLowerCase();
-    filtered = filtered.filter(n => 
-      n.title.toLowerCase().includes(query) || 
+    filtered = filtered.filter(n =>
+      n.title.toLowerCase().includes(query) ||
       n.excerpt.toLowerCase().includes(query) ||
       n.tag.toLowerCase().includes(query)
     );
   }
-  
+
   renderNews('newsList', filtered);
 }
 
