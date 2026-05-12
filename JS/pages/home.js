@@ -119,19 +119,19 @@ function renderHomePage() {
                         </div>
 
                         <!-- Active Students -->
-                        <div class="flip-card bg-white rounded-2xl shadow-sm border border-gray-100">
+                        <div class="flip-card bg-pcu-blue rounded-2xl shadow-sm border border-gray-100">
                             <div class="flip-card-inner">
-                                <div class="flip-card-front bg-white rounded-2xl p-6 text-center">
-                                    <div class="w-14 h-14 mx-auto mb-4 rounded-xl bg-pcu-navy/10 flex items-center justify-center">
-                                        <i class="w-7 h-7 text-pcu-navy" data-lucide="users"></i>
+                                <div class="flip-card-front bg-pcu-blue rounded-2xl p-6 text-center">
+                                    <div class="w-14 h-14 mx-auto mb-4 rounded-xl bg-white/20 flex items-center justify-center">
+                                        <i class="w-7 h-7 text-white" data-lucide="users"></i>
                                     </div>
-                                    <div class="counter text-3xl md:text-4xl font-bold text-pcu-navy" data-target="4734">0</div>
-                                    <div class="text-xs text-gray-400 mt-1 uppercase tracking-wider font-medium">Active Students</div>
+                                    <div class="counter text-3xl md:text-4xl font-bold text-white" data-target="4734">0</div>
+                                    <div class="text-xs text-white mt-1 uppercase tracking-wider font-medium">Active Students</div>
                                 </div>
-                                <div class="flip-card-back bg-slate-50">
+                                <div class="flip-card-back bg-pcu-blue/10">
                                     <div class="text-center">
-                                        <div class="text-lg font-bold text-pcu-blue mb-3">Student Breakdown</div>
-                                        <div class="text-sm text-gray-600 space-y-1">
+                                        <div class="text-lg font-bold text-white mb-3">Student Breakdown</div>
+                                        <div class="text-sm text-white space-y-1">
                                             <div>4528 Bachelor students</div>
                                             <div>152 Masters students</div>
                                             <div>54 Post-Doctorate students</div>
@@ -142,19 +142,19 @@ function renderHomePage() {
                         </div>
 
                         <!-- International Partners -->
-                        <div class="flip-card bg-white rounded-2xl shadow-sm border border-gray-100" onclick="navigateTo('international-partnership')">
+                        <div class="flip-card bg-pcu-magenta rounded-2xl shadow-sm border border-gray-100" onclick="navigateTo('international-partnership')">
                             <div class="flip-card-inner">
-                                <div class="flip-card-front bg-white rounded-2xl p-6 text-center">
-                                    <div class="w-14 h-14 mx-auto mb-4 rounded-xl bg-pcu-yellow/10 flex items-center justify-center">
-                                        <i class="w-7 h-7 text-pcu-yellow" data-lucide="globe"></i>
+                                <div class="flip-card-front bg-pcu-magenta rounded-2xl p-6 text-center">
+                                    <div class="w-14 h-14 mx-auto mb-4 rounded-xl bg-white/20 flex items-center justify-center">
+                                        <i class="w-7 h-7 text-white" data-lucide="globe"></i>
                                     </div>
-                                    <div class="counter text-3xl md:text-4xl font-bold text-pcu-navy" data-target="184">0</div>
-                                    <div class="text-xs text-gray-400 mt-1 uppercase tracking-wider font-medium">International Partners</div>
+                                    <div class="counter text-3xl md:text-4xl font-bold text-white" data-target="184">0</div>
+                                    <div class="text-xs text-white mt-1 uppercase tracking-wider font-medium">International Partners</div>
                                 </div>
-                                <div class="flip-card-back bg-slate-50">
+                                <div class="flip-card-back bg-pcu-magenta/10">
                                     <div class="text-center">
-                                        <div class="text-lg font-bold text-pcu-blue mb-2">International Partner List</div>
-                                        <div class="text-sm text-gray-600 mb-3">More about our international partnerships</div>
+                                        <div class="text-lg font-bold text-white mb-2">International Partner List</div>
+                                        <div class="text-sm text-white mb-3">More about our international partnerships</div>
                                         <div class="grid grid-cols-4 gap-3 items-center justify-items-center">
                                             <img alt="Anhui University" class="w-10 h-10 object-contain" src="Assets/Images/Logo/China/Anhui University, China.jpg"/>
                                             <img alt="FPNU" class="w-10 h-10 object-contain" src="Assets/Images/Logo/China/Fujian Polytechnic Normal University (FPNU), China.jpg"/>
@@ -171,19 +171,19 @@ function renderHomePage() {
                         </div>
 
                         <!-- Founded -->
-                        <div class="flip-card bg-white rounded-2xl shadow-sm border border-gray-100">
+                        <div class="flip-card bg-pcu-green rounded-2xl shadow-sm border border-gray-100">
                             <div class="flip-card-inner">
-                                <div class="flip-card-front bg-white rounded-2xl p-6 text-center">
-                                    <div class="w-14 h-14 mx-auto mb-4 rounded-xl bg-pcu-green/10 flex items-center justify-center">
-                                        <i class="w-7 h-7 text-pcu-green" data-lucide="calendar"></i>
+                                <div class="flip-card-front bg-pcu-green rounded-2xl p-6 text-center">
+                                    <div class="w-14 h-14 mx-auto mb-4 rounded-xl bg-white/20 flex items-center justify-center">
+                                        <i class="w-7 h-7 text-white" data-lucide="calendar"></i>
                                     </div>
-                                    <div class="text-3xl md:text-4xl font-bold text-pcu-navy">1961</div>
-                                    <div class="text-xs text-gray-400 mt-1 uppercase tracking-wider font-medium">Founded</div>
+                                    <div class="text-3xl md:text-4xl font-bold text-white">1961</div>
+                                    <div class="text-xs text-white mt-1 uppercase tracking-wider font-medium">Founded</div>
                                 </div>
-                                <div class="flip-card-back bg-slate-50">
+                                <div class="flip-card-back bg-pcu-green/10">
                                     <div class="text-center">
-                                        <div class="text-lg font-bold text-pcu-blue mb-1">Our History</div>
-                                        <div class="text-sm text-gray-600 leading-relaxed">
+                                        <div class="text-lg font-bold text-white mb-1">Our History</div>
+                                        <div class="text-sm text-white leading-relaxed">
                                             Petra Christian University was founded in 1961 by the Petra Foundation to serve Indonesia through faith-based education. Today it is recognized as a leading private university with strong academic excellence and Christian character.
                                         </div>
                                     </div>
@@ -192,29 +192,29 @@ function renderHomePage() {
                         </div>
 
                         <!-- National Partners -->
-                        <div class="flip-card bg-white rounded-2xl shadow-sm border border-gray-100" onclick="navigateTo('domestic-partnership')">
+                        <div class="flip-card bg-pcu-yellow rounded-2xl shadow-sm border border-gray-100" onclick="navigateTo('domestic-partnership')">
                             <div class="flip-card-inner">
-                                <div class="flip-card-front bg-white rounded-2xl p-6 text-center">
-                                    <div class="w-14 h-14 mx-auto mb-4 rounded-xl bg-pcu-magenta/10 flex items-center justify-center">
-                                        <i class="w-7 h-7 text-pcu-magenta" data-lucide="building-2"></i>
+                                <div class="flip-card-front bg-pcu-yellow rounded-2xl p-6 text-center">
+                                    <div class="w-14 h-14 mx-auto mb-4 rounded-xl bg-white/20 flex items-center justify-center">
+                                        <i class="w-7 h-7 text-white" data-lucide="building-2"></i>
                                     </div>
-                                    <div class="counter text-3xl md:text-4xl font-bold text-pcu-navy" data-target="430">0</div>
-                                    <div class="text-xs text-gray-400 mt-1 uppercase tracking-wider font-medium">National Partners</div>
+                                    <div class="counter text-3xl md:text-4xl font-bold text-white" data-target="430">0</div>
+                                    <div class="text-xs text-white mt-1 uppercase tracking-wider font-medium">National Partners</div>
                                 </div>
-                                <div class="flip-card-back bg-slate-50">
+                                <div class="flip-card-back bg-pcu-yellow/10">
                                     <div class="text-center">
-                                        <div class="text-lg font-bold text-pcu-blue mb-2">Domestic Partnership</div>
-                                        <div class="text-sm text-gray-600 mb-3">Click to learn more about our domestic partnerships</div>
+                                        <div class="text-lg font-bold text-white mb-2">Domestic Partnership</div>
+                                        <div class="text-sm text-white mb-3">Click to learn more about our domestic partnerships</div>
                                         <div class="grid grid-cols-5 gap-2 items-center justify-items-center">
-                                            <img alt="Bethany" class="w-10 h-10 object-contain" src="Assets/Images/Logo/Australia/Bethany Christian School, Adelaide, Australia.png"/>
-                                            <img alt="CPA" class="w-10 h-10 object-contain" src="Assets/Images/Logo/Australia/CPA Australia.png"/>
-                                            <img alt="Macquarie" class="w-10 h-10 object-contain" src="Assets/Images/Logo/Australia/Macquarie University, Australia.png"/>
-                                            <img alt="Monash" class="w-10 h-10 object-contain" src="Assets/Images/Logo/Australia/Monash University, Australia.png"/>
-                                            <img alt="Fresenius" class="w-10 h-10 object-contain" src="Assets/Images/Logo/Germany/Hochschule Fresenius University of Applied Sciences, Germany.png"/>
-                                            <img alt="Rennes" class="w-10 h-10 object-contain" src="Assets/Images/Logo/France/Rennes School of Business, France.jpg"/>
-                                            <img alt="UFV" class="w-10 h-10 object-contain" src="Assets/Images/Logo/Canada/University of the Fraser Valley (UFV), Canada.png"/>
-                                            <img alt="Yonsei" class="w-10 h-10 object-contain" src="Assets/Images/Logo/South Korea/Yonsei University, Korea.png"/>
-                                            <img alt="Bangkok" class="w-10 h-10 object-contain" src="Assets/Images/Logo/Thailand/Bangkok University, Thailand.jpg"/>
+                                            <img alt="Tokopedia" class="w-10 h-10 object-contain" src="Assets/Images/Industries/PT Tokopedia.png"/>
+                                            <img alt="GoTo Gojek" class="w-10 h-10 object-contain" src="Assets/Images/Industries/PT GoTo Gojek Tokopedia Tbk.svg"/>
+                                            <img alt="Semen Indonesia" class="w-10 h-10 object-contain" src="Assets/Images/Industries/PT. Semen Indonesia (Persero) Tbk..svg"/>
+                                            <img alt="JW Marriott" class="w-10 h-10 object-contain" src="Assets/Images/Industries/JW Marriott Hotel Surabaya.svg"/>
+                                            <img alt="Mayapada Hospital" class="w-10 h-10 object-contain" src="Assets/Images/Industries/Mayapada Hospital.png"/>
+                                            <img alt="Wings Group" class="w-10 h-10 object-contain" src="Assets/Images/Industries/Wings Group Surabaya.png"/>
+                                            <img alt="Maspion Group" class="w-10 h-10 object-contain" src="Assets/Images/Industries/Maspion Group.jpg"/>
+                                            <img alt="Samator Group" class="w-10 h-10 object-contain" src="Assets/Images/Industries/Samator Group.jpg"/>
+                                            <img alt="Bank Jatim" class="w-10 h-10 object-contain" src="Assets/Images/Industries/PT Bank Pembangunan Daerah Jawa Timur Tbk (Bank Jatim).jpg"/>
                                         </div>
                                     </div>
                                 </div>
@@ -222,28 +222,28 @@ function renderHomePage() {
                         </div>
 
                         <!-- Alumni -->
-                        <div class="bg-white rounded-2xl p-6 text-center shadow-sm border border-gray-100">
-                            <div class="w-14 h-14 mx-auto mb-4 rounded-xl bg-pcu-purple/10 flex items-center justify-center">
-                                <i class="w-7 h-7 text-pcu-purple" data-lucide="network"></i>
+                        <div class="bg-pcu-purple rounded-2xl p-6 text-center shadow-sm border border-gray-100">
+                            <div class="w-14 h-14 mx-auto mb-4 rounded-xl bg-white/20 flex items-center justify-center">
+                                <i class="w-7 h-7 text-white" data-lucide="network"></i>
                             </div>
-                            <div class="counter text-3xl md:text-4xl font-bold text-pcu-navy" data-target="52860">0</div>
-                            <div class="text-xs text-gray-400 mt-1 uppercase tracking-wider font-medium">Petranesian Alumni</div>
+                            <div class="counter text-3xl md:text-4xl font-bold text-white" data-target="52860">0</div>
+                            <div class="text-xs text-white mt-1 uppercase tracking-wider font-medium">Petranesian Alumni</div>
                         </div>
 
                         <!-- Study Programs -->
-                        <div class="flip-card bg-white rounded-2xl shadow-sm border border-gray-100">
+                        <div class="flip-card bg-pcu-red rounded-2xl shadow-sm border border-gray-100">
                             <div class="flip-card-inner">
-                                <div class="flip-card-front bg-white rounded-2xl p-6 text-center">
-                                    <div class="w-14 h-14 mx-auto mb-4 rounded-xl bg-pcu-red/10 flex items-center justify-center">
-                                        <i class="w-7 h-7 text-pcu-red" data-lucide="book-open"></i>
+                                <div class="flip-card-front bg-pcu-red rounded-2xl p-6 text-center">
+                                    <div class="w-14 h-14 mx-auto mb-4 rounded-xl bg-white/20 flex items-center justify-center">
+                                        <i class="w-7 h-7 text-white" data-lucide="book-open"></i>
                                     </div>
-                                    <div class="counter text-3xl md:text-4xl font-bold text-pcu-navy" data-target="57">0</div>
-                                    <div class="text-xs text-gray-400 mt-1 uppercase tracking-wider font-medium">Study Programs</div>
+                                    <div class="counter text-3xl md:text-4xl font-bold text-white" data-target="57">0</div>
+                                    <div class="text-xs text-white mt-1 uppercase tracking-wider font-medium">Study Programs</div>
                                 </div>
-                                <div class="flip-card-back bg-slate-50">
+                                <div class="flip-card-back bg-pcu-red/10">
                                     <div class="text-center">
-                                        <div class="text-lg font-bold text-pcu-blue mb-2">Program Highlights</div>
-                                        <div class="text-sm text-gray-600 space-y-1">
+                                        <div class="text-lg font-bold text-white mb-2">Program Highlights</div>
+                                        <div class="text-sm text-white space-y-1">
                                             <div>Engineering &amp; Technology</div>
                                             <div>Business &amp; Management</div>
                                             <div>Humanities &amp; Arts</div>
@@ -257,41 +257,41 @@ function renderHomePage() {
                         </div>
 
                         <!-- Faculties -->
-                        <div class="flip-card bg-white rounded-2xl shadow-sm border border-gray-100">
+                        <div class="flip-card bg-pcu-blue rounded-2xl shadow-sm border border-gray-100">
                             <div class="flip-card-inner">
-                                <div class="flip-card-front bg-white rounded-2xl p-6 text-center">
-                                    <div class="w-14 h-14 mx-auto mb-4 rounded-xl bg-pcu-blue/10 flex items-center justify-center">
-                                        <i class="w-7 h-7 text-pcu-blue" data-lucide="layers"></i>
+                                <div class="flip-card-front bg-pcu-blue rounded-2xl p-6 text-center">
+                                    <div class="w-14 h-14 mx-auto mb-4 rounded-xl bg-white/20 flex items-center justify-center">
+                                        <i class="w-7 h-7 text-white" data-lucide="layers"></i>
                                     </div>
-                                    <div class="counter text-3xl md:text-4xl font-bold text-pcu-navy" data-target="7">0</div>
-                                    <div class="text-xs text-gray-400 mt-1 uppercase tracking-wider font-medium">Faculties</div>
+                                    <div class="counter text-3xl md:text-4xl font-bold text-white" data-target="7">0</div>
+                                    <div class="text-xs text-white mt-1 uppercase tracking-wider font-medium">Faculties</div>
                                 </div>
-                                <div class="flip-card-back bg-slate-50 overflow-y-auto p-6 justify-start">
+                                <div class="flip-card-back bg-pcu-blue/10 overflow-y-auto p-6 justify-start">
                                     <div class="space-y-4 text-left">
-                                        <div class="text-lg font-bold text-pcu-blue mb-4">Our Faculties</div>
+                                        <div class="text-lg font-bold text-white mb-4">Our Faculties</div>
                                         <div class="space-y-4">
                                             <div class="flex items-start gap-4">
                                                 <img alt="Faculty of Civil Engineering and Planning" class="w-12 h-12 object-contain rounded-lg bg-white p-2" src="Assets/Images/Faculty/Faculty of Civil Engineering and Planning.svg"/>
                                                 <div>
-                                                    <a class="font-semibold text-pcu-blue hover:text-pcu-blue" href="https://petra.ac.id/faculty/ftsp" target="_blank">Faculty of Civil Engineering and Planning</a>
+                                                    <a class="font-semibold text-white hover:text-white/80" href="https://petra.ac.id/faculty/ftsp" target="_blank">Faculty of Civil Engineering and Planning</a>
                                                 </div>
                                             </div>
                                             <div class="flex items-start gap-4">
                                                 <img alt="Faculty of Industrial Technology" class="w-12 h-12 object-contain rounded-lg bg-white p-2" src="Assets/Images/Faculty/Faculty of Industrial Technology.svg"/>
                                                 <div>
-                                                    <a class="font-semibold text-pcu-blue hover:text-pcu-blue" href="https://petra.ac.id/faculty/fti" target="_blank">Faculty of Industrial Technology</a>
+                                                    <a class="font-semibold text-white hover:text-white/80" href="https://petra.ac.id/faculty/fti" target="_blank">Faculty of Industrial Technology</a>
                                                 </div>
                                             </div>
                                             <div class="flex items-start gap-4">
                                                 <img alt="School of Business Management" class="w-12 h-12 object-contain rounded-lg bg-white p-2" src="Assets/Images/Faculty/School of Business &amp; Management.svg"/>
                                                 <div>
-                                                    <a class="font-semibold text-pcu-blue hover:text-pcu-blue" href="https://petra.ac.id/faculty/sbm" target="_blank">School of Business Management</a>
+                                                    <a class="font-semibold text-white hover:text-white/80" href="https://petra.ac.id/faculty/sbm" target="_blank">School of Business Management</a>
                                                 </div>
                                             </div>
                                             <div class="flex items-start gap-4">
                                                 <img alt="Faculty of Humanities and Creative Industries" class="w-12 h-12 object-contain rounded-lg bg-white p-2" src="Assets/Images/Faculty/Faculty of Humanities and Creative Industries.svg"/>
                                                 <div>
-                                                    <a class="font-semibold text-pcu-blue hover:text-pcu-blue" href="https://petra.ac.id/fhik" target="_blank">Faculty of Humanities and Creative Industries</a>
+                                                    <a class="font-semibold text-white hover:text-white/80" href="https://petra.ac.id/fhik" target="_blank">Faculty of Humanities and Creative Industries</a>
                                                 </div>
                                             </div>
                                             <div class="flex items-start gap-4">
@@ -299,7 +299,7 @@ function renderHomePage() {
                                                     <i class="w-6 h-6 text-gray-400" data-lucide="activity"></i>
                                                 </div>
                                                 <div>
-                                                    <a class="font-semibold text-pcu-blue hover:text-pcu-blue" href="https://petra.ac.id/fkg" target="_blank">Faculty of Dentistry</a>
+                                                    <a class="font-semibold text-white hover:text-white/80" href="https://petra.ac.id/fkg" target="_blank">Faculty of Dentistry</a>
                                                 </div>
                                             </div>
                                             <div class="flex items-start gap-4">
@@ -307,13 +307,13 @@ function renderHomePage() {
                                                     <i class="w-6 h-6 text-gray-400" data-lucide="heart"></i>
                                                 </div>
                                                 <div>
-                                                    <a class="font-semibold text-pcu-blue hover:text-pcu-blue" href="https://petra.ac.id/fk" target="_blank">Faculty of Medicine</a>
+                                                    <a class="font-semibold text-white hover:text-white/80" href="https://petra.ac.id/fk" target="_blank">Faculty of Medicine</a>
                                                 </div>
                                             </div>
                                             <div class="flex items-start gap-4">
                                                 <img alt="Faculty of Teacher Education" class="w-12 h-12 object-contain rounded-lg bg-white p-2" src="Assets/Images/Faculty/Faculty of Teacher Education.svg"/>
                                                 <div>
-                                                    <a class="font-semibold text-pcu-blue hover:text-pcu-blue" href="https://petra.ac.id/fkip" target="_blank">Faculty of Teacher Education</a>
+                                                    <a class="font-semibold text-white hover:text-white/80" href="https://petra.ac.id/fkip" target="_blank">Faculty of Teacher Education</a>
                                                 </div>
                                             </div>
                                             <div class="flex items-start gap-4">
@@ -321,7 +321,7 @@ function renderHomePage() {
                                                     <i class="w-6 h-6 text-gray-400" data-lucide="briefcase"></i>
                                                 </div>
                                                 <div>
-                                                    <a class="font-semibold text-pcu-blue hover:text-pcu-blue" href="https://petra.ac.id/pbs" target="_blank">Petra Business School</a>
+                                                    <a class="font-semibold text-white hover:text-white/80" href="https://petra.ac.id/pbs" target="_blank">Petra Business School</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -331,49 +331,50 @@ function renderHomePage() {
                         </div>
 
                         <!-- Accreditation -->
-                        <div class="flip-card bg-white rounded-2xl shadow-sm border border-gray-100">
+                        <div class="flip-card bg-pcu-yellow rounded-2xl shadow-sm border border-gray-100">
                             <div class="flip-card-inner">
-                                <div class="flip-card-front bg-white rounded-2xl p-6 text-center">
-                                    <div class="w-14 h-14 mx-auto mb-4 rounded-xl bg-pcu-gold/10 flex items-center justify-center">
-                                        <i class="w-7 h-7 text-pcu-gold" data-lucide="award"></i>
+                                <div class="flip-card-front bg-pcu-yellow rounded-2xl p-6 text-center">
+                                    <div class="w-14 h-14 mx-auto mb-4 rounded-xl bg-white/20 flex items-center justify-center">
+                                        <i class="w-7 h-7 text-white" data-lucide="award"></i>
                                     </div>
-                                    <div class="text-3xl md:text-4xl font-bold text-pcu-navy">A</div>
-                                    <div class="text-xs text-gray-400 mt-1 uppercase tracking-wider font-medium">Excellent Accreditation</div>
+                                    <div class="text-3xl md:text-4xl font-bold text-white">A</div>
+                                    <div class="text-xs text-white mt-1 uppercase tracking-wider font-medium">Excellent Accreditation</div>
                                 </div>
-                                <div class="flip-card-back bg-slate-50 overflow-y-auto p-6">
+                                <div class="flip-card-back bg-pcu-yellow/10 overflow-y-auto p-6">
                                     <div class="space-y-4 text-left">
                                         <div class="flex items-start gap-4">
-                                            <img alt="BAN-PT" class="w-12 h-12 object-contain rounded-lg bg-white p-2" src="Assets/Images/Logo/Ban-Pt_edit.svg"/>
+                                            <img alt="BAN-PT" class="w-12 h-12 object-contain rounded-lg bg-white p-2" src="Assets/Images/Accreditation/Ban-Pt_edit.png"/>
                                             <div>
-                                                <div class="font-semibold text-pcu-blue">Terakreditasi Unggul</div>
+                                                <div class="font-semibold text-white">Terakreditasi Unggul</div>
+                                                <div class="text-sm text-white">BAN-PT</div>
                                             </div>
                                         </div>
                                         <div class="flex items-start gap-4">
                                             <img alt="AQAS" class="w-12 h-12 object-contain rounded-lg bg-white p-2" src="Assets/Images/Accreditation/AQAS-02.png"/>
                                             <div>
-                                                <div class="font-semibold text-pcu-blue">Accreditation agency based in Germany</div>
-                                                <div class="text-sm text-gray-600">Visual Communication Design, Interior Design</div>
+                                                <div class="font-semibold text-white">Accreditation agency based in Germany</div>
+                                                <div class="text-sm text-white">Visual Communication Design, Interior Design</div>
                                             </div>
                                         </div>
                                         <div class="flex items-start gap-4">
                                             <img alt="AUN-QA" class="w-12 h-12 object-contain rounded-lg bg-white p-2" src="Assets/Images/Accreditation/aun-qa.png"/>
                                             <div>
-                                                <div class="font-semibold text-pcu-blue">ASEAN University Network-Quality Assurance</div>
-                                                <div class="text-sm text-gray-600">Architecture, Accounting, Management, and Communication Science</div>
+                                                <div class="font-semibold text-white">ASEAN University Network-Quality Assurance</div>
+                                                <div class="text-sm text-white">Architecture, Accounting, Management, and Communication Science</div>
                                             </div>
                                         </div>
                                         <div class="flex items-start gap-4">
                                             <img alt="IABEE" class="w-12 h-12 object-contain rounded-lg bg-white p-2" src="Assets/Images/Accreditation/IABEE Logo_Acc_Program_ENG.png"/>
                                             <div>
-                                                <div class="font-semibold text-pcu-blue">Full signatory member of Washington Accord</div>
-                                                <div class="text-sm text-gray-600">Civil Engineering, Electrical Engineering, Mechanical Engineering, Industrial Engineering, Informatics</div>
+                                                <div class="font-semibold text-white">Full signatory member of Washington Accord</div>
+                                                <div class="text-sm text-white">Civil Engineering, Electrical Engineering, Mechanical Engineering, Industrial Engineering, Informatics</div>
                                             </div>
                                         </div>
                                         <div class="flex items-start gap-4">
                                             <img alt="KAAB" class="w-12 h-12 object-contain rounded-lg bg-white p-2" src="Assets/Images/Accreditation/KAAB.png"/>
                                             <div>
-                                                <div class="font-semibold text-pcu-blue">A signatory member of Korea Architectural Accrediting Board</div>
-                                                <div class="text-sm text-gray-600">Architecture (Bachelor's and Postgraduate Programs)</div>
+                                                <div class="font-semibold text-white">A signatory member of Korea Architectural Accrediting Board</div>
+                                                <div class="text-sm text-white">Architecture (Bachelor's and Postgraduate Programs)</div>
                                             </div>
                                         </div>
                                     </div>
