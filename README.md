@@ -145,6 +145,10 @@ Navigation is handled client-side via `navigateTo(pageId)`, which pushes `#pageI
 - **Animated Stat Counters** — Numbers count up when scrolled into view
 - **Flip Cards** — Hover-to-flip program cards (CSS 3D transforms)
 - **Program Type Selector** — Animated slide-in/out transitions for Joint vs Double Degree content
+- **OSE University Popup Cards** — Each university card on the Outbound Semester Exchange page is clickable and opens a detail popup with programs, description, duration, deadline, requirements, notes, and a website link; data is fetched from `/api/ose-programs` and merged by university name with the base partner list
+- **Admin OSE Manager** — A "Manage Universities" button in the admin FAB opens `ose-manager-modal`; admins can add custom university entries or edit/delete program details; saves to the `ose_programs` table via `/api/ose-programs`
+- **Internship Partner Filtering** — The Internship page splits partners into International/Domestic tabs with a live search input, domestic sub-type filter (International / National / Government / Education), partner count label, and a paginated "Show More" button
+- **Internship Opportunities CMS** — Admin-managed internship listings (position, company, apply link) stored in `internship_opportunities` table; admins add/edit/delete via `intern-form-modal`; displayed as cards below the partner grid on the Internship page
 - **International Partnership Modal** — Drill-down modal: continent → country → individual partner details, populated from `intlLogoFiles` in `main.js`
 - **International Partner Logo Carousel** — Auto-scrolling marquee of partner university logos on the International Partnership page
 - **Domestic Partnership Modal** — Institution detail modal with categorized partner cards and toggleable sections
@@ -217,7 +221,7 @@ pip install -r requirements.txt
 python main.py
 ```
 
-The server starts on `http://localhost:3001`. The SQLite database (`submissions.db`) is created automatically on first run.
+The server starts on `http://localhost:3001`. The SQLite database (`submissions.db`) is created automatically on first run. It contains three tables: `articles`, `ose_programs`, and `internship_opportunities`.
 
 > For production, start with Gunicorn instead: `gunicorn main:app` (the `procfile` handles this automatically on Railway/Heroku).
 
@@ -232,6 +236,14 @@ The server starts on `http://localhost:3001`. The SQLite database (`submissions.
 | `PUT` | `/api/articles/<id>` | Bearer | Update an existing article |
 | `DELETE` | `/api/articles/<id>` | Bearer | Delete an article |
 | `POST` | `/api/articles/<id>/visit` | — | Increment article visit counter |
+| `GET` | `/api/ose-programs` | — | List all OSE university program details |
+| `POST` | `/api/ose-programs` | Bearer | Create an OSE university program entry |
+| `PUT` | `/api/ose-programs/<pid>` | Bearer | Update an OSE university program entry |
+| `DELETE` | `/api/ose-programs/<pid>` | Bearer | Delete an OSE university program entry |
+| `GET` | `/api/internship-opportunities` | — | List all admin-managed internship opportunities |
+| `POST` | `/api/internship-opportunities` | Bearer | Create an internship opportunity listing |
+| `PUT` | `/api/internship-opportunities/<oid>` | Bearer | Update an internship opportunity listing |
+| `DELETE` | `/api/internship-opportunities/<oid>` | Bearer | Delete an internship opportunity listing |
 | `POST` | `/api/submit-meeting-request` | — | Save meeting request to DB and send email |
 | `GET` | `/api/submissions` | — | List all meeting request submissions (JSON) |
 | `GET` | `/api/health` | — | Health check |
@@ -274,16 +286,18 @@ The site includes a lightweight CMS for managing news articles. Articles are per
 | `admin_partnership` | Partnership | `#partnership` |
 | `admin_head` | Head | Any tag (unrestricted) |
 
-Credentials are defined in `ADMIN_ACCOUNTS` in `backend/server.py` (mirrored in `JS/admin.js` for the role list — only the server validates passwords). On successful login, the server issues a random Bearer token stored in `sessionStorage`; the token is invalidated on logout or tab close.
+Credentials are defined in `ADMIN_ACCOUNTS` in `backend/main.py` (mirrored in `JS/admin.js` for the role list — only the server validates passwords). On successful login, the server issues a random Bearer token stored in `sessionStorage`; the token is invalidated on logout or tab close.
 
 ### How it works
 
 1. Click the **Admin** button (bottom-right corner) to open the login modal.
 2. `admin.js` sends credentials to `POST /api/admin/login`; on success, the Bearer token is stored in `sessionStorage`.
-3. A floating action button (FAB) appears with **Add Article** and **Sign Out** options.
+3. A floating action button (FAB) appears with **Add Article**, **Manage Universities** (OSE), and **Sign Out** options.
 4. The article form collects: title, excerpt, body paragraphs, key highlights, contact info, tag, and an optional image (drag-and-drop or file picker — stored as a base64 data URL in the `image_url` column).
 5. On submit, the article is `POST`ed (or `PUT`ed for edits) to `/api/articles` with the Bearer token. The server saves it to SQLite and returns the saved article; `refreshNewsData()` merges it with the static seed articles from `JS/data/news.js`.
 6. Admins can edit or delete their own articles; the `Head` role can manage all articles (calls `DELETE /api/articles/<id>`).
+7. **OSE university management** — Clicking "Manage Universities" opens `ose-manager-modal`. The admin can create a new university entry (opens `ose-form-modal`) or edit/delete existing ones. Custom entries (`isCustom=true`) appear as extra cards on the OSE page; base universities from `oseBasePartners` can have program details attached by name-matching.
+8. **Internship opportunity management** — On the Internship page, admins see an "Add Opportunity" button. Clicking it opens `intern-form-modal` (position, company with autocomplete from partner list, apply link). Saved opportunities are fetched from `/api/internship-opportunities` and displayed as cards.
 7. Every article view fires a fire-and-forget `POST /api/articles/<id>/visit` to increment the server-side visit counter. The News page "Trending" sidebar is sorted by `visits` descending.
 
 ---
@@ -303,7 +317,7 @@ International partner logos are referenced as relative paths inside `intlLogoFil
 Each page is a standalone `render*()` function in `JS/pages/<section>/<page>.js`. When adding a new page, create the render file, add a `<script src="...">` tag plus a matching mount-point call in `index.html` (see the existing entries near line 420–458), and register the page ID in `main.js`.
 
 **Admin credentials in source code**
-Admin passwords are defined in plain text in `backend/server.py` (`ADMIN_ACCOUNTS`). The frontend `JS/admin.js` only stores the role/tag mapping — actual password validation happens server-side. Still, rotating credentials requires a code change and server restart. For a hardened deployment, replace the static dict with a database-backed user table and hashed passwords.
+Admin passwords are defined in plain text in `backend/main.py` (`ADMIN_ACCOUNTS`). The frontend `JS/admin.js` only stores the role/tag mapping — actual password validation happens server-side. Still, rotating credentials requires a code change and server restart. For a hardened deployment, replace the static dict with a database-backed user table and hashed passwords.
 
 **Admin sessions are in-memory**
 Bearer tokens issued by `/api/admin/login` are stored in a Python dict (`admin_sessions`) in the Flask process. Restarting the server invalidates all active sessions. For multi-process or multi-server deployments, move sessions to a shared store (Redis, DB table, etc.).
