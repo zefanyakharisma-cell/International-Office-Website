@@ -1,5 +1,5 @@
 // ---- ADMIN SYSTEM ----
-const API_BASE = 'http://localhost:3001';
+const API_BASE = 'https://international-office-website-production.up.railway.app';
 const ADMIN_SESSION_KEY = 'pcu_admin_session';
 
 const TAG_COLORS = {

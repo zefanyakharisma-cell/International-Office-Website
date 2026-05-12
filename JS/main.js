@@ -119,7 +119,7 @@ window.addEventListener('hashchange', () => {
 function trackArticleVisit(id) {
   if (!id.startsWith('news-') && !id.startsWith('admin-news-')) return;
   // Fire-and-forget; optimistically update local count for instant trending refresh
-  fetch(`http://localhost:3001/api/articles/${id}/visit`, { method: 'POST' }).catch(() => {});
+  fetch(`https://international-office-website-production.up.railway.app/api/articles/${id}/visit`, { method: 'POST' }).catch(() => {});
   const article = (window.allNews || []).find(a => a.id === id);
   if (article) {
     article.visits = (article.visits || 0) + 1;
@@ -2033,7 +2033,7 @@ document.getElementById('meetingRequestForm').addEventListener('submit', async f
   submitBtn.textContent = 'Submitting…';
 
   try {
-    const res = await fetch('http://localhost:3001/api/submit-meeting-request', {
+    const res = await fetch('https://international-office-website-production.up.railway.app/api/submit-meeting-request', {
       method:  'POST',
       headers: { 'Content-Type': 'application/json' },
       body:    JSON.stringify(payload),
