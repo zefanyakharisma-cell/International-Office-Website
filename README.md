@@ -63,8 +63,9 @@ A single-page application (SPA) for the PCU International Office, showcasing inb
 │       ├── Student Exchange/       # Student exchange program photos
 │       └── Thumbnails/             # Thumbnail images
 ├── backend/
-│   ├── server.py           # Flask API — meeting request submission and email notification
-│   ├── requirements.txt    # Python dependencies (flask, flask-cors, python-dotenv)
+│   ├── main.py             # Flask API — admin auth, article CRUD, meeting requests, email
+│   ├── procfile            # Railway/Heroku process definition: `web: gunicorn main:app`
+│   ├── requirements.txt    # Python dependencies (flask, flask-cors, python-dotenv, gunicorn)
 │   ├── submissions.db      # SQLite database — auto-created on first run (do not edit manually)
 │   └── .env                # SMTP credentials — see Backend Setup below (NOT committed to git)
 ├── scripts/
@@ -84,8 +85,9 @@ A single-page application (SPA) for the PCU International Office, showcasing inb
 | [Lucide Icons v0.263](https://lucide.dev) | Icon library (loaded via CDN) |
 | [DM Sans + Playfair Display](https://fonts.google.com) | Typography (loaded via Google Fonts) |
 | Vanilla JavaScript | Hash routing, animations, and dynamic page rendering |
-| Python 3 + Flask | Backend API for meeting request form submission and email notifications |
-| SQLite | Persistent storage for meeting request submissions (`backend/submissions.db`) |
+| Python 3 + Flask | Backend API for admin auth, article CRUD, meeting requests, and email |
+| Gunicorn | Production WSGI server (defined in `backend/procfile`) |
+| SQLite | Persistent storage for articles and meeting request submissions (`backend/submissions.db`) |
 
 The frontend requires no build step — all JS dependencies are loaded via CDN. The backend requires Python 3 and the packages listed in `backend/requirements.txt`.
 
@@ -212,10 +214,12 @@ For Gmail, generate an App Password at [myaccount.google.com/apppasswords](https
 ```bash
 cd backend
 pip install -r requirements.txt
-python server.py
+python main.py
 ```
 
 The server starts on `http://localhost:3001`. The SQLite database (`submissions.db`) is created automatically on first run.
+
+> For production, start with Gunicorn instead: `gunicorn main:app` (the `procfile` handles this automatically on Railway/Heroku).
 
 **API endpoints:**
 
@@ -245,14 +249,15 @@ The server starts on `http://localhost:3001`. The SQLite database (`submissions.
 
 ### Backend (Flask API)
 
-The backend must be deployed separately and kept running for the Meeting Request Form to work.
+The backend is deployed on **Railway** at:
+`https://international-office-website-production.up.railway.app`
 
-1. Copy the `backend/` folder to your server.
-2. Create `backend/.env` with valid SMTP credentials (see Backend Setup above).
-3. Install dependencies: `pip install -r requirements.txt`
-4. Run with a production WSGI server (e.g. Gunicorn): `gunicorn -w 2 -b 0.0.0.0:3001 server:app`
-5. Configure a reverse proxy (Nginx/Apache) to forward `/api/*` requests to the Flask server, or expose port `3001` directly.
-6. Update the `fetch` URL in `main.js` if the backend runs on a different host or port than `http://localhost:3001`.
+`JS/admin.js` and `JS/main.js` use this URL as `API_BASE`. To redeploy or run your own instance:
+
+1. Push the `backend/` folder to your Railway/Heroku project (the `procfile` handles the start command: `gunicorn main:app`).
+2. Add the SMTP environment variables (`SMTP_EMAIL`, `SMTP_PASSWORD`, `SMTP_HOST`, `SMTP_PORT`) in the platform's environment settings — do not rely on a committed `.env` file.
+3. If the backend URL changes, update `API_BASE` at the top of `JS/admin.js` and the `fetch` call in `JS/main.js`.
+4. The SQLite database (`submissions.db`) is ephemeral on most cloud platforms — consider migrating to a managed Postgres database for production persistence.
 
 ---
 
@@ -304,7 +309,10 @@ Admin passwords are defined in plain text in `backend/server.py` (`ADMIN_ACCOUNT
 Bearer tokens issued by `/api/admin/login` are stored in a Python dict (`admin_sessions`) in the Flask process. Restarting the server invalidates all active sessions. For multi-process or multi-server deployments, move sessions to a shared store (Redis, DB table, etc.).
 
 **Backend API URL hardcoded**
-The meeting request form `POST`s to `http://localhost:3001/api/submit-meeting-request`. Before deploying to production, update this URL in `main.js` to point to the live backend host. If the backend is offline, form submissions fail gracefully with an alert directing users to email `head-partnership@petra.ac.id`.
+`API_BASE` in `JS/admin.js` currently points to the Railway deployment (`https://international-office-website-production.up.railway.app`). If the backend is redeployed to a different URL, update `API_BASE` in `JS/admin.js` and the visit-tracking `fetch` in `JS/main.js`. If the backend is offline, the admin system and meeting request form fail gracefully — the form shows an alert directing users to email `head-partnership@petra.ac.id`.
+
+**SQLite on cloud platforms**
+Railway's filesystem is ephemeral — `submissions.db` may be wiped on redeployment. For durable storage, migrate to a managed database (e.g. Railway's Postgres plugin) and update the SQLite calls in `main.py` to use SQLAlchemy or `psycopg2`.
 
 **SMTP / email config**
 Email notifications require valid SMTP credentials in `backend/.env`. If the credentials are missing or incorrect, the form submission still saves to `submissions.db` but no email is sent (a warning is printed to the server console). Ensure `backend/.env` is never committed to the repository.
