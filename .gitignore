@@ -1,0 +1,4 @@
+backend/.env
+backend/submissions.db
+__pycache__/
+*.pyc

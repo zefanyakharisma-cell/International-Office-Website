@@ -205,13 +205,20 @@ The Meeting Request Form requires the Flask backend to be running. Without it, f
 **1. Create the `.env` file** inside `backend/`:
 
 ```
+# SMTP — email notifications for meeting request submissions
 SMTP_EMAIL=your-email@gmail.com
 SMTP_PASSWORD=your-app-password
 SMTP_HOST=smtp.gmail.com
 SMTP_PORT=587
+
+# Admin passwords — required; the server will refuse to start if any are missing
+PASS_INBOUND=your-inbound-password
+PASS_OUTBOUND=your-outbound-password
+PASS_PARTNERSHIP=your-partnership-password
+PASS_HEAD=your-head-password
 ```
 
-For Gmail, generate an App Password at [myaccount.google.com/apppasswords](https://myaccount.google.com/apppasswords) (requires 2-Step Verification). Do not commit this file — add `backend/.env` to `.gitignore`.
+For Gmail, generate an App Password at [myaccount.google.com/apppasswords](https://myaccount.google.com/apppasswords) (requires 2-Step Verification). Do not commit this file — `backend/.env` is already listed in `.gitignore`.
 
 **2. Install dependencies and start the server:**
 
@@ -267,7 +274,10 @@ The backend is deployed on **Railway** at:
 `JS/admin.js` and `JS/main.js` use this URL as `API_BASE`. To redeploy or run your own instance:
 
 1. Push the `backend/` folder to your Railway/Heroku project (the `procfile` handles the start command: `gunicorn main:app`).
-2. Add the SMTP environment variables (`SMTP_EMAIL`, `SMTP_PASSWORD`, `SMTP_HOST`, `SMTP_PORT`) in the platform's environment settings — do not rely on a committed `.env` file.
+2. Add **all** required environment variables in the platform's environment settings — do not rely on a committed `.env` file:
+   - SMTP: `SMTP_EMAIL`, `SMTP_PASSWORD`, `SMTP_HOST`, `SMTP_PORT`
+   - Admin passwords: `PASS_INBOUND`, `PASS_OUTBOUND`, `PASS_PARTNERSHIP`, `PASS_HEAD`
+   > The server will raise a `RuntimeError` and refuse to start if any `PASS_*` variable is missing.
 3. If the backend URL changes, update `API_BASE` at the top of `JS/admin.js` and the `fetch` call in `JS/main.js`.
 4. The SQLite database (`submissions.db`) is ephemeral on most cloud platforms — consider migrating to a managed Postgres database for production persistence.
 
@@ -286,7 +296,7 @@ The site includes a lightweight CMS for managing news articles. Articles are per
 | `admin_partnership` | Partnership | `#partnership` |
 | `admin_head` | Head | Any tag (unrestricted) |
 
-Credentials are defined in `ADMIN_ACCOUNTS` in `backend/main.py` (mirrored in `JS/admin.js` for the role list — only the server validates passwords). On successful login, the server issues a random Bearer token stored in `sessionStorage`; the token is invalidated on logout or tab close.
+Passwords are read from environment variables (`PASS_INBOUND`, `PASS_OUTBOUND`, `PASS_PARTNERSHIP`, `PASS_HEAD`) into `ADMIN_ACCOUNTS` in `backend/main.py`. `JS/admin.js` only stores the role/tag mapping — actual password validation happens server-side. On successful login, the server issues a random Bearer token stored in `sessionStorage`; the token is invalidated on logout or tab close.
 
 ### How it works
 
@@ -316,8 +326,8 @@ International partner logos are referenced as relative paths inside `intlLogoFil
 **Page render functions**
 Each page is a standalone `render*()` function in `JS/pages/<section>/<page>.js`. When adding a new page, create the render file, add a `<script src="...">` tag plus a matching mount-point call in `index.html` (see the existing entries near line 420–458), and register the page ID in `main.js`.
 
-**Admin credentials in source code**
-Admin passwords are defined in plain text in `backend/main.py` (`ADMIN_ACCOUNTS`). The frontend `JS/admin.js` only stores the role/tag mapping — actual password validation happens server-side. Still, rotating credentials requires a code change and server restart. For a hardened deployment, replace the static dict with a database-backed user table and hashed passwords.
+**Admin credentials**
+Admin passwords are **not** stored in source code. `backend/main.py` reads them exclusively from environment variables (`PASS_INBOUND`, `PASS_OUTBOUND`, `PASS_PARTNERSHIP`, `PASS_HEAD`) and refuses to start if any are missing. `JS/admin.js` only stores the role/tag mapping — actual password validation happens server-side. To rotate a password, update the corresponding env var and restart the server. For a hardened deployment, consider replacing the static dict with a database-backed user table and hashed passwords.
 
 **Admin sessions are in-memory**
 Bearer tokens issued by `/api/admin/login` are stored in a Python dict (`admin_sessions`) in the Flask process. Restarting the server invalidates all active sessions. For multi-process or multi-server deployments, move sessions to a shared store (Redis, DB table, etc.).
