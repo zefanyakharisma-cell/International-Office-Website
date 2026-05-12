@@ -12,7 +12,7 @@ A single-page application (SPA) for the PCU International Office, showcasing inb
 │   └── styles.css      # Custom styles, animations, page color themes, and PCU brand variables
 ├── JS/
 │   ├── main.js         # Navigation (hash routing), modals, visit tracking, trending list, and SDK integration
-│   ├── admin.js        # Admin system — login, article CRUD, image upload, localStorage persistence
+│   ├── admin.js        # Admin system — login (Bearer token), article CRUD via backend API, image upload
 │   ├── data/
 │   │   └── news.js     # Static news seed data and news page renderer (trending populated at runtime)
 │   └── pages/          # One render function per page, grouped by nav section
@@ -218,11 +218,18 @@ The server starts on `http://localhost:3001`. The SQLite database (`submissions.
 
 **API endpoints:**
 
-| Method | Endpoint | Description |
-|---|---|---|
-| `POST` | `/api/submit-meeting-request` | Save form submission to DB and send email |
-| `GET` | `/api/submissions` | List all submissions (JSON) |
-| `GET` | `/api/health` | Health check |
+| Method | Endpoint | Auth | Description |
+|---|---|---|---|
+| `POST` | `/api/admin/login` | — | Authenticate and receive a Bearer token |
+| `POST` | `/api/admin/logout` | Bearer | Invalidate the current session token |
+| `GET` | `/api/articles` | — | List all published articles |
+| `POST` | `/api/articles` | Bearer | Create a new article |
+| `PUT` | `/api/articles/<id>` | Bearer | Update an existing article |
+| `DELETE` | `/api/articles/<id>` | Bearer | Delete an article |
+| `POST` | `/api/articles/<id>/visit` | — | Increment article visit counter |
+| `POST` | `/api/submit-meeting-request` | — | Save meeting request to DB and send email |
+| `GET` | `/api/submissions` | — | List all meeting request submissions (JSON) |
+| `GET` | `/api/health` | — | Health check |
 
 ---
 
@@ -250,7 +257,7 @@ The backend must be deployed separately and kept running for the Meeting Request
 
 ## Admin System
 
-The site includes a lightweight CMS for managing news articles — no backend required.
+The site includes a lightweight CMS for managing news articles. Articles are persisted in the backend SQLite database (`articles` table), so they are shared across all devices and browsers. **The Flask backend must be running** for the admin system to work.
 
 ### Roles & Access
 
@@ -261,18 +268,17 @@ The site includes a lightweight CMS for managing news articles — no backend re
 | `admin_partnership` | Partnership | `#partnership` |
 | `admin_head` | Head | Any tag (unrestricted) |
 
-Passwords are defined in `ADMIN_ACCOUNTS` at the top of `JS/admin.js`. The session is stored in `sessionStorage` and cleared when the tab closes.
+Credentials are defined in `ADMIN_ACCOUNTS` in `backend/server.py` (mirrored in `JS/admin.js` for the role list — only the server validates passwords). On successful login, the server issues a random Bearer token stored in `sessionStorage`; the token is invalidated on logout or tab close.
 
 ### How it works
 
 1. Click the **Admin** button (bottom-right corner) to open the login modal.
-2. After login, a floating action button (FAB) appears with **Add Article** and **Sign Out** options.
-3. The article form collects: title, excerpt, body paragraphs, key highlights, tag, and an optional image (drag-and-drop or file picker — stored as a base64 data URL).
-4. Published articles are saved to `localStorage` under the key `pcu_admin_news` and immediately merged with the static seed articles from `JS/data/news.js` via `refreshNewsData()`.
-5. Admins can edit or delete their own articles; the `Head` role can manage all articles.
-6. The News page "Trending" sidebar is populated from visit counts stored in `localStorage` (`pcu_article_visits`), sorted by view count descending.
-
-> **Note:** Because articles are stored in `localStorage`, they are **device- and browser-specific** — articles published on one device will not appear on another. For a shared content store, the admin articles would need to be persisted server-side.
+2. `admin.js` sends credentials to `POST /api/admin/login`; on success, the Bearer token is stored in `sessionStorage`.
+3. A floating action button (FAB) appears with **Add Article** and **Sign Out** options.
+4. The article form collects: title, excerpt, body paragraphs, key highlights, contact info, tag, and an optional image (drag-and-drop or file picker — stored as a base64 data URL in the `image_url` column).
+5. On submit, the article is `POST`ed (or `PUT`ed for edits) to `/api/articles` with the Bearer token. The server saves it to SQLite and returns the saved article; `refreshNewsData()` merges it with the static seed articles from `JS/data/news.js`.
+6. Admins can edit or delete their own articles; the `Head` role can manage all articles (calls `DELETE /api/articles/<id>`).
+7. Every article view fires a fire-and-forget `POST /api/articles/<id>/visit` to increment the server-side visit counter. The News page "Trending" sidebar is sorted by `visits` descending.
 
 ---
 
@@ -291,10 +297,10 @@ International partner logos are referenced as relative paths inside `intlLogoFil
 Each page is a standalone `render*()` function in `JS/pages/<section>/<page>.js`. When adding a new page, create the render file, add a `<script src="...">` tag plus a matching mount-point call in `index.html` (see the existing entries near line 420–458), and register the page ID in `main.js`.
 
 **Admin credentials in source code**
-Admin usernames and passwords are hardcoded in plain text in `JS/admin.js`. Anyone who can view the page source can read them. For a production deployment, move credentials server-side or use a proper authentication service.
+Admin passwords are defined in plain text in `backend/server.py` (`ADMIN_ACCOUNTS`). The frontend `JS/admin.js` only stores the role/tag mapping — actual password validation happens server-side. Still, rotating credentials requires a code change and server restart. For a hardened deployment, replace the static dict with a database-backed user table and hashed passwords.
 
-**Admin articles are localStorage-only**
-News articles published via the admin panel are stored in `localStorage` under `pcu_admin_news`. They are per-browser and per-device — clearing browser storage or opening the site in a different browser will lose all admin-published articles. If persistence across devices is needed, articles must be saved server-side.
+**Admin sessions are in-memory**
+Bearer tokens issued by `/api/admin/login` are stored in a Python dict (`admin_sessions`) in the Flask process. Restarting the server invalidates all active sessions. For multi-process or multi-server deployments, move sessions to a shared store (Redis, DB table, etc.).
 
 **Backend API URL hardcoded**
 The meeting request form `POST`s to `http://localhost:3001/api/submit-meeting-request`. Before deploying to production, update this URL in `main.js` to point to the live backend host. If the backend is offline, form submissions fail gracefully with an alert directing users to email `head-partnership@petra.ac.id`.
