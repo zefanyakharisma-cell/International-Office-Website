@@ -36,7 +36,7 @@ A single-page application (SPA) for the PCU International Office, showcasing inb
 │       │   ├── domestic-partnership.js
 │       │   ├── consortium-association.js
 │       │   └── meet-us.js
-│       └── life at pcu/
+│       └── life-at-pcu/
 │           ├── how-to-get-to-pcu.js
 │           ├── accommodation.js
 │           ├── preparation-arrival-guide.js
@@ -67,7 +67,8 @@ A single-page application (SPA) for the PCU International Office, showcasing inb
 │   ├── requirements.txt    # Python dependencies (flask, flask-cors, python-dotenv)
 │   ├── submissions.db      # SQLite database — auto-created on first run (do not edit manually)
 │   └── .env                # SMTP credentials — see Backend Setup below (NOT committed to git)
-├── fix_news.py         # One-time dev utility — see note below (safe to ignore)
+├── scripts/
+│   └── fix_news.py     # One-time dev utility — see note below (safe to ignore)
 ├── .gitignore
 └── README.md
 ```
@@ -313,11 +314,11 @@ The `Assets/Images/` directory contains a large number of images (logos, facilit
 
 ---
 
-## About `fix_news.py`
+## About `scripts/fix_news.py`
 
 This is a **one-time developer utility** that was used during development to replace a static banner in the News page with a dynamic carousel. It has already been applied — the result is baked into `index.html`.
 
-**The IT team does not need to run this script.** It is kept in the repository for reference only and can be safely ignored or deleted.
+**The IT team does not need to run this script.** It is kept in `scripts/` for reference only and can be safely ignored or deleted.
 
 ---
 
