@@ -23,10 +23,10 @@ DB_PATH = os.path.join(os.path.dirname(__file__), "submissions.db")
 
 # ── Admin accounts (mirrors frontend) ──────────────────────────────────────
 ADMIN_ACCOUNTS = {
-    'admin_inbound':     {'password': 'inbound2026',     'role': 'Inbound',     'tag': '#inboundstudents'},
-    'admin_outbound':    {'password': 'outbound2026',    'role': 'Outbound',    'tag': '#outboundstudents'},
-    'admin_partnership': {'password': 'partnership2026', 'role': 'Partnership', 'tag': '#partnership'},
-    'admin_head':        {'password': 'inthead2026',     'role': 'Head',        'tag': None},
+    'admin_inbound':     {'password': os.getenv('PASS_INBOUND', 'inbound2026'),         'role': 'Inbound',     'tag': '#inboundstudents'},
+    'admin_outbound':    {'password': os.getenv('PASS_OUTBOUND', 'outbound2026'),        'role': 'Outbound',    'tag': '#outboundstudents'},
+    'admin_partnership': {'password': os.getenv('PASS_PARTNERSHIP', 'partnership2026'), 'role': 'Partnership', 'tag': '#partnership'},
+    'admin_head':        {'password': os.getenv('PASS_HEAD', 'inthead2026'),            'role': 'Head',        'tag': None},
 }
 
 # In-memory session store: token -> {username, role, tag}
