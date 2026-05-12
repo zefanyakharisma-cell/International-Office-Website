@@ -717,6 +717,13 @@ def health():
     return jsonify({"status": "ok"})
 
 
+# TEMP: force recreate DB — remove after one deploy
+import os as _os
+if _os.path.exists(DB_PATH):
+    _os.remove(DB_PATH)
+
+init_db()
+
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 3001))
     app.run(host='0.0.0.0', port=port)
