@@ -13,7 +13,11 @@ from dotenv import load_dotenv
 load_dotenv()
 
 app = Flask(__name__)
-CORS(app, origins=["*"])
+CORS(app, origins=[
+    "https://zefanyakharisma-cell.github.io",
+    "http://localhost:8080",
+    "http://localhost:3001",
+])
 
 DB_PATH = os.path.join(os.path.dirname(__file__), "submissions.db")
 
@@ -519,6 +523,5 @@ def health():
 
 
 if __name__ == "__main__":
-    init_db()
-    print("PCU Meeting Request backend running on http://localhost:3001")
-    app.run(host="0.0.0.0", port=3001, debug=True)
+    port = int(os.environ.get('PORT', 3001))
+    app.run(host='0.0.0.0', port=port)
