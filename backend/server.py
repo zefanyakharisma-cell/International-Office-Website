@@ -31,7 +31,7 @@ ADMIN_ACCOUNTS = {
 
 # In-memory session store: token -> {username, role, tag}
 admin_sessions: dict = {}
-RECIPIENT_EMAIL = "zefanya.kharisma@gmail.com"
+RECIPIENT_EMAIL = os.getenv("RECIPIENT_EMAIL", "zefanya.kharisma@petra.ac.id")
 SMTP_EMAIL    = os.getenv("SMTP_EMAIL")
 SMTP_PASSWORD = os.getenv("SMTP_PASSWORD")
 SMTP_HOST     = os.getenv("SMTP_HOST", "smtp.office365.com")
