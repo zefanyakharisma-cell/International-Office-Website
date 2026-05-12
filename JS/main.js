@@ -116,31 +116,23 @@ window.addEventListener('hashchange', () => {
 });
 
 // ---- ARTICLE VISIT TRACKING ----
-const VISITS_KEY = 'pcu_article_visits';
-
-function getArticleVisits() {
-  try { return JSON.parse(localStorage.getItem(VISITS_KEY)) || {}; } catch { return {}; }
-}
-
 function trackArticleVisit(id) {
   if (!id.startsWith('news-') && !id.startsWith('admin-news-')) return;
-  const visits = getArticleVisits();
-  visits[id] = (visits[id] || 0) + 1;
-  try { localStorage.setItem(VISITS_KEY, JSON.stringify(visits)); } catch {}
-  renderTrending();
+  // Fire-and-forget; optimistically update local count for instant trending refresh
+  fetch(`http://localhost:3001/api/articles/${id}/visit`, { method: 'POST' }).catch(() => {});
+  const article = (window.allNews || []).find(a => a.id === id);
+  if (article) {
+    article.visits = (article.visits || 0) + 1;
+    renderTrending();
+  }
 }
 
 function renderTrending() {
   const container = document.getElementById('trendingContainer');
   if (!container) return;
 
-  const visits  = getArticleVisits();
-  const articles = (window.allNews || []);
-
-  // Sort visited articles by count desc; fall back to most recent
-  const ranked = articles
-    .map(a => ({ ...a, visits: visits[a.id] || 0 }))
-    .sort((a, b) => b.visits - a.visits || 0)
+  const ranked = [...(window.allNews || [])]
+    .sort((a, b) => (b.visits || 0) - (a.visits || 0))
     .slice(0, 5);
 
   if (ranked.length === 0) {

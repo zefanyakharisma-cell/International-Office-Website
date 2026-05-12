@@ -1,12 +1,5 @@
 // ---- ADMIN SYSTEM ----
-const ADMIN_ACCOUNTS = {
-  'admin_inbound':     { password: 'inbound2026',     role: 'Inbound', tag: '#inboundstudents' },
-  'admin_outbound':    { password: 'outbound2026',    role: 'Outbound', tag: '#outboundstudents' },
-  'admin_partnership': { password: 'partnership2026', role: 'Partnership', tag: '#partnership' },
-  'admin_head':        { password: 'inthead2026',     role: 'Head', tag: null }
-};
-
-const ADMIN_NEWS_KEY = 'pcu_admin_news';
+const API_BASE = 'http://localhost:3001';
 const ADMIN_SESSION_KEY = 'pcu_admin_session';
 
 const TAG_COLORS = {
@@ -28,30 +21,40 @@ function isAdminLoggedIn() {
   return !!adminGetSession();
 }
 
-function adminLogin(username, password) {
-  const account = ADMIN_ACCOUNTS[username];
-  if (!account || account.password !== password) return false;
-  sessionStorage.setItem(ADMIN_SESSION_KEY, JSON.stringify({ username, role: account.role, tag: account.tag }));
-  return true;
+function authHeaders() {
+  const s = adminGetSession();
+  return {
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${s ? s.token : ''}`
+  };
+}
+
+async function adminLogin(username, password) {
+  try {
+    const res = await fetch(`${API_BASE}/api/admin/login`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, password })
+    });
+    if (!res.ok) return false;
+    const data = await res.json();
+    sessionStorage.setItem(ADMIN_SESSION_KEY, JSON.stringify({
+      username, role: data.role, tag: data.tag, token: data.token
+    }));
+    return true;
+  } catch { return false; }
 }
 
 function adminLogout() {
+  const s = adminGetSession();
+  if (s && s.token) {
+    fetch(`${API_BASE}/api/admin/logout`, {
+      method: 'POST',
+      headers: authHeaders()
+    }).catch(() => {});
+  }
   sessionStorage.removeItem(ADMIN_SESSION_KEY);
   updateAdminUI();
-  refreshNewsData();
-}
-
-// ---- STORAGE ----
-function getAdminArticles() {
-  try { return JSON.parse(localStorage.getItem(ADMIN_NEWS_KEY)) || []; } catch { return []; }
-}
-
-function saveAdminArticles(articles) {
-  localStorage.setItem(ADMIN_NEWS_KEY, JSON.stringify(articles));
-}
-
-function deleteAdminArticle(id) {
-  saveAdminArticles(getAdminArticles().filter(a => a.id !== id));
   refreshNewsData();
 }
 
@@ -70,14 +73,18 @@ function closeAdminLoginModal() {
   document.getElementById('adminLoginModal').classList.remove('flex');
 }
 
-function handleAdminLogin(e) {
+async function handleAdminLogin(e) {
   e.preventDefault();
   const username = document.getElementById('adminUsernameInput').value.trim();
   const password = document.getElementById('adminPasswordInput').value;
-  if (adminLogin(username, password)) {
+  const btn = e.target.querySelector('button[type="submit"]');
+  if (btn) btn.disabled = true;
+  const ok = await adminLogin(username, password);
+  if (btn) btn.disabled = false;
+  if (ok) {
     closeAdminLoginModal();
     updateAdminUI();
-    refreshNewsData();
+    await refreshNewsData();
   } else {
     document.getElementById('adminLoginError').style.display = 'block';
   }
@@ -138,7 +145,6 @@ function handleImageDragEnter(e) {
 }
 
 function handleImageDragLeave(e) {
-  // Only reset if leaving the drop zone entirely
   if (!document.getElementById('imageDropZone').contains(e.relatedTarget)) {
     document.getElementById('imageUploadLabel').classList.remove('border-pcu-blue', 'bg-pcu-light/40');
     document.getElementById('imageUploadLabel').classList.add('border-gray-200', 'bg-gray-50');
@@ -227,7 +233,6 @@ function resetArticleForm() {
 }
 
 function setFormMode(mode) {
-  // mode: 'add' | 'edit'
   const isEdit = mode === 'edit';
   document.getElementById('articleFormModalTitle').textContent = isEdit ? 'Edit Article' : 'Add New Article';
   document.getElementById('articleFormSubmitText').textContent = isEdit ? 'Update Article' : 'Publish Article';
@@ -249,14 +254,13 @@ function openAddArticleModal() {
 
 function openEditArticleModal(id) {
   if (!isAdminLoggedIn()) { openAdminLoginModal(); return; }
-  const article = getAdminArticles().find(a => a.id === id);
+  const article = (window.allNews || []).find(a => a.id === id);
   if (!article) return;
 
   editingArticleId = id;
   resetArticleForm();
   setFormMode('edit');
 
-  // Pre-fill all fields
   document.getElementById('articleTitle').value = article.title || '';
   document.getElementById('articleTag').value = article.tag || '#inboundstudents';
   document.getElementById('articleExcerpt').value = article.excerpt || '';
@@ -265,12 +269,8 @@ function openEditArticleModal(id) {
   document.getElementById('articleContactEmail').value = article.contactEmail || '';
   document.getElementById('articleContactPhone').value = article.contactPhone || '';
 
-  // Image
-  if (article.imageUrl) {
-    applyImageDataUrl(article.imageUrl);
-  }
+  if (article.imageUrl) applyImageDataUrl(article.imageUrl);
 
-  // Body paragraphs
   const bodyContainer = document.getElementById('articleBodyFields');
   const paras = article.paragraphs && article.paragraphs.length ? article.paragraphs : [''];
   bodyContainer.innerHTML = paras.map((_, i) => buildBodyField(i)).join('');
@@ -278,7 +278,6 @@ function openEditArticleModal(id) {
     ta.value = paras[i] || '';
   });
 
-  // Highlights
   const hlContainer = document.getElementById('articleHighlightFields');
   const hls = article.highlights && article.highlights.length ? article.highlights : [''];
   hlContainer.innerHTML = hls.map((_, i) => buildHighlightField(i)).join('');
@@ -299,17 +298,17 @@ function closeAddArticleModal() {
 }
 
 // ---- PUBLISH / UPDATE ----
-function handlePublishArticle(e) {
+async function handlePublishArticle(e) {
   e.preventDefault();
   const session = adminGetSession();
   if (!session) return;
 
-  const form = document.getElementById('articleForm');
-  const title       = document.getElementById('articleTitle').value.trim();
-  const excerpt     = document.getElementById('articleExcerpt').value.trim();
-  const tag         = document.getElementById('articleTag').value;
-  const imageUrl    = document.getElementById('articleImageUrl').value.trim();
-  const quote       = document.getElementById('articleQuote').value.trim();
+  const form         = document.getElementById('articleForm');
+  const title        = document.getElementById('articleTitle').value.trim();
+  const excerpt      = document.getElementById('articleExcerpt').value.trim();
+  const tag          = document.getElementById('articleTag').value;
+  const imageUrl     = document.getElementById('articleImageUrl').value.trim();
+  const quote        = document.getElementById('articleQuote').value.trim();
   const contactName  = document.getElementById('articleContactName').value.trim();
   const contactEmail = document.getElementById('articleContactEmail').value.trim();
   const contactPhone = document.getElementById('articleContactPhone').value.trim();
@@ -324,60 +323,38 @@ function handlePublishArticle(e) {
     return;
   }
 
-  if (editingArticleId) {
-    // ---- UPDATE ----
-    const articles = getAdminArticles();
-    const idx = articles.findIndex(a => a.id === editingArticleId);
-    if (idx === -1) {
-      showAdminToast('Error: article not found. Try refreshing.');
-      return;
+  const payload = { title, excerpt, tag, imageUrl, paragraphs, quote, highlights, contactName, contactEmail, contactPhone };
+  const submitBtn = document.getElementById('articleFormSubmitBtn');
+  submitBtn.disabled = true;
+
+  try {
+    if (editingArticleId) {
+      const res = await fetch(`${API_BASE}/api/articles/${editingArticleId}`, {
+        method: 'PUT',
+        headers: authHeaders(),
+        body: JSON.stringify(payload)
+      });
+      if (!res.ok) throw new Error((await res.json()).error || 'Server error');
+      const updated = await res.json();
+      closeAddArticleModal();
+      await refreshNewsData();
+      navigateTo(updated.id);
+      showAdminToast('Article updated successfully!');
+    } else {
+      const res = await fetch(`${API_BASE}/api/articles`, {
+        method: 'POST',
+        headers: authHeaders(),
+        body: JSON.stringify({ ...payload, author: session.username })
+      });
+      if (!res.ok) throw new Error((await res.json()).error || 'Server error');
+      closeAddArticleModal();
+      await refreshNewsData();
+      showAdminToast('Article published successfully!');
     }
-    const updated = {
-      ...articles[idx],
-      title, excerpt, tag,
-      color: TAG_COLORS[tag] || articles[idx].color,
-      imageUrl, paragraphs, quote, highlights,
-      contactName, contactEmail, contactPhone,
-      updatedAt: new Date().toISOString()
-    };
-    articles[idx] = updated;
-    try {
-      saveAdminArticles(articles);
-    } catch (err) {
-      alert('Could not save: storage may be full. Try removing the image or clearing old articles.');
-      return;
-    }
-    const targetId = updated.id;
-    closeAddArticleModal();
-    refreshNewsData();
-    // Navigate to the updated article — this re-injects the page AND correctly sets .active
-    navigateTo(targetId);
-    showAdminToast('Article updated successfully!');
-    return;
-  } else {
-    // ---- CREATE ----
-    const now = new Date();
-    const article = {
-      id: 'admin-news-' + Date.now(),
-      title, excerpt, tag,
-      color: TAG_COLORS[tag] || 'from-pcu-blue to-pcu-sky',
-      date: now.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }),
-      imageUrl, paragraphs, quote, highlights,
-      contactName, contactEmail, contactPhone,
-      author: session.username,
-      createdAt: now.toISOString()
-    };
-    const existing = getAdminArticles();
-    existing.unshift(article);
-    try {
-      saveAdminArticles(existing);
-    } catch (err) {
-      alert('Could not save: storage may be full. Try removing the image or using a smaller photo.');
-      return;
-    }
-    closeAddArticleModal();
-    refreshNewsData();
-    showAdminToast('Article published successfully!');
+  } catch (err) {
+    alert(`Could not save: ${err.message}`);
+  } finally {
+    submitBtn.disabled = false;
   }
 }
 
@@ -394,8 +371,13 @@ function showAdminToast(msg) {
 }
 
 // ---- DYNAMIC NEWS REFRESH ----
-function refreshNewsData() {
-  const adminArticles = getAdminArticles();
+async function refreshNewsData() {
+  let adminArticles = [];
+  try {
+    const res = await fetch(`${API_BASE}/api/articles`);
+    if (res.ok) adminArticles = await res.json();
+  } catch {}
+
   window.allNews = [...adminArticles, ...window.staticNews];
   window.latestNewsData = window.allNews.slice(0, 4);
   window.newsCarouselIndex = 0;
@@ -410,6 +392,7 @@ function refreshNewsData() {
   if (typeof renderNewsCarousel === 'function') renderNewsCarousel();
   if (typeof renderCategories === 'function') renderCategories();
   if (typeof renderTrending === 'function') renderTrending();
+  ensureAdminArticlePagesExist();
   lucide.createIcons();
 }
 
@@ -491,19 +474,27 @@ function renderAdminArticlePage(article) {
 }
 
 // ---- DELETE ----
-function confirmDeleteArticle(id) {
-  if (confirm('Delete this article? This cannot be undone.')) {
+async function confirmDeleteArticle(id) {
+  if (!confirm('Delete this article? This cannot be undone.')) return;
+  try {
+    const res = await fetch(`${API_BASE}/api/articles/${id}`, {
+      method: 'DELETE',
+      headers: authHeaders()
+    });
+    if (!res.ok) throw new Error((await res.json()).error || 'Server error');
     const pageEl = document.getElementById('page-' + id);
     if (pageEl) pageEl.remove();
-    deleteAdminArticle(id);
+    await refreshNewsData();
     navigateTo('news');
     showAdminToast('Article deleted.');
+  } catch (err) {
+    alert(`Could not delete: ${err.message}`);
   }
 }
 
 // ---- INJECT PAGE ----
 function injectAdminArticlePage(article) {
-  const existing = document.getElementById('page-' + article.id);
+  const existing  = document.getElementById('page-' + article.id);
   const container = document.getElementById('adminArticlePages');
   if (!container) return;
   const div = document.createElement('div');
@@ -518,12 +509,14 @@ function injectAdminArticlePage(article) {
 }
 
 function ensureAdminArticlePagesExist() {
-  getAdminArticles().forEach(a => injectAdminArticlePage(a));
+  (window.allNews || [])
+    .filter(a => a.id.startsWith('admin-news-'))
+    .forEach(a => injectAdminArticlePage(a));
 }
 
 // ---- UI STATE ----
 function updateAdminUI() {
-  const loggedIn = isAdminLoggedIn();
+  const loggedIn  = isAdminLoggedIn();
   const session   = adminGetSession();
   const fab       = document.getElementById('adminFab');
   const loginBtn  = document.getElementById('adminLoginBtn');
@@ -541,8 +534,7 @@ function updateAdminUI() {
 }
 
 // ---- INIT ----
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', async function() {
   updateAdminUI();
-  ensureAdminArticlePagesExist();
-  refreshNewsData();
+  await refreshNewsData();
 });

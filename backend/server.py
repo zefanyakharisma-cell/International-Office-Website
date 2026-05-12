@@ -1,5 +1,6 @@
 import os
 import json
+import secrets
 import sqlite3
 import smtplib
 from email.mime.multipart import MIMEMultipart
@@ -15,6 +16,17 @@ app = Flask(__name__)
 CORS(app, origins=["*"])
 
 DB_PATH = os.path.join(os.path.dirname(__file__), "submissions.db")
+
+# ── Admin accounts (mirrors frontend) ──────────────────────────────────────
+ADMIN_ACCOUNTS = {
+    'admin_inbound':     {'password': 'inbound2026',     'role': 'Inbound',     'tag': '#inboundstudents'},
+    'admin_outbound':    {'password': 'outbound2026',    'role': 'Outbound',    'tag': '#outboundstudents'},
+    'admin_partnership': {'password': 'partnership2026', 'role': 'Partnership', 'tag': '#partnership'},
+    'admin_head':        {'password': 'inthead2026',     'role': 'Head',        'tag': None},
+}
+
+# In-memory session store: token -> {username, role, tag}
+admin_sessions: dict = {}
 RECIPIENT_EMAIL = "zefanya.kharisma@gmail.com"
 SMTP_EMAIL    = os.getenv("SMTP_EMAIL")
 SMTP_PASSWORD = os.getenv("SMTP_PASSWORD")
@@ -30,6 +42,27 @@ def get_db():
 
 def init_db():
     with get_db() as conn:
+        conn.execute("""
+            CREATE TABLE IF NOT EXISTS articles (
+                id            TEXT PRIMARY KEY,
+                title         TEXT NOT NULL,
+                excerpt       TEXT,
+                tag           TEXT,
+                color         TEXT,
+                date          TEXT,
+                image_url     TEXT,
+                paragraphs    TEXT,
+                quote         TEXT,
+                highlights    TEXT,
+                contact_name  TEXT,
+                contact_email TEXT,
+                contact_phone TEXT,
+                author        TEXT,
+                created_at    TEXT NOT NULL,
+                updated_at    TEXT,
+                visits        INTEGER DEFAULT 0
+            )
+        """)
         conn.execute("""
             CREATE TABLE IF NOT EXISTS meeting_requests (
                 id              INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -248,6 +281,170 @@ Participants:
 """.strip()
 
     return text, html
+
+
+# ── Auth helpers ───────────────────────────────────────────────────────────
+def get_admin_session():
+    auth = request.headers.get('Authorization', '')
+    if not auth.startswith('Bearer '):
+        return None
+    return admin_sessions.get(auth[7:])
+
+
+def require_admin():
+    session = get_admin_session()
+    if not session:
+        return None, (jsonify({'error': 'Unauthorized'}), 401)
+    return session, None
+
+
+def article_to_dict(row):
+    d = dict(row)
+    d['imageUrl']     = d.pop('image_url', '')
+    d['contactName']  = d.pop('contact_name', '')
+    d['contactEmail'] = d.pop('contact_email', '')
+    d['contactPhone'] = d.pop('contact_phone', '')
+    d['createdAt']    = d.pop('created_at', '')
+    d['updatedAt']    = d.pop('updated_at', '')
+    d['paragraphs']   = json.loads(d.get('paragraphs') or '[]')
+    d['highlights']   = json.loads(d.get('highlights') or '[]')
+    return d
+
+
+# ── Admin login / logout ───────────────────────────────────────────────────
+@app.route("/api/admin/login", methods=["POST"])
+def admin_login():
+    data     = request.get_json(force=True) or {}
+    username = data.get('username', '').strip()
+    password = data.get('password', '')
+    account  = ADMIN_ACCOUNTS.get(username)
+    if not account or account['password'] != password:
+        return jsonify({'error': 'Invalid credentials'}), 401
+    token = secrets.token_hex(32)
+    admin_sessions[token] = {'username': username, 'role': account['role'], 'tag': account['tag']}
+    return jsonify({'token': token, 'role': account['role'], 'tag': account['tag']}), 200
+
+
+@app.route("/api/admin/logout", methods=["POST"])
+def admin_logout():
+    auth = request.headers.get('Authorization', '')
+    if auth.startswith('Bearer '):
+        admin_sessions.pop(auth[7:], None)
+    return jsonify({'ok': True}), 200
+
+
+# ── Articles CRUD ──────────────────────────────────────────────────────────
+@app.route("/api/articles", methods=["GET"])
+def list_articles():
+    with get_db() as conn:
+        rows = conn.execute(
+            "SELECT * FROM articles ORDER BY created_at DESC"
+        ).fetchall()
+    return jsonify([article_to_dict(r) for r in rows])
+
+
+@app.route("/api/articles", methods=["POST"])
+def create_article():
+    session, err = require_admin()
+    if err:
+        return err
+    data = request.get_json(force=True) or {}
+    now  = datetime.now().isoformat()
+    aid  = f"admin-news-{int(datetime.now().timestamp() * 1000)}"
+    TAG_COLORS = {
+        '#inboundstudents':  'from-pcu-blue to-pcu-sky',
+        '#outboundstudents': 'from-teal-500 to-emerald-600',
+        '#partnership':      'from-pcu-gold to-yellow-500',
+        '#general':          'from-violet-500 to-purple-600',
+    }
+    tag   = data.get('tag', '#general')
+    color = data.get('color') or TAG_COLORS.get(tag, 'from-pcu-blue to-pcu-sky')
+    date  = datetime.now().strftime('%b %d, %Y')
+    with get_db() as conn:
+        conn.execute("""
+            INSERT INTO articles
+              (id, title, excerpt, tag, color, date, image_url, paragraphs, quote,
+               highlights, contact_name, contact_email, contact_phone, author, created_at)
+            VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+        """, (
+            aid,
+            data.get('title', ''),
+            data.get('excerpt', ''),
+            tag, color, date,
+            data.get('imageUrl', ''),
+            json.dumps(data.get('paragraphs', [])),
+            data.get('quote', ''),
+            json.dumps(data.get('highlights', [])),
+            data.get('contactName', ''),
+            data.get('contactEmail', ''),
+            data.get('contactPhone', ''),
+            session['username'],
+            now,
+        ))
+        conn.commit()
+        row = conn.execute("SELECT * FROM articles WHERE id=?", (aid,)).fetchone()
+    return jsonify(article_to_dict(row)), 201
+
+
+@app.route("/api/articles/<article_id>", methods=["PUT"])
+def update_article(article_id):
+    session, err = require_admin()
+    if err:
+        return err
+    data = request.get_json(force=True) or {}
+    now  = datetime.now().isoformat()
+    TAG_COLORS = {
+        '#inboundstudents':  'from-pcu-blue to-pcu-sky',
+        '#outboundstudents': 'from-teal-500 to-emerald-600',
+        '#partnership':      'from-pcu-gold to-yellow-500',
+        '#general':          'from-violet-500 to-purple-600',
+    }
+    tag   = data.get('tag', '#general')
+    color = data.get('color') or TAG_COLORS.get(tag, 'from-pcu-blue to-pcu-sky')
+    with get_db() as conn:
+        conn.execute("""
+            UPDATE articles SET
+              title=?, excerpt=?, tag=?, color=?, image_url=?, paragraphs=?, quote=?,
+              highlights=?, contact_name=?, contact_email=?, contact_phone=?, updated_at=?
+            WHERE id=?
+        """, (
+            data.get('title', ''),
+            data.get('excerpt', ''),
+            tag, color,
+            data.get('imageUrl', ''),
+            json.dumps(data.get('paragraphs', [])),
+            data.get('quote', ''),
+            json.dumps(data.get('highlights', [])),
+            data.get('contactName', ''),
+            data.get('contactEmail', ''),
+            data.get('contactPhone', ''),
+            now,
+            article_id,
+        ))
+        conn.commit()
+        row = conn.execute("SELECT * FROM articles WHERE id=?", (article_id,)).fetchone()
+    if not row:
+        return jsonify({'error': 'Not found'}), 404
+    return jsonify(article_to_dict(row))
+
+
+@app.route("/api/articles/<article_id>", methods=["DELETE"])
+def delete_article(article_id):
+    _, err = require_admin()
+    if err:
+        return err
+    with get_db() as conn:
+        conn.execute("DELETE FROM articles WHERE id=?", (article_id,))
+        conn.commit()
+    return jsonify({'ok': True})
+
+
+@app.route("/api/articles/<article_id>/visit", methods=["POST"])
+def visit_article(article_id):
+    with get_db() as conn:
+        conn.execute("UPDATE articles SET visits = visits + 1 WHERE id=?", (article_id,))
+        conn.commit()
+    return jsonify({'ok': True})
 
 
 @app.route("/api/submit-meeting-request", methods=["POST"])
