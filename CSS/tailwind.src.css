@@ -1,0 +1,8 @@
+/* Tailwind source — compiled by `npm run build` to CSS/tailwind.build.css.
+   Custom styles live in CSS/styles.css and are loaded separately from index.html.
+   Content paths configured in tailwind.config.js scan index.html and JS/**.js,
+   so no safelist is required. */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

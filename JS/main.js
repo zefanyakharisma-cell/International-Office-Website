@@ -354,37 +354,41 @@ document.addEventListener('keydown', (e) => {
 // so themed components (e.g. .news-img placeholder) inherit cleanly without
 // scattered !important overrides. The legacy per-page !important rules in
 // styles.css are still in place for now (will be retired in Phase 3).
+// Each entry: [accent hex, section slug for body[data-section] scoping].
+// Pages not in this map (home, explore) intentionally have no data-section,
+// so they keep the default Tailwind colors instead of being themed.
 const PAGE_ACCENTS = {
   // Inbound — sky
-  'intl-students': '#30aeb4',
-  'semester-exchange': '#30aeb4',
-  'intl-degree': '#30aeb4',
-  'cop': '#30aeb4',
-  'indonesian-spectrum': '#30aeb4',
+  'intl-students':              ['#30aeb4', 'inbound'],
+  'semester-exchange':          ['#30aeb4', 'inbound'],
+  'intl-degree':                ['#30aeb4', 'inbound'],
+  'cop':                        ['#30aeb4', 'inbound'],
+  'indonesian-spectrum':        ['#30aeb4', 'inbound'],
   // Outbound — orange
-  'pcu-students': '#fa6632',
-  'outbound-semester-exchange': '#fa6632',
-  'joint-double-degree': '#fa6632',
-  'internship': '#fa6632',
+  'pcu-students':               ['#fa6632', 'outbound'],
+  'outbound-semester-exchange': ['#fa6632', 'outbound'],
+  'joint-double-degree':        ['#fa6632', 'outbound'],
+  'internship':                 ['#fa6632', 'outbound'],
   // Partnership — purple
-  'international-partnership': '#8d4bb1',
-  'domestic-partnership': '#8d4bb1',
-  'consortium-association': '#8d4bb1',
-  'partnership-meet-us': '#8d4bb1',
+  'international-partnership':  ['#8d4bb1', 'partnership'],
+  'domestic-partnership':       ['#8d4bb1', 'partnership'],
+  'consortium-association':     ['#8d4bb1', 'partnership'],
+  'partnership-meet-us':        ['#8d4bb1', 'partnership'],
   // Life at PCU — green
-  'how-to-get': '#52ac2d',
-  'accommodation': '#52ac2d',
-  'preparation-arrival': '#52ac2d',
-  'visa-immigration': '#52ac2d',
-  // About — navy (default)
-  'pcu-at-glance': '#1d446e',
-  'facilities': '#1d446e',
-  'news': '#1d446e',
-  'contact-us': '#1d446e'
+  'how-to-get':                 ['#52ac2d', 'life'],
+  'accommodation':              ['#52ac2d', 'life'],
+  'preparation-arrival':        ['#52ac2d', 'life'],
+  'visa-immigration':           ['#52ac2d', 'life'],
+  // About — navy
+  'pcu-at-glance':              ['#1d446e', 'about'],
+  'facilities':                 ['#1d446e', 'about'],
+  'news':                       ['#1d446e', 'about'],
+  'contact-us':                 ['#1d446e', 'about']
 };
 function setPageAccent(pageId) {
-  const hex = PAGE_ACCENTS[pageId] || '#1d446e';
-  // Convert #rrggbb to "r, g, b" so rgba() helpers work
+  const entry = PAGE_ACCENTS[pageId];
+  const hex = entry ? entry[0] : '#1d446e';
+  const section = entry ? entry[1] : '';
   const r = parseInt(hex.slice(1, 3), 16);
   const g = parseInt(hex.slice(3, 5), 16);
   const b = parseInt(hex.slice(5, 7), 16);
@@ -393,6 +397,9 @@ function setPageAccent(pageId) {
   root.setProperty('--page-accent-soft', `rgba(${r}, ${g}, ${b}, 0.10)`);
   root.setProperty('--page-accent-border', `rgba(${r}, ${g}, ${b}, 0.20)`);
   root.setProperty('--page-accent-shadow', `rgba(${r}, ${g}, ${b}, 0.15)`);
+  // Section attribute scopes the theming CSS rules in styles.css
+  if (section) document.body.setAttribute('data-section', section);
+  else document.body.removeAttribute('data-section');
 }
 
 // ---- HERO CAROUSEL ----
@@ -2533,13 +2540,7 @@ document.getElementById('meetingRequestForm').addEventListener('submit', async f
       email:      raw.picEmail,
       phone:      raw.picPhone,
     },
-    participants: [1,2,3,4,5].map(i => ({
-      title:      raw['p'+i+'Title'],
-      givenName:  raw['p'+i+'Given'],
-      familyName: raw['p'+i+'Family'],
-      position:   raw['p'+i+'Position'],
-      division:   raw['p'+i+'Division'],
-    })).filter(p => p.givenName || p.familyName),
+    participants: collectMeetingParticipants(form),
   };
 
   const submitBtn = form.querySelector('button[type="submit"]');
@@ -2590,4 +2591,308 @@ function closeMeetingRequestAfterSuccess() {
   if (success) success.remove();
   document.getElementById('meetingRequestForm').style.display = '';
   closeMeetingRequestModal();
+}
+
+// ============================================================
+// MEETING FORM — Faculty-grouped department picker + participants repeater
+// ------------------------------------------------------------
+// Replaces the previous 31-checkbox flat list (unusable on phones) and the
+// 5-row horizontal-scroll participants table. Departments are grouped under
+// 8 collapsible faculty accordions with search, select-all per faculty,
+// global select-all/clear, and a live selected-count. Participants are
+// rendered as stacked cards (up to 5) with an "Add participant" button and
+// per-card remove control.
+// ============================================================
+const FACULTY_DEPARTMENTS = [
+  { faculty: 'Faculty of Humanities & Creative Industries', depts: [
+    'English Department',
+    'Chinese Department',
+    'Communication Science',
+    'Visual Communication Design',
+    'Interior Design',
+    'Fashion Design and Textile',
+    'International Program in Digital Media',
+    'Creative Tourism',
+    'Hotel Management'
+  ]},
+  { faculty: 'Faculty of Teacher Education', depts: [
+    'Early Childhood Teacher Education',
+    'Elementary Teacher Education'
+  ]},
+  { faculty: 'Faculty of Civil Engineering & Planning', depts: [
+    'Civil Engineering',
+    'Architecture'
+  ]},
+  { faculty: 'Faculty of Industrial Technology', depts: [
+    'Electrical Engineering',
+    'Mechanical Engineering',
+    'Informatics',
+    'Industrial Engineering'
+  ]},
+  { faculty: 'Faculty of Health Sciences', depts: [
+    'Faculty of Medicines',
+    'Faculty of Dentistry',
+    'Pharmacy Department',
+    'Food Technology Department'
+  ]},
+  { faculty: 'Faculty of Business & Economics', depts: [
+    'Finance and Investment',
+    'Marketing Management',
+    'Business Management',
+    'International Business Management',
+    'Business Accounting',
+    'Tax Accounting',
+    'International Business Accounting'
+  ]},
+  { faculty: 'University Offices', depts: [
+    'Marketing & Relations Department',
+    'International Office',
+    'Institute of Research and Community Service'
+  ]}
+];
+
+// Build accordion DOM
+function renderDepartmentAccordion() {
+  const root = document.getElementById('mr-deptAccordion');
+  if (!root) return;
+  root.innerHTML = FACULTY_DEPARTMENTS.map((group, idx) => {
+    const facultyId = `mr-faculty-${idx}`;
+    const panelId = `mr-faculty-panel-${idx}`;
+    return `
+      <div class="mr-faculty-group" data-faculty="${group.faculty.toLowerCase()}">
+        <h5 class="m-0">
+          <button type="button" id="${facultyId}" aria-expanded="false" aria-controls="${panelId}"
+            class="w-full flex items-center justify-between gap-3 px-4 py-3 text-left text-sm font-semibold text-gray-700 hover:bg-violet-50/60 focus:outline-none focus-visible:bg-violet-50 transition mr-faculty-toggle">
+            <span class="flex items-center gap-2">
+              <i aria-hidden="true" class="w-4 h-4 text-gray-400 transition-transform mr-faculty-chevron" data-lucide="chevron-right"></i>
+              <span>${group.faculty}</span>
+            </span>
+            <span class="text-xs font-normal text-gray-400 mr-faculty-count">0/${group.depts.length}</span>
+          </button>
+        </h5>
+        <div id="${panelId}" role="region" aria-labelledby="${facultyId}" class="mr-faculty-panel hidden px-4 pb-3">
+          <div class="flex items-center gap-2 mb-2 flex-wrap pl-6">
+            <button type="button" class="px-2.5 py-1 text-[11px] font-semibold text-pcu-purple bg-violet-50 hover:bg-violet-100 rounded-full transition mr-faculty-select-all">Select faculty</button>
+            <button type="button" class="px-2.5 py-1 text-[11px] font-semibold text-gray-600 bg-gray-50 hover:bg-gray-100 rounded-full transition mr-faculty-clear">Clear</button>
+          </div>
+          <div class="grid sm:grid-cols-2 gap-y-2 gap-x-4 text-sm text-gray-700 pl-6">
+            ${group.depts.map((d) => `
+              <label class="mr-dept-item flex items-start gap-2 cursor-pointer py-1 rounded hover:bg-violet-50/50 px-1.5 -ml-1.5"
+                data-dept="${d.toLowerCase()}">
+                <input type="checkbox" name="dept" value="${d}" class="w-4 h-4 mt-0.5 accent-violet-600 shrink-0"/>
+                <span>${d}</span>
+              </label>`).join('')}
+          </div>
+        </div>
+      </div>`;
+  }).join('');
+  if (window.lucide) lucide.createIcons();
+  bindDepartmentAccordion();
+  updateDepartmentCount();
+}
+
+function bindDepartmentAccordion() {
+  const groups = document.querySelectorAll('.mr-faculty-group');
+  groups.forEach((group) => {
+    const toggle = group.querySelector('.mr-faculty-toggle');
+    const panel = group.querySelector('.mr-faculty-panel');
+    const chevron = group.querySelector('.mr-faculty-chevron');
+    toggle.addEventListener('click', () => {
+      const open = panel.classList.contains('hidden');
+      panel.classList.toggle('hidden', !open);
+      toggle.setAttribute('aria-expanded', String(open));
+      if (chevron) chevron.style.transform = open ? 'rotate(90deg)' : '';
+    });
+    group.querySelector('.mr-faculty-select-all').addEventListener('click', () => {
+      group.querySelectorAll('input[name="dept"]').forEach((c) => { c.checked = true; });
+      updateDepartmentCount();
+    });
+    group.querySelector('.mr-faculty-clear').addEventListener('click', () => {
+      group.querySelectorAll('input[name="dept"]').forEach((c) => { c.checked = false; });
+      updateDepartmentCount();
+    });
+    group.querySelectorAll('input[name="dept"]').forEach((c) => {
+      c.addEventListener('change', updateDepartmentCount);
+    });
+  });
+  // Global controls
+  document.getElementById('mr-deptSelectAll')?.addEventListener('click', () => {
+    document.querySelectorAll('#mr-deptAccordion input[name="dept"]').forEach((c) => { c.checked = true; });
+    updateDepartmentCount();
+  });
+  document.getElementById('mr-deptClearAll')?.addEventListener('click', () => {
+    document.querySelectorAll('#mr-deptAccordion input[name="dept"]').forEach((c) => { c.checked = false; });
+    updateDepartmentCount();
+  });
+  document.getElementById('mr-deptExpandAll')?.addEventListener('click', () => {
+    document.querySelectorAll('.mr-faculty-group').forEach((g) => {
+      g.querySelector('.mr-faculty-panel').classList.remove('hidden');
+      g.querySelector('.mr-faculty-toggle').setAttribute('aria-expanded', 'true');
+      const ch = g.querySelector('.mr-faculty-chevron');
+      if (ch) ch.style.transform = 'rotate(90deg)';
+    });
+  });
+  document.getElementById('mr-deptCollapseAll')?.addEventListener('click', () => {
+    document.querySelectorAll('.mr-faculty-group').forEach((g) => {
+      g.querySelector('.mr-faculty-panel').classList.add('hidden');
+      g.querySelector('.mr-faculty-toggle').setAttribute('aria-expanded', 'false');
+      const ch = g.querySelector('.mr-faculty-chevron');
+      if (ch) ch.style.transform = '';
+    });
+  });
+  // Search filter
+  const search = document.getElementById('mr-deptSearch');
+  const clear = document.getElementById('mr-deptSearchClear');
+  const empty = document.getElementById('mr-deptEmpty');
+  const applyFilter = () => {
+    const q = (search.value || '').trim().toLowerCase();
+    clear.classList.toggle('hidden', !q);
+    let anyVisible = false;
+    document.querySelectorAll('.mr-faculty-group').forEach((g) => {
+      const facultyMatch = g.dataset.faculty.includes(q);
+      let groupVisible = facultyMatch;
+      g.querySelectorAll('.mr-dept-item').forEach((item) => {
+        const match = !q || facultyMatch || item.dataset.dept.includes(q);
+        item.style.display = match ? '' : 'none';
+        if (match) groupVisible = true;
+      });
+      g.style.display = groupVisible ? '' : 'none';
+      if (groupVisible) anyVisible = true;
+      // Auto-expand groups while searching, restore on clear
+      if (q && groupVisible) {
+        g.querySelector('.mr-faculty-panel').classList.remove('hidden');
+        g.querySelector('.mr-faculty-toggle').setAttribute('aria-expanded', 'true');
+      }
+    });
+    if (empty) empty.classList.toggle('hidden', anyVisible);
+  };
+  search?.addEventListener('input', applyFilter);
+  clear?.addEventListener('click', () => { search.value = ''; applyFilter(); search.focus(); });
+}
+
+function updateDepartmentCount() {
+  const total = document.querySelectorAll('#mr-deptAccordion input[name="dept"]').length;
+  const checked = document.querySelectorAll('#mr-deptAccordion input[name="dept"]:checked').length;
+  const label = document.getElementById('mr-deptCount');
+  if (label) label.textContent = `${checked} of ${total} selected`;
+  // Per-faculty count
+  document.querySelectorAll('.mr-faculty-group').forEach((g) => {
+    const inputs = g.querySelectorAll('input[name="dept"]');
+    const c = g.querySelectorAll('input[name="dept"]:checked').length;
+    const countEl = g.querySelector('.mr-faculty-count');
+    if (countEl) countEl.textContent = `${c}/${inputs.length}`;
+  });
+}
+
+// Participants repeater
+const MAX_PARTICIPANTS = 5;
+let participantSeq = 0;
+function renderParticipantsInitial() {
+  const root = document.getElementById('mr-participants');
+  if (!root) return;
+  root.innerHTML = '';
+  participantSeq = 0;
+  addParticipantCard(); // start with one
+}
+
+function addParticipantCard() {
+  const root = document.getElementById('mr-participants');
+  if (!root) return;
+  if (root.children.length >= MAX_PARTICIPANTS) return;
+  participantSeq += 1;
+  const idx = participantSeq;
+  const card = document.createElement('div');
+  card.className = 'mr-participant-card relative bg-violet-50/40 rounded-2xl p-4 border border-violet-100';
+  card.dataset.participantIdx = String(idx);
+  card.innerHTML = `
+    <div class="flex items-center justify-between mb-3">
+      <p class="text-xs font-semibold text-pcu-purple uppercase tracking-wider mr-participant-label">Participant ${root.children.length + 1}</p>
+      <button type="button" aria-label="Remove participant"
+        class="mr-remove-participant text-gray-400 hover:text-red-500 transition p-1 rounded-full hover:bg-red-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-300">
+        <i aria-hidden="true" class="w-4 h-4" data-lucide="x"></i>
+      </button>
+    </div>
+    <div class="grid sm:grid-cols-2 gap-3">
+      <div>
+        <label class="block text-xs text-gray-500 mb-1" for="mr-p-title-${idx}">Title</label>
+        <select id="mr-p-title-${idx}" autocomplete="honorific-prefix"
+          class="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm bg-white focus:outline-none focus:ring-2 focus:ring-violet-300 focus:border-violet-400 transition mr-p-title">
+          <option value="">—</option><option>Mr.</option><option>Ms.</option><option>Dr.</option><option>Prof.</option>
+        </select>
+      </div>
+      <div>
+        <label class="block text-xs text-gray-500 mb-1" for="mr-p-given-${idx}">Given Name</label>
+        <input id="mr-p-given-${idx}" type="text" autocomplete="given-name"
+          class="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-violet-300 focus:border-violet-400 transition mr-p-given"/>
+      </div>
+      <div>
+        <label class="block text-xs text-gray-500 mb-1" for="mr-p-family-${idx}">Family Name</label>
+        <input id="mr-p-family-${idx}" type="text" autocomplete="family-name"
+          class="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-violet-300 focus:border-violet-400 transition mr-p-family"/>
+      </div>
+      <div>
+        <label class="block text-xs text-gray-500 mb-1" for="mr-p-position-${idx}">Position</label>
+        <input id="mr-p-position-${idx}" type="text" autocomplete="organization-title"
+          class="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-violet-300 focus:border-violet-400 transition mr-p-position"/>
+      </div>
+      <div class="sm:col-span-2">
+        <label class="block text-xs text-gray-500 mb-1" for="mr-p-division-${idx}">Division / Department</label>
+        <input id="mr-p-division-${idx}" type="text" autocomplete="off"
+          class="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-violet-300 focus:border-violet-400 transition mr-p-division"/>
+      </div>
+    </div>
+  `;
+  card.querySelector('.mr-remove-participant').addEventListener('click', () => {
+    card.remove();
+    relabelParticipants();
+    updateParticipantsCount();
+  });
+  root.appendChild(card);
+  relabelParticipants();
+  updateParticipantsCount();
+  if (window.lucide) lucide.createIcons();
+}
+
+function relabelParticipants() {
+  document.querySelectorAll('#mr-participants .mr-participant-card').forEach((card, i) => {
+    const label = card.querySelector('.mr-participant-label');
+    if (label) label.textContent = `Participant ${i + 1}`;
+  });
+}
+
+function updateParticipantsCount() {
+  const root = document.getElementById('mr-participants');
+  const countEl = document.getElementById('mr-participantsCount');
+  const addBtn = document.getElementById('mr-addParticipant');
+  if (!root || !countEl) return;
+  const n = root.children.length;
+  countEl.textContent = `${n} of ${MAX_PARTICIPANTS}`;
+  if (addBtn) addBtn.disabled = n >= MAX_PARTICIPANTS;
+  if (addBtn) addBtn.classList.toggle('opacity-50', n >= MAX_PARTICIPANTS);
+  if (addBtn) addBtn.classList.toggle('cursor-not-allowed', n >= MAX_PARTICIPANTS);
+}
+
+function collectMeetingParticipants(/* form */) {
+  return [...document.querySelectorAll('#mr-participants .mr-participant-card')]
+    .map((card) => ({
+      title:      card.querySelector('.mr-p-title')?.value || '',
+      givenName:  card.querySelector('.mr-p-given')?.value || '',
+      familyName: card.querySelector('.mr-p-family')?.value || '',
+      position:   card.querySelector('.mr-p-position')?.value || '',
+      division:   card.querySelector('.mr-p-division')?.value || ''
+    }))
+    .filter((p) => p.givenName || p.familyName);
+}
+
+// Wire up — render once at boot
+document.addEventListener('DOMContentLoaded', () => {
+  renderDepartmentAccordion();
+  renderParticipantsInitial();
+  document.getElementById('mr-addParticipant')?.addEventListener('click', addParticipantCard);
+});
+// In case DOMContentLoaded already fired (this script is at end of body)
+if (document.readyState !== 'loading') {
+  renderDepartmentAccordion();
+  renderParticipantsInitial();
+  document.getElementById('mr-addParticipant')?.addEventListener('click', addParticipantCard);
 }
