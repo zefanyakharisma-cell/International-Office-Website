@@ -24,45 +24,7 @@
   source — tailwind.config.js (build) and the inline config kept for the CDN.
 -->
 
-<!-- Production (uncomment after `npm run build`): -->
-<!-- <link href="CSS/tailwind.build.css" rel="stylesheet"/> -->
-
-<!-- Development (CDN fallback) — remove for production: -->
-<script src="https://cdn.tailwindcss.com/3.4.17"></script>
-<script>
-  // CDN-only inline config. Kept in sync with tailwind.config.js.
-  // Safelist removed — was a workaround for the CDN not scanning files.
-  // Once you build locally, classes are picked up by the file scan in
-  // tailwind.config.js (content: ['./index.html', './JS/**/*.js']) and
-  // no safelist is required.
-  tailwind.config = {
-    theme: {
-      extend: {
-        fontFamily: {
-          sans: ['DM Sans', 'sans-serif'],
-          display: ['Playfair Display', 'serif']
-        },
-        colors: {
-          pcu: {
-            red:     '#f7000d',
-            orange:  '#fa6632',
-            sky:     '#30aeb4',
-            purple:  '#8d4bb1',
-            yellow:  '#fdd600',
-            navy:    '#1d446e',
-            green:   '#52ac2d',
-            magenta: '#fa207d',
-            white:   '#ebe6e5',
-            blue:    '#1d446e',
-            light:   '#ebe6e5',
-            gold:    '#fdd600',
-            dark:    '#1d446e'
-          }
-        }
-      }
-    }
-  };
-</script>
+<link href="CSS/tailwind.build.css" rel="stylesheet"/>
 
 <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&amp;family=Playfair+Display:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
