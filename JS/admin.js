@@ -55,18 +55,20 @@ function isAdminLoggedIn() {
 }
 
 async function adminLogin(email, password) {
-  try {
-    const { data, error } = await window._supabase.auth.signInWithPassword({ email, password });
-    if (error || !data.user) return false;
-    const meta = data.user.user_metadata || {};
-    sessionStorage.setItem(ADMIN_SESSION_KEY, JSON.stringify({
-      username: meta.username || email,
-      role:     meta.role    || 'Admin',
-      tag:      meta.tag     || null,
-      token:    data.session?.access_token || '',
-    }));
-    return true;
-  } catch { return false; }
+  const { data, error } = await window._supabase.auth.signInWithPassword({ email, password });
+  if (error) {
+    console.error('Supabase auth error:', error.message);
+    return error.message;
+  }
+  if (!data.user) return 'No user returned.';
+  const meta = data.user.user_metadata || {};
+  sessionStorage.setItem(ADMIN_SESSION_KEY, JSON.stringify({
+    username: meta.username || email,
+    role:     meta.role    || 'Admin',
+    tag:      meta.tag     || null,
+    token:    data.session?.access_token || '',
+  }));
+  return null;
 }
 
 async function adminLogout() {
@@ -97,14 +99,16 @@ async function handleAdminLogin(e) {
   const password = document.getElementById('adminPasswordInput').value;
   const btn = e.target.querySelector('button[type="submit"]');
   if (btn) btn.disabled = true;
-  const ok = await adminLogin(email, password);
+  const err = await adminLogin(email, password);
   if (btn) btn.disabled = false;
-  if (ok) {
+  if (!err) {
     closeAdminLoginModal();
     updateAdminUI();
     await refreshNewsData();
   } else {
-    document.getElementById('adminLoginError').style.display = 'block';
+    const el = document.getElementById('adminLoginError');
+    el.textContent = err;
+    el.style.display = 'block';
   }
 }
 
