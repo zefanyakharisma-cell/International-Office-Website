@@ -1,4 +1,12 @@
 // Main Application Script
+// ---- SUPABASE CLIENT ----
+// Replace these two values after creating your Supabase project.
+const SUPABASE_URL      = 'YOUR_SUPABASE_URL';       // e.g. https://xxxx.supabase.co
+const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';  // public anon key from Project Settings → API
+window._supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+  db: { schema: 'pcu_global' },
+});
+
 // ---- CONFIG & SDK ----
 const defaultConfig = {
   hero_title: 'Your Gateway to Global Education',
@@ -135,7 +143,7 @@ window.addEventListener('hashchange', () => {
 function trackArticleVisit(id) {
   if (!id.startsWith('news-') && !id.startsWith('admin-news-')) return;
   // Fire-and-forget; optimistically update local count for instant trending refresh
-  fetch(`https://international-office-website-production.up.railway.app/api/articles/${id}/visit`, { method: 'POST' }).catch(() => {});
+  window._supabase.rpc('increment_article_visits', { article_id: id }).catch(() => {});
   const article = (window.allNews || []).find(a => a.id === id);
   if (article) {
     article.visits = (article.visits || 0) + 1;
@@ -1738,14 +1746,18 @@ window.oseCustomUniversities = [];
 let osePartners = [...oseBasePartners];
 
 async function loadOsePrograms() {
-  const base = typeof API_BASE !== 'undefined' ? API_BASE : 'https://international-office-website-production.up.railway.app';
   try {
-    const res = await fetch(`${base}/api/ose-programs`);
-    if (!res.ok) return;
-    const list = await res.json();
+    const { data: list, error } = await window._supabase
+      .from('ose_programs')
+      .select('*')
+      .order('name');
+    if (error || !list) return;
+    const normalizedList = list.map(r => ({
+      ...r, programs: r.programs || ['Semester Exchange'], isCustom: !!r.is_custom,
+    }));
     window.oseProgramData = {};
     window.oseCustomUniversities = [];
-    list.forEach(entry => {
+    normalizedList.forEach(entry => {
       window.oseProgramData[entry.name] = entry;
       if (entry.isCustom) {
         window.oseCustomUniversities.push({
@@ -2289,9 +2301,11 @@ async function renderInternshipOpportunities() {
   // Fetch API entries
   let apiEntries = [];
   try {
-    const base = typeof API_BASE !== 'undefined' ? API_BASE : 'https://international-office-website-production.up.railway.app';
-    const res = await fetch(`${base}/api/internship-opportunities`);
-    if (res.ok) apiEntries = await res.json();
+    const { data } = await window._supabase
+      .from('internship_opportunities')
+      .select('*')
+      .order('created_at', { ascending: false });
+    if (data) apiEntries = data;
   } catch {}
 
   const parts = [];
@@ -2549,17 +2563,41 @@ document.getElementById('meetingRequestForm').addEventListener('submit', async f
   submitBtn.textContent = 'Submitting…';
 
   try {
-    const res = await fetch('https://international-office-website-production.up.railway.app/api/submit-meeting-request', {
-      method:  'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body:    JSON.stringify(payload),
-    });
-    if (!res.ok) throw new Error('Server error ' + res.status);
+    const fields = payload.fields || [];
+    const fieldOther = payload.fieldOtherText ? `Other: ${payload.fieldOtherText}` : '';
+    const fieldStr = [...fields, ...(fieldOther ? [fieldOther] : [])].join(', ');
+
+    const { error } = await window._supabase
+      .from('meeting_requests')
+      .insert({
+        institution:     payload.institutionName,
+        address:         payload.address,
+        country:         payload.country,
+        website:         payload.website,
+        field:           fieldStr,
+        date1:           payload.date1,
+        time1:           payload.time1,
+        duration1:       payload.duration1,
+        date2:           payload.date2,
+        time2:           payload.time2,
+        duration2:       payload.duration2,
+        objectives:      payload.objectives,
+        departments:     payload.departments,
+        pic_title:       payload.pic.title,
+        pic_given_name:  payload.pic.givenName,
+        pic_family_name: payload.pic.familyName,
+        pic_position:    payload.pic.position,
+        pic_division:    payload.pic.division,
+        pic_email:       payload.pic.email,
+        pic_phone:       payload.pic.phone,
+        participants:    payload.participants,
+      });
+    if (error) throw new Error(error.message);
     showMeetingRequestSuccess();
     form.reset();
   } catch (err) {
     console.error('Submission failed:', err);
-    alert('Could not submit the form. Please make sure the backend server is running, or email us directly at head-partnership@petra.ac.id');
+    alert('Could not submit the form. Please try again or email us directly at head-partnership@petra.ac.id');
   } finally {
     submitBtn.disabled = false;
     submitBtn.textContent = originalText;

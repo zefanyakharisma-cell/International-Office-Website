@@ -1,5 +1,5 @@
 // ---- ADMIN SYSTEM ----
-const API_BASE = 'https://international-office-website-production.up.railway.app';
+// Supabase client is initialised in main.js as window._supabase
 const ADMIN_SESSION_KEY = 'pcu_admin_session';
 
 const TAG_COLORS = {
@@ -12,6 +12,39 @@ const TAG_COLORS = {
 // tracks which article is being edited (null = new article)
 let editingArticleId = null;
 
+// ---- ROW NORMALISATION ----
+function normalizeArticle(row) {
+  return {
+    ...row,
+    imageUrl:     row.image_url     || '',
+    contactName:  row.contact_name  || '',
+    contactEmail: row.contact_email || '',
+    contactPhone: row.contact_phone || '',
+    createdAt:    row.created_at    || '',
+    updatedAt:    row.updated_at    || '',
+    paragraphs:   row.paragraphs    || [],
+    highlights:   row.highlights    || [],
+  };
+}
+
+function normalizeOseProgram(row) {
+  return {
+    ...row,
+    programs:  row.programs  || ['Semester Exchange'],
+    isCustom:  !!row.is_custom,
+    createdAt: row.created_at || '',
+    updatedAt: row.updated_at || '',
+  };
+}
+
+function normalizeInternship(row) {
+  return {
+    ...row,
+    createdAt: row.created_at || '',
+    updatedAt: row.updated_at || '',
+  };
+}
+
 // ---- SESSION ----
 function adminGetSession() {
   try { return JSON.parse(sessionStorage.getItem(ADMIN_SESSION_KEY)); } catch { return null; }
@@ -21,38 +54,23 @@ function isAdminLoggedIn() {
   return !!adminGetSession();
 }
 
-function authHeaders() {
-  const s = adminGetSession();
-  return {
-    'Content-Type': 'application/json',
-    'Authorization': `Bearer ${s ? s.token : ''}`
-  };
-}
-
-async function adminLogin(username, password) {
+async function adminLogin(email, password) {
   try {
-    const res = await fetch(`${API_BASE}/api/admin/login`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username, password })
-    });
-    if (!res.ok) return false;
-    const data = await res.json();
+    const { data, error } = await window._supabase.auth.signInWithPassword({ email, password });
+    if (error || !data.user) return false;
+    const meta = data.user.user_metadata || {};
     sessionStorage.setItem(ADMIN_SESSION_KEY, JSON.stringify({
-      username, role: data.role, tag: data.tag, token: data.token
+      username: meta.username || email,
+      role:     meta.role    || 'Admin',
+      tag:      meta.tag     || null,
+      token:    data.session?.access_token || '',
     }));
     return true;
   } catch { return false; }
 }
 
-function adminLogout() {
-  const s = adminGetSession();
-  if (s && s.token) {
-    fetch(`${API_BASE}/api/admin/logout`, {
-      method: 'POST',
-      headers: authHeaders()
-    }).catch(() => {});
-  }
+async function adminLogout() {
+  await window._supabase.auth.signOut().catch(() => {});
   sessionStorage.removeItem(ADMIN_SESSION_KEY);
   updateAdminUI();
   refreshNewsData();
@@ -75,11 +93,11 @@ function closeAdminLoginModal() {
 
 async function handleAdminLogin(e) {
   e.preventDefault();
-  const username = document.getElementById('adminUsernameInput').value.trim();
+  const email    = document.getElementById('adminUsernameInput').value.trim();
   const password = document.getElementById('adminPasswordInput').value;
   const btn = e.target.querySelector('button[type="submit"]');
   if (btn) btn.disabled = true;
-  const ok = await adminLogin(username, password);
+  const ok = await adminLogin(email, password);
   if (btn) btn.disabled = false;
   if (ok) {
     closeAdminLoginModal();
@@ -323,30 +341,62 @@ async function handlePublishArticle(e) {
     return;
   }
 
-  const payload = { title, excerpt, tag, imageUrl, paragraphs, quote, highlights, contactName, contactEmail, contactPhone };
+  const TAG_COLOR_MAP = {
+    '#inboundstudents':  'from-pcu-blue to-pcu-sky',
+    '#outboundstudents': 'from-teal-500 to-emerald-600',
+    '#partnership':      'from-pcu-gold to-yellow-500',
+    '#general':          'from-violet-500 to-purple-600',
+  };
+
   const submitBtn = document.getElementById('articleFormSubmitBtn');
   submitBtn.disabled = true;
 
   try {
     if (editingArticleId) {
-      const res = await fetch(`${API_BASE}/api/articles/${editingArticleId}`, {
-        method: 'PUT',
-        headers: authHeaders(),
-        body: JSON.stringify(payload)
-      });
-      if (!res.ok) throw new Error((await res.json()).error || 'Server error');
-      const updated = await res.json();
+      const { data, error } = await window._supabase
+        .from('articles')
+        .update({
+          title, excerpt, tag,
+          color:         TAG_COLOR_MAP[tag] || 'from-pcu-blue to-pcu-sky',
+          image_url:     imageUrl,
+          paragraphs,
+          quote,
+          highlights,
+          contact_name:  contactName,
+          contact_email: contactEmail,
+          contact_phone: contactPhone,
+          updated_at:    new Date().toISOString(),
+        })
+        .eq('id', editingArticleId)
+        .select()
+        .single();
+      if (error) throw new Error(error.message);
       closeAddArticleModal();
       await refreshNewsData();
-      navigateTo(updated.id);
+      navigateTo(data.id);
       showAdminToast('Article updated successfully!');
     } else {
-      const res = await fetch(`${API_BASE}/api/articles`, {
-        method: 'POST',
-        headers: authHeaders(),
-        body: JSON.stringify({ ...payload, author: session.username })
-      });
-      if (!res.ok) throw new Error((await res.json()).error || 'Server error');
+      const now = new Date();
+      const aid = `admin-news-${now.getTime()}`;
+      const { data, error } = await window._supabase
+        .from('articles')
+        .insert({
+          id:            aid,
+          title, excerpt, tag,
+          color:         TAG_COLOR_MAP[tag] || 'from-pcu-blue to-pcu-sky',
+          date:          now.toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' }),
+          image_url:     imageUrl,
+          paragraphs,
+          quote,
+          highlights,
+          contact_name:  contactName,
+          contact_email: contactEmail,
+          contact_phone: contactPhone,
+          author:        session.username,
+        })
+        .select()
+        .single();
+      if (error) throw new Error(error.message);
       closeAddArticleModal();
       await refreshNewsData();
       showAdminToast('Article published successfully!');
@@ -374,8 +424,11 @@ function showAdminToast(msg) {
 async function refreshNewsData() {
   let adminArticles = [];
   try {
-    const res = await fetch(`${API_BASE}/api/articles`);
-    if (res.ok) adminArticles = await res.json();
+    const { data } = await window._supabase
+      .from('articles')
+      .select('*')
+      .order('created_at', { ascending: false });
+    if (data) adminArticles = data.map(normalizeArticle);
   } catch {}
 
   window.allNews = [...adminArticles, ...window.staticNews];
@@ -477,11 +530,11 @@ function renderAdminArticlePage(article) {
 async function confirmDeleteArticle(id) {
   if (!confirm('Delete this article? This cannot be undone.')) return;
   try {
-    const res = await fetch(`${API_BASE}/api/articles/${id}`, {
-      method: 'DELETE',
-      headers: authHeaders()
-    });
-    if (!res.ok) throw new Error((await res.json()).error || 'Server error');
+    const { error } = await window._supabase
+      .from('articles')
+      .delete()
+      .eq('id', id);
+    if (error) throw new Error(error.message);
     const pageEl = document.getElementById('page-' + id);
     if (pageEl) pageEl.remove();
     await refreshNewsData();
@@ -532,14 +585,12 @@ function updateAdminUI() {
     if (userLabel) userLabel.textContent = '';
   }
 
-  // Show admin edit buttons in open OSE modal
   const oseAdminBtn = document.getElementById('ose-modal-admin-edit-btn');
   if (oseAdminBtn) {
     if (loggedIn) oseAdminBtn.classList.remove('hidden');
     else oseAdminBtn.classList.add('hidden');
   }
 
-  // Show/hide OSE manager FAB on OSE page
   const oseFab = document.getElementById('oseManagerFabBtn');
   if (oseFab) {
     const osePage = document.getElementById('page-outbound-semester-exchange');
@@ -550,7 +601,6 @@ function updateAdminUI() {
     }
   }
 
-  // Show/hide Add Opportunity button on Internship page
   const internAddBtn = document.getElementById('internship-admin-add-btn');
   if (internAddBtn) {
     const internPage = document.getElementById('page-internship');
@@ -560,7 +610,6 @@ function updateAdminUI() {
       internAddBtn.classList.add('hidden');
     }
   }
-  // Re-render opportunities to show/hide edit controls when auth state changes
   const internPage = document.getElementById('page-internship');
   if (internPage && internPage.classList.contains('active') && typeof renderInternshipOpportunities === 'function') {
     renderInternshipOpportunities();
@@ -592,9 +641,12 @@ async function renderOseManagerList() {
 
   let list = [];
   try {
-    const res = await fetch(`${API_BASE}/api/ose-programs`);
-    if (res.ok) list = await res.json();
-  } catch (e) {}
+    const { data } = await window._supabase
+      .from('ose_programs')
+      .select('*')
+      .order('name');
+    if (data) list = data.map(normalizeOseProgram);
+  } catch {}
 
   if (!list.length) {
     container.innerHTML = '<p class="text-gray-400 text-sm text-center py-8">No program details added yet. Click "Add University" to get started.</p>';
@@ -632,7 +684,6 @@ async function renderOseManagerList() {
 function openOseEditForm(entryOrNull, prefillName) {
   if (!isAdminLoggedIn()) { openAdminLoginModal(); return; }
 
-  // Close manager modal if open (we'll reopen after save)
   const managerModal = document.getElementById('ose-manager-modal');
   if (managerModal) {
     managerModal.classList.add('hidden');
@@ -691,31 +742,29 @@ async function handleSaveOseProgram(e) {
     requirements: document.getElementById('ose-form-requirements').value.trim(),
     website:      document.getElementById('ose-form-website').value.trim(),
     notes:        document.getElementById('ose-form-notes').value.trim(),
-    isCustom:     document.getElementById('ose-form-is-custom').checked,
+    is_custom:    document.getElementById('ose-form-is-custom').checked,
   };
 
   try {
-    let res;
+    let error;
     if (oseEditingId) {
-      res = await fetch(`${API_BASE}/api/ose-programs/${oseEditingId}`, {
-        method: 'PUT',
-        headers: authHeaders(),
-        body: JSON.stringify(payload)
-      });
+      const res = await window._supabase
+        .from('ose_programs')
+        .update({ ...payload, updated_at: new Date().toISOString() })
+        .eq('id', oseEditingId);
+      error = res.error;
     } else {
-      res = await fetch(`${API_BASE}/api/ose-programs`, {
-        method: 'POST',
-        headers: authHeaders(),
-        body: JSON.stringify(payload)
-      });
+      const pid = `ose-${crypto.randomUUID().replace(/-/g, '').slice(0, 16)}`;
+      const res = await window._supabase
+        .from('ose_programs')
+        .insert({ id: pid, ...payload });
+      error = res.error;
     }
-    if (!res.ok) throw new Error((await res.json()).error || 'Server error');
+    if (error) throw new Error(error.message);
 
     closeOseEditForm();
-    // Reload OSE program data and re-render
     if (typeof loadOsePrograms === 'function') await loadOsePrograms();
     showAdminToast(oseEditingId ? 'University program updated!' : 'University program added!');
-    // Reopen manager modal
     await openOseManagerModal();
   } catch (err) {
     alert(`Could not save: ${err.message}`);
@@ -728,11 +777,11 @@ async function handleSaveOseProgram(e) {
 async function confirmDeleteOseProgram(id) {
   if (!confirm('Delete this university program entry? This cannot be undone.')) return;
   try {
-    const res = await fetch(`${API_BASE}/api/ose-programs/${id}`, {
-      method: 'DELETE',
-      headers: authHeaders()
-    });
-    if (!res.ok) throw new Error((await res.json()).error || 'Server error');
+    const { error } = await window._supabase
+      .from('ose_programs')
+      .delete()
+      .eq('id', id);
+    if (error) throw new Error(error.message);
     if (typeof loadOsePrograms === 'function') await loadOsePrograms();
     showAdminToast('Entry deleted.');
     await renderOseManagerList();
@@ -753,7 +802,7 @@ function buildCompanyDatalist() {
   dl.innerHTML = allNames.map(n => `<option value="${n.replace(/"/g, '&quot;')}"></option>`).join('');
 }
 
-function openInternshipOpportunityModal(id) {
+async function openInternshipOpportunityModal(id) {
   if (!isAdminLoggedIn()) { openAdminLoginModal(); return; }
 
   internEditingId = id || null;
@@ -764,18 +813,19 @@ function openInternshipOpportunityModal(id) {
   if (id) {
     title.textContent = 'Edit Internship Opportunity';
     submitText.textContent = 'Save Changes';
-    // Fetch current entry to prefill
-    fetch(`${API_BASE}/api/internship-opportunities`)
-      .then(r => r.json())
-      .then(list => {
-        const entry = list.find(e => e.id === id);
-        if (!entry) return;
-        document.getElementById('intern-form-id').value = entry.id;
-        document.getElementById('intern-form-position').value = entry.position || '';
-        document.getElementById('intern-form-company').value = entry.company || '';
-        document.getElementById('intern-form-link').value = entry.link || '';
-      })
-      .catch(() => {});
+    try {
+      const { data } = await window._supabase
+        .from('internship_opportunities')
+        .select('*')
+        .eq('id', id)
+        .single();
+      if (data) {
+        document.getElementById('intern-form-id').value = data.id;
+        document.getElementById('intern-form-position').value = data.position || '';
+        document.getElementById('intern-form-company').value = data.company || '';
+        document.getElementById('intern-form-link').value = data.link || '';
+      }
+    } catch {}
   } else {
     title.textContent = 'Add Internship Opportunity';
     submitText.textContent = 'Add Opportunity';
@@ -812,21 +862,21 @@ async function handleSaveInternshipOpportunity(e) {
   };
 
   try {
-    let res;
+    let error;
     if (internEditingId) {
-      res = await fetch(`${API_BASE}/api/internship-opportunities/${internEditingId}`, {
-        method: 'PUT',
-        headers: authHeaders(),
-        body: JSON.stringify(payload)
-      });
+      const res = await window._supabase
+        .from('internship_opportunities')
+        .update({ ...payload, updated_at: new Date().toISOString() })
+        .eq('id', internEditingId);
+      error = res.error;
     } else {
-      res = await fetch(`${API_BASE}/api/internship-opportunities`, {
-        method: 'POST',
-        headers: authHeaders(),
-        body: JSON.stringify(payload)
-      });
+      const oid = `intern-${crypto.randomUUID().replace(/-/g, '').slice(0, 16)}`;
+      const res = await window._supabase
+        .from('internship_opportunities')
+        .insert({ id: oid, ...payload });
+      error = res.error;
     }
-    if (!res.ok) throw new Error((await res.json()).error || 'Server error');
+    if (error) throw new Error(error.message);
     document.getElementById('intern-form-modal').classList.add('hidden');
     document.getElementById('intern-form-modal').classList.remove('flex');
     if (typeof renderInternshipOpportunities === 'function') await renderInternshipOpportunities();
@@ -842,11 +892,11 @@ async function handleSaveInternshipOpportunity(e) {
 async function confirmDeleteInternshipOpportunity(id) {
   if (!confirm('Delete this internship opportunity? This cannot be undone.')) return;
   try {
-    const res = await fetch(`${API_BASE}/api/internship-opportunities/${id}`, {
-      method: 'DELETE',
-      headers: authHeaders()
-    });
-    if (!res.ok) throw new Error((await res.json()).error || 'Server error');
+    const { error } = await window._supabase
+      .from('internship_opportunities')
+      .delete()
+      .eq('id', id);
+    if (error) throw new Error(error.message);
     if (typeof renderInternshipOpportunities === 'function') await renderInternshipOpportunities();
     showAdminToast('Opportunity deleted.');
   } catch (err) {
@@ -858,6 +908,5 @@ async function confirmDeleteInternshipOpportunity(id) {
 document.addEventListener('DOMContentLoaded', async function() {
   updateAdminUI();
   await refreshNewsData();
-  // Load OSE program details in background
   if (typeof loadOsePrograms === 'function') loadOsePrograms();
 });
