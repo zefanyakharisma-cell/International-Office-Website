@@ -1,7 +1,7 @@
 // Main Application Script
 // ---- SUPABASE CLIENT ----
 // Replace these two values after creating your Supabase project.
-const SUPABASE_URL      = 'https://xrzwjwaaayeoizmabchj.supabase.co/rest/v1/';       // e.g. https://xxxx.supabase.co
+const SUPABASE_URL      = 'https://xrzwjwaaayeoizmabchj.supabase.co';       // e.g. https://xxxx.supabase.co
 const SUPABASE_ANON_KEY = 'sb_publishable_QznNbgBFWibdv6eDosc2jQ_ZjwJMu8g';  // public anon key from Project Settings → API
 window._supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
   db: { schema: 'pcu_global' },
