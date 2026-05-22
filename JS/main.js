@@ -366,12 +366,12 @@ document.addEventListener('keydown', (e) => {
 // Pages not in this map (home, explore) intentionally have no data-section,
 // so they keep the default Tailwind colors instead of being themed.
 const PAGE_ACCENTS = {
-  // Inbound — sky
-  'intl-students':              ['#30aeb4', 'inbound'],
-  'semester-exchange':          ['#30aeb4', 'inbound'],
-  'intl-degree':                ['#30aeb4', 'inbound'],
-  'cop':                        ['#30aeb4', 'inbound'],
-  'indonesian-spectrum':        ['#30aeb4', 'inbound'],
+  // Inbound — red
+  'intl-students':              ['#f7000d', 'inbound'],
+  'semester-exchange':          ['#f7000d', 'inbound'],
+  'intl-degree':                ['#f7000d', 'inbound'],
+  'cop':                        ['#f7000d', 'inbound'],
+  'indonesian-spectrum':        ['#f7000d', 'inbound'],
   // Outbound — orange
   'pcu-students':               ['#fa6632', 'outbound'],
   'outbound-semester-exchange': ['#fa6632', 'outbound'],

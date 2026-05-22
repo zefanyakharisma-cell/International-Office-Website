@@ -5,13 +5,13 @@ function renderCop() {
             <div style="padding-top: 80px;">
 
                 <!-- Hero Section -->
-                <div class="relative overflow-hidden bg-gradient-to-r from-pcu-sky to-cyan-400 py-16 md:py-24">
+                <div class="relative overflow-hidden py-16 md:py-24" style="background: var(--pcu-red-to-yellow-gradient)">
                     <div class="absolute inset-0">
                         <img alt="ICOP" class="w-full h-full object-cover opacity-60"
                              src="Assets/Images/ICOP/icop-1.png"
                              style="object-position: center 50%;"/>
                     </div>
-                    <div class="absolute inset-0 bg-gradient-to-r from-pcu-sky/80 to-cyan-400/80"></div>
+                    <div class="absolute inset-0" style="background: linear-gradient(to right, rgba(236,0,140,0.8), rgba(255,188,0,0.8))"></div>
                     <div class="relative max-w-7xl mx-auto px-6 lg:px-8">
                         <a class="inline-flex items-center gap-1 text-white/60 text-sm mb-6 hover:text-white transition"
                            href="#" onclick="navigateTo('home');return false">
@@ -27,7 +27,7 @@ function renderCop() {
                     <div class="max-w-7xl mx-auto px-6 lg:px-8 py-20">
 
                         <!-- Program Overview -->
-                        <div class="mb-20 bg-gradient-to-br from-pcu-light/50 to-white rounded-3xl p-12 border border-pcu-sky/10">
+                        <div class="mb-20 bg-gradient-to-br from-pcu-light/50 to-white rounded-3xl p-12 border border-pcu-red/10">
                             <h2 class="font-display text-2xl md:text-3xl font-bold text-pcu-blue mb-6">Program Overview</h2>
                             <p class="text-gray-700 leading-relaxed mb-6">The International Community Outreach Program (COP) is an integrated service-learning program that combines academic study with meaningful community engagement. Students partner with local communities across rural Java to address real social challenges while developing cross-cultural competence, leadership skills, and global citizenship.</p>
                             <div class="grid md:grid-cols-3 gap-6 mt-8">
@@ -70,10 +70,10 @@ function renderCop() {
                                         </div>
                                     </div>
                                 </div>
-                                <div class="bg-white rounded-2xl p-8 border-l-4 border-pcu-sky">
+                                <div class="bg-white rounded-2xl p-8 border-l-4 border-pcu-red">
                                     <div class="flex items-start gap-4">
-                                        <div class="w-12 h-12 rounded-xl bg-pcu-sky/10 flex items-center justify-center shrink-0">
-                                            <i class="w-6 h-6 text-pcu-sky" data-lucide="heart-handshake"></i>
+                                        <div class="w-12 h-12 rounded-xl bg-pcu-red/10 flex items-center justify-center shrink-0">
+                                            <i class="w-6 h-6 text-pcu-red" data-lucide="heart-handshake"></i>
                                         </div>
                                         <div>
                                             <h3 class="font-semibold text-lg text-pcu-blue mb-2">Service &amp; Social Action</h3>
@@ -169,7 +169,7 @@ function renderCop() {
                         </div>
 
                         <!-- Program Timeline -->
-                        <div class="mb-20 bg-gradient-to-br from-pcu-light/50 to-white rounded-3xl p-12 border border-pcu-sky/10">
+                        <div class="mb-20 bg-gradient-to-br from-pcu-light/50 to-white rounded-3xl p-12 border border-pcu-red/10">
                             <h2 class="font-display text-2xl md:text-3xl font-bold text-pcu-blue mb-12">Typical Program Flow</h2>
                             <div class="space-y-6">
                                 <div class="flex gap-4">
@@ -291,7 +291,7 @@ function renderCop() {
                         </div>
 
                         <!-- Program Costs -->
-                        <div class="mb-20 bg-gradient-to-br from-pcu-light/50 to-white rounded-3xl p-12 border border-pcu-sky/10">
+                        <div class="mb-20 bg-gradient-to-br from-pcu-light/50 to-white rounded-3xl p-12 border border-pcu-red/10">
                             <h2 class="font-display text-2xl md:text-3xl font-bold text-pcu-blue mb-8">Program Costs &amp; Support</h2>
                             <p class="text-gray-600 mb-8">COP offers flexible pricing based on program length and background of participants. Scholarships and financial aid available for eligible candidates.</p>
                             <div class="grid md:grid-cols-2 gap-8">
@@ -321,7 +321,7 @@ function renderCop() {
                         </div>
 
                         <!-- CTA Section -->
-                        <div class="bg-gradient-to-r from-pcu-sky to-cyan-400 rounded-3xl p-12 text-white text-center">
+                        <div class="bg-pcu-red rounded-3xl p-12 text-white text-center">
                             <h2 class="font-display text-3xl font-bold mb-3">Ready to Make a Difference?</h2>
                             <p class="text-white/80 mb-8 max-w-2xl mx-auto">Join the International Community Outreach Program and become part of a global movement toward sustainable development and social justice.</p>
                             <div class="flex flex-wrap justify-center gap-4">

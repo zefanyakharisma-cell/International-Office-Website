@@ -5,13 +5,13 @@ function renderSemesterExchange() {
             <div style="padding-top: 80px;">
 
                 <!-- Hero Section -->
-                <div class="relative overflow-hidden bg-gradient-to-r from-pcu-sky to-cyan-400 py-16 md:py-24">
+                <div class="relative overflow-hidden py-16 md:py-24" style="background: var(--pcu-red-to-yellow-gradient)">
                     <div class="absolute inset-0">
                         <img alt="Gedung Petra" class="w-full h-full object-cover opacity-60"
                              src="Assets/Images/Student%20Exchange/student-exchange-1.svg"
                              style="object-position: center 5%;"/>
                     </div>
-                    <div class="absolute inset-0 bg-gradient-to-r from-pcu-sky/80 to-cyan-400/80"></div>
+                    <div class="absolute inset-0" style="background: linear-gradient(to right, rgba(236,0,140,0.8), rgba(255,188,0,0.8))"></div>
                     <div class="relative max-w-7xl mx-auto px-6 lg:px-8">
                         <a class="inline-flex items-center gap-1 text-white/60 text-sm mb-6 hover:text-white transition"
                            href="#" onclick="navigateTo('home');return false">
@@ -64,7 +64,7 @@ function renderSemesterExchange() {
                         </div>
 
                         <!-- Eligibility Section -->
-                        <div class="mb-20 bg-gradient-to-br from-pcu-sky/10 to-white rounded-3xl p-12 border border-pcu-sky/10">
+                        <div class="mb-20 bg-gradient-to-br from-pcu-red/10 to-white rounded-3xl p-12 border border-pcu-red/10">
                             <h2 class="font-display text-2xl md:text-3xl font-bold text-pcu-blue mb-6">Eligibility Requirements</h2>
                             <div class="grid md:grid-cols-2 gap-8">
                                 <div>
@@ -183,7 +183,7 @@ function renderSemesterExchange() {
                         </div>
 
                         <!-- CTA Section -->
-                        <div class="bg-gradient-to-r from-pcu-sky to-cyan-400 rounded-3xl p-12 text-white text-center">
+                        <div class="bg-pcu-red rounded-3xl p-12 text-white text-center">
                             <h2 class="font-display text-3xl font-bold mb-3">Ready to Start Your Journey?</h2>
                             <p class="text-white/80 mb-8 max-w-2xl mx-auto">Join hundreds of students from around the world who have experienced transformative semesters at Petra Christian University.</p>
                             <div class="flex flex-wrap justify-center gap-4">
