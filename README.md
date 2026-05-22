@@ -64,7 +64,7 @@ A single-page application (SPA) for the PCU International Office, showcasing inb
 │       └── Thumbnails/             # Thumbnail images
 ├── backend/
 │   ├── main.py             # Flask API — admin auth, article CRUD, meeting requests, email
-│   ├── procfile            # Railway/Heroku process definition: `web: gunicorn main:app`
+│   ├── Procfile            # Railway/Heroku process definition: `web: gunicorn main:app`
 │   ├── requirements.txt    # Python dependencies (flask, flask-cors, python-dotenv, gunicorn)
 │   ├── submissions.db      # SQLite database — auto-created on first run (do not edit manually)
 │   └── .env                # SMTP credentials — see Backend Setup below (NOT committed to git)
@@ -86,7 +86,7 @@ A single-page application (SPA) for the PCU International Office, showcasing inb
 | [DM Sans + Playfair Display](https://fonts.google.com) | Typography (loaded via Google Fonts) |
 | Vanilla JavaScript | Hash routing, animations, and dynamic page rendering |
 | Python 3 + Flask | Backend API for admin auth, article CRUD, meeting requests, and email |
-| Gunicorn | Production WSGI server (defined in `backend/procfile`) |
+| Gunicorn | Production WSGI server (defined in `backend/Procfile`) |
 | SQLite | Persistent storage for articles and meeting request submissions (`backend/submissions.db`) |
 
 The frontend requires no build step — all JS dependencies are loaded via CDN. The backend requires Python 3 and the packages listed in `backend/requirements.txt`.
@@ -205,10 +205,13 @@ The Meeting Request Form requires the Flask backend to be running. Without it, f
 **1. Create the `.env` file** inside `backend/`:
 
 ```
-# SMTP — email notifications for meeting request submissions
-SMTP_EMAIL=your-email@gmail.com
+# Email recipient — who receives meeting request notification emails
+RECIPIENT_EMAIL=your-recipient@yourdomain.com
+
+# SMTP — outgoing email for meeting request notifications
+SMTP_EMAIL=your-sender@yourdomain.com
 SMTP_PASSWORD=your-app-password
-SMTP_HOST=smtp.gmail.com
+SMTP_HOST=smtp.office365.com
 SMTP_PORT=587
 
 # Admin passwords — required; the server will refuse to start if any are missing
@@ -218,7 +221,7 @@ PASS_PARTNERSHIP=your-partnership-password
 PASS_HEAD=your-head-password
 ```
 
-For Gmail, generate an App Password at [myaccount.google.com/apppasswords](https://myaccount.google.com/apppasswords) (requires 2-Step Verification). Do not commit this file — `backend/.env` is already listed in `.gitignore`.
+Use an App Password if your mail provider requires it (e.g. Gmail: [myaccount.google.com/apppasswords](https://myaccount.google.com/apppasswords); Office 365: generate one in your account security settings). Do not commit this file — `backend/.env` is already listed in `.gitignore`.
 
 **2. Install dependencies and start the server:**
 
@@ -228,7 +231,7 @@ pip install -r requirements.txt
 python main.py
 ```
 
-The server starts on `http://localhost:3001`. The SQLite database (`submissions.db`) is created automatically on first run. It contains three tables: `articles`, `ose_programs`, and `internship_opportunities`.
+The server starts on `http://localhost:3001`. The SQLite database (`submissions.db`) is created automatically on first run. It contains four tables: `articles`, `meeting_requests`, `ose_programs`, and `internship_opportunities`.
 
 > For production, start with Gunicorn instead: `gunicorn main:app` (the `procfile` handles this automatically on Railway/Heroku).
 
@@ -261,10 +264,16 @@ The server starts on `http://localhost:3001`. The SQLite database (`submissions.
 
 ### Frontend (Static Files)
 
+The frontend is currently deployed on **GitHub Pages** at:
+`https://zefanyakharisma-cell.github.io/international-office-website/`
+
+To redeploy or self-host:
+
 1. Copy the repository folder (excluding `backend/`) to your web server's public directory (e.g. `/var/www/html/international-office/`).
 2. Ensure the web server (Apache/Nginx) serves `index.html` as the default document.
 3. No `.htaccess` rewrite rules are needed — all navigation is handled client-side via JavaScript.
 4. Verify that the `Assets/` folder and all subfolders are accessible. Several folder names contain spaces (`Assets/Graphics/Petra Graphic Asset/`, `Assets/Images/Foto Rektorat/`, etc.) — confirm your server handles these correctly, or rename them and update all references in `index.html`, `styles.css`, and `main.js`.
+5. If the frontend URL changes, update the `origins` list in `CORS(app, origins=[...])` at the top of `backend/main.py`.
 
 ### Backend (Flask API)
 
@@ -273,7 +282,7 @@ The backend is deployed on **Railway** at:
 
 `JS/admin.js` and `JS/main.js` use this URL as `API_BASE`. To redeploy or run your own instance:
 
-1. Push the `backend/` folder to your Railway/Heroku project (the `procfile` handles the start command: `gunicorn main:app`).
+1. Push the `backend/` folder to your Railway/Heroku project (the `Procfile` handles the start command: `gunicorn main:app`).
 2. Add **all** required environment variables in the platform's environment settings — do not rely on a committed `.env` file:
    - SMTP: `SMTP_EMAIL`, `SMTP_PASSWORD`, `SMTP_HOST`, `SMTP_PORT`
    - Admin passwords: `PASS_INBOUND`, `PASS_OUTBOUND`, `PASS_PARTNERSHIP`, `PASS_HEAD`
@@ -308,7 +317,7 @@ Passwords are read from environment variables (`PASS_INBOUND`, `PASS_OUTBOUND`, 
 6. Admins can edit or delete their own articles; the `Head` role can manage all articles (calls `DELETE /api/articles/<id>`).
 7. **OSE university management** — Clicking "Manage Universities" opens `ose-manager-modal`. The admin can create a new university entry (opens `ose-form-modal`) or edit/delete existing ones. Custom entries (`isCustom=true`) appear as extra cards on the OSE page; base universities from `oseBasePartners` can have program details attached by name-matching.
 8. **Internship opportunity management** — On the Internship page, admins see an "Add Opportunity" button. Clicking it opens `intern-form-modal` (position, company with autocomplete from partner list, apply link). Saved opportunities are fetched from `/api/internship-opportunities` and displayed as cards.
-7. Every article view fires a fire-and-forget `POST /api/articles/<id>/visit` to increment the server-side visit counter. The News page "Trending" sidebar is sorted by `visits` descending.
+9. Every article view fires a fire-and-forget `POST /api/articles/<id>/visit` to increment the server-side visit counter. The News page "Trending" sidebar is sorted by `visits` descending.
 
 ---
 

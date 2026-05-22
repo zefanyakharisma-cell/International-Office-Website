@@ -112,34 +112,36 @@
 <div class="leading-tight"><span class="font-bold text-pcu-navy text-lg tracking-tight">PCU Global</span> <span class="block text-[10px] text-gray-500 tracking-wide uppercase">International Office</span>
 </div></a> <!-- Desktop Nav -->
 <div class="hidden lg:flex items-center gap-1">
-<div class="nav-item relative"><button class="px-3 py-2 text-sm font-medium text-gray-700 hover:text-pcu-blue rounded-lg hover:bg-pcu-light/50 transition flex items-center gap-1"> About <i class="w-3.5 h-3.5" data-lucide="chevron-down"></i> </button>
-<div class="nav-dropdown absolute top-full left-0 w-56 bg-white rounded-xl shadow-xl border border-gray-100 p-2 mt-1"><a class="block px-3 py-2.5 text-sm text-gray-700 hover:bg-pcu-light rounded-lg transition" href="#" onclick="navigateTo('pcu-at-glance');return false">PCU at Glance</a> <a class="block px-3 py-2.5 text-sm text-gray-700 hover:bg-pcu-light rounded-lg transition" href="#" onclick="navigateTo('facilities');return false">Facilities</a> <a class="block px-3 py-2.5 text-sm text-gray-700 hover:bg-pcu-light rounded-lg transition" href="#" onclick="navigateTo('news');return false">News</a> <a class="block px-3 py-2.5 text-sm text-gray-700 hover:bg-pcu-light rounded-lg transition" href="#" onclick="navigateTo('contact-us');return false">Contact Us</a>
+<div class="nav-item relative"><button aria-controls="nav-dd-about" aria-expanded="false" aria-haspopup="true" class="px-3 py-2 text-sm font-medium text-gray-700 hover:text-pcu-blue rounded-lg hover:bg-pcu-light/50 transition flex items-center gap-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-pcu-sky"> About <i aria-hidden="true" class="w-3.5 h-3.5" data-lucide="chevron-down"></i> </button>
+<div class="nav-dropdown absolute top-full left-0 w-56 bg-white rounded-xl shadow-xl border border-gray-100 p-2 mt-1" id="nav-dd-about" role="menu"><a class="block px-3 py-2.5 text-sm text-gray-700 hover:bg-pcu-light rounded-lg transition focus:outline-none focus-visible:bg-pcu-light" href="#" onclick="navigateTo('pcu-at-glance');return false" role="menuitem">PCU at Glance</a> <a class="block px-3 py-2.5 text-sm text-gray-700 hover:bg-pcu-light rounded-lg transition focus:outline-none focus-visible:bg-pcu-light" href="#" onclick="navigateTo('facilities');return false" role="menuitem">Facilities</a> <a class="block px-3 py-2.5 text-sm text-gray-700 hover:bg-pcu-light rounded-lg transition focus:outline-none focus-visible:bg-pcu-light" href="#" onclick="navigateTo('news');return false" role="menuitem">News</a> <a class="block px-3 py-2.5 text-sm text-gray-700 hover:bg-pcu-light rounded-lg transition focus:outline-none focus-visible:bg-pcu-light" href="#" onclick="navigateTo('contact-us');return false" role="menuitem">Contact Us</a>
 </div>
 </div>
-<div class="nav-item relative"><button class="px-3 py-2 text-sm font-medium text-gray-700 hover:text-pcu-blue rounded-lg hover:bg-pcu-light/50 transition flex items-center gap-1"> Inbound Programs <i class="w-3.5 h-3.5" data-lucide="chevron-down"></i> </button>
-<div class="nav-dropdown absolute top-full left-0 w-56 bg-white rounded-xl shadow-xl border border-gray-100 p-2 mt-1"><a class="block px-3 py-2.5 text-sm text-gray-700 hover:bg-pcu-light rounded-lg transition" href="#" onclick="navigateTo('semester-exchange');return false">Semester Exchange</a> <a class="block px-3 py-2.5 text-sm text-gray-700 hover:bg-pcu-light rounded-lg transition" href="#" onclick="navigateTo('intl-degree');return false">International Degree</a> <a class="block px-3 py-2.5 text-sm text-gray-700 hover:bg-pcu-light rounded-lg transition" href="#" onclick="navigateTo('cop');return false">International Community Outreach Program</a> <a class="block px-3 py-2.5 text-sm text-gray-700 hover:bg-pcu-light rounded-lg transition" href="#" onclick="navigateTo('indonesian-spectrum');return false">Indonesian SPECTRUM</a>
+<div class="nav-item relative"><button aria-controls="nav-dd-inbound" aria-expanded="false" aria-haspopup="true" class="px-3 py-2 text-sm font-medium text-gray-700 hover:text-pcu-blue rounded-lg hover:bg-pcu-light/50 transition flex items-center gap-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-pcu-sky"> Inbound Programs <i aria-hidden="true" class="w-3.5 h-3.5" data-lucide="chevron-down"></i> </button>
+<!-- Wider (w-72) so "International Community Outreach Program" sits on one line -->
+<div class="nav-dropdown absolute top-full left-0 w-72 bg-white rounded-xl shadow-xl border border-gray-100 p-2 mt-1" id="nav-dd-inbound" role="menu"><a class="block px-3 py-2.5 text-sm text-gray-700 hover:bg-pcu-light rounded-lg transition focus:outline-none focus-visible:bg-pcu-light" href="#" onclick="navigateTo('semester-exchange');return false" role="menuitem">Semester Exchange</a> <a class="block px-3 py-2.5 text-sm text-gray-700 hover:bg-pcu-light rounded-lg transition focus:outline-none focus-visible:bg-pcu-light" href="#" onclick="navigateTo('intl-degree');return false" role="menuitem">International Degree</a> <a class="block px-3 py-2.5 text-sm text-gray-700 hover:bg-pcu-light rounded-lg transition focus:outline-none focus-visible:bg-pcu-light whitespace-nowrap" href="#" onclick="navigateTo('cop');return false" role="menuitem">International Community Outreach Program</a> <a class="block px-3 py-2.5 text-sm text-gray-700 hover:bg-pcu-light rounded-lg transition focus:outline-none focus-visible:bg-pcu-light" href="#" onclick="navigateTo('indonesian-spectrum');return false" role="menuitem">Indonesian SPECTRUM</a>
 </div>
 </div>
-<div class="nav-item relative"><button class="px-3 py-2 text-sm font-medium text-gray-700 hover:text-pcu-blue rounded-lg hover:bg-pcu-light/50 transition flex items-center gap-1"> Outbound Programs <i class="w-3.5 h-3.5" data-lucide="chevron-down"></i> </button>
-<div class="nav-dropdown absolute top-full left-0 w-56 bg-white rounded-xl shadow-xl border border-gray-100 p-2 mt-1"><a class="block px-3 py-2.5 text-sm text-gray-700 hover:bg-pcu-light rounded-lg transition" href="#" onclick="navigateTo('outbound-semester-exchange');return false">Semester Exchange</a> <a class="block px-3 py-2.5 text-sm text-gray-700 hover:bg-pcu-light rounded-lg transition" href="#" onclick="navigateTo('joint-double-degree');return false">Joint/Double Degree</a> <a class="block px-3 py-2.5 text-sm text-gray-700 hover:bg-pcu-light rounded-lg transition" href="#" onclick="navigateTo('internship');return false">Internship</a>
+<div class="nav-item relative"><button aria-controls="nav-dd-outbound" aria-expanded="false" aria-haspopup="true" class="px-3 py-2 text-sm font-medium text-gray-700 hover:text-pcu-blue rounded-lg hover:bg-pcu-light/50 transition flex items-center gap-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-pcu-sky"> Outbound Programs <i aria-hidden="true" class="w-3.5 h-3.5" data-lucide="chevron-down"></i> </button>
+<div class="nav-dropdown absolute top-full left-0 w-56 bg-white rounded-xl shadow-xl border border-gray-100 p-2 mt-1" id="nav-dd-outbound" role="menu"><a class="block px-3 py-2.5 text-sm text-gray-700 hover:bg-pcu-light rounded-lg transition focus:outline-none focus-visible:bg-pcu-light" href="#" onclick="navigateTo('outbound-semester-exchange');return false" role="menuitem">Semester Exchange</a> <a class="block px-3 py-2.5 text-sm text-gray-700 hover:bg-pcu-light rounded-lg transition focus:outline-none focus-visible:bg-pcu-light" href="#" onclick="navigateTo('joint-double-degree');return false" role="menuitem">Joint/Double Degree</a> <a class="block px-3 py-2.5 text-sm text-gray-700 hover:bg-pcu-light rounded-lg transition focus:outline-none focus-visible:bg-pcu-light" href="#" onclick="navigateTo('internship');return false" role="menuitem">Internship</a>
 </div>
 </div>
-<div class="nav-item relative"><button class="px-3 py-2 text-sm font-medium text-gray-700 hover:text-pcu-blue rounded-lg hover:bg-pcu-light/50 transition flex items-center gap-1"> Partnership <i class="w-3.5 h-3.5" data-lucide="chevron-down"></i> </button>
-<div class="nav-dropdown absolute top-full left-0 w-56 bg-white rounded-xl shadow-xl border border-gray-100 p-2 mt-1"><a class="block px-3 py-2.5 text-sm text-gray-700 hover:bg-pcu-light rounded-lg transition" href="#" onclick="navigateTo('international-partnership');return false">International Partnership</a> <a class="block px-3 py-2.5 text-sm text-gray-700 hover:bg-pcu-light rounded-lg transition" href="#" onclick="navigateTo('domestic-partnership');return false">Domestic Partnership</a> <a class="block px-3 py-2.5 text-sm text-gray-700 hover:bg-pcu-light rounded-lg transition" href="#" onclick="navigateTo('consortium-association');return false">Consortium &amp; Association</a> <a class="block px-3 py-2.5 text-sm text-gray-700 hover:bg-pcu-light rounded-lg transition" href="#" onclick="navigateTo('partnership-meet-us');return false">Meet Us</a>
+<div class="nav-item relative"><button aria-controls="nav-dd-partnership" aria-expanded="false" aria-haspopup="true" class="px-3 py-2 text-sm font-medium text-gray-700 hover:text-pcu-blue rounded-lg hover:bg-pcu-light/50 transition flex items-center gap-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-pcu-sky"> Partnership <i aria-hidden="true" class="w-3.5 h-3.5" data-lucide="chevron-down"></i> </button>
+<div class="nav-dropdown absolute top-full left-0 w-56 bg-white rounded-xl shadow-xl border border-gray-100 p-2 mt-1" id="nav-dd-partnership" role="menu"><a class="block px-3 py-2.5 text-sm text-gray-700 hover:bg-pcu-light rounded-lg transition focus:outline-none focus-visible:bg-pcu-light" href="#" onclick="navigateTo('international-partnership');return false" role="menuitem">International Partnership</a> <a class="block px-3 py-2.5 text-sm text-gray-700 hover:bg-pcu-light rounded-lg transition focus:outline-none focus-visible:bg-pcu-light" href="#" onclick="navigateTo('domestic-partnership');return false" role="menuitem">Domestic Partnership</a> <a class="block px-3 py-2.5 text-sm text-gray-700 hover:bg-pcu-light rounded-lg transition focus:outline-none focus-visible:bg-pcu-light" href="#" onclick="navigateTo('consortium-association');return false" role="menuitem">Consortium &amp; Association</a> <a class="block px-3 py-2.5 text-sm text-gray-700 hover:bg-pcu-light rounded-lg transition focus:outline-none focus-visible:bg-pcu-light" href="#" onclick="navigateTo('partnership-meet-us');return false" role="menuitem">Meet Us</a>
 </div>
 </div>
-<div class="nav-item relative"><button class="px-3 py-2 text-sm font-medium text-gray-700 hover:text-pcu-blue rounded-lg hover:bg-pcu-light/50 transition flex items-center gap-1"> Life at PCU <i class="w-3.5 h-3.5" data-lucide="chevron-down"></i> </button>
-<div class="nav-dropdown absolute top-full left-0 w-56 bg-white rounded-xl shadow-xl border border-gray-100 p-2 mt-1"><a class="block px-3 py-2.5 text-sm text-gray-700 hover:bg-pcu-light rounded-lg transition" href="#" onclick="navigateTo('how-to-get');return false">How to Get to PCU</a> <a class="block px-3 py-2.5 text-sm text-gray-700 hover:bg-pcu-light rounded-lg transition" href="#" onclick="navigateTo('accommodation');return false">Accommodation</a> <a class="block px-3 py-2.5 text-sm text-gray-700 hover:bg-pcu-light rounded-lg transition" href="#" onclick="navigateTo('preparation-arrival');return false">Preparation &amp; Arrival Guide</a> <a class="block px-3 py-2.5 text-sm text-gray-700 hover:bg-pcu-light rounded-lg transition" href="#" onclick="navigateTo('visa-immigration');return false">Visa &amp; Immigration</a>
+<div class="nav-item relative"><button aria-controls="nav-dd-life" aria-expanded="false" aria-haspopup="true" class="px-3 py-2 text-sm font-medium text-gray-700 hover:text-pcu-blue rounded-lg hover:bg-pcu-light/50 transition flex items-center gap-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-pcu-sky"> Life at PCU <i aria-hidden="true" class="w-3.5 h-3.5" data-lucide="chevron-down"></i> </button>
+<div class="nav-dropdown absolute top-full left-0 w-56 bg-white rounded-xl shadow-xl border border-gray-100 p-2 mt-1" id="nav-dd-life" role="menu"><a class="block px-3 py-2.5 text-sm text-gray-700 hover:bg-pcu-light rounded-lg transition focus:outline-none focus-visible:bg-pcu-light" href="#" onclick="navigateTo('how-to-get');return false" role="menuitem">How to Get to PCU</a> <a class="block px-3 py-2.5 text-sm text-gray-700 hover:bg-pcu-light rounded-lg transition focus:outline-none focus-visible:bg-pcu-light" href="#" onclick="navigateTo('accommodation');return false" role="menuitem">Accommodation</a> <a class="block px-3 py-2.5 text-sm text-gray-700 hover:bg-pcu-light rounded-lg transition focus:outline-none focus-visible:bg-pcu-light" href="#" onclick="navigateTo('preparation-arrival');return false" role="menuitem">Preparation &amp; Arrival Guide</a> <a class="block px-3 py-2.5 text-sm text-gray-700 hover:bg-pcu-light rounded-lg transition focus:outline-none focus-visible:bg-pcu-light" href="#" onclick="navigateTo('visa-immigration');return false" role="menuitem">Visa &amp; Immigration</a>
 </div>
 </div><a class="px-3 py-2 text-sm font-medium text-gray-700 hover:text-pcu-blue rounded-lg hover:bg-pcu-light/50 transition" href="#" onclick="navigateTo('news');return false">News</a>
 </div><!-- CTA + Mobile toggle -->
-<div class="flex items-center gap-3"><a class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 bg-[#1c446d] text-white text-sm font-semibold rounded-full hover:bg-[#163553] transition shadow-lg shadow-[#1c446d]/20" href="#" onclick="navigateTo('explore');return false"> Apply Now <i class="w-4 h-4" data-lucide="arrow-right"></i> </a> <button class="lg:hidden p-2 rounded-lg hover:bg-gray-100 transition" id="mobileToggle" onclick="toggleMobileMenu()"> <i class="w-6 h-6 text-gray-700" data-lucide="menu"></i> </button>
+<!-- CTA: renamed from "Apply Now" — link routes to /explore (program chooser), not an application form. Now visible on all viewports. -->
+<div class="flex items-center gap-3"><a class="inline-flex items-center gap-2 px-4 sm:px-5 py-2.5 bg-[#1c446d] text-white text-sm font-semibold rounded-full hover:bg-[#163553] transition shadow-lg shadow-[#1c446d]/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-pcu-sky focus-visible:ring-offset-2" href="#" onclick="navigateTo('explore');return false"><span class="hidden sm:inline">Explore Programs</span><span class="sm:hidden">Explore</span> <i aria-hidden="true" class="w-4 h-4" data-lucide="arrow-right"></i> </a> <button aria-controls="mobileMenu" aria-expanded="false" aria-label="Open menu" class="lg:hidden p-2 rounded-lg hover:bg-gray-100 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-pcu-sky" id="mobileToggle" onclick="toggleMobileMenu()"> <i aria-hidden="true" class="w-6 h-6 text-gray-700" data-lucide="menu"></i> </button>
 </div>
 </div>
 </div>
 </nav><!-- MOBILE MENU -->
 <div class="mobile-menu fixed inset-0 z-[60] bg-white" id="mobileMenu">
-<div class="flex items-center justify-between px-4 h-16 border-b border-gray-100"><span class="font-bold text-pcu-navy text-lg">PCU Global</span> <button class="p-2 rounded-lg hover:bg-gray-100" onclick="toggleMobileMenu()"><i class="w-6 h-6" data-lucide="x"></i></button>
+<div class="flex items-center justify-between px-4 h-16 border-b border-gray-100"><span class="font-bold text-pcu-navy text-lg">PCU Global</span> <button aria-label="Close menu" class="p-2 rounded-lg hover:bg-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-pcu-sky" onclick="toggleMobileMenu()"><i aria-hidden="true" class="w-6 h-6" data-lucide="x"></i></button>
 </div>
 <div class="p-4 space-y-1 overflow-auto" style="height: calc(100% - 64px)">
 <div class="px-4 py-2 text-xs font-semibold text-gray-400 uppercase tracking-wider">
@@ -189,7 +191,7 @@
 <div class="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,rgba(255,255,255,0.1),transparent)]"></div><i class="w-20 h-20 text-white/70 group-hover:scale-110 transition-transform duration-500" data-lucide="globe"></i>
 </div>
 <div class="p-8">
-<h2 class="font-display text-2xl font-bold text-pcu-orange mb-3">Local Students</h2>
+<h2 class="font-display text-2xl font-bold text-pcu-orange mb-3">PCU Students</h2>
 <p class="text-gray-500 mb-6 leading-relaxed">PCU student looking to go abroad? Discover outbound exchange, dual degrees, and internship opportunities.</p><span class="inline-flex items-center gap-2 px-6 py-3 bg-pcu-orange text-white font-semibold rounded-full group-hover:bg-amber-500 transition"> View Programs <i class="w-4 h-4" data-lucide="arrow-right"></i> </span>
 </div>
 </div>
@@ -203,11 +205,21 @@
 <div class="absolute inset-0">
 <img alt="Gedung Petra" class="w-full h-full object-cover opacity-60" src="Assets/Images/Student%20Exchange/student-exchange-8.JPG" style="object-position: center 35%;"/>
 </div>
-<div class="absolute inset-0 bg-gradient-to-r from-pcu-sky/80 to-cyan-400/80"></div>
-<div class="relative max-w-7xl mx-auto px-6 lg:px-8"><a class="inline-flex items-center gap-1 text-white/60 text-sm mb-6 hover:text-white transition" href="#" onclick="navigateTo('home');return false"><i class="w-4 h-4" data-lucide="arrow-left"></i> Back to Home</a>
-<a class="inline-flex items-center gap-1 text-white/70 text-sm mb-4 hover:text-white transition" href="#" onclick="navigateTo('pcu-students');return false"><i class="w-4 h-4" data-lucide="arrow-left"></i> Back to Local Students</a>
+<!-- Stronger overlay for WCAG AA contrast over hero image -->
+<div class="absolute inset-0 bg-gradient-to-r from-pcu-sky/90 to-cyan-500/90"></div>
+<div class="absolute inset-0 bg-black/25"></div>
+<div class="relative max-w-7xl mx-auto px-6 lg:px-8">
+<nav aria-label="Breadcrumb" class="mb-6">
+<ol class="flex items-center gap-2 text-sm text-white/90">
+<li><a class="hover:text-white underline-offset-2 hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80 rounded" href="#" onclick="navigateTo('home');return false">Home</a></li>
+<li aria-hidden="true" class="text-white/60">/</li>
+<li><a class="hover:text-white underline-offset-2 hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80 rounded" href="#" onclick="navigateTo('explore');return false">Explore Programs</a></li>
+<li aria-hidden="true" class="text-white/60">/</li>
+<li aria-current="page" class="text-white font-medium">International Students</li>
+</ol>
+</nav>
 <h1 class="font-display text-3xl md:text-5xl font-bold text-white mb-3">International Students</h1>
-<p class="text-white/70 text-lg max-w-2xl">Discover programs designed for students coming to PCU from around the world.</p>
+<p class="text-white/90 text-lg max-w-2xl">Discover programs designed for students coming to PCU from around the world.</p>
 </div>
 </div><!-- Programs -->
 <div class="max-w-7xl mx-auto px-6 lg:px-8 py-16">
@@ -275,11 +287,21 @@
 <div class="absolute inset-0">
 <img alt="Gedung Petra" class="w-full h-full object-cover opacity-60" src="Assets/Images/Student%20Exchange/student-exchange-7.JPG" style="object-position: center 50%;"/>
 </div>
-<div class="absolute inset-0 bg-gradient-to-r from-pcu-orange/70 to-amber-400/70"></div>
-<div class="relative max-w-7xl mx-auto px-6 lg:px-8"><a class="inline-flex items-center gap-1 text-white/60 text-sm mb-6 hover:text-white transition" href="#" onclick="navigateTo('home');return false"><i class="w-4 h-4" data-lucide="arrow-left"></i> Back to Home</a>
-<a class="inline-flex items-center gap-1 text-white/70 text-sm mb-4 hover:text-white transition" href="#" onclick="navigateTo('pcu-students');return false"><i class="w-4 h-4" data-lucide="arrow-left"></i> Back to Local Students</a>
-<h1 class="font-display text-3xl md:text-5xl font-bold text-white mb-3">Local Students</h1>
-<p class="text-white/70 text-lg max-w-2xl">Outbound opportunities for local PCU students to gain international experience.</p>
+<!-- Stronger overlay for WCAG AA contrast over hero image -->
+<div class="absolute inset-0 bg-gradient-to-r from-pcu-orange/90 to-amber-500/90"></div>
+<div class="absolute inset-0 bg-black/25"></div>
+<div class="relative max-w-7xl mx-auto px-6 lg:px-8">
+<nav aria-label="Breadcrumb" class="mb-6">
+<ol class="flex items-center gap-2 text-sm text-white/90">
+<li><a class="hover:text-white underline-offset-2 hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80 rounded" href="#" onclick="navigateTo('home');return false">Home</a></li>
+<li aria-hidden="true" class="text-white/60">/</li>
+<li><a class="hover:text-white underline-offset-2 hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80 rounded" href="#" onclick="navigateTo('explore');return false">Explore Programs</a></li>
+<li aria-hidden="true" class="text-white/60">/</li>
+<li aria-current="page" class="text-white font-medium">PCU Students</li>
+</ol>
+</nav>
+<h1 class="font-display text-3xl md:text-5xl font-bold text-white mb-3">PCU Students</h1>
+<p class="text-white/90 text-lg max-w-2xl">Outbound opportunities for PCU students to gain international experience.</p>
 </div>
 </div>
 <div class="max-w-7xl mx-auto px-6 lg:px-8 py-16">
@@ -359,39 +381,57 @@
 <!-- ==================== ADMIN ARTICLE PAGES (injected at runtime) ==================== -->
 <div id="adminArticlePages"></div>
 
-<footer class="bg-[#1c446d] text-white py-16">
+<footer class="bg-[#1c446d] text-white pt-16 pb-8">
 <div class="max-w-7xl mx-auto px-6 lg:px-8">
-<div class="text-center mb-8">
-<h3 class="font-display text-2xl md:text-3xl font-bold text-white mb-4">GET MORE UPDATES<br/>ON OUR SOCIAL MEDIA</h3>
-<div class="flex justify-center gap-4 mb-8">
-<a class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center hover:bg-pcu-sky transition" href="https://www.facebook.com/PetraChristianUniversity" target="_blank" rel="noopener noreferrer" aria-label="PCU Facebook">
-<i class="w-6 h-6" data-lucide="facebook"></i>
+<!-- Multi-column responsive footer with clearer hierarchy -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+<!-- Brand / address -->
+<div class="lg:col-span-2">
+<div class="flex items-center gap-3 mb-4">
+<img alt="" class="w-10 h-10 bg-white rounded-md p-1" src="Assets/Graphics/logo-UKP.svg"/>
+<div class="leading-tight"><span class="font-bold text-white text-lg">PCU Global</span><span class="block text-[10px] text-white/60 tracking-wide uppercase">International Office</span></div>
+</div>
+<p class="text-sm text-white/70 leading-relaxed mb-4 max-w-md">Petra Christian University's gateway to global education — connecting students, faculty, and partners worldwide.</p>
+<address class="not-italic text-sm text-white/70 leading-relaxed">
+Jl. Siwalankerto 121-131<br/>Surabaya 60236, Indonesia<br/>
+<a class="inline-block mt-2 hover:text-white transition focus:outline-none focus-visible:underline" href="mailto:io@petra.ac.id">io@petra.ac.id</a>
+</address>
+</div>
+<!-- Site map -->
+<nav aria-label="Footer navigation">
+<h4 class="text-sm font-semibold text-white uppercase tracking-wider mb-4">Explore</h4>
+<ul class="space-y-2 text-sm text-white/70">
+<li><a class="hover:text-white transition focus:outline-none focus-visible:underline" href="#" onclick="navigateTo('home'); return false;">Home</a></li>
+<li><a class="hover:text-white transition focus:outline-none focus-visible:underline" href="#" onclick="navigateTo('explore'); return false;">Programs</a></li>
+<li><a class="hover:text-white transition focus:outline-none focus-visible:underline" href="#" onclick="navigateTo('news'); return false;">News</a></li>
+<li><a class="hover:text-white transition focus:outline-none focus-visible:underline" href="#" onclick="navigateTo('facilities'); return false;">Facilities</a></li>
+<li><a class="hover:text-white transition focus:outline-none focus-visible:underline" href="#" onclick="navigateTo('contact-us'); return false;">Contact Us</a></li>
+</ul>
+</nav>
+<!-- Social -->
+<div>
+<h4 class="text-sm font-semibold text-white uppercase tracking-wider mb-4">Follow Us</h4>
+<div class="flex flex-wrap gap-3">
+<a class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-pcu-sky transition focus:outline-none focus-visible:ring-2 focus-visible:ring-white" href="https://www.facebook.com/PetraChristianUniversity" target="_blank" rel="noopener noreferrer" aria-label="PCU Facebook">
+<i aria-hidden="true" class="w-5 h-5" data-lucide="facebook"></i>
 </a>
-<a class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center hover:bg-pcu-sky transition" href="https://www.instagram.com/petrachristianuniversity" target="_blank" rel="noopener noreferrer" aria-label="PCU Instagram">
-<i class="w-6 h-6" data-lucide="instagram"></i>
+<a class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-pcu-sky transition focus:outline-none focus-visible:ring-2 focus-visible:ring-white" href="https://www.instagram.com/petrachristianuniversity" target="_blank" rel="noopener noreferrer" aria-label="PCU Instagram">
+<i aria-hidden="true" class="w-5 h-5" data-lucide="instagram"></i>
 </a>
-<a class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center hover:bg-pcu-sky transition" href="https://www.youtube.com/c/PetraChristianUniversity" target="_blank" rel="noopener noreferrer" aria-label="PCU YouTube">
-<i class="w-6 h-6" data-lucide="youtube"></i>
+<a class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-pcu-sky transition focus:outline-none focus-visible:ring-2 focus-visible:ring-white" href="https://www.youtube.com/c/PetraChristianUniversity" target="_blank" rel="noopener noreferrer" aria-label="PCU YouTube">
+<i aria-hidden="true" class="w-5 h-5" data-lucide="youtube"></i>
 </a>
-<a class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center hover:bg-pcu-sky transition" href="https://www.linkedin.com/school/petra-christian-university/" target="_blank" rel="noopener noreferrer" aria-label="PCU LinkedIn">
-<i class="w-6 h-6" data-lucide="linkedin"></i>
-</a>
-<a class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center hover:bg-pcu-sky transition" href="mailto:io@petra.ac.id" aria-label="Email PCU International Office">
-<i class="w-6 h-6" data-lucide="message-circle"></i>
+<a class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-pcu-sky transition focus:outline-none focus-visible:ring-2 focus-visible:ring-white" href="https://www.linkedin.com/school/petra-christian-university/" target="_blank" rel="noopener noreferrer" aria-label="PCU LinkedIn">
+<i aria-hidden="true" class="w-5 h-5" data-lucide="linkedin"></i>
 </a>
 </div>
-<div class="flex flex-wrap justify-center gap-4 text-sm text-white/70 mb-8">
-<a class="hover:text-white transition" href="#" onclick="navigateTo('home'); return false;">Home</a>
-<a class="hover:text-white transition" href="#" onclick="navigateTo('news'); return false;">News</a>
-<a class="hover:text-white transition" href="#" onclick="navigateTo('facilities'); return false;">Facilities</a>
-<a class="hover:text-white transition" href="#" onclick="navigateTo('contact-us'); return false;">Contact Us</a>
-<a class="hover:text-white transition" href="mailto:io@petra.ac.id">Email Us</a>
 </div>
-<div class="text-center text-white/70 mb-6">
-<p class="text-sm">PCU Global — Petra Christian University International Office</p>
-<p class="text-sm">Jl. Siwalankerto 121-131, Surabaya 60236, Indonesia</p>
 </div>
-<p class="text-xs text-white/30">© 2025 PCU Global — Petra Christian University. All rights reserved.</p>
+<div class="pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3">
+<p class="text-xs text-white/50">© 2025 Petra Christian University. All rights reserved.</p>
+<p class="text-xs text-white/40">PCU Global — International Office</p>
+</div>
+<p class="hidden text-xs text-white/30">© 2025 PCU Global— Petra Christian University. All rights reserved.</p>
 </div>
 </footer>
 </div>
@@ -1100,10 +1140,11 @@
       Sign Out (<span id="adminUserLabel"></span>)
     </button>
   </div>
-  <!-- Login button (only when logged out) -->
+  <!-- Login button — hidden from public; revealed only when ?admin=1 in URL or "pcuAdminUI" flag set in sessionStorage. See JS/main.js initAdminUiGate(). -->
   <button id="adminLoginBtn" onclick="openAdminLoginModal()"
-    class="flex items-center gap-2 px-4 py-2.5 bg-white/90 backdrop-blur text-gray-600 text-xs font-semibold rounded-full shadow-lg border border-gray-200 hover:bg-white transition">
-    <i data-lucide="shield" class="w-3.5 h-3.5 text-pcu-blue"></i>
+    class="hidden flex items-center gap-2 px-4 py-2.5 bg-white/90 backdrop-blur text-gray-600 text-xs font-semibold rounded-full shadow-lg border border-gray-200 hover:bg-white transition focus:outline-none focus-visible:ring-2 focus-visible:ring-pcu-sky"
+    aria-label="Admin login">
+    <i aria-hidden="true" data-lucide="shield" class="w-3.5 h-3.5 text-pcu-blue"></i>
     Admin
   </button>
 </div>

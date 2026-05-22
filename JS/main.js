@@ -87,6 +87,9 @@ function navigateTo(pageId, { updateHash = true } = {}) {
     pageId = 'home';
   }
   document.getElementById('app').scrollTop = 0;
+  // Update CSS --page-accent so components themed via this variable
+  // (e.g., news placeholder gradients) match the current section.
+  if (typeof setPageAccent === 'function') setPageAccent(pageId);
   if (updateHash) {
     history.pushState(null, '', '#' + pageId);
   }
@@ -223,8 +226,173 @@ function backToSelection() {
 }
 
 // ---- MOBILE MENU ----
-function toggleMobileMenu() {
-  document.getElementById('mobileMenu').classList.toggle('open');
+// Opens/closes the off-canvas mobile nav with:
+//   - body scroll lock (.menu-open on <body>)
+//   - aria-expanded sync on the toggle button
+//   - ESC-to-close (bound once below)
+//   - basic focus trap (Tab/Shift+Tab cycle within the menu)
+function toggleMobileMenu(force) {
+  const menu = document.getElementById('mobileMenu');
+  const toggle = document.getElementById('mobileToggle');
+  if (!menu) return;
+  const willOpen = typeof force === 'boolean' ? force : !menu.classList.contains('open');
+  menu.classList.toggle('open', willOpen);
+  document.body.classList.toggle('menu-open', willOpen);
+  if (toggle) {
+    toggle.setAttribute('aria-expanded', String(willOpen));
+    toggle.setAttribute('aria-label', willOpen ? 'Close menu' : 'Open menu');
+  }
+  if (willOpen) {
+    // Focus first interactive element so keyboard users land inside the menu
+    const firstFocusable = menu.querySelector('a, button');
+    if (firstFocusable) setTimeout(() => firstFocusable.focus(), 50);
+  } else if (toggle) {
+    toggle.focus();
+  }
+}
+
+// Close mobile menu on ESC + simple focus trap
+document.addEventListener('keydown', (e) => {
+  const menu = document.getElementById('mobileMenu');
+  if (!menu || !menu.classList.contains('open')) return;
+  if (e.key === 'Escape') {
+    e.preventDefault();
+    toggleMobileMenu(false);
+    return;
+  }
+  if (e.key === 'Tab') {
+    const focusables = menu.querySelectorAll('a[href], button:not([disabled])');
+    if (!focusables.length) return;
+    const first = focusables[0];
+    const last = focusables[focusables.length - 1];
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
+    }
+  }
+});
+
+// ---- DESKTOP DROPDOWN: click + keyboard + ESC ----
+// Hover-open still works via CSS (.nav-item:hover .nav-dropdown). This adds:
+//  - click toggles open/closed
+//  - aria-expanded reflects state
+//  - ESC closes + returns focus to trigger
+//  - clicking outside closes all
+(function initNavDropdowns() {
+  document.querySelectorAll('.nav-item').forEach((item) => {
+    const trigger = item.querySelector('button[aria-haspopup="true"]');
+    if (!trigger) return;
+    trigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const open = !item.classList.contains('is-open');
+      // close any other open dropdowns
+      document.querySelectorAll('.nav-item.is-open').forEach((o) => {
+        if (o !== item) {
+          o.classList.remove('is-open');
+          const t = o.querySelector('button[aria-haspopup="true"]');
+          if (t) t.setAttribute('aria-expanded', 'false');
+        }
+      });
+      item.classList.toggle('is-open', open);
+      trigger.setAttribute('aria-expanded', String(open));
+    });
+    item.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && item.classList.contains('is-open')) {
+        item.classList.remove('is-open');
+        trigger.setAttribute('aria-expanded', 'false');
+        trigger.focus();
+      }
+    });
+  });
+  // Click outside closes
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.nav-item')) {
+      document.querySelectorAll('.nav-item.is-open').forEach((o) => {
+        o.classList.remove('is-open');
+        const t = o.querySelector('button[aria-haspopup="true"]');
+        if (t) t.setAttribute('aria-expanded', 'false');
+      });
+    }
+  });
+  // Clicking a dropdown link should also close it (otherwise it stays open
+  // after navigation since the link click doesn't bubble to "outside").
+  document.querySelectorAll('.nav-dropdown a').forEach((a) => {
+    a.addEventListener('click', () => {
+      const item = a.closest('.nav-item');
+      if (!item) return;
+      item.classList.remove('is-open');
+      const t = item.querySelector('button[aria-haspopup="true"]');
+      if (t) t.setAttribute('aria-expanded', 'false');
+    });
+  });
+})();
+
+// ---- ADMIN UI GATE ----
+// Admin login pill is hidden from the public by default. Reveal it when:
+//   - URL contains ?admin=1   (typed/bookmarked by staff)
+//   - sessionStorage flag "pcuAdminUI" is set (persists in current tab)
+//   - Konami-style: Ctrl+Alt+A keypress
+(function initAdminUiGate() {
+  const reveal = () => {
+    const btn = document.getElementById('adminLoginBtn');
+    if (btn) btn.classList.remove('hidden');
+    try { sessionStorage.setItem('pcuAdminUI', '1'); } catch (_) {}
+  };
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('admin') === '1') reveal();
+  try { if (sessionStorage.getItem('pcuAdminUI') === '1') reveal(); } catch (_) {}
+  document.addEventListener('keydown', (e) => {
+    if (e.ctrlKey && e.altKey && (e.key === 'a' || e.key === 'A')) reveal();
+  });
+})();
+
+// ---- PAGE ACCENT SYSTEM ----
+// Maps a pageId to its brand accent color and sets a CSS variable on <body>
+// so themed components (e.g. .news-img placeholder) inherit cleanly without
+// scattered !important overrides. The legacy per-page !important rules in
+// styles.css are still in place for now (will be retired in Phase 3).
+const PAGE_ACCENTS = {
+  // Inbound — sky
+  'intl-students': '#30aeb4',
+  'semester-exchange': '#30aeb4',
+  'intl-degree': '#30aeb4',
+  'cop': '#30aeb4',
+  'indonesian-spectrum': '#30aeb4',
+  // Outbound — orange
+  'pcu-students': '#fa6632',
+  'outbound-semester-exchange': '#fa6632',
+  'joint-double-degree': '#fa6632',
+  'internship': '#fa6632',
+  // Partnership — purple
+  'international-partnership': '#8d4bb1',
+  'domestic-partnership': '#8d4bb1',
+  'consortium-association': '#8d4bb1',
+  'partnership-meet-us': '#8d4bb1',
+  // Life at PCU — green
+  'how-to-get': '#52ac2d',
+  'accommodation': '#52ac2d',
+  'preparation-arrival': '#52ac2d',
+  'visa-immigration': '#52ac2d',
+  // About — navy (default)
+  'pcu-at-glance': '#1d446e',
+  'facilities': '#1d446e',
+  'news': '#1d446e',
+  'contact-us': '#1d446e'
+};
+function setPageAccent(pageId) {
+  const hex = PAGE_ACCENTS[pageId] || '#1d446e';
+  // Convert #rrggbb to "r, g, b" so rgba() helpers work
+  const r = parseInt(hex.slice(1, 3), 16);
+  const g = parseInt(hex.slice(3, 5), 16);
+  const b = parseInt(hex.slice(5, 7), 16);
+  const root = document.body.style;
+  root.setProperty('--page-accent', hex);
+  root.setProperty('--page-accent-soft', `rgba(${r}, ${g}, ${b}, 0.10)`);
+  root.setProperty('--page-accent-border', `rgba(${r}, ${g}, ${b}, 0.20)`);
+  root.setProperty('--page-accent-shadow', `rgba(${r}, ${g}, ${b}, 0.15)`);
 }
 
 // ---- HERO CAROUSEL ----
@@ -233,19 +401,28 @@ const slides = document.querySelectorAll('.hero-slide');
 const dotsContainer = document.getElementById('heroDots');
 const prevBtn = document.getElementById('heroPrev');
 const nextBtn = document.getElementById('heroNext');
+// Dots rendered as <button> for proper semantics + keyboard focus
 slides.forEach((_, i) => {
-  const dot = document.createElement('div');
+  const dot = document.createElement('button');
+  dot.type = 'button';
   dot.className = 'dot' + (i === 0 ? ' active' : '');
-  dot.onclick = () => goToSlide(i);
+  dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+  if (i === 0) dot.setAttribute('aria-current', 'true');
+  dot.addEventListener('click', () => goToSlide(i));
   dotsContainer.appendChild(dot);
 });
 
 function goToSlide(n) {
   slides.forEach(s => s.classList.remove('active'));
-  dotsContainer.querySelectorAll('.dot').forEach(d => d.classList.remove('active'));
+  dotsContainer.querySelectorAll('.dot').forEach(d => {
+    d.classList.remove('active');
+    d.removeAttribute('aria-current');
+  });
   currentSlide = n;
   slides[n].classList.add('active');
-  dotsContainer.children[n].classList.add('active');
+  const activeDot = dotsContainer.children[n];
+  activeDot.classList.add('active');
+  activeDot.setAttribute('aria-current', 'true');
 }
 
 prevBtn.onclick = () => goToSlide((currentSlide - 1 + slides.length) % slides.length);

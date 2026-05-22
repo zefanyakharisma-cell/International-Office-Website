@@ -1,4 +1,5 @@
 :root {
+  /* Brand palette */
   --pcu-red: #f7000d;
   --pcu-orange: #fa6632;
   --pcu-sky-blue: #30aeb4;
@@ -15,16 +16,27 @@
   --pcu-teal-gradient: linear-gradient(to right, #54feeb, #133256);
   --pcu-red-to-yellow-gradient: linear-gradient(to right, #ec008c, #ffbc00);
   --pcu-purplish-gradient: linear-gradient(to right, #ec008c, #3990d0);
+
+  /* Page-accent system — set by JS per page (see Phase 3 theming).
+     Defaults to navy so anything unthemed still looks intentional. */
+  --page-accent: #1d446e;
+  --page-accent-soft: rgba(29, 68, 110, 0.10);
+  --page-accent-border: rgba(29, 68, 110, 0.20);
+  --page-accent-shadow: rgba(29, 68, 110, 0.15);
 }
 
 html, body { height: 100%; margin: 0; }
-body { 
-  font-family: 'DM Sans', sans-serif; 
+body {
+  font-family: 'DM Sans', sans-serif;
   overflow-x: hidden;
-  background-image: radial-gradient(circle, #d1d5db 1px, transparent 1px);
-  background-size: 24px 24px;
+  /* Subtler dotted background — was #d1d5db at 24px, too noisy */
+  background-image: radial-gradient(circle, rgba(29, 68, 110, 0.08) 1px, transparent 1px);
+  background-size: 32px 32px;
   background-color: var(--pcu-white);
 }
+
+/* Lock body scroll when mobile menu is open (set/cleared by toggleMobileMenu) */
+body.menu-open { overflow: hidden; }
 /* Smooth scroll */
 html { scroll-behavior: smooth; }
 
@@ -48,12 +60,24 @@ html { scroll-behavior: smooth; }
 .program-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
 .program-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(29,68,110,0.12); }
 
-/* Nav dropdown */
+/* Nav dropdown
+ * --------------
+ * The ::after pseudo-element is the "hover bridge": an invisible 20px strip
+ * between the trigger and the dropdown that keeps the menu open while the
+ * cursor moves diagonally from button → menu. Without it, the menu closes
+ * the moment the cursor leaves the button (because the dropdown sits below
+ * with margin-top). DO NOT REMOVE — it is load-bearing for the hover UX.
+ *
+ * Keyboard / click open is handled by JS, which adds the `.is-open` class.
+ * focus-within also keeps the menu open when tabbing through items.
+ */
 .nav-item { position: relative; }
 .nav-item::after { content: ''; position: absolute; top: 100%; left: 0; right: 0; height: 20px; }
-.nav-dropdown { opacity: 0; pointer-events: none; transform: translateY(8px); transition: all 0.25s ease; }
+.nav-dropdown { opacity: 0; pointer-events: none; transform: translateY(8px); transition: opacity 0.2s ease, transform 0.2s ease; }
 .nav-item:hover .nav-dropdown,
 .nav-item:hover::after,
+.nav-item:focus-within .nav-dropdown,
+.nav-item.is-open .nav-dropdown,
 .nav-dropdown:hover { opacity: 1; pointer-events: auto; transform: translateY(0); }
 .nav-item .nav-dropdown:hover { opacity: 1; pointer-events: auto; transform: translateY(0); }
 
@@ -65,9 +89,18 @@ html { scroll-behavior: smooth; }
 .page.active { display: block; animation: fadeIn 0.4s ease; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-/* Carousel dots */
-.dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.5); transition: all 0.3s; cursor: pointer; }
+/* Carousel dots — interactive buttons (created in JS) */
+.dot {
+  width: 10px; height: 10px; border-radius: 50%;
+  background: rgba(255,255,255,0.5);
+  transition: background 0.3s, width 0.3s, border-radius 0.3s;
+  cursor: pointer;
+  border: 0; padding: 0;
+}
+.dot:hover { background: rgba(255,255,255,0.75); }
+.dot:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
 .dot.active { background: #fff; width: 28px; border-radius: 5px; }
+.dot[aria-current="true"] { background: #fff; width: 28px; border-radius: 5px; }
 
 /* Floating animations for background decorations */
 @keyframes float1 {
@@ -104,7 +137,10 @@ html { scroll-behavior: smooth; }
   50% { transform: translate(-25px, 25px) scale(1.05); }
 }
 
-/* Background decoration container */
+/* Background decoration container
+ * Reduced opacity + fewer elements to lower visual clutter. The dotted-grid
+ * body background is the primary decorative layer; floating SVGs are now
+ * a quiet accent rather than a competing pattern. */
 .bg-decorations {
   position: fixed;
   top: 0;
@@ -119,7 +155,11 @@ html { scroll-behavior: smooth; }
 
 .bg-decoration {
   position: absolute;
-  opacity: 0.15;
+  opacity: 0.06;
+}
+/* Hide decorative floats on smaller screens where they crowd content */
+@media (max-width: 768px) {
+  .bg-decorations { display: none; }
 }
 
 .decoration-linework {
@@ -131,21 +171,40 @@ html { scroll-behavior: smooth; }
   background-image: url('Assets/Graphics/Petra Graphic Asset/Graphic Eleemnt Linework-04.svg');
 }
 
-/* Mobile menu */
-.mobile-menu { transform: translateX(100%); transition: transform 0.35s ease; }
-.mobile-menu.open { transform: translateX(0); }
+/* Mobile menu — visually hidden offscreen and isolated from a11y tree when closed */
+.mobile-menu {
+  transform: translateX(100%);
+  transition: transform 0.35s ease;
+  visibility: hidden;
+}
+.mobile-menu.open {
+  transform: translateX(0);
+  visibility: visible;
+}
 
-/* News card image placeholder */
-.news-img { background: linear-gradient(135deg, var(--pcu-sky-blue) 0%, var(--pcu-navy) 100%); }
+/* News card image placeholder — themed via --page-accent so each section
+ * (Inbound = sky, Outbound = orange, Partnership = purple, etc.) gets a
+ * placeholder gradient that matches its accent rather than always sky→navy. */
+.news-img {
+  background: linear-gradient(135deg, var(--page-accent, var(--pcu-sky-blue)) 0%, var(--pcu-navy) 100%);
+}
 
 /* News carousel styles */
 #newsCarouselContainer { animation: fadeIn 0.6s ease; }
 #newsCarouselContainer > div { height: 100%; width: 100%; }
 #newsCarouselContainer .absolute.inset-0 { background-size: cover; background-position: center; }
 
-/* Scrollbar */
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-thumb { background: var(--pcu-sky-blue); border-radius: 3px; }
+/* Scrollbar — thicker + visible track for better grab affordance */
+::-webkit-scrollbar { width: 12px; height: 12px; }
+::-webkit-scrollbar-track { background: rgba(29, 68, 110, 0.06); }
+::-webkit-scrollbar-thumb {
+  background: var(--pcu-sky-blue);
+  border-radius: 6px;
+  border: 3px solid var(--pcu-white);
+}
+::-webkit-scrollbar-thumb:hover { background: var(--pcu-navy); }
+/* Firefox */
+* { scrollbar-width: thin; scrollbar-color: var(--pcu-sky-blue) rgba(29, 68, 110, 0.06); }
 
 /* Map popup */
 #mapPopup {
@@ -565,4 +624,25 @@ body { box-sizing: border-box; }
 #page-facilities .program-card:hover,
 #page-contact-us .program-card:hover {
   box-shadow: 0 20px 40px rgba(29, 68, 110, 0.15) !important;
+}
+
+/* ==============================================
+   Reduced-motion support — respects user OS setting.
+   Disables decorative floats, marquees, fade-in
+   transitions, hover lifts, and slide animations.
+   Functional transitions (focus rings, color) stay.
+   ============================================== */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .bg-decoration,
+  .dp-carousel-track { animation: none !important; }
+  .program-card:hover { transform: none !important; }
+  .reveal { opacity: 1 !important; transform: none !important; }
+  .page.active { animation: none !important; }
+  .hero-slide { transition: opacity 0.001ms !important; }
 }
