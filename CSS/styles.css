@@ -440,3 +440,164 @@ body[data-section] .program-card:hover {
   .page.active { animation: none !important; }
   .hero-slide { transition: opacity 0.001ms !important; }
 }
+
+/* ==============================================
+   DARK MODE
+   ----------------------------------------------
+   The site is built with hard-coded light-theme
+   Tailwind utilities (bg-white, text-gray-*, …)
+   rather than dark: variants. Rebuilding the whole
+   markup with dark: classes isn't practical, so we
+   remap the common utilities here under html.dark.
+   Toggled by JS/i18n-theme.js (adds `.dark` to
+   <html>) and persisted to localStorage.
+
+   Surface scale (dark):
+     base bg   #0f172a   (slate-950-ish)
+     card/surf #1e293b   (slate-800)
+     raised    #273449
+     border    rgba(255,255,255,.09)
+   ============================================== */
+:root {
+  color-scheme: light;
+}
+html.dark { color-scheme: dark; }
+
+/* Smooth the switch (skipped under reduced-motion above). */
+html.dark body,
+html.dark .bg-white,
+html.dark .bg-gray-50,
+html.dark .bg-gray-100,
+html.dark .bg-pcu-light,
+html.dark .border-gray-100,
+html.dark .border-gray-200 {
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+html.dark body {
+  background-color: #0f172a !important;
+  color: #e5e7eb;
+  /* lighten the dotted texture so it reads on a dark base */
+  background-image: radial-gradient(circle, rgba(148, 163, 184, 0.07) 1px, transparent 1px);
+}
+
+/* --- Surfaces --- */
+html.dark .bg-white { background-color: #1e293b !important; }
+html.dark .bg-gray-50 { background-color: #18222f !important; }
+html.dark .bg-gray-100 { background-color: #273449 !important; }
+html.dark .bg-gray-200 { background-color: #2f3e54 !important; }
+html.dark .bg-pcu-light,
+html.dark .bg-pcu-light\/50,
+html.dark .bg-pcu-white { background-color: #18222f !important; }
+html.dark .bg-pcu-blue\/10,
+html.dark .bg-pcu-sky\/10,
+html.dark .bg-pcu-navy\/10 { background-color: rgba(81, 121, 214, 0.16) !important; }
+
+/* Translucent white surfaces (nav, sticky bars, glass cards) */
+html.dark .bg-white\/95 { background-color: rgba(15, 23, 42, 0.95) !important; }
+html.dark .bg-white\/90 { background-color: rgba(15, 23, 42, 0.90) !important; }
+html.dark .bg-white\/80 { background-color: rgba(15, 23, 42, 0.80) !important; }
+html.dark .bg-white\/70 { background-color: rgba(15, 23, 42, 0.70) !important; }
+html.dark .bg-white\/60 { background-color: rgba(15, 23, 42, 0.60) !important; }
+
+/* --- Text --- */
+html.dark .text-gray-900,
+html.dark .text-gray-800 { color: #e5e7eb !important; }
+html.dark .text-gray-700 { color: #d1d5db !important; }
+html.dark .text-gray-600 { color: #cbd5e1 !important; }
+html.dark .text-gray-500 { color: #9aa7b8 !important; }
+html.dark .text-gray-400 { color: #8593a6 !important; }
+html.dark .text-pcu-navy,
+html.dark .text-pcu-dark { color: #c7d6ef !important; }
+html.dark .text-black { color: #e5e7eb !important; }
+
+/* --- Borders --- */
+html.dark .border-gray-100 { border-color: rgba(255, 255, 255, 0.07) !important; }
+html.dark .border-gray-200 { border-color: rgba(255, 255, 255, 0.10) !important; }
+html.dark .border-gray-300 { border-color: rgba(255, 255, 255, 0.14) !important; }
+html.dark .border-white { border-color: rgba(255, 255, 255, 0.16) !important; }
+html.dark .divide-gray-100 > :not([hidden]) ~ :not([hidden]) { border-color: rgba(255, 255, 255, 0.07) !important; }
+
+/* --- Nav --- */
+html.dark #mainNav { border-color: rgba(255, 255, 255, 0.08) !important; }
+html.dark .nav-scrolled { box-shadow: 0 2px 20px rgba(0, 0, 0, 0.5) !important; }
+html.dark .nav-dropdown,
+html.dark .mobile-menu { background-color: #1e293b !important; }
+
+/* --- Form controls --- */
+html.dark input,
+html.dark textarea,
+html.dark select {
+  background-color: #18222f !important;
+  color: #e5e7eb;
+  border-color: rgba(255, 255, 255, 0.12);
+}
+html.dark input::placeholder,
+html.dark textarea::placeholder { color: #7b8a9e; }
+
+/* Section-accent soft fills (set via --page-accent) read too bright on dark */
+html.dark body[data-section] .bg-pcu-light,
+html.dark body[data-section] .bg-pcu-light\/50,
+html.dark body[data-section] .bg-pcu-blue\/10 {
+  background-color: rgba(255, 255, 255, 0.04) !important;
+}
+
+/* Flip-card back keeps its brand fill but lighten the front surface */
+html.dark .flip-card-front { background-color: #1e293b; }
+
+/* Scrollbar in dark */
+html.dark ::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.05); }
+html.dark ::-webkit-scrollbar-thumb { border-color: #0f172a; }
+
+/* Hero/overlay images can stay; just keep text legible over them. */
+html.dark .shadow-xl,
+html.dark .shadow-lg,
+html.dark .shadow-md { box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45) !important; }
+
+/* ==============================================
+   LANGUAGE + THEME TOGGLE CONTROLS
+   ============================================== */
+.lang-toggle {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 9999px;
+  border: 1px solid rgba(81, 121, 214, 0.25);
+  overflow: hidden;
+  background: rgba(81, 121, 214, 0.06);
+}
+.lang-toggle button {
+  padding: 0.25rem 0.6rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #5179d6;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.lang-toggle button[aria-pressed="true"] {
+  background: #5179d6;
+  color: #fff;
+}
+html.dark .lang-toggle { border-color: rgba(148, 163, 184, 0.25); background: rgba(148, 163, 184, 0.08); }
+html.dark .lang-toggle button { color: #c7d6ef; }
+html.dark .lang-toggle button[aria-pressed="true"] { background: #5179d6; color: #fff; }
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(81, 121, 214, 0.25);
+  color: #1d446e;
+  background: rgba(81, 121, 214, 0.06);
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.theme-toggle:hover { background: rgba(81, 121, 214, 0.14); }
+html.dark .theme-toggle { border-color: rgba(148, 163, 184, 0.25); color: #fdd600; background: rgba(148, 163, 184, 0.08); }
+html.dark .theme-toggle:hover { background: rgba(148, 163, 184, 0.16); }
+/* Show the right icon per theme (both rendered; CSS picks one) */
+.theme-toggle .icon-moon { display: inline-flex; }
+.theme-toggle .icon-sun { display: none; }
+html.dark .theme-toggle .icon-moon { display: none; }
+html.dark .theme-toggle .icon-sun { display: inline-flex; }
