@@ -213,6 +213,7 @@ function renderHomePage() {
                                             class="inline-flex items-center gap-1 text-sm font-semibold text-pcu-navy underline underline-offset-2 mb-3 hover:text-pcu-navy/70 focus:outline-none focus-visible:ring-2 focus-visible:ring-pcu-navy rounded">
                                             View all partners <i class="w-3.5 h-3.5" data-lucide="arrow-right"></i>
                                         </button>
+                                        <div class="text-xs text-pcu-navy/70 mb-2 font-medium">Featured industry &amp; institutional partners</div>
                                         <div class="grid grid-cols-5 gap-2 items-center justify-items-center">
                                             <img alt="Tokopedia" class="w-10 h-10 object-contain" src="Assets/Images/Industries/PT Tokopedia.png" loading="lazy" decoding="async"/>
                                             <img alt="GoTo Gojek" class="w-10 h-10 object-contain" src="Assets/Images/Industries/PT GoTo Gojek Tokopedia Tbk.svg" loading="lazy" decoding="async"/>
