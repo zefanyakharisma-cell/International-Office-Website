@@ -25,7 +25,7 @@ function renderFacilities() {
                         <a class="rounded-3xl bg-white border border-gray-100 p-8 shadow-sm hover:border-pcu-blue transition"
                            href="http://library.petra.ac.id/" target="_blank">
                             <div class="mb-6 overflow-hidden rounded-3xl bg-slate-50 h-40">
-                                <img alt="Library" class="w-full h-full object-cover object-center" src="Assets/Images/Facilities/library-1.svg"/>
+                                <img alt="Library" class="w-full h-full object-cover object-center" src="Assets/Images/Facilities/library-1.svg" loading="lazy" decoding="async"/>
                             </div>
                             <h3 class="font-semibold text-pcu-blue text-xl mb-3">Library</h3>
                             <p class="text-gray-600 mb-6">Access one of East Java's largest academic libraries with digital collections, e-resources, and study spaces.</p>
@@ -35,7 +35,7 @@ function renderFacilities() {
                         <a class="rounded-3xl bg-white border border-gray-100 p-8 shadow-sm hover:border-pcu-blue transition"
                            href="http://poliklinik.petra.ac.id/" target="_blank">
                             <div class="mb-6 overflow-hidden rounded-3xl bg-slate-50 h-40">
-                                <img alt="Health Services" class="w-full h-full object-cover object-center" src="Assets/Images/Facilities/health-services-1.svg"/>
+                                <img alt="Health Services" class="w-full h-full object-cover object-center" src="Assets/Images/Facilities/health-services-1.svg" loading="lazy" decoding="async"/>
                             </div>
                             <h3 class="font-semibold text-pcu-blue text-xl mb-3">Health Services</h3>
                             <p class="text-gray-600 mb-6">Klinik Pratama UK Petra offers general and dental care with free and self-pay services for the campus community.</p>
@@ -45,7 +45,7 @@ function renderFacilities() {
                         <a class="rounded-3xl bg-white border border-gray-100 p-8 shadow-sm hover:border-pcu-blue transition"
                            href="http://ptik.petra.ac.id/" target="_blank">
                             <div class="mb-6 overflow-hidden rounded-3xl bg-slate-50 h-40">
-                                <img alt="PTIK" class="w-full h-full object-cover object-center" src="Assets/Images/Facilities/ptik-1.svg"/>
+                                <img alt="PTIK" class="w-full h-full object-cover object-center" src="Assets/Images/Facilities/ptik-1.svg" loading="lazy" decoding="async"/>
                             </div>
                             <h3 class="font-semibold text-pcu-blue text-xl mb-3">PTIK</h3>
                             <p class="text-gray-600 mb-6">IT services and Microsoft software support for learning, teaching, and research at UK Petra.</p>
@@ -55,7 +55,7 @@ function renderFacilities() {
                         <a class="rounded-3xl bg-white border border-gray-100 p-8 shadow-sm hover:border-pcu-blue transition"
                            href="https://alumni.petra.ac.id/" target="_blank">
                             <div class="mb-6 overflow-hidden rounded-3xl bg-slate-50 h-40">
-                                <img alt="Petra Career Center" class="w-full h-full object-cover object-center" src="Assets/Images/Facilities/baka-1.svg"/>
+                                <img alt="Petra Career Center" class="w-full h-full object-cover object-center" src="Assets/Images/Facilities/baka-1.svg" loading="lazy" decoding="async"/>
                             </div>
                             <h3 class="font-semibold text-pcu-blue text-xl mb-3">Petra Career Center</h3>
                             <p class="text-gray-600 mb-6">Supporting students and alumni with career preparation, recruitment events, and professional networking.</p>

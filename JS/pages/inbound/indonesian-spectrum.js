@@ -9,7 +9,7 @@ function renderIndonesianSpectrum() {
                     <div class="absolute inset-0">
                         <img alt="Indonesian SPECTRUM" class="w-full h-full object-cover opacity-60"
                              src="Assets/Images/Student%20Exchange/student-exchange-4.JPG"
-                             style="object-position: center 60%;"/>
+                             style="object-position: center 60%;" loading="lazy" decoding="async"/>
                     </div>
                     <div class="absolute inset-0" style="background: linear-gradient(to right, rgba(236,0,140,0.8), rgba(255,188,0,0.8))"></div>
                     <div class="relative max-w-7xl mx-auto px-6 lg:px-8">

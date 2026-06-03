@@ -5,7 +5,7 @@ function renderDomesticPartnership() {
 <div style="padding-top: 80px;"><!-- Hero Section -->
 <div class="relative overflow-hidden py-16 md:py-24" style="background: linear-gradient(to right, #166534, #0d9488);">
 <div class="absolute inset-0">
-<img alt="PCU Campus Partnership" class="w-full h-full object-cover opacity-50" src="Assets/Images/Partnership/partnership-1.JPG" style="object-position: center 50%;"/>
+<img alt="PCU Campus Partnership" class="w-full h-full object-cover opacity-50" src="Assets/Images/Partnership/partnership-1.JPG" style="object-position: center 50%;" loading="lazy" decoding="async"/>
 </div>
 <div class="absolute inset-0" style="background: linear-gradient(to right, rgba(22,101,52,0.7), rgba(13,148,136,0.7));"></div>
 <div class="relative max-w-7xl mx-auto px-6 lg:px-8"><a class="inline-flex items-center gap-1 text-white/60 text-sm mb-6 hover:text-white transition" href="#" onclick="navigateTo('home');return false"><i class="w-4 h-4" data-lucide="arrow-left"></i> Back to Home</a>

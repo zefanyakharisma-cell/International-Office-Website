@@ -35,6 +35,27 @@ body {
   background-color: var(--pcu-white);
 }
 
+/* Skip-to-content link — visually hidden until focused by keyboard users */
+.skip-link {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  z-index: 100;
+  padding: 0.625rem 1.25rem;
+  background: var(--pcu-navy);
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.875rem;
+  border-radius: 0 0 0.75rem 0.75rem;
+  transition: transform 0.2s ease;
+  transform: translateX(-50%) translateY(-120%);
+}
+.skip-link:focus {
+  transform: translateX(-50%) translateY(0);
+  outline: 2px solid var(--pcu-sky);
+  outline-offset: 2px;
+}
+
 /* Lock body scroll when mobile menu is open (set/cleared by toggleMobileMenu) */
 body.menu-open { overflow: hidden; }
 /* Smooth scroll */
@@ -243,7 +264,8 @@ html { scroll-behavior: smooth; }
 }
 
 .flip-card:hover .flip-card-inner,
-.flip-card:focus-within .flip-card-inner {
+.flip-card:focus-within .flip-card-inner,
+.flip-card.flipped .flip-card-inner {
   transform: rotateY(180deg);
   -webkit-transform: rotateY(180deg);
 }
@@ -274,8 +296,11 @@ html { scroll-behavior: smooth; }
   justify-content: center;
   align-items: center;
   padding: 1.5rem;
-  background: #f8fafc;
-  border: 1px solid #e5e7eb;
+  /* Background is supplied per-card by a brand-color utility class
+     (e.g. .bg-pcu-blue) so the white text on the back stays readable.
+     Previously a hard-coded light #f8fafc here overrode those utilities
+     and rendered white-on-near-white text invisible. */
+  background: var(--pcu-navy);
 }
 
 /* Program card slide animations */

@@ -423,7 +423,7 @@ slides.forEach((_, i) => {
   dot.className = 'dot' + (i === 0 ? ' active' : '');
   dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
   if (i === 0) dot.setAttribute('aria-current', 'true');
-  dot.addEventListener('click', () => goToSlide(i));
+  dot.addEventListener('click', () => goToSlideManual(i));
   dotsContainer.appendChild(dot);
 });
 
@@ -440,10 +440,47 @@ function goToSlide(n) {
   activeDot.setAttribute('aria-current', 'true');
 }
 
-prevBtn.onclick = () => goToSlide((currentSlide - 1 + slides.length) % slides.length);
-nextBtn.onclick = () => goToSlide((currentSlide + 1) % slides.length);
+// ---- CAROUSEL AUTOPLAY ----
+// Respects prefers-reduced-motion (no auto-advance), pauses on hover/focus,
+// and restarts the timer after any manual interaction so a slide is never
+// yanked away mid-read (WCAG 2.2.2).
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+let heroTimer = null;
+const HERO_INTERVAL = 6000;
 
-setInterval(() => goToSlide((currentSlide + 1) % slides.length), 5000);
+function stopHeroAutoplay() {
+  if (heroTimer) { clearInterval(heroTimer); heroTimer = null; }
+}
+function startHeroAutoplay() {
+  stopHeroAutoplay();
+  if (prefersReducedMotion.matches || slides.length < 2) return;
+  heroTimer = setInterval(() => goToSlide((currentSlide + 1) % slides.length), HERO_INTERVAL);
+}
+// Any manual navigation restarts the countdown
+function goToSlideManual(n) {
+  goToSlide(n);
+  startHeroAutoplay();
+}
+
+prevBtn.onclick = () => goToSlideManual((currentSlide - 1 + slides.length) % slides.length);
+nextBtn.onclick = () => goToSlideManual((currentSlide + 1) % slides.length);
+
+const heroCarousel = document.getElementById('heroCarousel');
+if (heroCarousel) {
+  const heroRoot = heroCarousel.parentElement; // section wrapper incl. arrows + dots
+  heroRoot.addEventListener('mouseenter', stopHeroAutoplay);
+  heroRoot.addEventListener('mouseleave', startHeroAutoplay);
+  heroRoot.addEventListener('focusin', stopHeroAutoplay);
+  heroRoot.addEventListener('focusout', startHeroAutoplay);
+}
+// Pause when the tab is hidden; resume when visible
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) stopHeroAutoplay(); else startHeroAutoplay();
+});
+// React to runtime changes of the motion preference
+prefersReducedMotion.addEventListener('change', startHeroAutoplay);
+
+startHeroAutoplay();
 
 // ---- COUNTER ANIMATION ----
 function animateCounters() {
@@ -451,12 +488,17 @@ function animateCounters() {
     const target = parseInt(el.dataset.target);
     if (!target || el.dataset.done) return;
     el.dataset.done = '1';
+    // Only append a "+" when the markup explicitly opts in via data-suffix.
+    // Previously every value > 50 got a "+", which falsely implied "more than"
+    // on exact figures (e.g. 184 partners, 4734 students).
+    const suffix = el.dataset.suffix || '';
+    const formatter = new Intl.NumberFormat('en-US');
     let current = 0;
     const step = Math.max(1, Math.floor(target / 60));
     const interval = setInterval(() => {
       current += step;
       if (current >= target) { current = target; clearInterval(interval); }
-      el.textContent = current + (target > 50 ? '+' : '');
+      el.textContent = formatter.format(current) + suffix;
     }, 25);
   });
 }
@@ -1421,7 +1463,7 @@ function displaySelectedCountry(country, institutions) {
   // Build title with flag
   let titleHTML = '';
   if (flagPath) {
-    titleHTML = `<img src="${flagPath}" alt="${country}" class="w-8 h-6 object-cover rounded mr-3"> ${country} — Partner Institutions`;
+    titleHTML = `<img src="${flagPath}" alt="${country}" class="w-8 h-6 object-cover rounded mr-3" loading="lazy" decoding="async"> ${country} — Partner Institutions`;
   } else {
     titleHTML = `${country} — Partner Institutions`;
   }
@@ -1435,7 +1477,7 @@ function displaySelectedCountry(country, institutions) {
       <div class="bg-white rounded-xl p-5 border border-gray-100 shadow-sm hover:shadow-md hover:border-pcu-blue/30 transition">
         <div class="flex items-center gap-4">
           <div class="w-16 h-16 rounded-2xl bg-pcu-light/80 flex items-center justify-center overflow-hidden">
-            ${logoPath ? `<img src="${logoPath}" alt="${inst} logo" class="max-h-12 max-w-full object-contain">` : `<i data-lucide="building" class="w-6 h-6 text-pcu-blue"></i>`}
+            ${logoPath ? `<img src="${logoPath}" alt="${inst} logo" class="max-h-12 max-w-full object-contain" loading="lazy" decoding="async">` : `<i data-lucide="building" class="w-6 h-6 text-pcu-blue"></i>`}
           </div>
           <h3 class="font-semibold text-pcu-blue leading-tight">${inst}</h3>
         </div>
@@ -1459,9 +1501,116 @@ function clearSelectedCountry() {
 document.addEventListener('DOMContentLoaded', function() {
   initializeCountryGrid();
   initializePartnershipData();
+  setupFlipCards();
+  initModalA11y();
   const pageId = window.location.hash.slice(1) || 'home';
   navigateTo(pageId, { updateHash: false });
 });
+
+// ---- FLIP CARDS ----
+// CSS flips on :hover/:focus-within for mouse + keyboard, but touch devices
+// have no hover, so the back face (key stats, faculty list, etc.) was
+// unreachable. This makes every flip card tap- and keyboard-operable by
+// toggling a .flipped class, while letting buttons/links on the back work
+// without also toggling the card.
+function setupFlipCards() {
+  document.querySelectorAll('.flip-card').forEach((card) => {
+    if (card.dataset.flipReady) return;
+    card.dataset.flipReady = '1';
+    card.setAttribute('tabindex', '0');
+    card.setAttribute('role', 'button');
+    card.setAttribute('aria-pressed', 'false');
+    if (!card.getAttribute('aria-label')) {
+      const label = card.querySelector('.flip-card-front')?.textContent.trim().replace(/\s+/g, ' ');
+      if (label) card.setAttribute('aria-label', label + ' — show more');
+    }
+    const toggle = () => {
+      const flipped = card.classList.toggle('flipped');
+      card.setAttribute('aria-pressed', String(flipped));
+    };
+    card.addEventListener('click', (e) => {
+      // Ignore clicks that originate from an interactive element on the back
+      if (e.target.closest('a, button')) return;
+      toggle();
+    });
+    card.addEventListener('keydown', (e) => {
+      if (e.target !== card) return; // let inner controls handle their own keys
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggle();
+      }
+    });
+  });
+}
+
+// ---- MODAL ACCESSIBILITY ----
+// Generic ESC-to-close, focus trap, and focus restoration for every overlay
+// modal. Modals are opened/closed elsewhere by toggling the `hidden` class;
+// this layers a11y behavior on top without changing those functions. Each
+// modal id maps to its existing close function (all tolerate a no-arg call).
+const MODAL_CLOSERS = {
+  'meeting-request-modal': () => closeMeetingRequestModal(),
+  'ose-university-modal': () => closeOseUniversityModal(),
+  'ose-manager-modal': () => closeOseManagerModal(),
+  'ose-form-modal': () => closeOseEditForm(),
+  'partnership-modal': () => closePartnershipModal(),
+  'intern-form-modal': () => closeInternshipOpportunityModal(),
+  'adminLoginModal': () => closeAdminLoginModal(),
+  'articleFormModal': () => closeAddArticleModal(),
+};
+const modalOpeners = new WeakMap(); // modal element -> element to restore focus to on close
+
+function isModalOpen(el) { return el && !el.classList.contains('hidden'); }
+function getModalFocusable(el) {
+  return Array.from(el.querySelectorAll(
+    'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+  )).filter(n => n.offsetParent !== null);
+}
+function topOpenModal() {
+  const open = Object.keys(MODAL_CLOSERS)
+    .map(id => document.getElementById(id))
+    .filter(isModalOpen);
+  if (!open.length) return null;
+  // Highest stacking context wins when modals overlap
+  return open.sort((a, b) =>
+    (parseInt(getComputedStyle(b).zIndex) || 0) - (parseInt(getComputedStyle(a).zIndex) || 0)
+  )[0];
+}
+function initModalA11y() {
+  Object.keys(MODAL_CLOSERS).forEach((id) => {
+    const modal = document.getElementById(id);
+    if (!modal) return;
+    const obs = new MutationObserver(() => {
+      if (isModalOpen(modal)) {
+        if (!modalOpeners.has(modal)) {
+          modalOpeners.set(modal, document.activeElement);
+          const f = getModalFocusable(modal);
+          if (f.length) setTimeout(() => f[0].focus(), 50);
+        }
+      } else if (modalOpeners.has(modal)) {
+        const opener = modalOpeners.get(modal);
+        modalOpeners.delete(modal);
+        if (opener && typeof opener.focus === 'function') opener.focus();
+      }
+    });
+    obs.observe(modal, { attributes: true, attributeFilter: ['class'] });
+  });
+
+  document.addEventListener('keydown', (e) => {
+    const modal = topOpenModal();
+    if (!modal) return;
+    if (e.key === 'Escape') {
+      e.preventDefault();
+      MODAL_CLOSERS[modal.id]?.();
+    } else if (e.key === 'Tab') {
+      const f = getModalFocusable(modal);
+      if (!f.length) return;
+      const first = f[0], last = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+  });
+}
 
 // ---- PARTNERSHIP FUNCTIONS ----
 function togglePartnershipBox(boxId, suffix = '') {
@@ -1507,7 +1656,7 @@ function loadCountries(suffix = '') {
     return `
       <div class="bg-white rounded-xl p-4 border border-gray-100 shadow-sm hover:shadow-md hover:border-pcu-blue/30 transition cursor-pointer" onclick="showCountryUniversities('${country}')">
         <div class="flex items-center gap-3">
-          ${flagPath ? `<img src="${flagPath}" alt="${country}" class="w-8 h-6 object-cover rounded">` : ''}
+          ${flagPath ? `<img src="${flagPath}" alt="${country}" class="w-8 h-6 object-cover rounded" loading="lazy" decoding="async">` : ''}
           <span class="font-semibold text-pcu-blue">${country}</span>
         </div>
       </div>
@@ -1528,7 +1677,7 @@ function showContinent(continent, suffix = '') {
         return `
           <div class="bg-white rounded-xl p-4 border border-gray-100 shadow-sm hover:shadow-md hover:border-pcu-blue/30 transition cursor-pointer" onclick="showCountryUniversities('${country}')">
             <div class="flex items-center gap-3">
-              ${flagPath ? `<img src="${flagPath}" alt="${country}" class="w-8 h-6 object-cover rounded">` : ''}
+              ${flagPath ? `<img src="${flagPath}" alt="${country}" class="w-8 h-6 object-cover rounded" loading="lazy" decoding="async">` : ''}
               <span class="font-semibold text-pcu-blue">${country}</span>
             </div>
           </div>
@@ -1570,7 +1719,7 @@ function openPartnershipModal(type) {
           return `
             <div class="bg-white rounded-xl p-4 border border-gray-100 shadow-sm hover:shadow-md hover:border-pcu-blue/30 transition cursor-pointer" onclick="showCountryInModal('${country.replace(/'/g,"\\'")}')">
               <div class="flex items-center gap-3">
-                ${flagPath ? `<img src="${flagPath}" alt="${country}" class="w-8 h-6 object-cover rounded shrink-0">` : ''}
+                ${flagPath ? `<img src="${flagPath}" alt="${country}" class="w-8 h-6 object-cover rounded shrink-0" loading="lazy" decoding="async">` : ''}
                 <span class="font-semibold text-pcu-blue text-sm">${country}</span>
               </div>
             </div>`;
@@ -1618,7 +1767,7 @@ function showContinentInModal(continent) {
         return `
           <div class="bg-white rounded-xl p-4 border border-gray-100 shadow-sm hover:shadow-md hover:border-pcu-blue/30 transition cursor-pointer" onclick="showCountryInModal('${country.replace(/'/g,"\\'")}')">
             <div class="flex items-center gap-3">
-              ${flagPath ? `<img src="${flagPath}" alt="${country}" class="w-8 h-6 object-cover rounded shrink-0">` : ''}
+              ${flagPath ? `<img src="${flagPath}" alt="${country}" class="w-8 h-6 object-cover rounded shrink-0" loading="lazy" decoding="async">` : ''}
               <span class="font-semibold text-pcu-blue text-sm">${country}</span>
             </div>
           </div>`;
@@ -1635,7 +1784,7 @@ function showCountryInModal(country) {
   const flagPath = getFlagPath(country);
 
   title.innerHTML = flagPath
-    ? `<img src="${flagPath}" alt="${country}" class="w-8 h-6 object-cover rounded mr-3 inline-block align-middle"> ${country}`
+    ? `<img src="${flagPath}" alt="${country}" class="w-8 h-6 object-cover rounded mr-3 inline-block align-middle" loading="lazy" decoding="async"> ${country}`
     : country;
   title.className = 'font-display text-2xl font-bold text-pcu-blue flex items-center';
 
@@ -1650,7 +1799,7 @@ function showCountryInModal(country) {
           <div class="bg-white rounded-xl p-5 border border-gray-100 shadow-sm hover:shadow-md hover:border-pcu-blue/30 transition">
             <div class="flex items-center gap-4">
               <div class="w-14 h-14 rounded-2xl bg-pcu-light/80 flex items-center justify-center overflow-hidden shrink-0">
-                ${logoPath ? `<img src="${logoPath}" alt="${inst} logo" class="max-h-10 max-w-full object-contain">` : `<i data-lucide="building" class="w-6 h-6 text-pcu-blue"></i>`}
+                ${logoPath ? `<img src="${logoPath}" alt="${inst} logo" class="max-h-10 max-w-full object-contain" loading="lazy" decoding="async">` : `<i data-lucide="building" class="w-6 h-6 text-pcu-blue"></i>`}
               </div>
               <h3 class="font-semibold text-pcu-blue leading-tight text-sm">${inst}</h3>
             </div>
@@ -1682,7 +1831,7 @@ function initializeCountryGrid() {
     card.onclick = () => showCountryUniversities(country);
     card.innerHTML = `
       <div class="flex items-center gap-3">
-        ${flagPath ? `<img src="${flagPath}" alt="${country}" class="w-8 h-6 object-cover rounded">` : ''}
+        ${flagPath ? `<img src="${flagPath}" alt="${country}" class="w-8 h-6 object-cover rounded" loading="lazy" decoding="async">` : ''}
         <span class="font-semibold text-pcu-blue">${country}</span>
       </div>
     `;

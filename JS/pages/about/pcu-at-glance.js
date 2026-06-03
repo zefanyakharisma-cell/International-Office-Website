@@ -9,7 +9,7 @@ function renderPcuAtGlance() {
                     <div class="absolute inset-0">
                         <img alt="Gedung Petra" class="w-full h-full object-cover opacity-40"
                              src="Assets/Images/Gedung%20Petra/gedung-petra-1.png"
-                             style="object-position: center 75%;"/>
+                             style="object-position: center 75%;" loading="lazy" decoding="async"/>
                     </div>
                     <div class="absolute inset-0 bg-gradient-to-r from-[#0d2137]/70 to-pcu-navy/70"></div>
                     <div class="relative max-w-7xl mx-auto px-6 lg:px-8">
@@ -104,7 +104,7 @@ function renderPcuAtGlance() {
                                     <div class="md:w-1/3 overflow-hidden">
                                         <div class="relative h-80 md:h-full">
                                             <img alt="Prof. Dr. (H.C.) Ir. Rolly Intan" class="w-full h-full object-cover object-center"
-                                                 src="Assets/Images/Foto%20Rektorat/00%20-%20Pak%20Rolly/DSC09547.JPG"/>
+                                                 src="Assets/Images/Foto%20Rektorat/00%20-%20Pak%20Rolly/DSC09547.JPG" loading="lazy" decoding="async"/>
                                             <div class="absolute inset-x-0 bottom-0 bg-black/80 p-4 text-white text-sm font-semibold leading-tight">
                                                 Prof. Dr. (H.C.) Ir. Rolly Intan, M.A.Sc., Dr.Eng. - Rector of Petra Christian University
                                             </div>
@@ -135,7 +135,7 @@ function renderPcuAtGlance() {
                                     <div class="h-48 overflow-hidden">
                                         <img alt="Dra. Leenawaty Limantara" class="w-full h-full object-cover"
                                              src="Assets/Images/Foto%20Rektorat/01%20-%20Bu%20Shinta/IMG_9575.JPG"
-                                             style="object-position: center 27%;"/>
+                                             style="object-position: center 27%;" loading="lazy" decoding="async"/>
                                     </div>
                                     <div class="p-6 text-center">
                                         <h3 class="font-semibold text-lg text-pcu-blue mb-2">Dra. Leenawaty Limantara, M.Sc., Ph.D.</h3>
@@ -146,7 +146,7 @@ function renderPcuAtGlance() {
                                     <div class="h-48 overflow-hidden">
                                         <img alt="Liem Pei Fun" class="w-full h-full object-cover"
                                              src="Assets/Images/Foto%20Rektorat/02%20-%20Bu%20Pei%20Fun/IMG_9613.JPG"
-                                             style="object-position: center 20%;"/>
+                                             style="object-position: center 20%;" loading="lazy" decoding="async"/>
                                     </div>
                                     <div class="p-6 text-center">
                                         <h3 class="font-semibold text-lg text-pcu-blue mb-2">Liem Pei Fun, S.E., M.Com., Ph.D.</h3>
@@ -157,7 +157,7 @@ function renderPcuAtGlance() {
                                     <div class="h-48 overflow-hidden">
                                         <img alt="Dr. Rudy Setiawan" class="w-full h-full object-cover"
                                              src="Assets/Images/Foto%20Rektorat/03%20-%20Pak%20Rudy/DSCF8768.jpg"
-                                             style="object-position: center 25%;"/>
+                                             style="object-position: center 25%;" loading="lazy" decoding="async"/>
                                     </div>
                                     <div class="p-6 text-center">
                                         <h3 class="font-semibold text-lg text-pcu-blue mb-2">Dr. Rudy Setiawan, S.T., M.T.</h3>
@@ -168,7 +168,7 @@ function renderPcuAtGlance() {
                                     <div class="h-48 overflow-hidden">
                                         <img alt="Dr. Dra. Gan Shu San" class="w-full h-full object-cover"
                                              src="Assets/Images/Foto%20Rektorat/04%20-%20Bu%20Gan%20Shu%20San/DSCF8999.jpg"
-                                             style="object-position: center 20%;"/>
+                                             style="object-position: center 20%;" loading="lazy" decoding="async"/>
                                     </div>
                                     <div class="p-6 text-center">
                                         <h3 class="font-semibold text-lg text-pcu-blue mb-2">Dr. Dra. Gan Shu San, M.Sc.</h3>

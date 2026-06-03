@@ -4,7 +4,9 @@ function renderHomePage() {
         <div class="page active" id="page-home">
 
             <!-- HERO CAROUSEL -->
-            <section class="relative z-10 w-full overflow-hidden" style="height: 600px; margin-top: 0; padding-top: 80px;">
+            <!-- Fluid height (clamp) so the hero adapts to short/small viewports
+                 instead of clipping content at a fixed 600px. -->
+            <section class="relative z-10 w-full overflow-hidden" style="height: clamp(540px, 82vh, 640px); margin-top: 0; padding-top: 80px;">
                 <div class="absolute inset-0" style="top: 80px;">
                     <div class="relative w-full h-full" id="heroCarousel">
 
@@ -29,8 +31,8 @@ function renderHomePage() {
                                                 Explore Programs <i class="w-4 h-4" data-lucide="arrow-right"></i>
                                             </a>
                                             <a class="inline-flex items-center gap-2 px-7 py-3.5 bg-[#1c446d] border-transparent text-white font-semibold rounded-full hover:bg-[#163553] transition"
-                                               href="#" onclick="navigateTo('explore');return false">
-                                                Apply Now
+                                               href="#" onclick="navigateTo('contact-us');return false">
+                                                Contact Us
                                             </a>
                                         </div>
                                     </div>
@@ -48,7 +50,7 @@ function renderHomePage() {
                             <div class="absolute inset-0 flex items-center">
                                 <div class="max-w-7xl mx-auto px-6 lg:px-8 w-full">
                                     <div class="max-w-2xl">
-                                        <span class="inline-block px-6 py-2 bg-pcu-yellow/30 border border-pcu-yellow text-pcu-yellow text-xs font-semibold rounded-full mb-6 tracking-wide uppercase">
+                                        <span class="inline-block px-6 py-2 bg-pcu-yellow/20 border border-pcu-yellow text-white text-xs font-semibold rounded-full mb-6 tracking-wide uppercase">
                                             Student Exchange
                                         </span>
                                         <h1 class="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-5">
@@ -111,11 +113,11 @@ function renderHomePage() {
 
                         <!-- Top 100 -->
                         <div class="bg-pcu-yellow rounded-2xl p-8 text-center shadow-md border border-pcu-yellow/20 col-span-2 flex flex-col items-center justify-center min-h-full">
-                            <div class="w-16 h-16 mx-auto mb-4 rounded-xl bg-white/20 flex items-center justify-center">
-                                <i class="w-8 h-8 text-white" data-lucide="award"></i>
+                            <div class="w-16 h-16 mx-auto mb-4 rounded-xl bg-pcu-navy/15 flex items-center justify-center">
+                                <i class="w-8 h-8 text-pcu-navy" data-lucide="award"></i>
                             </div>
-                            <div class="text-3xl md:text-4xl font-bold text-white leading-tight">Top 100 University</div>
-                            <div class="text-base text-white mt-2 leading-relaxed">QS South-Eastern Asia University Ranking 2026</div>
+                            <div class="text-3xl md:text-4xl font-bold text-pcu-navy leading-tight">Top 100 University</div>
+                            <div class="text-base text-pcu-navy/80 mt-2 leading-relaxed">QS South-Eastern Asia University Ranking 2026</div>
                         </div>
 
                         <!-- Active Students -->
@@ -128,7 +130,7 @@ function renderHomePage() {
                                     <div class="counter text-3xl md:text-4xl font-bold text-white" data-target="4734">0</div>
                                     <div class="text-xs text-white mt-1 uppercase tracking-wider font-medium">Active Students</div>
                                 </div>
-                                <div class="flip-card-back bg-pcu-blue/10">
+                                <div class="flip-card-back bg-pcu-blue">
                                     <div class="text-center">
                                         <div class="text-lg font-bold text-white mb-3">Student Breakdown</div>
                                         <div class="text-sm text-white space-y-1">
@@ -142,7 +144,7 @@ function renderHomePage() {
                         </div>
 
                         <!-- International Partners -->
-                        <div class="flip-card bg-pcu-magenta rounded-2xl shadow-sm border border-gray-100" onclick="navigateTo('international-partnership')">
+                        <div class="flip-card bg-pcu-magenta rounded-2xl shadow-sm border border-gray-100">
                             <div class="flip-card-inner">
                                 <div class="flip-card-front bg-pcu-magenta rounded-2xl p-6 text-center">
                                     <div class="w-14 h-14 mx-auto mb-4 rounded-xl bg-white/20 flex items-center justify-center">
@@ -151,19 +153,22 @@ function renderHomePage() {
                                     <div class="counter text-3xl md:text-4xl font-bold text-white" data-target="184">0</div>
                                     <div class="text-xs text-white mt-1 uppercase tracking-wider font-medium">International Partners</div>
                                 </div>
-                                <div class="flip-card-back bg-pcu-magenta/10">
+                                <div class="flip-card-back bg-pcu-magenta">
                                     <div class="text-center">
                                         <div class="text-lg font-bold text-white mb-2">International Partner List</div>
-                                        <div class="text-sm text-white mb-3">More about our international partnerships</div>
+                                        <button type="button" onclick="event.stopPropagation();navigateTo('international-partnership')"
+                                            class="inline-flex items-center gap-1 text-sm font-semibold text-white underline underline-offset-2 mb-3 hover:text-white/80 focus:outline-none focus-visible:ring-2 focus-visible:ring-white rounded">
+                                            View all partners <i class="w-3.5 h-3.5" data-lucide="arrow-right"></i>
+                                        </button>
                                         <div class="grid grid-cols-4 gap-3 items-center justify-items-center">
-                                            <img alt="Anhui University" class="w-10 h-10 object-contain" src="Assets/Images/Logo/China/Anhui University, China.jpg"/>
-                                            <img alt="FPNU" class="w-10 h-10 object-contain" src="Assets/Images/Logo/China/Fujian Polytechnic Normal University (FPNU), China.jpg"/>
-                                            <img alt="Sophia University" class="w-10 h-10 object-contain" src="Assets/Images/Logo/Japan/Sophia University, Japan.png"/>
-                                            <img alt="Meiji University" class="w-10 h-10 object-contain" src="Assets/Images/Logo/Japan/Meiji University, Japan.png"/>
-                                            <img alt="Fontys University" class="w-10 h-10 object-contain" src="Assets/Images/Logo/Netherlands/Fontys University of Applied Sciences, The Netherlands.png"/>
-                                            <img alt="Saxion University" class="w-10 h-10 object-contain" src="Assets/Images/Logo/Netherlands/Saxion University of Applied Sciences, the Netherlands.png"/>
-                                            <img alt="Hochschule Fresenius" class="w-10 h-10 object-contain" src="Assets/Images/Logo/Germany/Hochschule Fresenius University of Applied Sciences, Germany.png"/>
-                                            <img alt="Hochschule Mainz" class="w-10 h-10 object-contain" src="Assets/Images/Logo/Germany/Hochschule Mainz - University of Applied Sciences, Germany.png"/>
+                                            <img alt="Anhui University" class="w-10 h-10 object-contain" src="Assets/Images/Logo/China/Anhui University, China.jpg" loading="lazy" decoding="async"/>
+                                            <img alt="FPNU" class="w-10 h-10 object-contain" src="Assets/Images/Logo/China/Fujian Polytechnic Normal University (FPNU), China.jpg" loading="lazy" decoding="async"/>
+                                            <img alt="Sophia University" class="w-10 h-10 object-contain" src="Assets/Images/Logo/Japan/Sophia University, Japan.png" loading="lazy" decoding="async"/>
+                                            <img alt="Meiji University" class="w-10 h-10 object-contain" src="Assets/Images/Logo/Japan/Meiji University, Japan.png" loading="lazy" decoding="async"/>
+                                            <img alt="Fontys University" class="w-10 h-10 object-contain" src="Assets/Images/Logo/Netherlands/Fontys University of Applied Sciences, The Netherlands.png" loading="lazy" decoding="async"/>
+                                            <img alt="Saxion University" class="w-10 h-10 object-contain" src="Assets/Images/Logo/Netherlands/Saxion University of Applied Sciences, the Netherlands.png" loading="lazy" decoding="async"/>
+                                            <img alt="Hochschule Fresenius" class="w-10 h-10 object-contain" src="Assets/Images/Logo/Germany/Hochschule Fresenius University of Applied Sciences, Germany.png" loading="lazy" decoding="async"/>
+                                            <img alt="Hochschule Mainz" class="w-10 h-10 object-contain" src="Assets/Images/Logo/Germany/Hochschule Mainz - University of Applied Sciences, Germany.png" loading="lazy" decoding="async"/>
                                         </div>
                                     </div>
                                 </div>
@@ -180,7 +185,7 @@ function renderHomePage() {
                                     <div class="text-3xl md:text-4xl font-bold text-white">1961</div>
                                     <div class="text-xs text-white mt-1 uppercase tracking-wider font-medium">Founded</div>
                                 </div>
-                                <div class="flip-card-back bg-pcu-green/10">
+                                <div class="flip-card-back bg-pcu-green">
                                     <div class="text-center">
                                         <div class="text-lg font-bold text-white mb-1">Our History</div>
                                         <div class="text-sm text-white leading-relaxed">
@@ -192,29 +197,32 @@ function renderHomePage() {
                         </div>
 
                         <!-- National Partners -->
-                        <div class="flip-card bg-pcu-yellow rounded-2xl shadow-sm border border-gray-100" onclick="navigateTo('domestic-partnership')">
+                        <div class="flip-card bg-pcu-yellow rounded-2xl shadow-sm border border-gray-100">
                             <div class="flip-card-inner">
                                 <div class="flip-card-front bg-pcu-yellow rounded-2xl p-6 text-center">
-                                    <div class="w-14 h-14 mx-auto mb-4 rounded-xl bg-white/20 flex items-center justify-center">
-                                        <i class="w-7 h-7 text-white" data-lucide="building-2"></i>
+                                    <div class="w-14 h-14 mx-auto mb-4 rounded-xl bg-pcu-navy/15 flex items-center justify-center">
+                                        <i class="w-7 h-7 text-pcu-navy" data-lucide="building-2"></i>
                                     </div>
-                                    <div class="counter text-3xl md:text-4xl font-bold text-white" data-target="430">0</div>
-                                    <div class="text-xs text-white mt-1 uppercase tracking-wider font-medium">National Partners</div>
+                                    <div class="counter text-3xl md:text-4xl font-bold text-pcu-navy" data-target="430">0</div>
+                                    <div class="text-xs text-pcu-navy/80 mt-1 uppercase tracking-wider font-medium">National Partners</div>
                                 </div>
-                                <div class="flip-card-back bg-pcu-yellow/10">
+                                <div class="flip-card-back bg-pcu-yellow">
                                     <div class="text-center">
-                                        <div class="text-lg font-bold text-white mb-2">Domestic Partnership</div>
-                                        <div class="text-sm text-white mb-3">Click to learn more about our domestic partnerships</div>
+                                        <div class="text-lg font-bold text-pcu-navy mb-2">Domestic Partnership</div>
+                                        <button type="button" onclick="event.stopPropagation();navigateTo('domestic-partnership')"
+                                            class="inline-flex items-center gap-1 text-sm font-semibold text-pcu-navy underline underline-offset-2 mb-3 hover:text-pcu-navy/70 focus:outline-none focus-visible:ring-2 focus-visible:ring-pcu-navy rounded">
+                                            View all partners <i class="w-3.5 h-3.5" data-lucide="arrow-right"></i>
+                                        </button>
                                         <div class="grid grid-cols-5 gap-2 items-center justify-items-center">
-                                            <img alt="Tokopedia" class="w-10 h-10 object-contain" src="Assets/Images/Industries/PT Tokopedia.png"/>
-                                            <img alt="GoTo Gojek" class="w-10 h-10 object-contain" src="Assets/Images/Industries/PT GoTo Gojek Tokopedia Tbk.svg"/>
-                                            <img alt="Semen Indonesia" class="w-10 h-10 object-contain" src="Assets/Images/Industries/PT. Semen Indonesia (Persero) Tbk..svg"/>
-                                            <img alt="JW Marriott" class="w-10 h-10 object-contain" src="Assets/Images/Industries/JW Marriott Hotel Surabaya.svg"/>
-                                            <img alt="Mayapada Hospital" class="w-10 h-10 object-contain" src="Assets/Images/Industries/Mayapada Hospital.png"/>
-                                            <img alt="Wings Group" class="w-10 h-10 object-contain" src="Assets/Images/Industries/Wings Group Surabaya.png"/>
-                                            <img alt="Maspion Group" class="w-10 h-10 object-contain" src="Assets/Images/Industries/Maspion Group.jpg"/>
-                                            <img alt="Samator Group" class="w-10 h-10 object-contain" src="Assets/Images/Industries/Samator Group.jpg"/>
-                                            <img alt="Bank Jatim" class="w-10 h-10 object-contain" src="Assets/Images/Industries/PT Bank Pembangunan Daerah Jawa Timur Tbk (Bank Jatim).jpg"/>
+                                            <img alt="Tokopedia" class="w-10 h-10 object-contain" src="Assets/Images/Industries/PT Tokopedia.png" loading="lazy" decoding="async"/>
+                                            <img alt="GoTo Gojek" class="w-10 h-10 object-contain" src="Assets/Images/Industries/PT GoTo Gojek Tokopedia Tbk.svg" loading="lazy" decoding="async"/>
+                                            <img alt="Semen Indonesia" class="w-10 h-10 object-contain" src="Assets/Images/Industries/PT. Semen Indonesia (Persero) Tbk..svg" loading="lazy" decoding="async"/>
+                                            <img alt="JW Marriott" class="w-10 h-10 object-contain" src="Assets/Images/Industries/JW Marriott Hotel Surabaya.svg" loading="lazy" decoding="async"/>
+                                            <img alt="Mayapada Hospital" class="w-10 h-10 object-contain" src="Assets/Images/Industries/Mayapada Hospital.png" loading="lazy" decoding="async"/>
+                                            <img alt="Wings Group" class="w-10 h-10 object-contain" src="Assets/Images/Industries/Wings Group Surabaya.png" loading="lazy" decoding="async"/>
+                                            <img alt="Maspion Group" class="w-10 h-10 object-contain" src="Assets/Images/Industries/Maspion Group.jpg" loading="lazy" decoding="async"/>
+                                            <img alt="Samator Group" class="w-10 h-10 object-contain" src="Assets/Images/Industries/Samator Group.jpg" loading="lazy" decoding="async"/>
+                                            <img alt="Bank Jatim" class="w-10 h-10 object-contain" src="Assets/Images/Industries/PT Bank Pembangunan Daerah Jawa Timur Tbk (Bank Jatim).jpg" loading="lazy" decoding="async"/>
                                         </div>
                                     </div>
                                 </div>
@@ -240,7 +248,7 @@ function renderHomePage() {
                                     <div class="counter text-3xl md:text-4xl font-bold text-white" data-target="57">0</div>
                                     <div class="text-xs text-white mt-1 uppercase tracking-wider font-medium">Study Programs</div>
                                 </div>
-                                <div class="flip-card-back bg-pcu-red/10">
+                                <div class="flip-card-back bg-pcu-red">
                                     <div class="text-center">
                                         <div class="text-lg font-bold text-white mb-2">Program Highlights</div>
                                         <div class="text-sm text-white space-y-1">
@@ -266,30 +274,30 @@ function renderHomePage() {
                                     <div class="counter text-3xl md:text-4xl font-bold text-white" data-target="7">0</div>
                                     <div class="text-xs text-white mt-1 uppercase tracking-wider font-medium">Faculties</div>
                                 </div>
-                                <div class="flip-card-back bg-pcu-blue/10 overflow-y-auto p-6 justify-start">
+                                <div class="flip-card-back bg-pcu-blue overflow-y-auto p-6 justify-start">
                                     <div class="space-y-4 text-left">
                                         <div class="text-lg font-bold text-white mb-4">Our Faculties</div>
                                         <div class="space-y-4">
                                             <div class="flex items-start gap-4">
-                                                <img alt="Faculty of Civil Engineering and Planning" class="w-12 h-12 object-contain rounded-lg bg-white p-2" src="Assets/Images/Faculty/Faculty of Civil Engineering and Planning.svg"/>
+                                                <img alt="Faculty of Civil Engineering and Planning" class="w-12 h-12 object-contain rounded-lg bg-white p-2" src="Assets/Images/Faculty/Faculty of Civil Engineering and Planning.svg" loading="lazy" decoding="async"/>
                                                 <div>
                                                     <a class="font-semibold text-white hover:text-white/80" href="https://petra.ac.id/faculty/ftsp" target="_blank">Faculty of Civil Engineering and Planning</a>
                                                 </div>
                                             </div>
                                             <div class="flex items-start gap-4">
-                                                <img alt="Faculty of Industrial Technology" class="w-12 h-12 object-contain rounded-lg bg-white p-2" src="Assets/Images/Faculty/Faculty of Industrial Technology.svg"/>
+                                                <img alt="Faculty of Industrial Technology" class="w-12 h-12 object-contain rounded-lg bg-white p-2" src="Assets/Images/Faculty/Faculty of Industrial Technology.svg" loading="lazy" decoding="async"/>
                                                 <div>
                                                     <a class="font-semibold text-white hover:text-white/80" href="https://petra.ac.id/faculty/fti" target="_blank">Faculty of Industrial Technology</a>
                                                 </div>
                                             </div>
                                             <div class="flex items-start gap-4">
-                                                <img alt="School of Business Management" class="w-12 h-12 object-contain rounded-lg bg-white p-2" src="Assets/Images/Faculty/School of Business &amp; Management.svg"/>
+                                                <img alt="School of Business Management" class="w-12 h-12 object-contain rounded-lg bg-white p-2" src="Assets/Images/Faculty/School of Business &amp; Management.svg" loading="lazy" decoding="async"/>
                                                 <div>
                                                     <a class="font-semibold text-white hover:text-white/80" href="https://petra.ac.id/faculty/sbm" target="_blank">School of Business Management</a>
                                                 </div>
                                             </div>
                                             <div class="flex items-start gap-4">
-                                                <img alt="Faculty of Humanities and Creative Industries" class="w-12 h-12 object-contain rounded-lg bg-white p-2" src="Assets/Images/Faculty/Faculty of Humanities and Creative Industries.svg"/>
+                                                <img alt="Faculty of Humanities and Creative Industries" class="w-12 h-12 object-contain rounded-lg bg-white p-2" src="Assets/Images/Faculty/Faculty of Humanities and Creative Industries.svg" loading="lazy" decoding="async"/>
                                                 <div>
                                                     <a class="font-semibold text-white hover:text-white/80" href="https://petra.ac.id/fhik" target="_blank">Faculty of Humanities and Creative Industries</a>
                                                 </div>
@@ -311,7 +319,7 @@ function renderHomePage() {
                                                 </div>
                                             </div>
                                             <div class="flex items-start gap-4">
-                                                <img alt="Faculty of Teacher Education" class="w-12 h-12 object-contain rounded-lg bg-white p-2" src="Assets/Images/Faculty/Faculty of Teacher Education.svg"/>
+                                                <img alt="Faculty of Teacher Education" class="w-12 h-12 object-contain rounded-lg bg-white p-2" src="Assets/Images/Faculty/Faculty of Teacher Education.svg" loading="lazy" decoding="async"/>
                                                 <div>
                                                     <a class="font-semibold text-white hover:text-white/80" href="https://petra.ac.id/fkip" target="_blank">Faculty of Teacher Education</a>
                                                 </div>
@@ -334,44 +342,44 @@ function renderHomePage() {
                         <div class="flip-card bg-pcu-yellow rounded-2xl shadow-sm border border-gray-100">
                             <div class="flip-card-inner">
                                 <div class="flip-card-front bg-pcu-yellow rounded-2xl p-6 text-center">
-                                    <div class="w-14 h-14 mx-auto mb-4 rounded-xl bg-white/20 flex items-center justify-center">
-                                        <i class="w-7 h-7 text-white" data-lucide="award"></i>
+                                    <div class="w-14 h-14 mx-auto mb-4 rounded-xl bg-pcu-navy/15 flex items-center justify-center">
+                                        <i class="w-7 h-7 text-pcu-navy" data-lucide="award"></i>
                                     </div>
-                                    <div class="text-3xl md:text-4xl font-bold text-white">A</div>
-                                    <div class="text-xs text-white mt-1 uppercase tracking-wider font-medium">Excellent Accreditation</div>
+                                    <div class="text-3xl md:text-4xl font-bold text-pcu-navy">A</div>
+                                    <div class="text-xs text-pcu-navy/80 mt-1 uppercase tracking-wider font-medium">Excellent Accreditation</div>
                                 </div>
-                                <div class="flip-card-back bg-pcu-yellow/10 overflow-y-auto p-6">
+                                <div class="flip-card-back bg-pcu-navy overflow-y-auto p-6">
                                     <div class="space-y-4 text-left">
                                         <div class="flex items-start gap-4">
-                                            <img alt="BAN-PT" class="w-12 h-12 object-contain rounded-lg bg-white p-2" src="Assets/Images/Accreditation/Ban-Pt_edit.png"/>
+                                            <img alt="BAN-PT" class="w-12 h-12 object-contain rounded-lg bg-white p-2" src="Assets/Images/Accreditation/Ban-Pt_edit.png" loading="lazy" decoding="async"/>
                                             <div>
                                                 <div class="font-semibold text-white">Terakreditasi Unggul</div>
                                                 <div class="text-sm text-white">BAN-PT</div>
                                             </div>
                                         </div>
                                         <div class="flex items-start gap-4">
-                                            <img alt="AQAS" class="w-12 h-12 object-contain rounded-lg bg-white p-2" src="Assets/Images/Accreditation/AQAS-02.png"/>
+                                            <img alt="AQAS" class="w-12 h-12 object-contain rounded-lg bg-white p-2" src="Assets/Images/Accreditation/AQAS-02.png" loading="lazy" decoding="async"/>
                                             <div>
                                                 <div class="font-semibold text-white">Accreditation agency based in Germany</div>
                                                 <div class="text-sm text-white">Visual Communication Design, Interior Design</div>
                                             </div>
                                         </div>
                                         <div class="flex items-start gap-4">
-                                            <img alt="AUN-QA" class="w-12 h-12 object-contain rounded-lg bg-white p-2" src="Assets/Images/Accreditation/aun-qa.png"/>
+                                            <img alt="AUN-QA" class="w-12 h-12 object-contain rounded-lg bg-white p-2" src="Assets/Images/Accreditation/aun-qa.png" loading="lazy" decoding="async"/>
                                             <div>
                                                 <div class="font-semibold text-white">ASEAN University Network-Quality Assurance</div>
                                                 <div class="text-sm text-white">Architecture, Accounting, Management, and Communication Science</div>
                                             </div>
                                         </div>
                                         <div class="flex items-start gap-4">
-                                            <img alt="IABEE" class="w-12 h-12 object-contain rounded-lg bg-white p-2" src="Assets/Images/Accreditation/IABEE Logo_Acc_Program_ENG.png"/>
+                                            <img alt="IABEE" class="w-12 h-12 object-contain rounded-lg bg-white p-2" src="Assets/Images/Accreditation/IABEE Logo_Acc_Program_ENG.png" loading="lazy" decoding="async"/>
                                             <div>
                                                 <div class="font-semibold text-white">Full signatory member of Washington Accord</div>
                                                 <div class="text-sm text-white">Civil Engineering, Electrical Engineering, Mechanical Engineering, Industrial Engineering, Informatics</div>
                                             </div>
                                         </div>
                                         <div class="flex items-start gap-4">
-                                            <img alt="KAAB" class="w-12 h-12 object-contain rounded-lg bg-white p-2" src="Assets/Images/Accreditation/KAAB.png"/>
+                                            <img alt="KAAB" class="w-12 h-12 object-contain rounded-lg bg-white p-2" src="Assets/Images/Accreditation/KAAB.png" loading="lazy" decoding="async"/>
                                             <div>
                                                 <div class="font-semibold text-white">A signatory member of Korea Architectural Accrediting Board</div>
                                                 <div class="text-sm text-white">Architecture (Bachelor's and Postgraduate Programs)</div>
@@ -398,7 +406,7 @@ function renderHomePage() {
 
                         <div class="program-card bg-white rounded-2xl border border-gray-100 overflow-hidden cursor-pointer" onclick="navigateTo('semester-exchange')">
                             <div class="h-44 bg-slate-100 overflow-hidden relative">
-                                <img alt="Semester Exchange" class="w-full h-full object-cover" src="Assets/Images/Student Exchange/student-exchange-2.JPG"/>
+                                <img alt="Semester Exchange" class="w-full h-full object-cover" src="Assets/Images/Student Exchange/student-exchange-2.JPG" loading="lazy" decoding="async"/>
                                 <div class="absolute inset-0 bg-pcu-blue/30"></div>
                             </div>
                             <div class="p-6">
@@ -410,7 +418,7 @@ function renderHomePage() {
 
                         <div class="program-card bg-white rounded-2xl border border-gray-100 overflow-hidden cursor-pointer" onclick="navigateTo('intl-degree')">
                             <div class="h-44 bg-slate-100 overflow-hidden relative">
-                                <img alt="International Degree Program" class="w-full h-full object-cover" src="Assets/Images/Student Exchange/student-exchange-3.jpg"/>
+                                <img alt="International Degree Program" class="w-full h-full object-cover" src="Assets/Images/Student Exchange/student-exchange-3.jpg" loading="lazy" decoding="async"/>
                                 <div class="absolute inset-0 bg-pcu-sky/30"></div>
                             </div>
                             <div class="p-6">
@@ -422,7 +430,7 @@ function renderHomePage() {
 
                         <div class="program-card bg-white rounded-2xl border border-gray-100 overflow-hidden cursor-pointer" onclick="navigateTo('cop')">
                             <div class="h-44 bg-slate-100 overflow-hidden relative">
-                                <img alt="International Community Outreach Program" class="w-full h-full object-cover" src="Assets/Images/ICOP/icop-1.png"/>
+                                <img alt="International Community Outreach Program" class="w-full h-full object-cover" src="Assets/Images/ICOP/icop-1.png" loading="lazy" decoding="async"/>
                                 <div class="absolute inset-0 bg-pcu-yellow/30"></div>
                             </div>
                             <div class="p-6">
@@ -434,7 +442,7 @@ function renderHomePage() {
 
                         <div class="program-card bg-white rounded-2xl border border-gray-100 overflow-hidden cursor-pointer" onclick="navigateTo('joint-double-degree')">
                             <div class="h-44 bg-slate-100 overflow-hidden relative">
-                                <img alt="Joint/Double Degree" class="w-full h-full object-cover" src="Assets/Images/Student Exchange/student-exchange-4.JPG"/>
+                                <img alt="Joint/Double Degree" class="w-full h-full object-cover" src="Assets/Images/Student Exchange/student-exchange-4.JPG" loading="lazy" decoding="async"/>
                                 <div class="absolute inset-0 bg-pcu-purple/30"></div>
                             </div>
                             <div class="p-6">
@@ -446,7 +454,7 @@ function renderHomePage() {
 
                         <div class="program-card bg-white rounded-2xl border border-gray-100 overflow-hidden cursor-pointer" onclick="navigateTo('pcu-students')">
                             <div class="h-44 bg-slate-100 overflow-hidden relative">
-                                <img alt="Internship" class="w-full h-full object-cover" src="Assets/Images/Student Exchange/student-exchange-5.jpg"/>
+                                <img alt="Internship" class="w-full h-full object-cover" src="Assets/Images/Student Exchange/student-exchange-5.jpg" loading="lazy" decoding="async"/>
                                 <div class="absolute inset-0 bg-pcu-green/30"></div>
                             </div>
                             <div class="p-6">
@@ -501,7 +509,7 @@ function renderHomePage() {
 
                         <a class="bg-pcu-blue/10 rounded-2xl p-8 text-center program-card block border border-pcu-blue/10 hover:shadow-lg transition-all"
                            download="" href="https://canva.link/internationalstudentsguidebookpetra">
-                            <img alt="International Students Guidebook thumbnail" class="mx-auto mb-5 w-32 h-32 rounded-3xl border border-white/20 shadow-sm" src="Assets/Images/Thumbnails/International Students Guidebook.png"/>
+                            <img alt="International Students Guidebook thumbnail" class="mx-auto mb-5 w-32 h-32 rounded-3xl border border-white/20 shadow-sm" src="Assets/Images/Thumbnails/International Students Guidebook.png" loading="lazy" decoding="async"/>
                             <h3 class="font-semibold text-pcu-navy text-lg mb-2">International Students Guidebook</h3>
                             <p class="text-sm text-gray-500 mb-5">Everything you need to know about studying at PCU.</p>
                             <span class="inline-flex items-center gap-2 px-5 py-2.5 bg-pcu-navy text-white text-sm font-medium rounded-full">
@@ -511,7 +519,7 @@ function renderHomePage() {
 
                         <a class="bg-pcu-blue/10 rounded-2xl p-8 text-center program-card block border border-pcu-blue/10 hover:shadow-lg transition-all"
                            download="" href="https://canva.link/partnershipbookletpetra">
-                            <img alt="PCU Global Booklet thumbnail" class="mx-auto mb-5 w-32 h-32 rounded-3xl border border-white/20 shadow-sm" src="Assets/Images/Thumbnails/PCU Global Booklet.png"/>
+                            <img alt="PCU Global Booklet thumbnail" class="mx-auto mb-5 w-32 h-32 rounded-3xl border border-white/20 shadow-sm" src="Assets/Images/Thumbnails/PCU Global Booklet.png" loading="lazy" decoding="async"/>
                             <h3 class="font-semibold text-pcu-navy text-lg mb-2">PCU Global Booklet</h3>
                             <p class="text-sm text-gray-500 mb-5">Explore our international partnerships and programs.</p>
                             <span class="inline-flex items-center gap-2 px-5 py-2.5 bg-pcu-navy text-white text-sm font-medium rounded-full">

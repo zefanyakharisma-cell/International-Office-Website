@@ -9,7 +9,7 @@ function renderHowToGet() {
                     <div class="absolute inset-0">
                         <img alt="Life at PCU" class="w-full h-full object-cover opacity-60"
                              src="Assets/Images/Student%20Exchange/student-exchange-2.JPG"
-                             style="object-position: center 50%;"/>
+                             style="object-position: center 50%;" loading="lazy" decoding="async"/>
                     </div>
                     <div class="absolute inset-0 bg-gradient-to-r from-pcu-green/80 to-emerald-500/80"></div>
                     <div class="relative max-w-7xl mx-auto px-6 lg:px-8">

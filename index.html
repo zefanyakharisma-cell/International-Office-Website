@@ -52,7 +52,7 @@
       animation-delay: 3s;
     "></div>
 </div>
-<div class="h-full overflow-auto relative z-10" id="app"><!-- STICKY NAV -->
+<div class="h-full overflow-auto relative z-10" id="app"><a class="skip-link" href="#main-content">Skip to content</a><!-- STICKY NAV -->
 <nav class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-100 transition-shadow duration-300" id="mainNav">
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 <div class="flex items-center justify-between h-16 md:h-20"><!-- Logo --> <a class="flex items-center gap-3 shrink-0" href="#" onclick="navigateTo('home');return false">
@@ -78,7 +78,7 @@
 </div>
 </div>
 <div class="nav-item relative"><button aria-controls="nav-dd-life" aria-expanded="false" aria-haspopup="true" class="px-3 py-2 text-sm font-medium text-gray-700 hover:text-pcu-blue rounded-lg hover:bg-pcu-light/50 transition flex items-center gap-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-pcu-sky"> Life at PCU <i aria-hidden="true" class="w-3.5 h-3.5" data-lucide="chevron-down"></i> </button>
-<div class="nav-dropdown absolute top-full left-0 w-56 bg-white rounded-xl shadow-xl border border-gray-100 p-2 mt-1" id="nav-dd-life" role="menu"><a class="block px-3 py-2.5 text-sm text-gray-700 hover:bg-pcu-light rounded-lg transition focus:outline-none focus-visible:bg-pcu-light" href="#" onclick="navigateTo('how-to-get');return false" role="menuitem">How to Get to PCU</a> <a class="block px-3 py-2.5 text-sm text-gray-700 hover:bg-pcu-light rounded-lg transition focus:outline-none focus-visible:bg-pcu-light" href="#" onclick="navigateTo('accommodation');return false" role="menuitem">Accommodation</a> <a class="block px-3 py-2.5 text-sm text-gray-700 hover:bg-pcu-light rounded-lg transition focus:outline-none focus-visible:bg-pcu-light" href="#" onclick="navigateTo('preparation-arrival');return false" role="menuitem">Preparation &amp; Arrival Guide</a> <a class="block px-3 py-2.5 text-sm text-gray-700 hover:bg-pcu-light rounded-lg transition focus:outline-none focus-visible:bg-pcu-light" href="#" onclick="navigateTo('visa-immigration');return false" role="menuitem">Visa &amp; Immigration</a>
+<div class="nav-dropdown absolute top-full left-0 w-56 bg-white rounded-xl shadow-xl border border-gray-100 p-2 mt-1" id="nav-dd-life" role="menu"><a class="block px-3 py-2.5 text-sm text-gray-700 hover:bg-pcu-light rounded-lg transition focus:outline-none focus-visible:bg-pcu-light" href="#" onclick="navigateTo('how-to-get');return false" role="menuitem">How to Get to PCU</a> <!-- Accommodation page is a placeholder — intentionally not linked in public nav until content is ready --> <a class="block px-3 py-2.5 text-sm text-gray-700 hover:bg-pcu-light rounded-lg transition focus:outline-none focus-visible:bg-pcu-light" href="#" onclick="navigateTo('preparation-arrival');return false" role="menuitem">Preparation &amp; Arrival Guide</a> <a class="block px-3 py-2.5 text-sm text-gray-700 hover:bg-pcu-light rounded-lg transition focus:outline-none focus-visible:bg-pcu-light" href="#" onclick="navigateTo('visa-immigration');return false" role="menuitem">Visa &amp; Immigration</a>
 </div>
 </div><a class="px-3 py-2 text-sm font-medium text-gray-700 hover:text-pcu-blue rounded-lg hover:bg-pcu-light/50 transition" href="#" onclick="navigateTo('news');return false">News</a>
 </div><!-- CTA + Mobile toggle -->
@@ -106,11 +106,11 @@
      </div><a class="block px-4 py-3 text-gray-700 rounded-xl hover:bg-pcu-light transition" href="#" onclick="navigateTo('international-partnership');toggleMobileMenu();return false">International Partnership</a> <a class="block px-4 py-3 text-gray-700 rounded-xl hover:bg-pcu-light transition" href="#" onclick="navigateTo('domestic-partnership');toggleMobileMenu();return false">Domestic Partnership</a> <a class="block px-4 py-3 text-gray-700 rounded-xl hover:bg-pcu-light transition" href="#" onclick="navigateTo('consortium-association');toggleMobileMenu();return false">Consortium &amp; Association</a> <a class="block px-4 py-3 text-gray-700 rounded-xl hover:bg-pcu-light transition" href="#" onclick="navigateTo('partnership-meet-us');toggleMobileMenu();return false">Meet Us</a>
 <div class="px-4 py-2 text-xs font-semibold text-gray-400 uppercase tracking-wider">
       Life at PCU
-     </div><a class="block px-4 py-3 text-gray-700 rounded-xl hover:bg-pcu-light transition" href="#" onclick="navigateTo('how-to-get');toggleMobileMenu();return false">How to Get to PCU</a> <a class="block px-4 py-3 text-gray-700 rounded-xl hover:bg-pcu-light transition" href="#" onclick="navigateTo('accommodation');toggleMobileMenu();return false">Accommodation</a> <a class="block px-4 py-3 text-gray-700 rounded-xl hover:bg-pcu-light transition" href="#" onclick="navigateTo('preparation-arrival');toggleMobileMenu();return false">Preparation &amp; Arrival Guide</a> <a class="block px-4 py-3 text-gray-700 rounded-xl hover:bg-pcu-light transition" href="#" onclick="navigateTo('visa-immigration');toggleMobileMenu();return false">Visa &amp; Immigration</a>
-<div class="px-4 py-2 text-xs font-semibold text-gray-400 uppercase tracking-wider">
+     </div><a class="block px-4 py-3 text-gray-700 rounded-xl hover:bg-pcu-light transition" href="#" onclick="navigateTo('how-to-get');toggleMobileMenu();return false">How to Get to PCU</a> <!-- Accommodation page is a placeholder — intentionally not linked in public nav until content is ready --> <a class="block px-4 py-3 text-gray-700 rounded-xl hover:bg-pcu-light transition" href="#" onclick="navigateTo('preparation-arrival');toggleMobileMenu();return false">Preparation &amp; Arrival Guide</a> <a class="block px-4 py-3 text-gray-700 rounded-xl hover:bg-pcu-light transition" href="#" onclick="navigateTo('visa-immigration');toggleMobileMenu();return false">Visa &amp; Immigration</a>
 </div>
 </div>
-</div>
+<!-- Skip-link / main-content focus target (keyboard users land here past the nav) -->
+<div id="main-content" tabindex="-1"></div>
 <div id="homeMountPoint"></div>
 <div id="newsMountPoint"></div>
 <div id="howToGetMountPoint"></div>
@@ -151,7 +151,7 @@
 <div style="padding-top: 80px;"><!-- Hero banner -->
 <div class="relative overflow-hidden bg-gradient-to-r from-pcu-sky to-cyan-400 py-16 md:py-24">
 <div class="absolute inset-0">
-<img alt="Gedung Petra" class="w-full h-full object-cover opacity-60" src="Assets/Images/Student%20Exchange/student-exchange-8.JPG" style="object-position: center 35%;"/>
+<img alt="Gedung Petra" class="w-full h-full object-cover opacity-60" src="Assets/Images/Student%20Exchange/student-exchange-8.JPG" style="object-position: center 35%;" loading="lazy" decoding="async"/>
 </div>
 <!-- Stronger overlay for WCAG AA contrast over hero image -->
 <div class="absolute inset-0 bg-gradient-to-r from-pcu-sky/90 to-cyan-500/90"></div>
@@ -233,7 +233,7 @@
 <div style="padding-top: 80px;">
 <div class="relative overflow-hidden bg-gradient-to-r from-pcu-orange to-amber-400 py-16 md:py-24">
 <div class="absolute inset-0">
-<img alt="Gedung Petra" class="w-full h-full object-cover opacity-60" src="Assets/Images/Student%20Exchange/student-exchange-7.JPG" style="object-position: center 50%;"/>
+<img alt="Gedung Petra" class="w-full h-full object-cover opacity-60" src="Assets/Images/Student%20Exchange/student-exchange-7.JPG" style="object-position: center 50%;" loading="lazy" decoding="async"/>
 </div>
 <!-- Stronger overlay for WCAG AA contrast over hero image -->
 <div class="absolute inset-0 bg-gradient-to-r from-pcu-orange/90 to-amber-500/90"></div>
@@ -336,7 +336,7 @@
 <!-- Brand / address -->
 <div class="lg:col-span-2">
 <div class="flex items-center gap-3 mb-4">
-<img alt="" class="w-10 h-10 bg-white rounded-md p-1" src="Assets/Graphics/logo-UKP.svg"/>
+<img alt="" class="w-10 h-10 bg-white rounded-md p-1" src="Assets/Graphics/logo-UKP.svg" loading="lazy" decoding="async"/>
 <div class="leading-tight"><span class="font-bold text-white text-lg">PCU Global</span><span class="block text-[10px] text-white/60 tracking-wide uppercase">International Office</span></div>
 </div>
 <p class="text-sm text-white/70 leading-relaxed mb-4 max-w-md">Petra Christian University's gateway to global education — connecting students, faculty, and partners worldwide.</p>
@@ -376,10 +376,9 @@ Jl. Siwalankerto 121-131<br/>Surabaya 60236, Indonesia<br/>
 </div>
 </div>
 <div class="pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3">
-<p class="text-xs text-white/50">© 2025 Petra Christian University. All rights reserved.</p>
+<p class="text-xs text-white/50">© 2025–2026 Petra Christian University. All rights reserved.</p>
 <p class="text-xs text-white/40">PCU Global — International Office</p>
 </div>
-<p class="hidden text-xs text-white/30">© 2025 PCU Global— Petra Christian University. All rights reserved.</p>
 </div>
 </footer>
 </div>
@@ -967,7 +966,7 @@ Jl. Siwalankerto 121-131<br/>Surabaya 60236, Indonesia<br/>
           <input id="articleImageFile" type="file" accept="image/*" class="hidden" onchange="handleImageUpload(event)"/>
           <!-- Preview -->
           <div id="imagePreviewWrapper" class="hidden relative rounded-2xl overflow-hidden border border-gray-200" style="height:160px;">
-            <img id="imagePreview" src="" alt="preview" class="w-full h-full object-cover"/>
+            <img id="imagePreview" src="" alt="preview" class="w-full h-full object-cover" loading="lazy" decoding="async"/>
             <div class="absolute bottom-0 left-0 right-0 flex justify-between items-center px-3 py-2 bg-black/40">
               <span class="text-white text-xs font-medium">Thumbnail preview</span>
               <button type="button" onclick="clearImageUpload()"
