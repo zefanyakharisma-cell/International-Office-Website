@@ -325,7 +325,7 @@ function renderCop() {
                             <h2 class="font-display text-3xl font-bold mb-3">Ready to Make a Difference?</h2>
                             <p class="text-white/80 mb-8 max-w-2xl mx-auto">Join the International Community Outreach Program and become part of a global movement toward sustainable development and social justice.</p>
                             <div class="flex flex-wrap justify-center gap-4">
-                                <a class="inline-flex items-center gap-2 px-7 py-3.5 bg-[#5179d6] text-white font-semibold rounded-full hover:bg-[#3a5fb0] transition shadow-lg" href="#">
+                                <a class="inline-flex items-center gap-2 px-7 py-3.5 bg-white text-pcu-red font-semibold rounded-full hover:bg-red-50 transition shadow-lg" href="#">
                                     Apply Now <i class="w-4 h-4" data-lucide="arrow-right"></i>
                                 </a>
                                 <a class="inline-flex items-center gap-2 px-7 py-3.5 border-2 border-white/40 text-white font-semibold rounded-full hover:bg-white/10 transition" href="#">

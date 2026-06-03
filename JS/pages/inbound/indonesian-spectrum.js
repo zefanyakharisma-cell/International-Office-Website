@@ -30,15 +30,15 @@ function renderIndonesianSpectrum() {
                         <div class="mb-20">
                             <div class="grid md:grid-cols-3 gap-8 mb-12">
                                 <div class="bg-pcu-light rounded-2xl p-8 border border-pcu-blue/10">
-                                    <div class="w-12 h-12 rounded-xl bg-violet-500/20 flex items-center justify-center mb-4">
-                                        <i class="w-6 h-6 text-violet-600" data-lucide="calendar"></i>
+                                    <div class="w-12 h-12 rounded-xl bg-pcu-blue/20 flex items-center justify-center mb-4">
+                                        <i class="w-6 h-6 text-pcu-blue" data-lucide="calendar"></i>
                                     </div>
                                     <h3 class="font-semibold text-lg text-pcu-blue mb-2">Duration</h3>
                                     <p class="text-gray-600">Short-term program (2-4 weeks)</p>
                                 </div>
                                 <div class="bg-pcu-light rounded-2xl p-8 border border-pcu-blue/10">
-                                    <div class="w-12 h-12 rounded-xl bg-purple-500/20 flex items-center justify-center mb-4">
-                                        <i class="w-6 h-6 text-purple-600" data-lucide="users"></i>
+                                    <div class="w-12 h-12 rounded-xl bg-pcu-sky/20 flex items-center justify-center mb-4">
+                                        <i class="w-6 h-6 text-pcu-sky" data-lucide="users"></i>
                                     </div>
                                     <h3 class="font-semibold text-lg text-pcu-blue mb-2">Experience</h3>
                                     <p class="text-gray-600">Cultural and academic immersion</p>
@@ -54,11 +54,11 @@ function renderIndonesianSpectrum() {
                             <div class="prose prose-lg max-w-none">
                                 <h2 class="font-display text-2xl md:text-3xl font-bold text-pcu-blue mb-6">Program Highlights</h2>
                                 <ul class="space-y-4 text-gray-600 mb-8">
-                                    <li class="flex items-start gap-3"><i class="w-5 h-5 text-violet-600 shrink-0 mt-1" data-lucide="check-circle"></i> <span>Explore Indonesia's rich cultural heritage and modern development</span></li>
-                                    <li class="flex items-start gap-3"><i class="w-5 h-5 text-violet-600 shrink-0 mt-1" data-lucide="check-circle"></i> <span>Academic courses combined with cultural excursions and activities</span></li>
-                                    <li class="flex items-start gap-3"><i class="w-5 h-5 text-violet-600 shrink-0 mt-1" data-lucide="check-circle"></i> <span>Visit historical sites, museums, and contemporary landmarks</span></li>
-                                    <li class="flex items-start gap-3"><i class="w-5 h-5 text-violet-600 shrink-0 mt-1" data-lucide="check-circle"></i> <span>Interact with local communities and experience Indonesian hospitality</span></li>
-                                    <li class="flex items-start gap-3"><i class="w-5 h-5 text-violet-600 shrink-0 mt-1" data-lucide="check-circle"></i> <span>Guided by experienced faculty and cultural experts</span></li>
+                                    <li class="flex items-start gap-3"><i class="w-5 h-5 text-pcu-blue shrink-0 mt-1" data-lucide="check-circle"></i> <span>Explore Indonesia's rich cultural heritage and modern development</span></li>
+                                    <li class="flex items-start gap-3"><i class="w-5 h-5 text-pcu-blue shrink-0 mt-1" data-lucide="check-circle"></i> <span>Academic courses combined with cultural excursions and activities</span></li>
+                                    <li class="flex items-start gap-3"><i class="w-5 h-5 text-pcu-blue shrink-0 mt-1" data-lucide="check-circle"></i> <span>Visit historical sites, museums, and contemporary landmarks</span></li>
+                                    <li class="flex items-start gap-3"><i class="w-5 h-5 text-pcu-blue shrink-0 mt-1" data-lucide="check-circle"></i> <span>Interact with local communities and experience Indonesian hospitality</span></li>
+                                    <li class="flex items-start gap-3"><i class="w-5 h-5 text-pcu-blue shrink-0 mt-1" data-lucide="check-circle"></i> <span>Guided by experienced faculty and cultural experts</span></li>
                                 </ul>
                             </div>
                         </div>
@@ -118,7 +118,7 @@ function renderIndonesianSpectrum() {
                             <h2 class="font-display text-3xl font-bold mb-3">Experience Indonesian Culture</h2>
                             <p class="text-white/80 mb-8 max-w-2xl mx-auto">Join Indonesian SPECTRUM and discover the beauty and diversity of Indonesia through an unforgettable cultural journey.</p>
                             <div class="flex flex-wrap justify-center gap-4">
-                                <a class="inline-flex items-center gap-2 px-7 py-3.5 bg-[#5179d6] text-white font-semibold rounded-full hover:bg-[#3a5fb0] transition shadow-lg" href="#">
+                                <a class="inline-flex items-center gap-2 px-7 py-3.5 bg-white text-pcu-red font-semibold rounded-full hover:bg-red-50 transition shadow-lg" href="#">
                                     Apply Now <i class="w-4 h-4" data-lucide="arrow-right"></i>
                                 </a>
                                 <a class="inline-flex items-center gap-2 px-7 py-3.5 border-2 border-white/40 text-white font-semibold rounded-full hover:bg-white/10 transition" href="#">

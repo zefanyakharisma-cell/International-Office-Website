@@ -29,21 +29,21 @@ function renderIntlDegree() {
                         <!-- Overview Cards -->
                         <div class="mb-20">
                             <div class="grid md:grid-cols-3 gap-8 mb-12">
-                                <div class="bg-pcu-purple/20 rounded-2xl p-8 border border-pcu-blue/10">
+                                <div class="bg-pcu-blue/10 rounded-2xl p-8 border border-pcu-blue/10">
                                     <div class="w-12 h-12 rounded-xl bg-pcu-blue/20 flex items-center justify-center mb-4">
                                         <i class="w-6 h-6 text-pcu-blue" data-lucide="book-open"></i>
                                     </div>
                                     <h3 class="font-semibold text-lg text-pcu-blue mb-2">Full Bachelor's Degree</h3>
                                     <p class="text-gray-600">Complete a comprehensive 4-year program with internationally recognized credentials.</p>
                                 </div>
-                                <div class="bg-pcu-purple/20 rounded-2xl p-8 border border-pcu-blue/10">
+                                <div class="bg-pcu-blue/10 rounded-2xl p-8 border border-pcu-blue/10">
                                     <div class="w-12 h-12 rounded-xl bg-pcu-blue/20 flex items-center justify-center mb-4">
                                         <i class="w-6 h-6 text-pcu-blue" data-lucide="globe"></i>
                                     </div>
                                     <h3 class="font-semibold text-lg text-pcu-blue mb-2">9 Departments</h3>
                                     <p class="text-gray-600">Choose from specialized programs across multiple faculties and schools.</p>
                                 </div>
-                                <div class="bg-pcu-purple/20 rounded-2xl p-8 border border-pcu-blue/10">
+                                <div class="bg-pcu-blue/10 rounded-2xl p-8 border border-pcu-blue/10">
                                     <div class="w-12 h-12 rounded-xl bg-pcu-blue/20 flex items-center justify-center mb-4">
                                         <i class="w-6 h-6 text-pcu-blue" data-lucide="sparkles"></i>
                                     </div>
@@ -180,7 +180,7 @@ function renderIntlDegree() {
                             <h2 class="font-display text-3xl font-bold mb-3">Begin Your Degree at PCU</h2>
                             <p class="text-white/80 mb-8 max-w-2xl mx-auto">Join our diverse community of international students and earn your degree from one of Indonesia's premier universities.</p>
                             <div class="flex flex-wrap justify-center gap-4">
-                                <a class="inline-flex items-center gap-2 px-7 py-3.5 bg-[#5179d6] text-white font-semibold rounded-full hover:bg-[#3a5fb0] transition shadow-lg" href="#">
+                                <a class="inline-flex items-center gap-2 px-7 py-3.5 bg-white text-pcu-red font-semibold rounded-full hover:bg-red-50 transition shadow-lg" href="#">
                                     Apply Now <i class="w-4 h-4" data-lucide="arrow-right"></i>
                                 </a>
                                 <a class="inline-flex items-center gap-2 px-7 py-3.5 border-2 border-white/40 text-white font-semibold rounded-full hover:bg-white/10 transition" href="#">

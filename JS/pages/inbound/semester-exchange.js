@@ -155,7 +155,7 @@ function renderSemesterExchange() {
                         <div class="mb-20">
                             <h2 class="font-display text-2xl md:text-3xl font-bold text-pcu-blue mb-12">Student Experiences</h2>
                             <div class="grid md:grid-cols-2 gap-8">
-                                <div class="bg-blue/10 rounded-2xl p-8 border border-pcu-blue/10">
+                                <div class="bg-pcu-blue/10 rounded-2xl p-8 border border-pcu-blue/10">
                                     <div class="flex gap-1 mb-4">
                                         <i class="w-4 h-4 text-pcu-gold fill-pcu-gold" data-lucide="star"></i>
                                         <i class="w-4 h-4 text-pcu-gold fill-pcu-gold" data-lucide="star"></i>
@@ -167,7 +167,7 @@ function renderSemesterExchange() {
                                     <p class="font-semibold text-pcu-blue">Emma Rodriguez</p>
                                     <p class="text-sm text-gray-500">University of Madrid, Spain</p>
                                 </div>
-                                <div class="bg-blue/10 rounded-2xl p-8 border border-pcu-blue/10">
+                                <div class="bg-pcu-blue/10 rounded-2xl p-8 border border-pcu-blue/10">
                                     <div class="flex gap-1 mb-4">
                                         <i class="w-4 h-4 text-pcu-gold fill-pcu-gold" data-lucide="star"></i>
                                         <i class="w-4 h-4 text-pcu-gold fill-pcu-gold" data-lucide="star"></i>
@@ -187,7 +187,7 @@ function renderSemesterExchange() {
                             <h2 class="font-display text-3xl font-bold mb-3">Ready to Start Your Journey?</h2>
                             <p class="text-white/80 mb-8 max-w-2xl mx-auto">Join hundreds of students from around the world who have experienced transformative semesters at Petra Christian University.</p>
                             <div class="flex flex-wrap justify-center gap-4">
-                                <a class="inline-flex items-center gap-2 px-7 py-3.5 bg-[#5179d6] text-white font-semibold rounded-full hover:bg-[#3a5fb0] transition shadow-lg" href="#">
+                                <a class="inline-flex items-center gap-2 px-7 py-3.5 bg-white text-pcu-red font-semibold rounded-full hover:bg-red-50 transition shadow-lg" href="#">
                                     Apply Now <i class="w-4 h-4" data-lucide="arrow-right"></i>
                                 </a>
                                 <a class="inline-flex items-center gap-2 px-7 py-3.5 border-2 border-white/40 text-white font-semibold rounded-full hover:bg-white/10 transition" href="#">

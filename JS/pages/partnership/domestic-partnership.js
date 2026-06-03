@@ -3,11 +3,11 @@ function renderDomesticPartnership() {
     return `
 <div class="page" id="page-domestic-partnership">
 <div style="padding-top: 80px;"><!-- Hero Section -->
-<div class="relative overflow-hidden py-16 md:py-24" style="background: linear-gradient(to right, #166534, #0d9488);">
+<div class="relative overflow-hidden bg-gradient-to-r from-pcu-purple to-violet-500 py-16 md:py-24">
 <div class="absolute inset-0">
 <img alt="PCU Campus Partnership" class="w-full h-full object-cover opacity-50" src="Assets/Images/Partnership/partnership-1.JPG" style="object-position: center 50%;" loading="lazy" decoding="async"/>
 </div>
-<div class="absolute inset-0" style="background: linear-gradient(to right, rgba(22,101,52,0.7), rgba(13,148,136,0.7));"></div>
+<div class="absolute inset-0 bg-gradient-to-r from-pcu-purple/70 to-violet-500/70"></div>
 <div class="relative max-w-7xl mx-auto px-6 lg:px-8"><a class="inline-flex items-center gap-1 text-white/60 text-sm mb-6 hover:text-white transition" href="#" onclick="navigateTo('home');return false"><i class="w-4 h-4" data-lucide="arrow-left"></i> Back to Home</a>
 <h1 class="font-display text-4xl md:text-5xl font-bold text-white mb-4">Domestic Partnership</h1>
 <p class="text-white/80 text-lg max-w-3xl">Discover our extensive network of domestic partnerships spanning industries, education institutions, government agencies, and regional organizations across Indonesia.</p>
@@ -17,20 +17,20 @@ function renderDomesticPartnership() {
 <div class="max-w-7xl mx-auto px-6 lg:px-8 py-20">
 <section class="mb-20 bg-gradient-to-b from-white to-pcu-light/20 rounded-3xl p-8 border border-gray-100 shadow-sm reveal">
 <div class="text-center mb-10">
-<span class="inline-block px-4 py-1.5 bg-pcu-green/10 text-pcu-green text-xs font-semibold rounded-full uppercase tracking-wider">Domestic Partnerships</span>
+<span class="inline-block px-4 py-1.5 bg-pcu-blue/10 text-pcu-blue text-xs font-semibold rounded-full uppercase tracking-wider">Domestic Partnerships</span>
 <h2 class="font-display text-3xl md:text-4xl font-bold text-pcu-blue mt-4">List of our Domestic Partners</h2>
 <p class="text-gray-600 mt-3 max-w-2xl mx-auto">Explore our extensive network of domestic partners across cities throughout Indonesia. Click any card to explore.</p>
 </div>
 <div class="grid md:grid-cols-3 gap-6">
-<div class="text-center cursor-pointer p-8 bg-white rounded-3xl shadow-sm border border-gray-100 hover:shadow-md hover:border-green-300 transition" onclick="toggleDomesticBox('total')">
+<div class="text-center cursor-pointer p-8 bg-white rounded-3xl shadow-sm border border-gray-100 hover:shadow-md hover:border-pcu-purple/40 transition" onclick="toggleDomesticBox('total')">
 <div class="text-4xl font-bold text-pcu-blue mb-2">321</div>
 <p class="text-gray-600 text-sm font-medium">Total</p>
 </div>
-<div class="text-center cursor-pointer p-8 bg-white rounded-3xl shadow-sm border border-gray-100 hover:shadow-md hover:border-green-300 transition" onclick="toggleDomesticBox('cities')">
+<div class="text-center cursor-pointer p-8 bg-white rounded-3xl shadow-sm border border-gray-100 hover:shadow-md hover:border-pcu-purple/40 transition" onclick="toggleDomesticBox('cities')">
 <div class="text-4xl font-bold text-pcu-blue mb-2">52</div>
 <p class="text-gray-600 text-sm font-medium">Cities</p>
 </div>
-<div class="text-center cursor-pointer p-8 bg-white rounded-3xl shadow-sm border border-gray-100 hover:shadow-md hover:border-green-300 transition" onclick="toggleDomesticBox('type')">
+<div class="text-center cursor-pointer p-8 bg-white rounded-3xl shadow-sm border border-gray-100 hover:shadow-md hover:border-pcu-purple/40 transition" onclick="toggleDomesticBox('type')">
 <div class="text-4xl font-bold text-pcu-blue mb-2">5</div>
 <p class="text-gray-600 text-sm font-medium">Type</p>
 </div>

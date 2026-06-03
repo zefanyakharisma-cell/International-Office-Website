@@ -2293,9 +2293,9 @@ function filterInternshipPartners(type) {
     // Update tab styles
     document.querySelectorAll('.ip-tab').forEach(t => {
       if (t.dataset.ptype === type) {
-        t.className = 'ip-tab px-5 py-2 rounded-full text-sm font-semibold bg-teal-600 text-white transition';
+        t.className = 'ip-tab px-5 py-2 rounded-full text-sm font-semibold bg-orange-600 text-white transition';
       } else {
-        t.className = 'ip-tab px-5 py-2 rounded-full text-sm font-semibold bg-white border border-gray-200 text-gray-700 hover:border-teal-500 hover:text-teal-600 transition';
+        t.className = 'ip-tab px-5 py-2 rounded-full text-sm font-semibold bg-white border border-gray-200 text-gray-700 hover:border-orange-500 hover:text-orange-600 transition';
       }
     });
     // Show/hide domestic sub-filter
@@ -2310,8 +2310,8 @@ function filterInternshipPartners(type) {
         ipCurrentDomesticType = 'all';
         document.querySelectorAll('.dp-type-tab').forEach(t => {
           t.className = t.dataset.dtype === 'all'
-            ? 'dp-type-tab px-3 py-1.5 rounded-full text-xs font-semibold bg-teal-600 text-white border border-transparent transition'
-            : 'dp-type-tab px-3 py-1.5 rounded-full text-xs font-semibold bg-white border border-gray-200 text-gray-600 hover:border-teal-400 hover:text-teal-600 transition';
+            ? 'dp-type-tab px-3 py-1.5 rounded-full text-xs font-semibold bg-orange-600 text-white border border-transparent transition'
+            : 'dp-type-tab px-3 py-1.5 rounded-full text-xs font-semibold bg-white border border-gray-200 text-gray-600 hover:border-orange-400 hover:text-orange-600 transition';
         });
       }
     }
@@ -2324,9 +2324,9 @@ function filterDomesticType(dtype) {
   ipShowCount = IP_PAGE_SIZE;
   document.querySelectorAll('.dp-type-tab').forEach(t => {
     if (t.dataset.dtype === dtype) {
-      t.className = 'dp-type-tab px-3 py-1.5 rounded-full text-xs font-semibold bg-teal-600 text-white border border-transparent transition';
+      t.className = 'dp-type-tab px-3 py-1.5 rounded-full text-xs font-semibold bg-orange-600 text-white border border-transparent transition';
     } else {
-      t.className = 'dp-type-tab px-3 py-1.5 rounded-full text-xs font-semibold bg-white border border-gray-200 text-gray-600 hover:border-teal-400 hover:text-teal-600 transition';
+      t.className = 'dp-type-tab px-3 py-1.5 rounded-full text-xs font-semibold bg-white border border-gray-200 text-gray-600 hover:border-orange-400 hover:text-orange-600 transition';
     }
   });
   renderInternshipPartners();
@@ -2360,7 +2360,7 @@ function renderInternshipPartners() {
     const remaining = total - showing.length;
 
     cards = showing.map(p => `
-      <div class="bg-white rounded-2xl border border-gray-100 p-5 shadow-sm hover:border-teal-300 hover:shadow-md transition">
+      <div class="bg-white rounded-2xl border border-gray-100 p-5 shadow-sm hover:border-orange-300 hover:shadow-md transition">
         <div class="flex items-start gap-3">
           <div class="w-9 h-9 rounded-xl bg-blue-50 flex items-center justify-center shrink-0">
             <i data-lucide="globe" class="w-4 h-4 text-blue-600"></i>
@@ -2413,10 +2413,10 @@ function renderInternshipPartners() {
     };
 
     cards = showing.map(p => `
-      <div class="bg-white rounded-2xl border border-gray-100 p-5 shadow-sm hover:border-teal-300 hover:shadow-md transition">
+      <div class="bg-white rounded-2xl border border-gray-100 p-5 shadow-sm hover:border-orange-300 hover:shadow-md transition">
         <div class="flex items-start gap-3">
-          <div class="w-9 h-9 rounded-xl bg-teal-50 flex items-center justify-center shrink-0">
-            <i data-lucide="building-2" class="w-4 h-4 text-teal-600"></i>
+          <div class="w-9 h-9 rounded-xl bg-orange-50 flex items-center justify-center shrink-0">
+            <i data-lucide="building-2" class="w-4 h-4 text-orange-600"></i>
           </div>
           <div class="min-w-0">
             <h3 class="font-semibold text-pcu-blue text-sm leading-snug">${p.name}</h3>
@@ -2471,20 +2471,20 @@ async function renderInternshipOpportunities() {
   // API entries (admin-managed)
   if (apiEntries.length > 0) {
     parts.push(...apiEntries.map(op => `
-      <div class="bg-white rounded-2xl border border-teal-100 p-6 shadow-sm hover:shadow-md hover:border-teal-300 transition">
+      <div class="bg-white rounded-2xl border border-orange-100 p-6 shadow-sm hover:shadow-md hover:border-orange-300 transition">
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div class="flex-1">
             <div class="flex flex-wrap items-center gap-2 mb-2">
               <h3 class="font-semibold text-pcu-blue text-lg">${op.position}</h3>
-              <span class="px-2.5 py-0.5 text-xs font-semibold rounded-full bg-teal-50 text-teal-700 border border-teal-100">Open</span>
+              <span class="px-2.5 py-0.5 text-xs font-semibold rounded-full bg-orange-50 text-orange-700 border border-orange-100">Open</span>
             </div>
             <p class="text-sm font-medium text-gray-500 flex items-center gap-1.5">
-              <i data-lucide="building-2" class="w-3.5 h-3.5 text-teal-500"></i> ${op.company}
+              <i data-lucide="building-2" class="w-3.5 h-3.5 text-orange-500"></i> ${op.company}
             </p>
           </div>
           <div class="flex items-center gap-2 sm:shrink-0 flex-wrap">
             ${op.link ? `<a href="${op.link}" target="_blank" rel="noopener noreferrer"
-              class="inline-flex items-center gap-2 px-5 py-2.5 bg-teal-600 text-white text-sm font-semibold rounded-full hover:bg-teal-700 transition whitespace-nowrap">
+              class="inline-flex items-center gap-2 px-5 py-2.5 bg-orange-600 text-white text-sm font-semibold rounded-full hover:bg-orange-700 transition whitespace-nowrap">
               Apply / View <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
             </a>` : ''}
             ${isAdmin ? `
@@ -2504,22 +2504,22 @@ async function renderInternshipOpportunities() {
 
   // Static entries (always shown)
   parts.push(...internshipOpportunities.map(op => `
-    <div class="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm hover:shadow-md hover:border-teal-200 transition">
+    <div class="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm hover:shadow-md hover:border-orange-200 transition">
       <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
         <div class="flex-1">
           <div class="flex flex-wrap items-center gap-2 mb-2">
             <h3 class="font-semibold text-pcu-blue text-lg">${op.title}</h3>
-            <span class="px-2.5 py-0.5 text-xs font-semibold rounded-full bg-teal-50 text-teal-700 border border-teal-100">${op.type}</span>
+            <span class="px-2.5 py-0.5 text-xs font-semibold rounded-full bg-orange-50 text-orange-700 border border-orange-100">${op.type}</span>
           </div>
-          <p class="text-sm font-medium text-gray-500 mb-2 flex items-center gap-1.5"><i data-lucide="building-2" class="w-3.5 h-3.5 text-teal-500"></i> ${op.company}</p>
+          <p class="text-sm font-medium text-gray-500 mb-2 flex items-center gap-1.5"><i data-lucide="building-2" class="w-3.5 h-3.5 text-orange-500"></i> ${op.company}</p>
           <p class="text-sm text-gray-500 leading-relaxed mb-4">${op.description}</p>
           <div class="flex flex-wrap gap-4 text-xs text-gray-400">
-            <span class="flex items-center gap-1"><i data-lucide="clock" class="w-3.5 h-3.5 text-teal-500"></i> Duration: <strong class="text-gray-600">${op.duration}</strong></span>
-            <span class="flex items-center gap-1"><i data-lucide="calendar" class="w-3.5 h-3.5 text-teal-500"></i> Deadline: <strong class="text-red-500">${op.deadline}</strong></span>
+            <span class="flex items-center gap-1"><i data-lucide="clock" class="w-3.5 h-3.5 text-orange-500"></i> Duration: <strong class="text-gray-600">${op.duration}</strong></span>
+            <span class="flex items-center gap-1"><i data-lucide="calendar" class="w-3.5 h-3.5 text-orange-500"></i> Deadline: <strong class="text-red-500">${op.deadline}</strong></span>
           </div>
         </div>
         <div class="sm:shrink-0">
-          <a href="mailto:io@petra.ac.id" class="inline-flex items-center gap-2 px-5 py-2.5 bg-teal-600 text-white text-sm font-semibold rounded-full hover:bg-teal-700 transition whitespace-nowrap">
+          <a href="mailto:io@petra.ac.id" class="inline-flex items-center gap-2 px-5 py-2.5 bg-orange-600 text-white text-sm font-semibold rounded-full hover:bg-orange-700 transition whitespace-nowrap">
             Apply Now <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
           </a>
         </div>
