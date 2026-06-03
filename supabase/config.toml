@@ -1,0 +1,55 @@
+# Supabase project configuration.
+# Docs: https://supabase.com/docs/guides/cli/config
+#
+# `project_id` is the project ref shown in your dashboard URL
+# (https://supabase.com/dashboard/project/<project_id>) and is used by
+# `supabase link` / `supabase functions deploy`.
+project_id = "xrzwjwaaayeoizmabchj"
+
+[api]
+enabled = true
+port = 54321
+# Schemas exposed via the auto-generated PostgREST API. The app keeps all of
+# its tables in `pcu_global`, so it must be listed alongside the defaults.
+schemas = ["public", "graphql_public", "pcu_global"]
+extra_search_path = ["public", "pcu_global"]
+max_rows = 1000
+
+[db]
+port = 54322
+shadow_port = 54320
+# Postgres major version of your Supabase project. SQL migrations live in
+# ./migrations and are applied with `supabase db push`.
+major_version = 15
+
+[studio]
+enabled = true
+port = 54323
+
+[inbucket]
+# Local email testing inbox (only used by `supabase start`).
+enabled = true
+port = 54324
+
+[auth]
+enabled = true
+# Replace with your production URL when deploying.
+site_url = "http://localhost:8080"
+additional_redirect_urls = [
+  "http://localhost:8080",
+  "https://zefanyakharisma-cell.github.io",
+]
+jwt_expiry = 3600
+enable_signup = false
+
+[auth.email]
+enable_signup = false
+enable_confirmations = false
+
+# ── Edge Functions ──────────────────────────────────────────────────────────
+# Sends the meeting-request email via Resend. Triggered by a database webhook
+# on INSERT to pcu_global.meeting_requests. Secrets live in the dashboard
+# (Edge Functions → Secrets); see .env.example for the list.
+[functions.send-meeting-email]
+enabled = true
+verify_jwt = false

@@ -66,6 +66,8 @@ A single-page application (SPA) for the PCU International Office, showcasing inb
 │       ├── Student Exchange/       # Student exchange program photos
 │       └── Thumbnails/             # Thumbnail images
 ├── supabase/
+│   ├── config.toml     # Supabase CLI project config (project ref, exposed schemas, edge function)
+│   ├── .env.example    # Documents every Supabase/edge-function value; copy to .env
 │   ├── migrations/
 │   │   ├── 001_initial_schema.sql  # Full schema: pcu_global tables + RLS policies + increment_article_visits RPC
 │   │   └── 002_site_config.sql     # site_config table (single-row store for editable Home content)
@@ -222,9 +224,21 @@ All backend functionality (database, auth, and email) runs on Supabase. No local
 
 Go to [supabase.com](https://supabase.com), create a new project, and note your **Project URL** and **anon public key**.
 
-**2. Run the database migration**
+**2. Run the database migrations**
 
-In Supabase Dashboard → SQL Editor, paste and run `supabase/migrations/001_initial_schema.sql`. This creates the `pcu_global` schema, all four tables, RLS policies, and the `increment_article_visits` RPC.
+Either approach works:
+
+- **CLI (recommended)** — with the [Supabase CLI](https://supabase.com/docs/guides/cli) installed, copy `supabase/.env.example` to `supabase/.env`, then:
+
+  ```bash
+  supabase login
+  supabase link --project-ref <your-project-ref>   # project_id is preset in supabase/config.toml
+  supabase db push                                  # applies everything in supabase/migrations/
+  ```
+
+- **Dashboard** — in Supabase Dashboard → SQL Editor, paste and run `supabase/migrations/001_initial_schema.sql` then `002_site_config.sql`.
+
+This creates the `pcu_global` schema, all tables, RLS policies, the `increment_article_visits` RPC, and the `site_config` store. `config.toml` also exposes the `pcu_global` schema to the API (`schemas = [..., "pcu_global"]`), matching the `db: { schema: 'pcu_global' }` option in the JS client.
 
 **3. Create admin users**
 
