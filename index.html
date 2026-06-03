@@ -27,7 +27,8 @@
 <link href="CSS/tailwind.build.css" rel="stylesheet"/>
 
 <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&amp;family=Playfair+Display:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.gstatic.com" rel="preconnect" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
 <link href="CSS/styles.css" rel="stylesheet"/>
 </head>
 <body class="h-full bg-white text-gray-800">
@@ -83,7 +84,7 @@
 </div><a class="px-3 py-2 text-sm font-medium text-gray-700 hover:text-pcu-blue rounded-lg hover:bg-pcu-light/50 transition" href="#" onclick="navigateTo('news');return false">News</a>
 </div><!-- CTA + Mobile toggle -->
 <!-- CTA: renamed from "Apply Now" — link routes to /explore (program chooser), not an application form. Now visible on all viewports. -->
-<div class="flex items-center gap-3"><a class="inline-flex items-center gap-2 px-4 sm:px-5 py-2.5 bg-[#1c446d] text-white text-sm font-semibold rounded-full hover:bg-[#163553] transition shadow-lg shadow-[#1c446d]/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-pcu-sky focus-visible:ring-offset-2" href="#" onclick="navigateTo('explore');return false"><span class="hidden sm:inline">Explore Programs</span><span class="sm:hidden">Explore</span> <i aria-hidden="true" class="w-4 h-4" data-lucide="arrow-right"></i> </a> <button aria-controls="mobileMenu" aria-expanded="false" aria-label="Open menu" class="lg:hidden p-2 rounded-lg hover:bg-gray-100 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-pcu-sky" id="mobileToggle" onclick="toggleMobileMenu()"> <i aria-hidden="true" class="w-6 h-6 text-gray-700" data-lucide="menu"></i> </button>
+<div class="flex items-center gap-3"><a class="inline-flex items-center gap-2 px-4 sm:px-5 py-2.5 bg-[#5179d6] text-white text-sm font-semibold rounded-full hover:bg-[#3a5fb0] transition shadow-lg shadow-[#5179d6]/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-pcu-sky focus-visible:ring-offset-2" href="#" onclick="navigateTo('explore');return false"><span class="hidden sm:inline">Explore Programs</span><span class="sm:hidden">Explore</span> <i aria-hidden="true" class="w-4 h-4" data-lucide="arrow-right"></i> </a> <button aria-controls="mobileMenu" aria-expanded="false" aria-label="Open menu" class="lg:hidden p-2 rounded-lg hover:bg-gray-100 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-pcu-sky" id="mobileToggle" onclick="toggleMobileMenu()"> <i aria-hidden="true" class="w-6 h-6 text-gray-700" data-lucide="menu"></i> </button>
 </div>
 </div>
 </div>
@@ -329,7 +330,7 @@
 <!-- ==================== ADMIN ARTICLE PAGES (injected at runtime) ==================== -->
 <div id="adminArticlePages"></div>
 
-<footer class="bg-[#1c446d] text-white pt-16 pb-8">
+<footer class="bg-[#5179d6] text-white pt-16 pb-8">
 <div class="max-w-7xl mx-auto px-6 lg:px-8">
 <!-- Multi-column responsive footer with clearer hierarchy -->
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">

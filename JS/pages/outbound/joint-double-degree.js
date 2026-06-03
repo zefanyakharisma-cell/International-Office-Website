@@ -344,7 +344,7 @@ function renderJointDoubleDegree() {
 <div class="bg-gradient-to-r from-pcu-orange to-amber-400 rounded-3xl p-12 text-white text-center">
 <h2 class="font-display text-3xl font-bold mb-3">Ready to Pursue a Joint Degree?</h2>
 <p class="text-white/80 mb-8 max-w-2xl mx-auto">Combine the best of two worlds and earn an internationally recognized degree from PCU and our esteemed partners.</p>
-<div class="flex flex-wrap justify-center gap-4"><a class="inline-flex items-center gap-2 px-7 py-3.5 bg-[#1c446d] text-white font-semibold rounded-full hover:bg-[#163553] transition shadow-lg" href="#"> Apply Now <i class="w-4 h-4" data-lucide="arrow-right"></i> </a> <a class="inline-flex items-center gap-2 px-7 py-3.5 border-2 border-white/40 text-white font-semibold rounded-full hover:bg-white/10 transition" href="#"> Get More Info </a>
+<div class="flex flex-wrap justify-center gap-4"><a class="inline-flex items-center gap-2 px-7 py-3.5 bg-[#5179d6] text-white font-semibold rounded-full hover:bg-[#3a5fb0] transition shadow-lg" href="#"> Apply Now <i class="w-4 h-4" data-lucide="arrow-right"></i> </a> <a class="inline-flex items-center gap-2 px-7 py-3.5 border-2 border-white/40 text-white font-semibold rounded-full hover:bg-white/10 transition" href="#"> Get More Info </a>
 </div>
 </div>
 </div><!-- Double Degree Content -->
@@ -554,7 +554,7 @@ function renderJointDoubleDegree() {
 <div class="bg-gradient-to-r from-pcu-orange to-amber-400 rounded-3xl p-12 text-white text-center">
 <h2 class="font-display text-3xl font-bold mb-3">Earn Two Degrees, Double Your Opportunities</h2>
 <p class="text-white/80 mb-8 max-w-2xl mx-auto">Complete your double degree and gain credentials from two world-class institutions across different continents.</p>
-<div class="flex flex-wrap justify-center gap-4"><a class="inline-flex items-center gap-2 px-7 py-3.5 bg-[#1c446d] text-white font-semibold rounded-full hover:bg-[#163553] transition shadow-lg" href="#"> Apply Now <i class="w-4 h-4" data-lucide="arrow-right"></i> </a> <a class="inline-flex items-center gap-2 px-7 py-3.5 border-2 border-white/40 text-white font-semibold rounded-full hover:bg-white/10 transition" href="#"> Get More Info </a>
+<div class="flex flex-wrap justify-center gap-4"><a class="inline-flex items-center gap-2 px-7 py-3.5 bg-[#5179d6] text-white font-semibold rounded-full hover:bg-[#3a5fb0] transition shadow-lg" href="#"> Apply Now <i class="w-4 h-4" data-lucide="arrow-right"></i> </a> <a class="inline-flex items-center gap-2 px-7 py-3.5 border-2 border-white/40 text-white font-semibold rounded-full hover:bg-white/10 transition" href="#"> Get More Info </a>
 </div>
 </div>
 </div>

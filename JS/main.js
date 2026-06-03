@@ -19,7 +19,7 @@ const defaultConfig = {
   text_color: '#0A2F6E',
   primary_action_color: '#1E6FD9',
   secondary_action_color: '#D4A843',
-  font_family: 'DM Sans',
+  font_family: 'Inter',
   font_size: 16
 };
 
@@ -39,11 +39,14 @@ function applyConfig(config) {
   const size = config.font_size || defaultConfig.font_size;
 
   document.documentElement.style.setProperty('--bg', bg);
-  document.body.style.fontFamily = `${font}, DM Sans, sans-serif`;
+  document.body.style.fontFamily = `${font}, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif`;
   document.body.style.fontSize = `${size}px`;
 
+  // Petra-style single-family system: headings use the same Inter face as body
+  // (no serif display contrast). The font-family is left to CSS so it tracks the
+  // configured `font` rather than being pinned to a removed Playfair webfont.
   document.querySelectorAll('.font-display').forEach(el => {
-    el.style.fontFamily = `Playfair Display, ${font}, serif`;
+    el.style.fontFamily = `${font}, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif`;
   });
 }
 

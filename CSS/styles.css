@@ -1,38 +1,45 @@
 :root {
-  /* Brand palette */
-  --pcu-red: #f7000d;
-  --pcu-orange: #fa6632;
-  --pcu-sky-blue: #30aeb4;
-  --pcu-sky: #30aeb4;
-  --pcu-purple: #8d4bb1;
+  /* Brand palette — softened toward Petra's brighter pastel system.
+     Primary is now Petra's periwinkle (#5179d6); navy is reserved for
+     deep text/structure. Keep these in sync with tailwind.config.js. */
+  --pcu-red: #e56767;
+  --pcu-orange: #e5ae67;
+  --pcu-sky-blue: #4cb6c7;
+  --pcu-sky: #4cb6c7;
+  --pcu-purple: #8451d6;
   --pcu-yellow: #fdd600;
   --pcu-navy: #1d446e;
-  --pcu-green: #52ac2d;
-  --pcu-magenta: #fa207d;
-  --pcu-white: #ebe6e5;
-  --pcu-blue: #1d446e;
+  --pcu-green: #30c78d;
+  --pcu-magenta: #ff6c9d;
+  --pcu-white: #f8f9fa;
+  --pcu-primary: #5179d6;
+  --pcu-blue: #5179d6;
   --pcu-gold: #fdd600;
-  --pcu-dark-blue-gradient: linear-gradient(to right, #245484, #133256);
-  --pcu-teal-gradient: linear-gradient(to right, #54feeb, #133256);
-  --pcu-red-to-yellow-gradient: linear-gradient(to right, #ec008c, #ffbc00);
-  --pcu-purplish-gradient: linear-gradient(to right, #ec008c, #3990d0);
+  --pcu-dark-blue-gradient: linear-gradient(to right, #5179d6, #1d446e);
+  --pcu-teal-gradient: linear-gradient(to right, #4cb6c7, #5179d6);
+  --pcu-red-to-yellow-gradient: linear-gradient(to right, #ff6c9d, #e5ae67);
+  --pcu-purplish-gradient: linear-gradient(to right, #8451d6, #5179d6);
 
   /* Page-accent system — set by JS per page (see Phase 3 theming).
-     Defaults to navy so anything unthemed still looks intentional. */
-  --page-accent: #1d446e;
-  --page-accent-soft: rgba(29, 68, 110, 0.10);
-  --page-accent-border: rgba(29, 68, 110, 0.20);
-  --page-accent-shadow: rgba(29, 68, 110, 0.15);
+     Defaults to the periwinkle primary so anything unthemed looks intentional. */
+  --page-accent: #5179d6;
+  --page-accent-soft: rgba(81, 121, 214, 0.08);
+  --page-accent-border: rgba(81, 121, 214, 0.18);
+  --page-accent-shadow: rgba(81, 121, 214, 0.15);
 }
 
 html, body { height: 100%; margin: 0; }
 body {
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  letter-spacing: -0.011em; /* Inter reads cleaner with a hair of negative tracking */
   overflow-x: hidden;
-  /* Subtler dotted background — was #d1d5db at 24px, too noisy */
-  background-image: radial-gradient(circle, rgba(29, 68, 110, 0.08) 1px, transparent 1px);
-  background-size: 32px 32px;
-  background-color: var(--pcu-white);
+  /* Very subtle dotted texture over a clean Petra-style light background.
+     Dialed down (was rgba(29,68,110,.08)) so the page reads bright + airy. */
+  background-image: radial-gradient(circle, rgba(81, 121, 214, 0.045) 1px, transparent 1px);
+  background-size: 34px 34px;
+  background-color: #f8f9fa;
 }
 
 /* Skip-to-content link — visually hidden until focused by keyboard users */
@@ -79,7 +86,7 @@ html { scroll-behavior: smooth; }
 
 /* Card hover */
 .program-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
-.program-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(29,68,110,0.12); }
+.program-card:hover { transform: translateY(-6px); box-shadow: 0 18px 38px rgba(81,121,214,0.14); }
 
 /* Nav dropdown
  * --------------
@@ -176,7 +183,7 @@ html { scroll-behavior: smooth; }
 
 .bg-decoration {
   position: absolute;
-  opacity: 0.06;
+  opacity: 0.03;
 }
 /* Hide decorative floats on smaller screens where they crowd content */
 @media (max-width: 768px) {

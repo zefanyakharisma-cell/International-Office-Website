@@ -30,7 +30,7 @@ function renderHomePage() {
                                                href="#" onclick="navigateTo('explore');return false">
                                                 Explore Programs <i class="w-4 h-4" data-lucide="arrow-right"></i>
                                             </a>
-                                            <a class="inline-flex items-center gap-2 px-7 py-3.5 bg-[#1c446d] border-transparent text-white font-semibold rounded-full hover:bg-[#163553] transition"
+                                            <a class="inline-flex items-center gap-2 px-7 py-3.5 bg-[#5179d6] border-transparent text-white font-semibold rounded-full hover:bg-[#3a5fb0] transition"
                                                href="#" onclick="navigateTo('contact-us');return false">
                                                 Contact Us
                                             </a>
