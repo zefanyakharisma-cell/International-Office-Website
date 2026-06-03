@@ -327,6 +327,9 @@
 <!-- ==================== CONTACT US PAGE ==================== -->
 <div id="contactUsMountPoint"></div>
 
+<!-- ==================== ADMIN DASHBOARD (#admin) ==================== -->
+<div id="adminDashboardMountPoint"></div>
+
 <!-- ==================== ADMIN ARTICLE PAGES (injected at runtime) ==================== -->
 <div id="adminArticlePages"></div>
 
@@ -809,6 +812,8 @@ Jl. Siwalankerto 121-131<br/>Surabaya 60236, Indonesia<br/>
 <script>document.getElementById('intlDegreeMountPoint').outerHTML = renderIntlDegree();</script>
 <script src="JS/pages/inbound/indonesian-spectrum.js"></script>
 <script>document.getElementById('indonesianSpectrumMountPoint').outerHTML = renderIndonesianSpectrum();</script>
+<script src="JS/pages/admin-dashboard.js"></script>
+<script>document.getElementById('adminDashboardMountPoint').outerHTML = renderAdminDashboard();</script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="JS/main.js"></script>
 
@@ -1049,6 +1054,11 @@ Jl. Siwalankerto 121-131<br/>Surabaya 60236, Indonesia<br/>
 <div class="fixed bottom-6 right-6 z-[250] flex flex-col items-end gap-3">
   <!-- Add Article FAB (only when logged in) -->
   <div id="adminFab" class="hidden flex flex-col items-end gap-2">
+    <button onclick="openAdminDashboard()"
+      class="flex items-center gap-2 px-5 py-3 bg-pcu-navy text-white font-semibold text-sm rounded-full shadow-xl shadow-pcu-navy/30 hover:bg-pcu-blue transition">
+      <i data-lucide="layout-dashboard" class="w-4 h-4"></i>
+      Dashboard
+    </button>
     <button onclick="openAddArticleModal()"
       class="flex items-center gap-2 px-5 py-3 bg-pcu-blue text-white font-semibold text-sm rounded-full shadow-xl shadow-pcu-blue/30 hover:bg-pcu-navy transition">
       <i data-lucide="file-plus" class="w-4 h-4"></i>
@@ -1080,6 +1090,7 @@ Jl. Siwalankerto 121-131<br/>Surabaya 60236, Indonesia<br/>
 </div>
 
 <script src="JS/admin.js"></script>
+<script src="JS/admin-dashboard.js"></script>
 <script>lucide.createIcons();</script>
 </body>
 </html>

@@ -15,6 +15,7 @@ A single-page application (SPA) for the PCU International Office, showcasing inb
 ├── JS/
 │   ├── main.js         # Navigation (hash routing), Supabase client init, modals, visit tracking, trending list
 │   ├── admin.js        # Admin system — Supabase Auth login, article/OSE/internship CRUD
+│   ├── admin-dashboard.js  # Dedicated #admin dashboard logic (tabs, lists, Home content save)
 │   ├── data/
 │   │   └── news.js     # Static news seed data and news page renderer (trending populated at runtime)
 │   └── pages/          # One render function per page, grouped by nav section
@@ -66,7 +67,8 @@ A single-page application (SPA) for the PCU International Office, showcasing inb
 │       └── Thumbnails/             # Thumbnail images
 ├── supabase/
 │   ├── migrations/
-│   │   └── 001_initial_schema.sql  # Full schema: pcu_global tables + RLS policies + increment_article_visits RPC
+│   │   ├── 001_initial_schema.sql  # Full schema: pcu_global tables + RLS policies + increment_article_visits RPC
+│   │   └── 002_site_config.sql     # site_config table (single-row store for editable Home content)
 │   └── functions/
 │       └── send-meeting-email/
 │           └── index.ts            # Deno Edge Function — triggered by DB webhook on meeting_requests INSERT; sends email via Resend
@@ -304,6 +306,16 @@ No separate backend deployment is needed. The database, auth, and Edge Function 
 
 The site includes a lightweight CMS for managing news articles, OSE programs, and internship opportunities. All data is persisted in Supabase (PostgreSQL + RLS), so changes are shared across all devices and browsers instantly.
 
+### Admin Dashboard (`#admin`)
+
+Once logged in, a **Dashboard** button at the top of the floating action button stack opens a dedicated full-page admin view at the `#admin` route. It consolidates every dynamic section in one place via a left tab rail:
+
+- **Overview** — record counts and quick-create actions.
+- **News Articles / OSE Programs / Internships** — inline lists with add / edit / delete, reusing the existing CRUD modals.
+- **Home Content** — edit the home hero title/subtitle, section headings, brand colors, and font. Saved to the `pcu_global.site_config` table (single row) and applied to the live site immediately. Run `supabase/migrations/002_site_config.sql` once in the Supabase SQL Editor to provision this table; until then the dashboard reads/writes nothing and the site falls back to `defaultConfig` in `JS/main.js`.
+
+The dashboard logic lives in `JS/admin-dashboard.js`; its markup is rendered by `renderAdminDashboard()` in `JS/pages/admin-dashboard.js`. The `#admin` route is gated — visiting it while logged out redirects home and opens the login modal.
+
 ### Roles & Access
 
 | Email (example) | Role | Publishes to tag |
@@ -319,7 +331,7 @@ The email-to-role mapping is defined in `ADMIN_ROLES` at the top of `JS/admin.js
 
 1. Click the **Admin** button (bottom-right corner) to open the login modal.
 2. `admin.js` calls `supabase.auth.signInWithPassword({ email, password })`; on success, the Supabase session is stored in `sessionStorage`.
-3. A floating action button (FAB) appears with **Add Article**, **Manage Universities** (OSE), and **Sign Out** options.
+3. A floating action button (FAB) appears with **Dashboard**, **Add Article**, **Manage Universities** (OSE), and **Sign Out** options.
 4. The article form collects: title, excerpt, body paragraphs, key highlights, contact info, tag, and an optional image (drag-and-drop or file picker — stored as a base64 data URL in the `image_url` column).
 5. On submit, `admin.js` upserts the article directly to `pcu_global.articles` via the Supabase JS client. `refreshNewsData()` merges the updated data with the static seed articles from `JS/data/news.js`.
 6. Admins can edit or delete their own articles; the `Head` role can manage all articles.

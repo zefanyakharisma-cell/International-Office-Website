@@ -26,6 +26,7 @@ const defaultConfig = {
 function applyConfig(config) {
   const el = (id) => document.getElementById(id);
   if (el('heroTitle')) el('heroTitle').textContent = config.hero_title || defaultConfig.hero_title;
+  if (el('heroSubtitle')) el('heroSubtitle').textContent = config.hero_subtitle || defaultConfig.hero_subtitle;
   if (el('statsHeading')) el('statsHeading').textContent = config.stats_heading || defaultConfig.stats_heading;
   if (el('studyHeading')) el('studyHeading').textContent = config.study_heading || defaultConfig.study_heading;
   if (el('newsHeading')) el('newsHeading').textContent = config.news_heading || defaultConfig.news_heading;
@@ -134,6 +135,10 @@ function navigateTo(pageId, { updateHash = true } = {}) {
       addBtn.classList.remove('hidden');
     }
     setTimeout(() => { filterInternshipPartners(); renderInternshipOpportunities(); }, 60);
+  }
+  // Admin dashboard — gate to logged-in admins and (re)render its panels
+  if (pageId === 'admin' && typeof onAdminDashboardOpened === 'function') {
+    setTimeout(onAdminDashboardOpened, 30);
   }
 }
 
@@ -1927,6 +1932,7 @@ async function loadOsePrograms() {
       ...window.oseCustomUniversities.filter(c => !baseNames.has(c.name))
     ];
     renderOsePartners();
+    if (typeof adminDashRefresh === 'function') adminDashRefresh();
   } catch (e) {}
 }
 
@@ -2527,6 +2533,7 @@ async function renderInternshipOpportunities() {
     list.innerHTML = parts.join('');
   }
   lucide.createIcons();
+  if (typeof adminDashRefresh === 'function') adminDashRefresh();
 }
 
 // ---- NEWS CAROUSEL ----
@@ -2657,6 +2664,24 @@ document.getElementById('newsSearchInput')?.addEventListener('input', (e) => {
 lucide.createIcons();
 initRevealObserver();
 applyConfig(defaultConfig);
+
+// ---- SITE CONFIG (Home content) ----
+// Hydrate editable Home content from Supabase (table: site_config, single row).
+// Falls back silently to defaultConfig when the table/row is absent.
+window.siteConfig = window.siteConfig || {};
+async function loadSiteConfig() {
+  try {
+    const { data, error } = await window._supabase
+      .from('site_config')
+      .select('config')
+      .eq('id', 1)
+      .single();
+    if (error || !data || !data.config) return;
+    window.siteConfig = data.config;
+    applyConfig(Object.assign({}, defaultConfig, data.config));
+  } catch (_) { /* table not provisioned yet — keep defaults */ }
+}
+loadSiteConfig();
 
 // ---- MEETING REQUEST FORM MODAL ----
 function openMeetingRequestModal() {

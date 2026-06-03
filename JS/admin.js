@@ -377,7 +377,10 @@ async function handlePublishArticle(e) {
       if (error) throw new Error(error.message);
       closeAddArticleModal();
       await refreshNewsData();
-      navigateTo(data.id);
+      // Stay on the dashboard when editing from it; otherwise open the article.
+      if (!document.getElementById('page-admin')?.classList.contains('active')) {
+        navigateTo(data.id);
+      }
       showAdminToast('Article updated successfully!');
     } else {
       const now = new Date();
@@ -451,6 +454,7 @@ async function refreshNewsData() {
   if (typeof renderTrending === 'function') renderTrending();
   ensureAdminArticlePagesExist();
   lucide.createIcons();
+  if (typeof adminDashRefresh === 'function') adminDashRefresh();
 }
 
 // ---- DYNAMIC ARTICLE DETAIL PAGE ----
@@ -542,7 +546,10 @@ async function confirmDeleteArticle(id) {
     const pageEl = document.getElementById('page-' + id);
     if (pageEl) pageEl.remove();
     await refreshNewsData();
-    navigateTo('news');
+    // Stay on the dashboard when deleting from it; otherwise return to News.
+    if (!document.getElementById('page-admin')?.classList.contains('active')) {
+      navigateTo('news');
+    }
     showAdminToast('Article deleted.');
   } catch (err) {
     alert(`Could not delete: ${err.message}`);
@@ -769,7 +776,12 @@ async function handleSaveOseProgram(e) {
     closeOseEditForm();
     if (typeof loadOsePrograms === 'function') await loadOsePrograms();
     showAdminToast(oseEditingId ? 'University program updated!' : 'University program added!');
-    await openOseManagerModal();
+    // Return to the manager modal only when that was the entry point; when
+    // editing from the admin dashboard, stay on the dashboard (it self-refreshes
+    // via the loadOsePrograms hook).
+    if (!document.getElementById('page-admin')?.classList.contains('active')) {
+      await openOseManagerModal();
+    }
   } catch (err) {
     alert(`Could not save: ${err.message}`);
   } finally {
@@ -884,6 +896,7 @@ async function handleSaveInternshipOpportunity(e) {
     document.getElementById('intern-form-modal').classList.add('hidden');
     document.getElementById('intern-form-modal').classList.remove('flex');
     if (typeof renderInternshipOpportunities === 'function') await renderInternshipOpportunities();
+    if (typeof adminDashRefresh === 'function') adminDashRefresh();
     showAdminToast(internEditingId ? 'Opportunity updated!' : 'Opportunity added!');
   } catch (err) {
     alert(`Could not save: ${err.message}`);
@@ -902,6 +915,7 @@ async function confirmDeleteInternshipOpportunity(id) {
       .eq('id', id);
     if (error) throw new Error(error.message);
     if (typeof renderInternshipOpportunities === 'function') await renderInternshipOpportunities();
+    if (typeof adminDashRefresh === 'function') adminDashRefresh();
     showAdminToast('Opportunity deleted.');
   } catch (err) {
     alert(`Could not delete: ${err.message}`);
