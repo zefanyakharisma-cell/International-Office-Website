@@ -1,5 +1,5 @@
 /* ============================================================
-   i18n-theme.js — Language (EN/ID) + Light/Dark theme engine
+   i18n.js — Language (EN/ID) toggle engine
    ------------------------------------------------------------
    The site is an English-authored static site whose pages are
    rendered into the DOM by per-page render functions. Rather
@@ -12,14 +12,13 @@
    after load) is caught by a MutationObserver while Indonesian
    is active, so newly-inserted nodes get translated too.
 
-   Both preferences persist in localStorage and are re-applied on
-   load (the no-flash <head> script sets the initial <html> state).
+   The language preference persists in localStorage and is
+   re-applied on load.
    ============================================================ */
 (function () {
   'use strict';
 
   var LANG_KEY = 'pcu-lang';
-  var THEME_KEY = 'pcu-theme';
 
   // Dictionary: { "English string": "Teks Indonesia" }. May be empty
   // if the dict file failed to load — engine then no-ops gracefully.
@@ -160,36 +159,11 @@
     }
   }
 
-  // ---- Public: theme ----
-  function currentTheme() {
-    return document.documentElement.classList.contains('dark') ? 'dark' : 'light';
-  }
-
-  function updateThemeButtons(theme) {
-    var btns = document.querySelectorAll('.theme-toggle');
-    for (var i = 0; i < btns.length; i++) {
-      btns[i].setAttribute('aria-pressed', theme === 'dark' ? 'true' : 'false');
-    }
-  }
-
-  function setTheme(theme) {
-    theme = theme === 'dark' ? 'dark' : 'light';
-    document.documentElement.classList.toggle('dark', theme === 'dark');
-    try { localStorage.setItem(THEME_KEY, theme); } catch (e) {}
-    updateThemeButtons(theme);
-  }
-
-  function toggleTheme() {
-    setTheme(currentTheme() === 'dark' ? 'light' : 'dark');
-  }
-
   // Expose for inline onclick handlers in index.html.
   window.PCUSetLanguage = setLanguage;
-  window.PCUToggleTheme = toggleTheme;
 
   // ---- Init ----
   function init() {
-    updateThemeButtons(currentTheme());
     updateLangButtons(currentLang());
     // Apply stored language to the already-rendered DOM.
     if (currentLang() === 'id') {
